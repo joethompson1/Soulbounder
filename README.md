@@ -1,2 +1,2 @@
 # Soulbounder
-Soulboun token provider
+Soulbound token provider
