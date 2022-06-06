@@ -1,0 +1,33 @@
+{
+  "name": "soulbounder",
+  "version": "1.0.0",
+  "description": "Soulbound token provider",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joeb4202/Soulbounder.git"
+  },
+  "author": "Joe Thompson",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/joeb4202/Soulbounder/issues"
+  },
+  "homepage": "https://github.com/joeb4202/Soulbounder#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-ejs-layouts": "^2.5.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.3.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
