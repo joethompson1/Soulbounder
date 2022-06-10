@@ -19,6 +19,7 @@ mongoose.connect(dbURI, { useUnifiedTopology: true })
 
 
 const homeRouter = require('./routes/homeRoutes');
+const createEventRouter = require('./routes/createEventRoutes');
 
 
 
@@ -37,6 +38,7 @@ app.use(express.json());
 // Static Files
 app.use('/', homeRouter);
 app.use('/home', homeRouter);
+app.use('/createEvent', createEventRouter);
 
 
 module.exports = app;

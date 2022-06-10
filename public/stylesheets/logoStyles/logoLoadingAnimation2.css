@@ -1,0 +1,86 @@
+
+@keyframes loading {
+  60% {
+    transform: scale(1.0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.6;
+  }
+}
+
+@keyframes pulse {
+  60% {
+    transform: scale(1.0);
+    /*opacity: 1;*/
+  }
+  100% {
+    transform: scale(0.95);
+    /*opacity: 0.65;*/
+  }
+}
+
+
+.topRightTile{
+  transition: all 0.5s;
+  transform-origin: 150% 100%;
+  animation: loading 1.5s ease alternate infinite;
+}
+
+.topMiddleTile{
+  transition: all 0.5s;
+  transform-origin: 150% 100%;
+  animation: loading 1.5s 0.1s ease alternate infinite;
+}
+
+.topLeftTile{
+  transition: all 0.5s;
+  transform-origin: 150% 100%;
+  animation: loading 1.5s 0.2s ease alternate infinite,
+              pulse 1.5s 1.8s ease alternate infinite;
+}
+
+.middleLeftTile{
+  transition: all 0.5s;
+  transform-origin: 150% 100%;
+  animation: loading 1.5s 0.3s ease alternate infinite,
+              pulse 1.5s 1.8s ease alternate infinite;
+}
+
+.middleMiddleTile{
+  transition: all 0.5s;
+  transform-origin: 150% 100%;
+  animation: loading 1.5s 0.4s ease alternate infinite,
+              pulse 1.5s 1.8s ease alternate infinite;
+}
+
+.middleRightTile{
+  transition: all 0.5s;
+  transform-origin: 150% 100%;
+  animation: loading 1.5s 0.5s ease alternate infinite,
+              pulse 1.5s 1.8s ease alternate infinite;
+}
+
+.bottomRightTile{
+  transition: all 0.5s;
+  transform-origin: 150% 100%;
+  animation: loading 1.5s 0.6s ease alternate infinite,
+              pulse 1.5s 1.8s ease alternate infinite;
+}
+
+.bottomMiddleTile{
+  transition: all 0.5s;
+  transform-origin: 150% 100%;
+  animation: loading 1.5s 0.7s ease alternate infinite,
+              pulse 1.5s 1.8s ease alternate infinite;
+}
+
+.bottomLeftTile{
+  transition: all 0.5s;
+  transform-origin: 150% 100%;
+  animation: loading 1.5s 0.8s ease alternate infinite,
+              pulse 1.5s 1.8s ease alternate infinite;
+}
+
+
