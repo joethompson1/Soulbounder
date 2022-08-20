@@ -1,4 +1,4 @@
-/* Fonts */
+/* ---------- Fonts ---------- */
 @font-face {
     font-family: 'Righteous';
     src: url('../../fonts/Righteous/Righteous-Regular.eot');
@@ -14,7 +14,7 @@
 
 
 
-/* Loading Animation CSS */
+/* ---------- Loading Animation CSS ---------- */
 
 .loadingContainer {
 	width: 20%;
@@ -31,7 +31,7 @@
 
 
 
-/* Form CSS */
+/* ---------- Form CSS ---------- */
 
 .formContainer {
 	width: 75%;
@@ -45,10 +45,8 @@
 }
 
 
-.SBTHeader {
 
-}
-
+/* SBT Name CSS */
 
 .SBTName {
 	font-family: Righteous;
@@ -58,7 +56,7 @@
 	border-radius: 0.9vw;
 	border-style: none;
 	width: 110%;
-	height: 8vw;
+	height: 6vw;
 	padding-left: 1.2vw;
 }
 
@@ -74,7 +72,7 @@
 
 
 
-
+/* SBT Picture CSS */
 
 .SBTPictureContainer {
 	background-color: whitesmoke;
@@ -89,16 +87,37 @@
 	border-width: thick;
 }
 
-
 .SBTPictureContainer:hover {
 	background-color: lightgray;
 }
 
-.SBTDisplayPicture {
-	width: 70%;
-	height: 100%;
-	transform: translate(2.5vw, 1vw);
+.SBTPictureContainer>input {
+  display: none;
 }
+
+
+.SBTDisplayPicture {
+	width: 60%;
+	height: 100%;
+	transform: translate(4vw, 1vw);
+}
+
+
+.displayImage {
+	display: none;
+	width: 100%;
+	height: 100%;
+	border-radius: 1vw;
+}
+
+
+.imageLabel {
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+
+
 
 
 
