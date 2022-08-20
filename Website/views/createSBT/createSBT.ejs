@@ -1,0 +1,35 @@
+<head>
+	<!-- External Scripts -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+	<link rel="stylesheet" href="/stylesheets/logoStyles/logoLoadingAnimation.css">
+	<link rel="stylesheet" href="/stylesheets/createSBTStyles/createSBT.css">
+</head>
+
+<body>
+	<div class="container loadingContainer">
+		<div class="container text-center">
+			<%- include('../components/logoLoadingAnimation.ejs') %>
+		</div>
+	</div>
+
+	<div class="container formContainer">
+		<div class="row SBTHeader">
+			<div class="col">
+				<form>
+					<!-- <label for="SBTName">SBT Name</label> -->
+					<input class="SBTName" type="text" name="SBTName" placeholder="SBT Name">
+				</form>
+			</div>
+
+			<div class="col">
+				<div class="container SBTPictureContainer">
+					<img class="SBTDisplayPicture" src="/images/handWithPicture.png">
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+

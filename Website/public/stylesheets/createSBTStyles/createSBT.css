@@ -1,0 +1,108 @@
+/* Fonts */
+@font-face {
+    font-family: 'Righteous';
+    src: url('../../fonts/Righteous/Righteous-Regular.eot');
+    src: url('../../fonts/Righteous/Righteous-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../../fonts/Righteous/Righteous-Regular.woff2') format('woff2'),
+        url('../../fonts/Righteous/Righteous-Regular.woff') format('woff'),
+        url('../../fonts/Righteous/Righteous-Regular.svg#Righteous-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+
+/* Loading Animation CSS */
+
+.loadingContainer {
+	width: 20%;
+	height: 100vh;
+	display: flex;
+}
+
+.loadingContainer .logoContainer {
+	margin: auto;
+}
+
+
+
+
+
+
+/* Form CSS */
+
+.formContainer {
+	width: 75%;
+	height: 100vh;
+	background-color: #3445b4;
+	border-radius: 2vw;
+	padding-top: 3vw;
+	padding-left: 5vw;
+	padding-right: 5vw;
+
+}
+
+
+.SBTHeader {
+
+}
+
+
+.SBTName {
+	font-family: Righteous;
+	font-size: 5vw;
+	background-color: transparent;
+	color: whitesmoke;
+	border-radius: 0.9vw;
+	border-style: none;
+	width: 110%;
+	height: 8vw;
+	padding-left: 1.2vw;
+}
+
+.SBTName:focus {
+	background-color: whitesmoke;
+	color: black;
+}
+
+.SBTName::placeholder {
+	color: whitesmoke;
+}
+
+
+
+
+
+
+.SBTPictureContainer {
+	background-color: whitesmoke;
+	width: 20vw;
+	height: 20vw;
+	border-radius: 1.5vw;
+	transform: translateY(-8vw);
+	margin-right: 0;
+	margin-left: auto;
+	border: lightgray;
+	border-style: ridge;
+	border-width: thick;
+}
+
+
+.SBTPictureContainer:hover {
+	background-color: lightgray;
+}
+
+.SBTDisplayPicture {
+	width: 70%;
+	height: 100%;
+	transform: translate(2.5vw, 1vw);
+}
+
+
+
+
+
+
+
