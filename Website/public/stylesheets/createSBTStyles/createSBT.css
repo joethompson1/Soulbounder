@@ -11,6 +11,19 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Quattrocento Sans';
+    src: url('../../fonts/Quattrocento_Sans/QuattrocentoSans.eot');
+    src: url('../../fonts/Quattrocento_Sans/QuattrocentoSans.eot?#iefix') format('embedded-opentype'),
+        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.woff2') format('woff2'),
+        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.woff') format('woff'),
+        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.ttf') format('truetype'),
+        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.svg#QuattrocentoSans') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 
 
 
@@ -39,14 +52,14 @@
 	background-color: #3445b4;
 	border-radius: 2vw;
 	padding-top: 3vw;
-	padding-left: 5vw;
+	padding-left: 6vw;
 	padding-right: 5vw;
 
 }
 
 
 
-/* SBT Name CSS */
+/* SBT Name */
 
 .SBTName {
 	font-family: Righteous;
@@ -72,7 +85,7 @@
 
 
 
-/* SBT Picture CSS */
+/* SBT Picture */
 
 .SBTPictureContainer {
 	background-color: whitesmoke;
@@ -119,8 +132,66 @@
 
 
 
+/* SBT Attributes */
+
+.SBTDescription {
+	font-family: Quattrocento Sans;
+	width: 100%;
+	height: 10vw;
+	border-top-right-radius: 2vw;
+	border-bottom-right-radius: 2vw;
+	border-bottom-left-radius: 2vw;
+	padding-left: 1.3vw;
+	padding-right: 1.1vw;
+	padding-bottom: 1.3vw;
+	border: none;
+	outline: none;
+}
+
+.textareaContainer {
+	width: 100%;
+	background-color: white;
+	border-top-right-radius: 2vw;
+	border-bottom-right-radius: 2vw;
+	border-bottom-left-radius: 2vw;
+	margin-bottom: 3vw;
+	margin-left: 0.2vw;
+	margin-right: 0.2;
+}
+
+.label {
+	font-family: Quattrocento Sans;
+	padding-left: 1.3vw;
+	padding-top: 0.5vw;
+	font-weight: bolder;
+	font-size: 1.2vw;
+}
+
+.inputLabel {
+	font-family: Quattrocento Sans;
+	display: block;
+	padding-left: 0.5vw;
+	color: white;
+	font-size: 1.2vw;
+}
 
 
+.inputContainer {
+	/*background-color: white;*/
+	border-radius: 2vw;
+	margin-bottom: none !important;
+	display: block;
+}
+
+
+.input {
+	width: 100%;
+	border-radius: 2vw;
+	padding:  0.5vw;
+	border: none;
+	outline: none;
+	transform: translateY(-0.5rem);
+}
 
 
 
