@@ -1,7 +1,4 @@
 <head>
-	<!-- External Scripts -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 	<!-- Stylesheets -->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 	<link rel="stylesheet" href="/stylesheets/logoStyles/logoLoadingAnimation.css">
@@ -16,9 +13,17 @@
 	</div>
 
 	<div class="container formContainer">
-		<div class="row SBTHeader">
+		<div class="row">
 			<div class="col">
 				<input class="SBTName" type="text" name="SBTName" placeholder="SBT Name">
+				<div class="dropdown">
+					<button onclick="myFunction()" class="btn-lg dropdown-toggle dropbtn">Type of SBT</button>
+					<div id="myDropdown" class="dropdown-content">
+						<a href="#home">Event / Attendance</a>
+						<a href="#about">Certificate (Coming soon)</a>
+						<a href="#contact">Ticket (Coming soon)</a>
+					</div>
+				</div>
 			</div>
 
 			<div class="col">
@@ -41,12 +46,31 @@
 
 		<div class="row">
 			<div class="col inputContainer" style="margin-right: 1vw;">
-				<label class="inputLabel">Date (Optional):</label>
+				<label class="inputLabel">City (Optional):</label>
 				<input class="input" type="text" name=""></input>
 			</div>
 
 			<div class="col inputContainer">
-				<label class="inputLabel">Time (Optional):</label>
+				<label class="inputLabel">Country (Optional):</label>
+				<input class="input" type="text" name=""></input>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col inputContainer" style="margin-right: 1vw;">
+				<label class="inputLabel">Start Date:</label>
+				<input class="input" type="text" name=""></input>
+			</div>
+
+			<div class="col inputContainer">
+				<label class="inputLabel">End Date (Optional):</label>
+				<input class="input" type="text" name=""></input>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col inputContainer">
+				<label class="inputLabel">Website (Optional):</label>
 				<input class="input" type="text" name=""></input>
 			</div>
 		</div>
@@ -70,4 +94,29 @@
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
+
+
+	/* When the user clicks on the button, 
+	toggle between hiding and showing the dropdown content */
+	function myFunction() {
+		document.getElementById("myDropdown").classList.toggle("show");
+	}
+
+	// Close the dropdown if the user clicks outside of it
+	window.onclick = function(event) {
+	  if (!event.target.matches('.dropbtn')) {
+	  	var dropdowns = document.getElementsByClassName("dropdown-content");
+	  	var i;
+	  	for (i = 0; i < dropdowns.length; i++) {
+	  		var openDropdown = dropdowns[i];
+	  		if (openDropdown.classList.contains('show')) {
+	  			openDropdown.classList.remove('show');
+	  		}
+	  	}
+	  }
+	}
 </script>
+
+
+
+
