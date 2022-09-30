@@ -253,5 +253,19 @@
 }
 
 
+.submitButton {
+	margin: auto;
+	background-color: #3498DB;
+	color: white;
+	border-radius: 1vw;
+	padding-top: 0.75vw;
+	padding-bottom: 0.75vw;
+	padding-left: 2vw;
+	padding-right: 2vw;
+	font-size: 1.3vw;
+	border: none;
+}
+
+
 
 
