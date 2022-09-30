@@ -1,15 +1,17 @@
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   require('dotenv').config();
+// }
 
-const express = require('express');
+
+import express from 'express';
 const app = express();
-const expressLayouts = require('express-ejs-layouts');
-const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt');
-const cookieParser = require('cookie-parser');
-const mongoose = require('mongoose');
-
+import expressLayouts from 'express-ejs-layouts';
+import bodyParser from 'body-parser';
+import bcrypt from 'bcrypt';
+import cookieParser from 'cookie-parser';
+import mongoose from 'mongoose';
+import path from 'path';
+const __dirname = path.resolve();
 
 const dbURI = 'mongodb+srv://joethompson:Thojoe12@cluster0.sw8hl.mongodb.net/soulbounder';
 mongoose.connect(dbURI, { useUnifiedTopology: true })
@@ -18,8 +20,8 @@ mongoose.connect(dbURI, { useUnifiedTopology: true })
 
 
 
-const homeRouter = require('./routes/homeRoutes');
-const createSBTRouter = require('./routes/createSBTRoutes');
+import homeRouter from './routes/homeRoutes.js'
+import createSBTRouter from './routes/createSBTRoutes.js';
 
 
 
@@ -43,4 +45,4 @@ app.use('/home', homeRouter);
 app.use('/createSBT', createSBTRouter);
 
 
-module.exports = app;
+export default app;

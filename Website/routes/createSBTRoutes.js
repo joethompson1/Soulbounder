@@ -1,12 +1,11 @@
-const { Router } = require('express');
-const createSBTController = require('../controllers/createSBTController');
+import express from 'express';
+const router = express.Router();
 
-const router = Router();
-
-router.get('/', createSBTController.createSBT_get);
-router.post('/', createSBTController.createSBT_post);
+import { createSBT_get, createSBT_post } from '../controllers/createSBTController.js';
 
 
+router.get('/', createSBT_get);
+router.post('/', createSBT_post);
 
 
-module.exports = router;
+export default router;

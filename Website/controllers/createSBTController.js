@@ -1,34 +1,26 @@
-// import ipfsClient from 'ipfs-http-client';
-
-const ipfsClient = require('ipfs-http-client');
-const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol:'https' });
-
-
-
-const mongoose = require("mongoose");
-var ObjectId = require('mongoose').Types.ObjectId;
-
+import * as IPFS from 'ipfs-core';
 
 
 // controller actions
-module.exports.createSBT_get = async (req, res) => {
+export const createSBT_get = async (req, res) => {
 	res.status(200).render('createSBT/createSBT');
 };
 
 
-module.exports.createSBT_post = async (req, res) => {
+export const createSBT_post = async (req, res) => {
 	try {
+		const node = await IPFS.create({ host: 'ipfs.infura.io', port: 5001, protocol:'https' });
 
 		let { SBTName, SBTPicture, SBTDescription, SBTCity, SBTCountry, SBTStartDate, SBTEndDate, SBTWebsite }  = req.body;
 
 		console.log(SBTPicture);
 
-		// ipfs.files.add(testBuffer, function (err, file) {
-	 //        if (err) {
-	 //        	console.log(err);
-	 //        }
-	 //        console.log(file);
-  //     	});
+		const fileAdded = await node.add(SBTName);
+		console.log("Added file CID:", fileAdded.cid);
+
+
+
+	
 
 
 
