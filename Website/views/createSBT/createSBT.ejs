@@ -6,13 +6,21 @@
 </head>
 
 <body>
-	<div class="container loadingContainer">
-		<div class="container text-center">
+	<div class="container text-center" id="loadingContainer">
+		<div class="container loadingContainer">
 			<%- include('../components/logoLoadingAnimation.ejs') %>
+		</div>
+		<div class="container loadingTextContainer typewriter" style="width: max-content;">
+			<div id="contactingText">
+				<h1 id="">Contacting the Interplantery File System...</h1>
+			</div>
+			<div id="storingText">
+				<h1 id="">Storing SBT Data on the Interplantery File System...</h1>
+			</div>
 		</div>
 	</div>
 
-	<div class="container formContainer">
+	<div class="container formContainer" id="formContainer">
 		<div class="row">
 			<div class="col">
 				<input class="SBTName" type="text" name="SBTName" placeholder="SBT Name" id="SBTName">
@@ -86,6 +94,8 @@
 
 
 <script type="text/javascript">
+	$('div[id^=loadingContainer]').hide();
+	$('div[id^=storingText').hide();
 	var base64String = "";
 
 	function readURL(input) {
@@ -98,9 +108,6 @@
 				$('#displayImage').attr('src', e.target.result);
 				$('#stockImage').hide();
 				$('#displayImage').show();
-
-				// console.log(e.target.result);
-				// base64String = e.target.result;
 
 				base64String = reader.result.split(',')[1];
 
@@ -144,6 +151,15 @@
 		const SBTEndDate = document.getElementById('SBTEndDate').value;
 		const SBTWebsite = document.getElementById('SBTWebsite').value;
 
+		// $('div[id^=formContainer]').delay(10000).hide();
+		// $('div[id^=loadingContainer]').delay(15000).show();
+
+		$('div[id^=formContainer]').fadeOut(2500);
+		$('div[id^=loadingContainer]').delay(2500).fadeIn(2500);
+
+		$('div[id^=contactingText]').delay(7500).fadeOut(2500);
+		$('div[id^=storingText]').delay(10000).fadeIn(2500);
+
 		
 		try {
 			const res = await fetch('createSBT', { 
@@ -155,6 +171,8 @@
 		} catch (err) {
 			console.log(err);
 		}
+
+
 
 	}
 </script>
