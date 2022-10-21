@@ -24,73 +24,74 @@
 	</div>
 
 	<div class="container formContainer" id="formContainer">
-		<div class="row">
-			<div class="col">
-				<input class="SBTName" type="text" name="SBTName" placeholder="SBT Name" id="SBTName">
-				<div class="dropdown">
-					<button onclick="dropdownFunction()" class="btn-lg dropdown-toggle dropbtn">Type of SBT</button>
-					<div id="myDropdown" class="dropdown-content">
-						<a href="#home">Event / Attendance</a>
-						<a href="#about">Certificate (Coming soon)</a>
-						<a href="#contact">Ticket (Coming soon)</a>
+		<form name="sbtForm" id="sbtForm" method="POST" action="/createSBT">
+			<div class="row">
+				<div class="col">
+					<input class="SBTName" type="text" name="SBTName" placeholder="SBT Name" id="SBTName">
+					<div class="dropdown">
+						<button onclick="dropdownFunction()" class="btn-lg dropdown-toggle dropbtn">Type of SBT</button>
+						<div id="myDropdown" class="dropdown-content">
+							<a href="#home">Event / Attendance</a>
+							<a href="#about">Certificate (Coming soon)</a>
+							<a href="#contact">Ticket (Coming soon)</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="col">
+					<div class="SBTPictureContainer">
+						<label class="imageLabel" for="fileInput">
+							<img class="SBTDisplayPicture" id="stockImage" src="/images/handWithPicture.png">
+							<img class="displayImage" src="#" id="displayImage">
+						</label>
+
+						<input id="fileInput" type="file" onchange="readURL(this);" name="image">
+						<input class="SBTPicture" type="text" name="SBTPicture" id=SBTPicture>
 					</div>
 				</div>
 			</div>
+			
+			<div class="row textareaContainer">
+				<label class="label"><u>Description:</u></label>
+				<textarea class="SBTDescription" type="text" name="SBTDescription" placeholder="Enter a short description about what your SBT is for." id="SBTDescription"></textarea>
+			</div>
 
-			<div class="col">
-				<div class="SBTPictureContainer">
-					<label class="imageLabel" for="fileInput">
-						<!-- <img class="SBTDisplayPicture" id="stockImage" src="/images/handWithPicture.png"> -->
-						<img class="SBTDisplayPicture" id="stockImage" src="/images/handWithPicture.png">
-						<img class="displayImage" src="#" id="displayImage">
-					</label>
 
-					<input id="fileInput" type="file" onchange="readURL(this);" name="image">
+			<div class="row">
+				<div class="col inputContainer" style="margin-right: 1vw;">
+					<label class="inputLabel">City (Optional):</label>
+					<input class="input" type="text" name="" id="SBTCity"></input>
+				</div>
+
+				<div class="col inputContainer">
+					<label class="inputLabel">Country (Optional):</label>
+					<input class="input" type="text" name="" id="SBTCountry"></input>
 				</div>
 			</div>
-		</div>
-		
-		<div class="row textareaContainer">
-			<label class="label"><u>Description:</u></label>
-			<textarea class="SBTDescription" type="text" name="SBTDescription" placeholder="Enter a short description about what your SBT is for." id="SBTDescription"></textarea>
-		</div>
 
+			<div class="row">
+				<div class="col inputContainer" style="margin-right: 1vw;">
+					<label class="inputLabel">Start Date:</label>
+					<input class="input" type="text" name="" id="SBTStartDate"></input>
+				</div>
 
-		<div class="row">
-			<div class="col inputContainer" style="margin-right: 1vw;">
-				<label class="inputLabel">City (Optional):</label>
-				<input class="input" type="text" name="" id="SBTCity"></input>
+				<div class="col inputContainer">
+					<label class="inputLabel">End Date (Optional):</label>
+					<input class="input" type="text" name="" id="SBTEndDate"></input>
+				</div>
 			</div>
 
-			<div class="col inputContainer">
-				<label class="inputLabel">Country (Optional):</label>
-				<input class="input" type="text" name="" id="SBTCountry"></input>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col inputContainer" style="margin-right: 1vw;">
-				<label class="inputLabel">Start Date:</label>
-				<input class="input" type="text" name="" id="SBTStartDate"></input>
+			<div class="row">
+				<div class="col inputContainer">
+					<label class="inputLabel">Website (Optional):</label>
+					<input class="input" type="text" name="" id="SBTWebsite"></input>
+				</div>
 			</div>
 
-			<div class="col inputContainer">
-				<label class="inputLabel">End Date (Optional):</label>
-				<input class="input" type="text" name="" id="SBTEndDate"></input>
+			<div class="row">
+				<button class="submitButton" id="formSubitButton">Create!</button>
 			</div>
-		</div>
-
-		<div class="row">
-			<div class="col inputContainer">
-				<label class="inputLabel">Website (Optional):</label>
-				<input class="input" type="text" name="" id="SBTWebsite"></input>
-			</div>
-		</div>
-
-		<div class="row">
-			<button class="submitButton" onclick="formSubmit()">Create!</button>
-		</div>
-
+		</form>
 	</div>
 </body>
 
@@ -114,6 +115,7 @@
 				$('#displayImage').show();
 
 				base64String = reader.result.split(',')[1];
+				$('input.SBTPicture').val(base64String);
 
 			}
 
@@ -143,41 +145,20 @@
 	  }
 	}
 
-
-
-	async function formSubmit() {
-		const SBTName = document.getElementById('SBTName').value;
-		const SBTPicture = base64String;
-		const SBTDescription = document.getElementById('SBTDescription').value;
-		const SBTCity = document.getElementById('SBTCity').value;
-		const SBTCountry = document.getElementById('SBTCountry').value;
-		const SBTStartDate = document.getElementById('SBTStartDate').value;
-		const SBTEndDate = document.getElementById('SBTEndDate').value;
-		const SBTWebsite = document.getElementById('SBTWebsite').value;
-
-		$('div[id^=formContainer]').fadeOut(2500);
+	$("#formSubitButton").click(function(){
+        $('div[id^=formContainer]').fadeOut(2500);
 		$('div[id^=loadingContainer]').delay(2500).fadeIn(2500);
-		$('div[id^=hideHeader').delay(1500).show(1000);
-		// $("#hideHeader").css({ transform: translateX(2vw) });
+		$('div[id^=hideHeader').delay(1500).fadeIn(500);
 
 		$('div[id^=contactingText]').delay(7000).fadeOut(2500);
 		$('div[id^=storingText]').delay(9600).fadeIn(2500);
-
-		
-		try {
-			const res = await fetch('createSBT', { 
-			  	method: 'POST', 
-			  	body: JSON.stringify({ SBTName, SBTPicture, SBTDescription, SBTCity, SBTCountry, SBTStartDate, SBTEndDate, SBTWebsite }),
-			  	headers: {'Content-Type': 'application/json'}
-			});
-
-		} catch (err) {
-			console.log(err);
-		}
+		$('div[id^=storingText]').delay(17500).fadeOut(2500);
+    }); 
 
 
 
-	}
+
+
 </script>
 
 

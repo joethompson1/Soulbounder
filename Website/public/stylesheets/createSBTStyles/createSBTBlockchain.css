@@ -1,0 +1,79 @@
+/* ---------- Fonts ---------- */
+@font-face {
+    font-family: 'Righteous';
+    src: url('../../fonts/Righteous/Righteous-Regular.eot');
+    src: url('../../fonts/Righteous/Righteous-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../../fonts/Righteous/Righteous-Regular.woff2') format('woff2'),
+        url('../../fonts/Righteous/Righteous-Regular.woff') format('woff'),
+        url('../../fonts/Righteous/Righteous-Regular.svg#Righteous-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Quattrocento Sans';
+    src: url('../../fonts/Quattrocento_Sans/QuattrocentoSans.eot');
+    src: url('../../fonts/Quattrocento_Sans/QuattrocentoSans.eot?#iefix') format('embedded-opentype'),
+        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.woff2') format('woff2'),
+        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.woff') format('woff'),
+        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.ttf') format('truetype'),
+        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.svg#QuattrocentoSans') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+  font-family: 'Raleway';
+  src:  url('../../fonts/Raleway/Raleway-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
+
+
+
+
+/* ---------- Loading Animation CSS ---------- */
+
+.loadingContainer {
+    width: 20%;
+    height: 80vh;
+    display: flex;
+}
+
+.loadingContainer .logoContainer {
+    margin: auto;
+}
+
+.loadingTextContainer {
+    transform: translateY(-25vh);
+}
+
+.loadingTextContainer h1 {
+    font-family: 'Raleway' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 2;
+    font-size: 1.5vw;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#page {
+    display: none;
+}
+
+#loadingContainer {
+    display: flex;
+}
+

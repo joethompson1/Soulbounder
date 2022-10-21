@@ -7,14 +7,13 @@ $(function() {
   	var $this = $(this);
 
 
-    // $(".burgerImg").fadeOut(50);
-
   	if ( $('body').hasClass('show-sidebar') ) {
   		$('body').removeClass('show-sidebar');
   		$this.removeClass('active');
   	} else {
   		$('body').addClass('show-sidebar');	
   		$this.addClass('active');
+      $(".burgerImg").fadeOut(0);
   	}
 
   	e.preventDefault();
@@ -29,6 +28,7 @@ $(function() {
 				$('body').removeClass('show-sidebar');
 				$('body').find('.js-menu-toggle').removeClass('active');
         // $(".burgerImg").fadeIn();
+        $(".burgerImg").fadeIn(150);
 			}
     }
 	}); 

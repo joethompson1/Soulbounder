@@ -15,12 +15,18 @@
 
 
 
-<body>
+<body style="display: none;">
 	<%- include('../components/header.ejs') %>
 	<div class="container-layout">
 		<%- body %>
 	</div>
 </body>
+
+<script type="text/javascript">
+	$(function() {
+		$('body').hide().fadeIn('slow');
+	});
+</script>
 
 
 </html>

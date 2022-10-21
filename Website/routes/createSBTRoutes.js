@@ -7,5 +7,6 @@ import { createSBT_get, createSBT_post } from '../controllers/createSBTControlle
 router.get('/', createSBT_get);
 router.post('/', createSBT_post);
 
+// router.get('/blockchain', blockchain_get);
 
 export default router;
