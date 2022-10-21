@@ -6,13 +6,16 @@
 </head>
 
 <body>
+	<div class="hideHeader" id="hideHeader">
+		
+	</div>
 	<div class="container text-center" id="loadingContainer">
 		<div class="container loadingContainer">
 			<%- include('../components/logoLoadingAnimation.ejs') %>
 		</div>
-		<div class="container loadingTextContainer typewriter" style="width: max-content;">
+		<div class="container loadingTextContainer" style="width: max-content;">
 			<div id="contactingText">
-				<h1 id="">Contacting the Interplantery File System...</h1>
+				<h1 id="">Contacting the Interplantery File System...</h1>	
 			</div>
 			<div id="storingText">
 				<h1 id="">Storing SBT Data on the Interplantery File System...</h1>
@@ -96,6 +99,7 @@
 <script type="text/javascript">
 	$('div[id^=loadingContainer]').hide();
 	$('div[id^=storingText').hide();
+	$('div[id^=hideHeader').hide();
 	var base64String = "";
 
 	function readURL(input) {
@@ -151,14 +155,13 @@
 		const SBTEndDate = document.getElementById('SBTEndDate').value;
 		const SBTWebsite = document.getElementById('SBTWebsite').value;
 
-		// $('div[id^=formContainer]').delay(10000).hide();
-		// $('div[id^=loadingContainer]').delay(15000).show();
-
 		$('div[id^=formContainer]').fadeOut(2500);
 		$('div[id^=loadingContainer]').delay(2500).fadeIn(2500);
+		$('div[id^=hideHeader').delay(1500).show(1000);
+		// $("#hideHeader").css({ transform: translateX(2vw) });
 
-		$('div[id^=contactingText]').delay(7500).fadeOut(2500);
-		$('div[id^=storingText]').delay(10000).fadeIn(2500);
+		$('div[id^=contactingText]').delay(7000).fadeOut(2500);
+		$('div[id^=storingText]').delay(9600).fadeIn(2500);
 
 		
 		try {

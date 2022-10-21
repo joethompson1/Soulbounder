@@ -217,7 +217,7 @@ aside {
   width: 100px;
   cursor: pointer;
   position: relative;
-  z-index: 99;
+  z-index: 98;
   float: right;
 }
 

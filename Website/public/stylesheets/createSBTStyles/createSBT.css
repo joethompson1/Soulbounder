@@ -32,11 +32,25 @@
 }
 
 
+
+.hideHeader { 
+	width: 20vh;
+	height: 20vh;
+	background-color: #fcfcfc;
+	/*background-color: red;*/
+	cursor: pointer;
+	position: fixed;
+	z-index: 999999;
+	/*float: right;*/
+	margin-left: 0vh;
+	/*transform: translateX(10vw);*/
+ }
+
 /* ---------- Loading Animation CSS ---------- */
 
 .loadingContainer {
 	width: 20%;
-	height: 100vh;
+	height: 80vh;
 	display: flex;
 }
 
@@ -45,13 +59,10 @@
 }
 
 .loadingTextContainer {
-	transform: translateY(-35vh);
+	transform: translateY(-25vh);
 }
 
-
-
-.typewriter h1 {
-	/* use !important to prevent issues with browser extensions that change fonts */
+.loadingTextContainer h1 {
 	font-family: 'Raleway' !important;
 	speak: none;
 	font-style: normal;
@@ -59,34 +70,12 @@
 	font-variant: normal;
 	text-transform: none;
 	line-height: 2;
+	font-size: 1.5vw;
 
 	/* Better Font Rendering =========== */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-
-	overflow: hidden; /* Ensures the content is not revealed until the animation */
-	border-right: .15em solid #ff6584; /* The typwriter cursor */
-	white-space: nowrap; /* Keeps the content on a single line */
-	margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-	font-size: 2vw;
-	text-align: center;
-	animation: 
-		typing 5.5s steps(40, end),
-		blink-caret 1s step-end infinite;
 }
-
-/* The typing effect */
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-/* The typewriter cursor effect */
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  25% { border-color: #ff6584; }
-}
-
 
 
 

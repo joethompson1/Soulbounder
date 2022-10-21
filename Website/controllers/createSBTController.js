@@ -40,7 +40,7 @@ export const createSBT_post = async (req, res) => {
 		const dataAdded = await node.add(JSON.stringify(SBTData));
 		console.log("Added file CID:", dataAdded);
 
-
+		// res.status(200).render('');
 
 
 	} catch (err) {
