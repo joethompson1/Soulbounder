@@ -38,42 +38,223 @@
 
 
 
-/* ---------- Loading Animation CSS ---------- */
 
-.loadingContainer {
-    width: 20%;
-    height: 80vh;
-    display: flex;
+
+
+
+
+
+
+
+
+
+
+/* SBT Picture */
+
+.SBTPictureContainer {
+    background-color: whitesmoke;
+    width: 20vw;
+    height: 20vw;
+    border-radius: 1.5vw 1.5vw 1.5vw 1.5vw;
+    margin-left: 50%;
+    margin-right: auto;
+    transform: translateX(-50%);
 }
 
-.loadingContainer .logoContainer {
-    margin: auto;
+
+.SBTDisplayPicture {
+    width: 100%;
+    height: 100%;
+    border-radius: 1.25vw 1.25vw 1.25vw 1.25vw;
 }
 
-.loadingTextContainer {
-    transform: translateY(-25vh);
+.picturePadding {
+    display: inline-block;
+    margin: 0 auto;
+    padding-top: 1vw;
+    width: 21vw;
+    height: 27vw;
+    border-radius: 1.5vw;
+    transform: translateX(0.5vw);
 }
 
-.loadingTextContainer h1 {
-    font-family: 'Raleway' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 2;
+
+
+
+
+/* Increase/Decrease Input */
+
+
+.quantityContainer {
+    margin-top: 1vw;
+    height: 4vw;
+}
+
+form {
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.value-button {
+  display: inline-block;
+  width: 6.3vw;
+  height: 100%;
+  color: black;
+  text-align: center;
+  vertical-align: middle;
+  transform: translateY(-0.2vw);
+  background: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.value-button:hover {
+  cursor: pointer;
+}
+
+form #decrease {
+    border-radius: 0.85vw;
+    border-right: 1px solid black;
+    font-size: 2.5vw;
+    padding-top: 0.25vw;
+    background-color: #3445b4;
+    color: white;
+    float: left;
+}
+
+#decrease:active {
+    background-color: #3498DB;
+}
+
+form #increase {
+    border-radius: 0.85vw;
+    border-left: 1px solid black;
+    font-size: 2vw;
+    padding-top: 0.5vw;
+    background-color: #3445b4;
+    color: white;
+    float: right;
+}
+
+#increase:active {
+    background-color: #3498DB;
+}
+
+
+form #input-wrap {
+  margin: 0px;
+  padding: 0px;
+}
+
+input#number {
+    text-align: center;
+    border: none;
+    background-color: transparent;
+    width: 6vw;
+    height: 100%;
     font-size: 1.5vw;
-
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    border-radius: 0.85vw;
+    vertical-align: top;
 }
 
-#page {
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+
+
+
+/* ---------- Form CSS ---------- */
+
+.formContainer {
+    width: 50%;
+    padding-bottom: 2vw;
+    transform: translateY(7vw);
+    margin-bottom: 30vw;
+    border-radius: 2vw;
+/*    background-color: lightgray;*/
+}
+
+
+.rowBoarder {
+    border-radius: 1.5vw;
+    border-style: solid;
+    border-color: gray;
+    background-color: whitesmoke;
+}
+
+
+.dropdown-content {
     display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    width: 25vw;
+    min-width: 160px;
+    border-radius: 1vw;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
 }
 
-#loadingContainer {
-    display: flex;
+
+.SBTType {
+    border-radius: 0.75vw;
+    background-color: #3445b4;
+    margin-top: 0.5vw;
 }
+
+.SBTType p {
+    font-size: 1.25vw;
+    padding-top: 0.1vw;
+    padding-bottom: 0.1vw;
+    margin: 0vw;
+}
+
+
+.SBTDescription {
+    margin-top: 1.3vw;
+    font-size: 1.1vw;
+    background-color: white;
+    border-radius: 0.5vw;
+    border-style: solid;
+    border-width: thin;
+    height: 17.6vw;
+    padding: 0.5vw;
+    color: darkgray;
+    overflow-y: scroll;
+    text-align: left;
+    margin-bottom: 0vw;
+}
+
+
+/* SBT Name */
+
+.SBTName {
+    font-family: Righteous;
+    font-size: 3vw;
+    color: black;
+    padding-top: 0.6vw;
+    margin: 0vw;
+}
+
+
+
+
+
+/* ----- Max Width ----- */
+
+/*@media (max-width: 1200px) {
+    .SBTDescription {
+        margin-top: 1.1vw !important;
+    }
+}*/
 

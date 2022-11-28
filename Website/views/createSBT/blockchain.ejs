@@ -4,17 +4,93 @@
 	<link rel="stylesheet" href="/stylesheets/createSBTStyles/createSBTBlockchain.css">
 
 	<script type="text/javascript">
-		function onLoad() {
-			document.getElementById("page").style.display = "block";
-            document.getElementById("loadingContainer").style.display = "none";
-		}
+
 	</script>
 </head>
 
 <body>
-	<div class="container text-center">
-		<h1><%= path %></h1>
+	<div class="text-center">
+		<form class="formContainer">
+			<div class="row rowBoarder">
+				<div class="col">
+					<!-- <h1 class="SBTName" id="SBTName">1234567890</h1> -->
+					<h1 class="SBTName" id="SBTName"><%= SBTData.Name %></h1>
+					<div class="SBTType">
+						<p>
+							Type: Certificate
+						</p>
+					</div>
+					<p class="SBTDescription" id="SBTDescription"><%= SBTData.Description %></p>
+				</div>
+
+				<div class="col-auto">
+					<div class="picturePadding">	
+						<div class="SBTPictureContainer">
+							<img class="SBTDisplayPicture" id="imageSBT" src="<%= SBTData.Picture %>">
+							<!-- <img class="SBTDisplayPicture" id="imageSBT" src="<%= SBTData %>"> -->
+							<div class="quantityContainer">
+								<div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+								<input type="number" id="number" value="0" />
+								<div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		</form>
 	</div>
+
+
+
+
+
+	<script type="text/javascript">
+		function increaseValue() {
+			var value = parseInt(document.getElementById('number').value, 10);
+		  	value = isNaN(value) ? 0 : value;
+		  	value++;
+		  	document.getElementById('number').value = value;
+		}
+
+		function decreaseValue() {
+			var value = parseInt(document.getElementById('number').value, 10);
+		  	value = isNaN(value) ? 0 : value;
+		  	value < 1 ? value = 1 : '';
+		  	value--;
+		  	document.getElementById('number').value = value;
+		}
+
+		$('#SBTName').each(function() {
+			var el= $(this);
+			var textLength = el.html().length;
+
+			if (textLength > 11) {
+		   		el.css('font-size', '2.7vw');
+		   		$('#SBTDescription').css('height', '18.2vw');
+		   	}
+
+			if (textLength > 13) {
+		   		el.css('font-size', '2.3vw');
+		   		$('#SBTDescription').css('height', '18.8vw');
+			}
+		   
+			if (textLength > 15) {
+		       el.css('font-size', '2.1vw');
+		       $('#SBTDescription').css('height', '19vw');
+		   }
+
+			if (textLength > 17) {
+		   		el.css('font-size', '1.8vw');
+		   		$('#SBTDescription').css('height', '19.2vw');
+			}
+
+			if (textLength > 19) {
+		   		el.css('font-size', '1.6vw');
+		   		$('#SBTDescription').css('height', '19.4vw');
+			}
+		});
+	</script>
 </body>
 
 

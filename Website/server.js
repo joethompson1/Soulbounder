@@ -45,4 +45,17 @@ app.use('/home', homeRouter);
 app.use('/createSBT', createSBTRouter);
 
 
+
+// IPFS Connection
+import * as IPFS from 'ipfs-core';
+
+const ifpsConfig = {
+  host: "ipfs.infura.io",
+  port: 5001,
+  protocol: "https"
+};
+
+export const node = await IPFS.create(ifpsConfig);
+
+
 export default app;

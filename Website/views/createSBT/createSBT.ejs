@@ -1,4 +1,7 @@
 <head>
+	<!-- Preload Stylesheets -->
+	<link rel="preload" href="/stylesheets/createSBTStyles/createSBT.css" as="style">
+
 	<!-- Stylesheets -->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 	<link rel="stylesheet" href="/stylesheets/logoStyles/logoLoadingAnimation.css">
@@ -60,31 +63,31 @@
 			<div class="row">
 				<div class="col inputContainer" style="margin-right: 1vw;">
 					<label class="inputLabel">City (Optional):</label>
-					<input class="input" type="text" name="" id="SBTCity"></input>
+					<input class="input" type="text" name="SBTCity" id="SBTCity"></input>
 				</div>
 
 				<div class="col inputContainer">
 					<label class="inputLabel">Country (Optional):</label>
-					<input class="input" type="text" name="" id="SBTCountry"></input>
+					<input class="input" type="text" name="SBTCountry" id="SBTCountry"></input>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col inputContainer" style="margin-right: 1vw;">
 					<label class="inputLabel">Start Date:</label>
-					<input class="input" type="text" name="" id="SBTStartDate"></input>
+					<input class="input" type="text" name="SBTStartDate" id="SBTStartDate"></input>
 				</div>
 
 				<div class="col inputContainer">
 					<label class="inputLabel">End Date (Optional):</label>
-					<input class="input" type="text" name="" id="SBTEndDate"></input>
+					<input class="input" type="text" name="SBTEndDate" id="SBTEndDate"></input>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col inputContainer">
 					<label class="inputLabel">Website (Optional):</label>
-					<input class="input" type="text" name="" id="SBTWebsite"></input>
+					<input class="input" type="text" name="SBTWebsite" id="SBTWebsite"></input>
 				</div>
 			</div>
 
@@ -154,10 +157,6 @@
 		$('div[id^=storingText]').delay(9600).fadeIn(2500);
 		$('div[id^=storingText]').delay(17500).fadeOut(2500);
     }); 
-
-
-
-
 
 </script>
 

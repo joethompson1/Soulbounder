@@ -28,7 +28,7 @@ $(function() {
 				$('body').removeClass('show-sidebar');
 				$('body').find('.js-menu-toggle').removeClass('active');
         // $(".burgerImg").fadeIn();
-        $(".burgerImg").fadeIn(150);
+        $(".burgerImg").delay(125).fadeIn(300);
 			}
     }
 	}); 
