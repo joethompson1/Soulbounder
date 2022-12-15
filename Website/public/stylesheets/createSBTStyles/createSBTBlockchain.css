@@ -236,7 +236,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 
-/* SBT Name */
+
 
 .SBTName {
     font-family: Righteous;
@@ -247,6 +247,25 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 
+
+.submitButton {
+    font-family: Righteous;
+    font-size: 1.5vw;
+    border-radius: 1vw;
+    margin-top: 15px;
+    height: 3vw;
+    border-style: solid;
+    border-color: gray;
+    background-color: #3445b4;
+    width: 100%;
+    color: white;
+}
+
+
+.submitButton:hover {
+    background-color: #9445c6;
+    color: #1FD6D0;
+}
 
 
 

@@ -3,9 +3,7 @@
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 	<link rel="stylesheet" href="/stylesheets/createSBTStyles/createSBTBlockchain.css">
 
-	<script type="text/javascript">
-
-	</script>
+	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
 </head>
 
 <body>
@@ -13,21 +11,22 @@
 		<form class="formContainer">
 			<div class="row rowBoarder">
 				<div class="col">
-					<!-- <h1 class="SBTName" id="SBTName">1234567890</h1> -->
-					<h1 class="SBTName" id="SBTName"><%= SBTData.Name %></h1>
+					<h1 class="SBTName" id="SBTName">1234567890</h1>
+					<!-- <h1 class="SBTName" id="SBTName"><%= SBTData.Name %></h1> -->
 					<div class="SBTType">
 						<p>
 							Type: Certificate
 						</p>
 					</div>
-					<p class="SBTDescription" id="SBTDescription"><%= SBTData.Description %></p>
+					<!-- <p class="SBTDescription" id="SBTDescription"><%= SBTData.Description %></p> -->
+					<p class="SBTDescription" id="SBTDescription">Example description. Here is the SBT description.</p>
 				</div>
 
 				<div class="col-auto">
 					<div class="picturePadding">	
 						<div class="SBTPictureContainer">
-							<img class="SBTDisplayPicture" id="imageSBT" src="<%= SBTData.Picture %>">
-							<!-- <img class="SBTDisplayPicture" id="imageSBT" src="<%= SBTData %>"> -->
+							<!-- <img class="SBTDisplayPicture" id="imageSBT" src="<%= SBTData.Picture %>"> -->
+							<img class="SBTDisplayPicture" id="imageSBT" src="<%= SBTData %>">
 							<div class="quantityContainer">
 								<div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
 								<input type="number" id="number" value="0" />
@@ -37,12 +36,59 @@
 					</div>
 				</div>
 			</div>
-		
+
+			<div class="row">
+				<button class="submitButton" id="submitButton" type="button">PUBLISH</button>
+				<h2>Account: <span class="showAccount"></span></h2>
+			</div>
+			
 		</form>
 	</div>
 
 
 
+	<script type="text/javascript">
+		const showAccount = document.querySelector('.showAccount');
+
+		$(function() // execute once the DOM has loaded
+		{
+
+			// wire up Add Item button click event
+			$("#submitButton").click(async function(event) {
+				event.preventDefault(); // cancel default behavior
+
+				const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+				const userWalletAddress = accounts[0];
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				const signer = provider.getSigner(userWalletAddress);
+				showAccount.innerHTML = userWalletAddress;
+
+				const networkId = await window.ethereum.request({ method: 'net_version' });
+				const contractNetworkId = "<%= contractNetworkId %>"
+
+
+				if (contractNetworkId == networkId) {
+					let contractAbi = '<%- contractAbi %>';
+					const contractAddress = "<%= contractAddress %>";
+
+					const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+
+					let memeHash = await contract.get();
+					console.log(memeHash);
+
+					await contract.set("<%= SBTHash %>");
+
+					memeHash = await contract.get();
+					console.log(memeHash);
+
+				} else {
+					window.alert("Smart contract not deployed to detected network!");
+				}
+		  	});
+		});
+
+
+	</script>
 
 
 	<script type="text/javascript">
@@ -91,6 +137,7 @@
 			}
 		});
 	</script>
+
 </body>
 
 

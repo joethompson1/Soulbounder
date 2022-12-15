@@ -10,29 +10,31 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/joeb4202/Soulbounder.git"
+    "url": "git+https://github.com/joethompson1/Soulbounder.git"
   },
   "author": "Joe Thompson",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/joeb4202/Soulbounder/issues"
+    "url": "https://github.com/joethompson1/Soulbounder/issues"
   },
-  "homepage": "https://github.com/joeb4202/Soulbounder#readme",
+  "homepage": "https://github.com/joethompson1/Soulbounder#readme",
   "dependencies": {
-    "bcrypt": "^5.0.1",
     "buffer": "^6.0.3",
+    "chai": "^4.3.7",
+    "chai-as-promised": "^7.1.1",
+    "chai-bignumber": "^3.1.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.1",
     "ejs": "^3.1.8",
+    "ethers": "^5.7.2",
     "express": "^4.18.1",
     "express-ejs-layouts": "^2.5.1",
     "ipfs": "^0.64.2",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.3.5",
-    "truffle-hdwallet-provider": "^1.0.6",
+    "web3": "^1.8.1",
     "webpack": "^5.73.0"
   },
   "devDependencies": {
+    "@truffle/hdwallet-provider": "^2.1.2",
     "nodemon": "^2.0.16",
     "webpack-cli": "^4.9.2"
   }
