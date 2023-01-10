@@ -1,0 +1,10 @@
+
+
+.shrinkTile:hover {
+  transform: scale(0.95);
+}
+
+.shrinkTile {
+  transition: all 0.5s;
+  transform-origin: 150% 100%;
+}

@@ -1,0 +1,15 @@
+{
+  "name": "truffle",
+  "type": "commonjs",
+  "version": "1.0.0",
+  "description": "ESM workaround solution to allow commonjs in chai testing",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
