@@ -1,0 +1,165 @@
+<head>
+	<!-- Preload Stylesheets -->
+	<link rel="preload" href="/stylesheets/createSBTStyles/createSBT.css" as="style">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+	<link rel="stylesheet" href="/stylesheets/logoStyles/logoLoadingAnimation.css">
+	<link rel="stylesheet" href="/stylesheets/createSBTStyles/createSBT.css">
+</head>
+
+<body>
+	<div class="hideHeader" id="hideHeader">
+		
+	</div>
+	<div class="container text-center" id="loadingContainer">
+		<div class="container loadingContainer">
+			<%- include('../components/logoLoadingAnimation.ejs') %>
+		</div>
+		<div class="container loadingTextContainer" style="width: max-content;">
+			<div id="contactingText">
+				<h1 id="">Contacting the Interplantery File System...</h1>	
+			</div>
+			<div id="storingText">
+				<h1 id="">Storing SBT Data on the Interplantery File System...</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="container formContainer" id="formContainer">
+		<form name="sbtForm" id="sbtForm" method="POST" action="/createSBT">
+			<div class="row">
+				<div class="col">
+					<input class="SBTName" type="text" name="SBTName" placeholder="SBT Name" id="SBTName">
+					<div class="dropdown">
+						<button onclick="dropdownFunction()" class="btn-lg dropdown-toggle dropbtn">Type of SBT</button>
+						<div id="myDropdown" class="dropdown-content">
+							<a href="#home">Event / Attendance</a>
+							<a href="#about">Certificate (Coming soon)</a>
+							<a href="#contact">Ticket (Coming soon)</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="col">
+					<div class="SBTPictureContainer">
+						<label class="imageLabel" for="fileInput">
+							<img class="SBTDisplayPicture" id="stockImage" src="/images/handWithPicture.png">
+							<img class="displayImage" src="#" id="displayImage">
+						</label>
+
+						<input id="fileInput" type="file" onchange="readURL(this);" name="image">
+						<input class="SBTPicture" type="text" name="SBTPicture" id=SBTPicture>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row textareaContainer">
+				<label class="label"><u>Description:</u></label>
+				<textarea class="SBTDescription" type="text" name="SBTDescription" placeholder="Enter a short description about what your SBT is for." id="SBTDescription"></textarea>
+			</div>
+
+
+			<div class="row">
+				<div class="col inputContainer" style="margin-right: 1vw;">
+					<label class="inputLabel">City (Optional):</label>
+					<input class="input" type="text" name="SBTCity" id="SBTCity"></input>
+				</div>
+
+				<div class="col inputContainer">
+					<label class="inputLabel">Country (Optional):</label>
+					<input class="input" type="text" name="SBTCountry" id="SBTCountry"></input>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col inputContainer" style="margin-right: 1vw;">
+					<label class="inputLabel">Start Date:</label>
+					<input class="input" type="text" name="SBTStartDate" id="SBTStartDate"></input>
+				</div>
+
+				<div class="col inputContainer">
+					<label class="inputLabel">End Date (Optional):</label>
+					<input class="input" type="text" name="SBTEndDate" id="SBTEndDate"></input>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col inputContainer">
+					<label class="inputLabel">Website (Optional):</label>
+					<input class="input" type="text" name="SBTWebsite" id="SBTWebsite"></input>
+				</div>
+			</div>
+
+			<div class="row">
+				<button class="submitButton" id="formSubitButton">Create!</button>
+			</div>
+		</form>
+	</div>
+</body>
+
+
+
+<script type="text/javascript">
+	$('div[id^=loadingContainer]').hide();
+	$('div[id^=storingText').hide();
+	$('div[id^=hideHeader').hide();
+	var base64String = "";
+
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			const file = input.files[0];
+			var reader = new FileReader();
+
+
+			reader.onload = function (e) {
+				$('#displayImage').attr('src', e.target.result);
+				$('#stockImage').hide();
+				$('#displayImage').show();
+
+				base64String = reader.result.split(',')[1];
+				$('input.SBTPicture').val(base64String);
+
+			}
+
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+
+
+
+	/* When the user clicks on the button, 
+	toggle between hiding and showing the dropdown content */
+	function dropdownFunction() {
+		document.getElementById("myDropdown").classList.toggle("show");
+	}
+
+	// Close the dropdown if the user clicks outside of it
+	window.onclick = function(event) {
+	  if (!event.target.matches('.dropbtn')) {
+	  	var dropdowns = document.getElementsByClassName("dropdown-content");
+	  	var i;
+	  	for (i = 0; i < dropdowns.length; i++) {
+	  		var openDropdown = dropdowns[i];
+	  		if (openDropdown.classList.contains('show')) {
+	  			openDropdown.classList.remove('show');
+	  		}
+	  	}
+	  }
+	}
+
+	$("#formSubitButton").click(function(){
+        $('div[id^=formContainer]').fadeOut(2500);
+		$('div[id^=loadingContainer]').delay(2500).fadeIn(2500);
+		$('div[id^=hideHeader').delay(1500).fadeIn(500);
+
+		$('div[id^=contactingText]').delay(7000).fadeOut(2500);
+		$('div[id^=storingText]').delay(9600).fadeIn(2500);
+		$('div[id^=storingText]').delay(17500).fadeOut(2500);
+    }); 
+
+</script>
+
+
+
+

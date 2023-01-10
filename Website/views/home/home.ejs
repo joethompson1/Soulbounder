@@ -1,0 +1,60 @@
+
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+</head>
+
+<body>
+	<div class="container" style="width: 100%; height: 100vh; display: flex;" >
+		<div class="container text-center" style="margin: auto;">
+			<h1>Coming Soon.</h1>
+			<button class="enableEthereumButton">Enable Ethereum</button>
+			<h2>Account: <span class="showAccount"></span></h2>
+		</div>
+	</div>
+
+
+
+
+	<script type="text/javascript">
+		const ethereumButton = document.querySelector('.enableEthereumButton');
+		const showAccount = document.querySelector('.showAccount');
+
+		ethereumButton.addEventListener('click', () => {
+			getAccount();
+		});
+
+		async function getAccount() {
+			const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+			const userWalletAddress = accounts[0];
+			const provider = new ethers.providers.Web3Provider(ethereum);
+			const signer = provider.getSigner(userWalletAddress)
+			showAccount.innerHTML = userWalletAddress;
+
+			const networkId = await window.ethereum.request({ method: 'net_version' });
+			const contractNetworkId = "<%= contractNetworkId %>"
+
+
+			if (contractNetworkId == networkId) {
+				let contractAbi = '<%- contractAbi %>';
+				const contractAddress = "<%= contractAddress %>";
+
+				const contract = new ethers.Contract(contractAddress, contractAbi, provider);
+
+				const memeHash = await contract.get();
+				console.log(memeHash);
+
+			} else {
+				window.alert("Smart contract not deployed to detected network!");
+			}
+		}
+
+
+
+
+
+	</script>
+</body>
+
