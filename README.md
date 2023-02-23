@@ -51,11 +51,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-### Home Page:
-[![homePage][product-screenshot]](https://joethompson.co.uk/projects)
-
-### Student Account Page:
-[![homePage][product-screenshot2]](https://joethompson.co.uk/projects)
+[![product-screenshot][product-screenshot]](https://joethompson.co.uk/projects)
 
 
 ### Description:
