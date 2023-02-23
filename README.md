@@ -276,7 +276,7 @@ Github Link: [https://github.com/joethompson1/Datachain](https://github.com/joet
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[product-screenshot]: dataChain/application-datachain/public/images/homePage.png
+[product-screenshot]: LogoDesigns/soulbounderCreateSBT.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [Hyperledger]: https://img.shields.io/badge/Hyperledger_Fabric-FF0000?style=for-the-badge&logo=Hyperledger&logoColor=black
