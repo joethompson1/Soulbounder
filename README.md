@@ -7,7 +7,7 @@
 <br />
 <div align="center">
   <a href="">
-    <img src="https://github.com/joethompson1/Soulbounder/blob/main/Logo%20Designs/SB%20purple%2Bblue%2Bgradient.svg" alt="Logo" width="180" height="180">
+    <img src="https://github.com/joethompson1/Soulbounder/blob/main/LogoDesigns/SB%20purple%2Bblue%2Bgradient.svg" alt="Logo" width="180" height="180">
   </a>
 
   <h3 align="center">Soulbounder</h3>
