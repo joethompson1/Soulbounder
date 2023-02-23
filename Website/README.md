@@ -1,2 +1,0 @@
-# Soulbounder
-Soulbound token provider
