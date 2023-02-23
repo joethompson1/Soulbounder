@@ -55,11 +55,13 @@
 
 
 ### Description:
-The purpose of the application was to create a prototype which highlights to universities that the adoption of blockchain technology is not only beneficial to their organisation, but also to their past, present, and future students. This is because creating a digital degree brings with it added utility to both students and employers, whilst at the same time helping to prevent qualification fraud.
+This project is currently still under development.
 
-Datachain makes use of a variety of languages and technologies in order to achieve this. By leveraging the HyperLedger Fabric permissioned blockchain network to deploy custom smart contracts written using the programming language Go, an immutable record of transactions was able to be created, specifically for the distribution and viewing of digital degrees.
+In 2022 Vitalik Buterin Co-authored a whitepaper called Decentralized Society: Finding Web3's Soul. Whereby he outlined his idea of introducing SoulBound Tokens (SBTs) to bring about a more decentralised society through the use of the blockchain. This is achieved through the use of a one time transfer token known as an SBT.
 
-This was created with the help of Node.Js and the HyperLedger Fabric blockchain network. Please be aware that a local Hyperledger Fabric blockchain network is required to be running on your computer in order for the site to work as it has not been set up for production purposes. More can be found about this in the getting started.
+Working with this idea I am currently developing a website that would allow people to create and issue their own SBTs. These can come in a variety of different forms such as, proof of attendance, certificates and general ID's. This builds upon the work I did for my Datachain project, this time creating a more general purpose certificate which will be hosted on the Ethereum blockchain and utilising the cutting edge Soulbound Token smart contract, which is currently being developed by the Ethereum Foundation.
+
+The premise of the project is to leverage blockchain technology as a way of improving the efficiency of every day life. One of the ways we are already seeing this is with the increase in utility of digital wallets. Soulbounder strives at providing an easy way of creating and sharing SBT's by bridging the gap between blockchain technology and the every day user. This will open up a whole world of potential possibilities for users wanting to add more functionality to digital wallets.
 
 
 
@@ -73,11 +75,9 @@ This was created with the help of Node.Js and the HyperLedger Fabric blockchain 
 The technologies I used to build this project are listed below:
 
 * [![JQuery][JQuery.com]][JQuery-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![Hyperledger Fabric][Hyperledger]][Hyperledger-url]
 * [![Node.JS][NodeJS]][NodeJS-url]
-* [![MongoDB][MongoDB]][MongoDB-url]
 * [![NPM][NPM]][NPM-url]
+* [![Ethereum][Ethereum]][Ethereum-url]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -283,6 +283,8 @@ Github Link: [https://github.com/joethompson1/Datachain](https://github.com/joet
 [MongoDB-url]: https://www.mongodb.com/
 [NPM]: https://img.shields.io/badge/NPM-d90166?style=for-the-badge&logo=npm&logoColor=white
 [NPM-url]: https://www.npmjs.com/
+[Ethereum]: https://img.shields.io/badge/Ethereum-#5A5A5A?style=for-the-badge&logo=npm&logoColor=white
+[Ethereum-url]: https://www.ethereum.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
 [Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
