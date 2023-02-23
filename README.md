@@ -77,7 +77,7 @@ The technologies I used to build this project are listed below:
 * [![JQuery][JQuery.com]][JQuery-url]
 * [![Node.JS][NodeJS]][NodeJS-url]
 * [![NPM][NPM]][NPM-url]
-* [![Ethereum][Ethereum]][Ethereum-url]
+* [![Ether][Ethereum]][Ethereum-url]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -283,7 +283,7 @@ Github Link: [https://github.com/joethompson1/Datachain](https://github.com/joet
 [MongoDB-url]: https://www.mongodb.com/
 [NPM]: https://img.shields.io/badge/NPM-d90166?style=for-the-badge&logo=npm&logoColor=white
 [NPM-url]: https://www.npmjs.com/
-[Ethereum]: https://img.shields.io/badge/Ethereum-#5A5A5A?style=for-the-badge&logo=npm&logoColor=white
+[Ethereum]: https://img.shields.io/badge/Ethereum-5A5A5A?style=for-the-badge&logo=npm&logoColor=white
 [Ethereum-url]: https://www.ethereum.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
