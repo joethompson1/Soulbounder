@@ -122,19 +122,16 @@ If you don't have them installed then copy and paste the necessary lines below i
 
 Follow the steps below to set up and start the project locally:
 
-1. Clone the repo
-   ```sh
-   git clone https://github.com/joethompson1/Soulbounder.git
-   ```
-2. Go to the website folder
+
+1. Go to the website folder
    ```sh
    cd Soulbounder/Website/
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    npm install
    ```
-4. Start the development server
+3. Start the development server
    ```sh
    npm run devStart
    ```
@@ -165,7 +162,7 @@ Joe Thompson
 
 Email: joe.cl.thompson@gmail.com
 
-Github Link: [https://github.com/joethompson1/Datachain](https://github.com/joethompson1/Datachain)
+Github Link: [https://github.com/joethompson1/Datachain](https://github.com/joethompson1/Soulbounder)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
