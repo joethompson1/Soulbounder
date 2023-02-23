@@ -13,10 +13,8 @@
   <h3 align="center">Soulbounder</h3>
 
   <p align="center">
-    My university dissertation project that utilises the Hyperledger Fabric blockchain to allow for the awarding and storing of digital degrees.
+    An in the works Soulbound token (SBT) provider using the Ethereum blockchain as a store and proof of transactions.
     <br />
-    <br />
-    <a href="https://drive.google.com/file/d/1ZvBKH6Ezdz7gkq5NJTThPwjUGQTCqliJ/view"><strong>- Read Project Report</strong></a>
     <br />
     <a href="https://joethompson.co.uk/projects"><strong>- View Portfolio Overview</strong></a>
     <br />
@@ -279,7 +277,6 @@ Github Link: [https://github.com/joethompson1/Datachain](https://github.com/joet
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [product-screenshot]: dataChain/application-datachain/public/images/homePage.png
-[product-screenshot2]: dataChain/application-datachain/public/images/studentAccountPageWithDegree.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [Hyperledger]: https://img.shields.io/badge/Hyperledger_Fabric-FF0000?style=for-the-badge&logo=Hyperledger&logoColor=black
