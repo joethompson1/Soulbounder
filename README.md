@@ -116,9 +116,25 @@ If you don't have them installed then copy and paste the necessary lines below i
 
 
 <br></br>
-### Installation and set up of Back End
 
-1. Command to tell truffle to compile the contracts
+### Installation
+
+Follow the steps below to set up and start the project locally:
+
+
+1. Go to the website folder
+   ```sh
+   cd Soulbounder/Website/
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+
+
+### Set up of Back End
+
+1. Enter command to tell truffle to compile the contracts
    ```sh
    truffle --config truffle-config.cjs compile
    ```
@@ -126,11 +142,11 @@ If you don't have them installed then copy and paste the necessary lines below i
    ```sh
    truffle --config truffle-config.cjs migrate
    ```
-1. Command to bring up the truffle console
+* (If you wish to use interect with the smart contract through the truffle console) Command to bring up the truffle console
    ```sh
    truffle --config truffle-config.cjs console
    ```
-1. Once in the console enter the following to view contract
+* Once in the console you can interact with the functions of the smart contract, for example:
    ```sh
    const meme = await Meme.deployed()
    ```
@@ -138,12 +154,15 @@ If you don't have them installed then copy and paste the necessary lines below i
    meme
    ```
    ```sh
-   memeHash = meme.get()
+   meme.set('Test123')
+   ```
+   ```sh
+   meme.get()
    ```
 
 
 
-### Installation and set up of Front End
+### Set up of Front End
 
 Follow the steps below to set up and start the project locally:
 
