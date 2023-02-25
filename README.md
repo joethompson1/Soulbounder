@@ -134,6 +134,10 @@ Follow the steps below to set up and start the project locally:
 
 ### Set up of Back End
 
+1. Go to the website folder
+   ```sh
+   cd Soulbounder/Website/
+   ```
 1. Enter command to tell truffle to compile the contracts
    ```sh
    truffle --config truffle-config.cjs compile
