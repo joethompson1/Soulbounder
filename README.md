@@ -122,6 +122,10 @@ If you don't have them installed then copy and paste the necessary lines below i
    ```sh
    truffle --config truffle-config.cjs compile
    ```
+1. Deploy the smart contract to the blockchain
+   ```sh
+   truffle --config truffle-config.cjs migrate
+   ```
 1. Command to bring up the truffle console
    ```sh
    truffle --config truffle-config.cjs console
