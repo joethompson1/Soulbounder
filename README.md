@@ -116,9 +116,27 @@ If you don't have them installed then copy and paste the necessary lines below i
 
 
 <br></br>
+### Installation and set up of Back End
+
+1. Command to tell truffle to compile the contracts
+   ```sh
+   truffle --config truffle-config.cjs compile
+   ```
+1. Command to bring up the truffle console
+   ```sh
+   truffle --config truffle-config.cjs console
+   const meme = await Meme.deployed();
+   meme;
+   ```
+1. Once in the console enter the following to view contract
+   ```sh
+   const meme = await Meme.deployed();
+   meme;
+   memeHash = meme.get()
+   ```
 
 
-### Installation
+### Installation and set up of Front End
 
 Follow the steps below to set up and start the project locally:
 

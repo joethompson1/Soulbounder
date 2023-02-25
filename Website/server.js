@@ -1,6 +1,3 @@
-// if (process.env.NODE_ENV !== 'production') {
-//   require('dotenv').config();
-// }
 
 
 import express from 'express';
@@ -10,10 +7,6 @@ import bodyParser from 'body-parser';
 import path from 'path';
 const __dirname = path.resolve();
 
-// const dbURI = 'mongodb+srv://joethompson:Thojoe12@cluster0.sw8hl.mongodb.net/soulbounder';
-// mongoose.connect(dbURI, { useUnifiedTopology: true })
-//   .then((result) => app.listen(process.env.PORT || 3000))
-//   .catch((err) => console.log(err));
 
 app.listen(process.env.PORT || 3000);
 

@@ -11,22 +11,22 @@
 		<form class="formContainer">
 			<div class="row rowBoarder">
 				<div class="col">
-					<h1 class="SBTName" id="SBTName">1234567890</h1>
-					<!-- <h1 class="SBTName" id="SBTName"><%= SBTData.Name %></h1> -->
+					<!-- <h1 class="SBTName" id="SBTName">1234567890</h1> -->
+					<h1 class="SBTName" id="SBTName"><%= SBTData.Name %></h1>
 					<div class="SBTType">
 						<p>
 							Type: Certificate
 						</p>
 					</div>
-					<!-- <p class="SBTDescription" id="SBTDescription"><%= SBTData.Description %></p> -->
-					<p class="SBTDescription" id="SBTDescription">Example description. Here is the SBT description.</p>
+					<p class="SBTDescription" id="SBTDescription"><%= SBTData.Description %></p>
+					<!-- <p class="SBTDescription" id="SBTDescription">Example description. Here is the SBT description.</p> -->
 				</div>
 
 				<div class="col-auto">
 					<div class="picturePadding">	
 						<div class="SBTPictureContainer">
-							<!-- <img class="SBTDisplayPicture" id="imageSBT" src="<%= SBTData.Picture %>"> -->
-							<img class="SBTDisplayPicture" id="imageSBT" src="<%= SBTData %>">
+							<img class="SBTDisplayPicture" id="imageSBT" src="<%= SBTData.Picture %>">
+							<!-- <img class="SBTDisplayPicture" id="imageSBT" src="<%= SBTData %>"> -->
 							<div class="quantityContainer">
 								<div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
 								<input type="number" id="number" value="0" />
