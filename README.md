@@ -125,15 +125,18 @@ If you don't have them installed then copy and paste the necessary lines below i
 1. Command to bring up the truffle console
    ```sh
    truffle --config truffle-config.cjs console
-   const meme = await Meme.deployed();
-   meme;
    ```
 1. Once in the console enter the following to view contract
    ```sh
-   const meme = await Meme.deployed();
-   meme;
+   const meme = await Meme.deployed()
+   ```
+   ```sh
+   meme
+   ```
+   ```sh
    memeHash = meme.get()
    ```
+
 
 
 ### Installation and set up of Front End
