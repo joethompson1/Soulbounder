@@ -151,16 +151,16 @@ Follow the steps below to set up and start the project locally:
    truffle --config truffle-config.cjs console
    ```
 * Once in the console you can interact with the functions of the smart contract, for example:
-   ```sh
+   ```js
    const meme = await Meme.deployed()
    ```
-   ```sh
+   ```js
    meme
    ```
-   ```sh
+   ```js
    meme.set('Test123')
    ```
-   ```sh
+   ```js
    meme.get()
    ```
 

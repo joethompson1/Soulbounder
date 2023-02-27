@@ -48,11 +48,12 @@ export const createSBT_post = async (req, res) => {
 
 			console.log(JSON.stringify(SBTData));
 
-			const SBTHash = await node.add(JSON.stringify(SBTData));
-			console.log("Added file CID:", SBTHash);
-			// const path = dataAdded.path.toString();
+			const sbtHash = await node.add(JSON.stringify(SBTData));
+			console.log("Added file CID:", sbtHash);
+			const path =  sbtHash.path.toString();
+			console.log("Path:", path);
 
-			res.status(200).render('createSBT/blockchain', { SBTData, SBTHash, contractNetworkId, contractAddress, contractAbi : JSON.stringify(contractAbi) });
+			res.status(200).render('createSBT/blockchain', { SBTData, sbtHash: path, contractNetworkId, contractAddress, contractAbi : JSON.stringify(contractAbi) });
 
 	} catch (err) {
 			console.log("error in uploading IPFS data: ", err);
@@ -62,7 +63,7 @@ export const createSBT_post = async (req, res) => {
 }
 
 
-
+// Only necessary for testing
 export const blockchain_get = async (req, res) => {
 	let networkDataList = Meme.networks;
 	var contractNetworkId;

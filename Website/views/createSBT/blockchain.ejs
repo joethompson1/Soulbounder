@@ -76,7 +76,7 @@
 					let memeHash = await contract.get();
 					console.log(memeHash);
 
-					await contract.set("<%= SBTHash %>");
+					await contract.set("<%= sbtHash %>");
 
 					memeHash = await contract.get();
 					console.log(memeHash);
