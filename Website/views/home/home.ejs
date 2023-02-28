@@ -16,51 +16,49 @@
 			<img class="spaceRip" id="" src="/images/spaceRip.svg">
 			<img class="spaceRip2" id="" src="/images/spaceRip2.svg">
 		</div>
-			
-		<div class="container__polaroid" id="container__polaroid">
-			<div class="pol__center">
-				<img class="polaroid pre" id="" src="/images/polaroidGrey.svg">
-				<img class="polaroid post" id="" src="/images/polaroid.svg">
-				<div class="polaroid__background post">
-					<img class="polaroid__mainPicture post" id="" src="/images/rocketLaunch.svg">
+		
+		<div class="container__launchPad" id="container__launchPad">	
+			<div class="container__polaroid" id="container__polaroid">
+				<div class="pol__center">
+					<div class="polaroid__background post">
+						<img class="launchPad__picture polaroid__metaMask post" id="" src="/images/metamask.svg">
+					</div>
+					<div class="polaroid__background pre">
+						<img class="polaroid__mainPicture pre" id="" src="/images/rocketLaunch2.svg">
+					</div>
+					<h1 class="connectText pre">Launch</h1>
+					<h1 class="connectText post">Connect</h1>
 				</div>
-				<div class="polaroid__background pre">
-					<img class="polaroid__mainPicture pre" id="" src="/images/rocketLaunch2.svg">
-				</div>
-				<h1 class="connectText pre">Launch</h1>
-				<h1 class="connectText post">Connect</h1>
-			</div>
 
-			<div class="pol__topLeft">
-				<img class="polaroid" src="/images/polaroid.svg">
-				<div class="polaroid__background">
-					<img class="polaroid__mainPicture" id="" src="/images/rocketLaunch.svg">
+				<div class="pol__topLeft">
+					<div class="polaroid__background about__background">
+						<!-- <div class="about__background"> -->
+							<img class="launchPad__picture polaroid__about" id="" src="/images/about.svg">
+						<!-- </div> -->
+					</div>
+					<h1 class="launchPad__text">About</h1>
 				</div>
-				<h1 class="connectText">About</h1>
-			</div>
 
-			<div class="pol__topRight">
-				<img class="polaroid" id="" src="/images/polaroid.svg">
-				<div class="polaroid__background">
-					<img class="polaroid__mainPicture" id="" src="/images/rocketLaunch.svg">
+				<div class="pol__topRight">
+					<div class="polaroid__background">
+						<img class="polaroid__mainPicture" id="" src="/images/rocketLaunch.svg">
+					</div>
+					<h1 class="launchPad__text">Library</h1>
 				</div>
-				<h1 class="connectText">Library</h1>
-			</div>
 
-			<div class="pol__bottomLeft">
-				<img class="polaroid" id="" src="/images/polaroid.svg">
-				<div class="polaroid__background">
-					<img class="polaroid__mainPicture" id="" src="/images/rocketLaunch.svg">
+				<div class="pol__bottomLeft">
+					<div class="polaroid__background">
+						<img class="polaroid__mainPicture" id="" src="/images/rocketLaunch.svg">
+					</div>
+					<h1 class="launchPad__text">Create</h1>
 				</div>
-				<h1 class="connectText">Create</h1>
-			</div>
 
-			<div class="pol__bottomRight">
-				<img class="polaroid" id="" src="/images/polaroid.svg">
-				<div class="polaroid__background">
-					<img class="polaroid__mainPicture" id="" src="/images/rocketLaunch.svg">
+				<div class="pol__bottomRight">
+					<div class="polaroid__background">
+						<img class="polaroid__mainPicture" id="" src="/images/rocketLaunch.svg">
+					</div>
+					<h1 class="launchPad__text">Launch Pad</h1>
 				</div>
-				<h1 class="connectText">Launch Pad</h1>
 			</div>
 		</div>	
 	</div>
@@ -70,7 +68,7 @@
 
 <script>
 	$(document).ready(function(){
-		$('#container__polaroid').hover(function(){ 
+		$('#container__launchPad').hover(function(){ 
 	    	$('#container__background').hide(100);
 		}, function(){
 	        $('#container__background').show(100);

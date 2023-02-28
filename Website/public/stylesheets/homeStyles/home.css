@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Gajraj+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
 
 .container__body {
 	position: relative;
@@ -13,7 +14,7 @@
 
 
 
-/* Background  */
+/*------------------------ Background -------------------------- */
 
 .container__background {
 	position: absolute;
@@ -23,7 +24,7 @@
 	height: 18vw;
 	transform: translate(-50%, -50%);
 	opacity: 1;
-	transition: all 0.7s;
+	transition: all 1s;
 }
 
 
@@ -31,10 +32,10 @@
 
 .spaceRip {
 	position: absolute;
-	top: -9%;
-	left: 116%;
+	top: -10%;
+	left: 114%;
 	transform: translate(-50%, -50%);
-	transition: all 0.7s;
+	transition: all 1s;
 	width: 416%;
 	opacity: 1;
 }
@@ -45,7 +46,7 @@
 	top: 221%;
 	left: -75%;
 	transform: translate(-50%, -50%);
-	transition: all 0.7s;
+	transition: all 1s;
 	width: 320%;
 	opacity: 1;
 }
@@ -58,13 +59,33 @@
 
 
 
-/* General Polaroid */
+/*=========================================  Launch Pad ======================================*/
+
+.container__launchPad {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 17vw;
+	height: 18vw;
+	transform: translate(-50%, -50%);
+	transition: all 1s;
+	background-color: transparent;
+	border-radius: 2vw;
+}
+
+.container__launchPad:hover {
+	transition: all 1s;
+	width: 55vw;
+	height: 40vw;
+	background-color: lightgray;
+}
+
 
 .container__polaroid {
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	width: 18vw;
+	width: 16vw;
 	height: 18vw;
 	transform: translate(-50%, -50%);
 }
@@ -82,27 +103,35 @@
 
 
 
-/* Polaroid Middle */
+/*-------------------------- Polaroid Middle --------------------------*/
 
 .pol__center {
 	width: 100%;
 	height: 100%;
 	position: absolute;
-	transition: all 0.7s;
+	transition: all 1s;
 	cursor: pointer;
 }
 
 
 
-.container__polaroid:hover .pol__center {
-	transition: all 0.7s;
+.container__launchPad:hover .pol__center {
+	transition: all 1s;
 }
 
 .pol__center:hover {
-	transition: all 0.7s;
+	transition: all 0.1s;
 	transform: translate(3%, 3%);
 	width: 95%;
 	height: 95%;
+}
+
+
+.launchPad__picture {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .polaroid__mainPicture {
@@ -115,29 +144,54 @@
 }
 
 
+.polaroid__metaMask {
+	width: 75%;
+	height: 75%;
+	top: 55% !important;
+}
+
+
+.polaroid__about {
+	width: 65%;
+	height: 65%;
+}
+
+
+.about__background {
+/*	position: absolute;
+	width: 80%;
+	height: 80%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);*/
+	background-color: darkblue !important;
+	border-radius: 50vw !important;
+	height: 65% !important;
+	width: 75% !important;
+}
 
 .polaroid__background {
 	position: absolute;
 	width: 80%;
 	height: 75%;
+	background-color: transparent;
 /*	background-color: #3f3d56;*/
-	background-color: #3f3d56;
 	border-radius: 1vw;
 	top: 42%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	transition: all 0.7s;
+	transition: all 1s;
 }
 
-.container__polaroid:hover .polaroid__background {
-	background-color: #023020;
+.container__launchPad:hover .polaroid__background {
+/*	background-color: #023020;*/
 }
 
-.container__polaroid:hover .container__background{
+.container__launchPad:hover .container__background{
 	opacity: 0;
 	display: none;
 	visibility: hidden;
-	transition: all 0.7s;
+	transition: all 1s;
 }
 
 
@@ -147,37 +201,56 @@
 	font-family: 'Gajraj One', cursive;
 /*	font-family: 'Permanent Marker', cursive;*/
 	color: #50C878;
-	top: 89%;
+	top: 85%;
 	left: 50%;
 	width: 76%;
 	text-align: center;
 	transform: translate(-50%, -50%);
 	font-size: 2vw;
-	transition: all 0.7s;
+	transition: all 1s;
 }
 
 
-.container__polaroid:hover .connectText {
+.launchPad__text {
+	position: absolute;
+	color: black;
+	top: 85%;
+	left: 50%;
+	width: 76%;
+	text-align: center;
+	transform: translate(-50%, -50%);
+	font-size: 2vw;
+	transition: all 1s;
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+
+.container__launchPad:hover .connectText {
+	color: black;
+	transition: all 1s;
+}
+
+.pol__center:hover .connectText {
 	color: #50C878;
-	transition: all 0.7s;
+	transition: all 0.1s;
 }
 
 
 
 .post {
 	opacity: 0;
-	transition: all 0.7s;
+	transition: all 1s;
 }
 
 
-.container__polaroid:hover .pre {
+.container__launchPad:hover .pre {
 	opacity: 0;
-	transition: all 0.7s;
+	transition: all 1s;
 }
 
-.container__polaroid:hover .post {
+.container__launchPad:hover .post {
 	opacity: 1;
-	transition: all 0.7s;
+	transition: all 1s;
 }
 
 
@@ -186,26 +259,26 @@
 
 
 
-/* Polaroid Top */
+/*-------------------------- Polaroid Top --------------------------*/
 
 .pol__top {
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	opacity: 0;
-	transition: all 0.7s;
+	transition: all 1s;
 	cursor: pointer;
 }
 
 
-.container__polaroid:hover .pol__top {
+.container__launchPad:hover .pol__top {
 	transform: translateY(-106%);
 	opacity: 1;
-	transition: all 0.7s;
+	transition: all 1s;
 }
 
 .pol__top:hover {
-	transition: all 0.7s;
+	transition: all 0.1s;
 	width: 96%;
 	height: 96%;
 }
@@ -213,26 +286,26 @@
 
 
 
-/* Polaroid Bottom */
+/*-------------------------- Polaroid Bottom --------------------------*/
 
 .pol__bottom {
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	opacity: 0;
-	transition: all 0.7s;
+	transition: all 1s;
 	cursor: pointer;
 }
 
 
-.container__polaroid:hover .pol__bottom {
+.container__launchPad:hover .pol__bottom {
 	transform: translateY(106%);
 	opacity: 1;
-	transition: all 0.7s;
+	transition: all 1s;
 }
 
 .pol__bottom:hover {
-	transition: all 0.7s;
+	transition: all 0.1s;
 	width: 96%;
 	height: 96%;
 }
@@ -242,26 +315,26 @@
 
 
 
-/* Polaroid Top Left */
+/*-------------------------- Polaroid Top Left --------------------------*/
 
 .pol__topLeft {
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	opacity: 0;
-	transition: all 0.7s;
+	transition: all 1s;
 	cursor: pointer;
 }
 
 
-.container__polaroid:hover .pol__topLeft {
-	transform: translate(-100%, -54%);
+.container__launchPad:hover .pol__topLeft {
+	transform: translate(-110%, -54%);
 	opacity: 1;
-	transition: all 0.7s;
+	transition: all 1s;
 }
 
 .pol__topLeft:hover {
-	transition: all 0.7s;
+	transition: all 0.1s;
 	width: 96%;
 	height: 96%;
 }
@@ -270,53 +343,53 @@
 
 
 
-/* Polaroid Top Right */
+/*-------------------------- Polaroid Top Right --------------------------*/
 
 .pol__topRight {
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	opacity: 0;
-	transition: all 0.7s;
+	transition: all 1s;
 	cursor: pointer;
 }
 
 
-.container__polaroid:hover .pol__topRight {
-	transform: translate(100%, -54%);
+.container__launchPad:hover .pol__topRight {
+	transform: translate(110%, -54%);
 	opacity: 1;
-	transition: all 0.7s;
+	transition: all 1s;
 }
 
 
 .pol__topRight:hover {
-	transition: all 0.7s;
+	transition: all 0.1s;
 	width: 96%;
 	height: 96%;
 }
 
 
 
-/* Polaroid Bottom Left */
+/*-------------------------- Polaroid Bottom Left --------------------------*/
 
 .pol__bottomLeft {
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	opacity: 0;
-	transition: all 0.7s;
+	transition: all 1s;
 	cursor: pointer;
 }
 
 
-.container__polaroid:hover .pol__bottomLeft {
-	transform: translate(-100%, 54%);
+.container__launchPad:hover .pol__bottomLeft {
+	transform: translate(-110%, 54%);
 	opacity: 1;
-	transition: all 0.7s;
+	transition: all 1s;
 }
 
 .pol__bottomLeft:hover {
-	transition: all 0.7s;
+	transition: all 0.1s;
 	width: 96%;
 	height: 96%;
 }
@@ -324,26 +397,26 @@
 
 
 
-/* Polaroid Bottom Right */
+/*-------------------------- Polaroid Bottom Right --------------------------*/
 
 .pol__bottomRight {
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	opacity: 0;
-	transition: all 0.7s;
+	transition: all 1s;
 	cursor: pointer;
 }
 
 
-.container__polaroid:hover .pol__bottomRight {
-	transform: translate(100%, 54%);
+.container__launchPad:hover .pol__bottomRight {
+	transform: translate(110%, 54%);
 	opacity: 1;
-	transition: all 0.7s;
+	transition: all 1s;
 }
 
 .pol__bottomRight:hover {
-	transition: all 0.7s;
+	transition: all 0.1s;
 	width: 96%;
 	height: 96%;
 }
