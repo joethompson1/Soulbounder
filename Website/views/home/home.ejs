@@ -4,18 +4,76 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+
+	<link rel="stylesheet" href="/stylesheets/homeStyles/home.css">
 </head>
 
+
+
 <body>
-	<div class="container" style="width: 100%; height: 100vh; display: flex;" >
-		<div class="container text-center" style="margin: auto;">
-
+	<div class="container__body">
+		<div class="container__background" id="container__background">
+			<img class="spaceRip" id="" src="/images/spaceRip.svg">
+			<img class="spaceRip2" id="" src="/images/spaceRip2.svg">
 		</div>
+			
+		<div class="container__polaroid" id="container__polaroid">
+			<div class="pol__center">
+				<img class="polaroid pre" id="" src="/images/polaroidGrey.svg">
+				<img class="polaroid post" id="" src="/images/polaroid.svg">
+				<div class="polaroid__background post">
+					<img class="polaroid__mainPicture post" id="" src="/images/rocketLaunch.svg">
+				</div>
+				<div class="polaroid__background pre">
+					<img class="polaroid__mainPicture pre" id="" src="/images/rocketLaunch2.svg">
+				</div>
+				<h1 class="connectText pre">Launch</h1>
+				<h1 class="connectText post">Connect</h1>
+			</div>
+
+			<div class="pol__topLeft">
+				<img class="polaroid" src="/images/polaroid.svg">
+				<div class="polaroid__background">
+					<img class="polaroid__mainPicture" id="" src="/images/rocketLaunch.svg">
+				</div>
+				<h1 class="connectText">About</h1>
+			</div>
+
+			<div class="pol__topRight">
+				<img class="polaroid" id="" src="/images/polaroid.svg">
+				<div class="polaroid__background">
+					<img class="polaroid__mainPicture" id="" src="/images/rocketLaunch.svg">
+				</div>
+				<h1 class="connectText">Library</h1>
+			</div>
+
+			<div class="pol__bottomLeft">
+				<img class="polaroid" id="" src="/images/polaroid.svg">
+				<div class="polaroid__background">
+					<img class="polaroid__mainPicture" id="" src="/images/rocketLaunch.svg">
+				</div>
+				<h1 class="connectText">Create</h1>
+			</div>
+
+			<div class="pol__bottomRight">
+				<img class="polaroid" id="" src="/images/polaroid.svg">
+				<div class="polaroid__background">
+					<img class="polaroid__mainPicture" id="" src="/images/rocketLaunch.svg">
+				</div>
+				<h1 class="connectText">Launch Pad</h1>
+			</div>
+		</div>	
 	</div>
-
-
-
-
-
 </body>
 
+
+
+<script>
+	$(document).ready(function(){
+		$('#container__polaroid').hover(function(){ 
+	    	$('#container__background').hide(100);
+		}, function(){
+	        $('#container__background').show(100);
+	    });
+	});
+</script>

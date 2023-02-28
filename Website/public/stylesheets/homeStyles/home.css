@@ -1,0 +1,350 @@
+@import url('https://fonts.googleapis.com/css2?family=Gajraj+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+.container__body {
+	position: relative;
+	width: 100%;
+	height: 100vh;
+}
+
+
+
+
+
+
+
+/* Background  */
+
+.container__background {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 18vw;
+	height: 18vw;
+	transform: translate(-50%, -50%);
+	opacity: 1;
+	transition: all 0.7s;
+}
+
+
+
+
+.spaceRip {
+	position: absolute;
+	top: -9%;
+	left: 116%;
+	transform: translate(-50%, -50%);
+	transition: all 0.7s;
+	width: 416%;
+	opacity: 1;
+}
+
+
+.spaceRip2 {
+	position: absolute;
+	top: 221%;
+	left: -75%;
+	transform: translate(-50%, -50%);
+	transition: all 0.7s;
+	width: 320%;
+	opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+/* General Polaroid */
+
+.container__polaroid {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 18vw;
+	height: 18vw;
+	transform: translate(-50%, -50%);
+}
+
+
+
+.polaroid {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+
+
+
+
+
+/* Polaroid Middle */
+
+.pol__center {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	transition: all 0.7s;
+	cursor: pointer;
+}
+
+
+
+.container__polaroid:hover .pol__center {
+	transition: all 0.7s;
+}
+
+.pol__center:hover {
+	transition: all 0.7s;
+	transform: translate(3%, 3%);
+	width: 95%;
+	height: 95%;
+}
+
+.polaroid__mainPicture {
+	position: relative;
+	width: 90%;
+	height: 90%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+
+
+.polaroid__background {
+	position: absolute;
+	width: 80%;
+	height: 75%;
+/*	background-color: #3f3d56;*/
+	background-color: #3f3d56;
+	border-radius: 1vw;
+	top: 42%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	transition: all 0.7s;
+}
+
+.container__polaroid:hover .polaroid__background {
+	background-color: #023020;
+}
+
+.container__polaroid:hover .container__background{
+	opacity: 0;
+	display: none;
+	visibility: hidden;
+	transition: all 0.7s;
+}
+
+
+
+.connectText {
+	position: absolute;
+	font-family: 'Gajraj One', cursive;
+/*	font-family: 'Permanent Marker', cursive;*/
+	color: #50C878;
+	top: 89%;
+	left: 50%;
+	width: 76%;
+	text-align: center;
+	transform: translate(-50%, -50%);
+	font-size: 2vw;
+	transition: all 0.7s;
+}
+
+
+.container__polaroid:hover .connectText {
+	color: #50C878;
+	transition: all 0.7s;
+}
+
+
+
+.post {
+	opacity: 0;
+	transition: all 0.7s;
+}
+
+
+.container__polaroid:hover .pre {
+	opacity: 0;
+	transition: all 0.7s;
+}
+
+.container__polaroid:hover .post {
+	opacity: 1;
+	transition: all 0.7s;
+}
+
+
+
+
+
+
+
+/* Polaroid Top */
+
+.pol__top {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	opacity: 0;
+	transition: all 0.7s;
+	cursor: pointer;
+}
+
+
+.container__polaroid:hover .pol__top {
+	transform: translateY(-106%);
+	opacity: 1;
+	transition: all 0.7s;
+}
+
+.pol__top:hover {
+	transition: all 0.7s;
+	width: 96%;
+	height: 96%;
+}
+
+
+
+
+/* Polaroid Bottom */
+
+.pol__bottom {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	opacity: 0;
+	transition: all 0.7s;
+	cursor: pointer;
+}
+
+
+.container__polaroid:hover .pol__bottom {
+	transform: translateY(106%);
+	opacity: 1;
+	transition: all 0.7s;
+}
+
+.pol__bottom:hover {
+	transition: all 0.7s;
+	width: 96%;
+	height: 96%;
+}
+
+
+
+
+
+
+/* Polaroid Top Left */
+
+.pol__topLeft {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	opacity: 0;
+	transition: all 0.7s;
+	cursor: pointer;
+}
+
+
+.container__polaroid:hover .pol__topLeft {
+	transform: translate(-100%, -54%);
+	opacity: 1;
+	transition: all 0.7s;
+}
+
+.pol__topLeft:hover {
+	transition: all 0.7s;
+	width: 96%;
+	height: 96%;
+}
+
+
+
+
+
+/* Polaroid Top Right */
+
+.pol__topRight {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	opacity: 0;
+	transition: all 0.7s;
+	cursor: pointer;
+}
+
+
+.container__polaroid:hover .pol__topRight {
+	transform: translate(100%, -54%);
+	opacity: 1;
+	transition: all 0.7s;
+}
+
+
+.pol__topRight:hover {
+	transition: all 0.7s;
+	width: 96%;
+	height: 96%;
+}
+
+
+
+/* Polaroid Bottom Left */
+
+.pol__bottomLeft {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	opacity: 0;
+	transition: all 0.7s;
+	cursor: pointer;
+}
+
+
+.container__polaroid:hover .pol__bottomLeft {
+	transform: translate(-100%, 54%);
+	opacity: 1;
+	transition: all 0.7s;
+}
+
+.pol__bottomLeft:hover {
+	transition: all 0.7s;
+	width: 96%;
+	height: 96%;
+}
+
+
+
+
+/* Polaroid Bottom Right */
+
+.pol__bottomRight {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	opacity: 0;
+	transition: all 0.7s;
+	cursor: pointer;
+}
+
+
+.container__polaroid:hover .pol__bottomRight {
+	transform: translate(100%, 54%);
+	opacity: 1;
+	transition: all 0.7s;
+}
+
+.pol__bottomRight:hover {
+	transition: all 0.7s;
+	width: 96%;
+	height: 96%;
+}
+
