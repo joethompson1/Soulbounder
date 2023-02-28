@@ -1,6 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Gajraj+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@100;300&display=swap');
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
+body {
+	overflow-x: hidden;
+	-ms-overflow-style: none;  /* IE and Edge */
+	scrollbar-width: none;  /* Firefox */
+
+}
+
 
 .container__body {
 	position: relative;
@@ -48,6 +62,7 @@
 	transform: translate(-50%, -50%);
 	transition: all 0.75s;
 	width: 320%;
+/*	width: 56vw;*/
 	opacity: 1;
 }
 
@@ -69,10 +84,11 @@
 	height: 18vw;
 	transform: translate(-50%, -50%);
 	transition: all 0.5s;
+	animation-timing-function: ease-in-out;
 	background-color: transparent;
 	border-radius: 2vw;
-/*	background-color: red;*/
 	border-radius: 5vw;
+	z-index: 999;
 }
 
 .container__launchPad:hover {
@@ -421,3 +437,113 @@
 	height: 96%;
 }
 
+
+
+
+
+
+
+/*=============================================== About ===============================================*/
+
+
+.container__about {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 18vw;
+	height: 18vw;
+	transform: translate(-50%, -50%);
+	opacity: 1;
+	transition: all 0.75s;
+}
+
+
+.container__aboutPanel {
+	position: absolute;
+	top: 295%;
+	width: 140vw;
+	height: 80vw;
+	background-color: #3f3d56;
+	transform: translateX(-50%);
+}
+
+
+
+.spaceBackgroundImg {
+	position: absolute;
+	left: 94%;
+	top: 60%;
+	transform: translate(-50%, -50%);
+	width: 40%;
+	overflow: hidden;
+}
+
+
+.astronaut {
+	position: absolute;
+	left: 54%;
+	top: 22%;
+	transform: translate(-50%, -50%);
+	width: 35%;
+	overflow: hidden;
+	animation-name: floating;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+
+
+@keyframes floating {
+    0% { transform: translate(0,  0); }
+    50%  { transform: translate(-15px, 15px); }
+    100%   { transform: translate(0, 0); }   
+}
+
+
+.spaceBitsTopImg {
+	position: absolute;
+	left: 30%;
+	top: 25%;
+	transform: translate(-50%, -50%);
+	width: 40%;
+	overflow: hidden;
+	animation-name: floating2;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.spaceBitsImg {
+	position: absolute;
+	left: 40%;
+	top: 90%;
+	transform: translate(-50%, -50%);
+	width: 40%;
+	overflow: hidden;
+}
+
+
+.container__aboutDescription {
+	position: absolute;
+	left: 45%;
+	top: 45%;
+	transform: translate(-50%, -50%);
+	width: 30%;
+	overflow: hidden;
+/*	border-radius: 5vw;*/
+	background-color: transparent;
+	font-family: 'Montserrat Alternates', sans-serif !important;
+}
+
+
+.aboutText {
+	font-family: 'Montserrat Alternates', sans-serif !important;
+	color: #f2f2f2;
+	font-size: 5vw;
+}
+
+.container__aboutDescription p {
+	color: #f2f2f2;
+	font-size: 1.2vw;
+}
