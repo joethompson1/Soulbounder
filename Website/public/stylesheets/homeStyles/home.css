@@ -12,7 +12,7 @@ body {
 	overflow-x: hidden;
 	-ms-overflow-style: none;  /* IE and Edge */
 	scrollbar-width: none;  /* Firefox */
-
+	font-family: 'Montserrat Alternates', sans-serif;
 }
 
 
@@ -20,6 +20,10 @@ body {
 	position: relative;
 	width: 100%;
 	height: 100vh;
+}
+
+* {
+	font-family: 'Montserrat Alternates', sans-serif !important;
 }
 
 
@@ -213,7 +217,7 @@ body {
 
 .connectText {
 	position: absolute;
-	font-family: 'Gajraj One', cursive;
+	font-family: 'Gajraj One', cursive !important;
 /*	font-family: 'Permanent Marker', cursive;*/
 	color: #50C878;
 	top: 88%;
@@ -236,7 +240,7 @@ body {
 	transform: translate(-50%, -50%);
 	font-size: 2vw;
 	transition: all 0.5s;
-	font-family: 'Josefin Sans', sans-serif;
+	font-family: 'Josefin Sans', sans-serif !important;
 }
 
 
@@ -443,8 +447,16 @@ body {
 
 
 
-/*=============================================== About ===============================================*/
 
+
+
+
+
+
+/*=============================================== About ============================================================*/
+
+
+/* --------------------- About Container ------------------ */
 
 .container__about {
 	position: absolute;
@@ -468,6 +480,33 @@ body {
 	transform: translateX(-50%);
 }
 
+
+
+
+/*------ About text -------*/
+
+.aboutTitle {
+	font-size: 5vw;
+}
+
+.aboutSubtitle {
+	font-size: 2vw;
+}
+
+.aboutSubtitle2 {
+	font-size: 1.3vw;
+}
+
+.aboutParagraph {
+	font-size: 1.2vw;
+	padding-left: 0.3vw;
+}
+
+
+
+
+
+/*------------------- About Container Background Images ------------------*/
 
 
 .spaceBackgroundImg {
@@ -509,10 +548,6 @@ body {
 	transform: translate(-50%, -50%);
 	width: 40%;
 	overflow: hidden;
-	animation-name: floating2;
-    animation-duration: 5s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
 }
 
 .spaceBitsImg {
@@ -527,7 +562,7 @@ body {
 
 .alienShipImg {
 	position: absolute;
-	left: 13%;
+	left: 10%;
 	top: 0%;
 	transform: translate(-50%, -50%);
 	width: 18%;
@@ -536,27 +571,52 @@ body {
 }
 
 
+.rocketShipImg {
+	position: absolute;
+	top: 30%;
+	left: -10%;
+	width: 35%;
+}
+
+
+.spaceAlien {
+	position: absolute;
+	width: 5%;
+	height: 5%;
+}
+
+
 .spaceAlienImg {
-	position: relative;
-	left: 25%;
+	left: 22%;
 	top: 15%;
-	transform: translate(-50%, -50%);
-	width: 4.5%;
-	overflow: hidden;
 	transform: rotate(315deg);
 	cursor: pointer;
 }
 
 
+.spaceAlien2Img {
+	top: 59.1%;
+	left: 63.4%;
+}
+
+
+.spaceAlien3Img {
+	top: 71.1%;
+	left: 27.5%;
+	-webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+
+.spaceAlien4Img {
+	top: 84%;
+	left: 63%;
+	transform: rotate(42deg);
+}
+
+
 
 .vortexAnimation {
-	position: relative;
-	left: 25%;
-	top: 19%;
-	transform: translate(-50%, -50%);
-	width: 4.5%;
-	overflow: hidden;
-	transform: rotate(315deg);
 	animation-name: vortex;
     animation-duration: 3s;
     animation-iteration-count: 1;
@@ -568,29 +628,28 @@ body {
     0% { 
     	transform: translate(0,  0); 
     }
-    80%  { 
-/*    	transform: translate(-185%, -185%); */
-    }
     100% { 
     	transform: translate(-150%, -150%); 
     	opacity: 0;
-/*    	display: none;*/
-/*    	pointer-events: none;*/
     }   
 }
 
 
 
+
+
+
+
+
+
+/*------------------------ About Details -----------------------------*/
+
 .container__aboutDescription {
 	position: absolute;
-	left: 40%;
-	top: 30%;
-	transform: translate(-50%, -50%);
+	left: 25%;
+	top: 23%;
 	width: 30%;
 	overflow: hidden;
-/*	border-radius: 5vw;*/
-	background-color: transparent;
-	font-family: 'Montserrat Alternates', sans-serif !important;
 }
 
 
@@ -603,26 +662,20 @@ body {
 }
 
 .container__aboutDescription2 {
-	position: relative;
-	left: 35%;
+	position: absolute;
+	left: 25.3%;
 	top: 38%;
-	transform: translate(-50%, -50%);
 	width: 20%;
 	height: 11%;
 	overflow: hidden;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	gap: 15%;
-	background-color: transparent;
-	font-family: 'Montserrat Alternates', sans-serif !important;
 }
 
 
 .container__aboutBox {
 	position: relative;
-/*	background-color: #f2f2f2;*/
-/*	background-color: #D8D8D8;*/
-	background-color: transparent;
 	text-align: center;
 	width: 100%;
 	height: 100%;
@@ -637,7 +690,6 @@ body {
 	top: 84%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	font-family: 'Montserrat Alternates', sans-serif !important;
 	color: #f2f2f2;
 }
 
@@ -657,116 +709,60 @@ body {
 	height: 95%;
 }
 
+
+
+
+
+
+
+/*------------ What Section ------------*/
+
 .container__what {
 	position: absolute;
-/*	background-color: red;*/
-	top: 50%;
-	left: 24%;
-	width: 50%;
-	height: 36%;
+	width: 40%;
+	height: 10%;
+	overflow: hidden;
+	background-color: #f2f2f2;
+	padding: 1.5vw;
+	border-radius: 3vw 3vw 0vw 3vw;
 }
 
 
 .container__what1 {
-	position: relative;
 	left: 24%;
-	top: 35%;
-	width: 40%;
-	height: 10%;
-	overflow: hidden;
-	background-color: #f2f2f2;
-	border-radius: 3vw;
-	padding: 1.5vw;
-	font-family: 'Montserrat Alternates', sans-serif !important;
-}
-
-.container__what1 p {
-	color: #3f3d56;
-}
-
-.container__what1 h1 {
-	color: #3f3d56;
+	top: 52%;
 }
 
 .container__what2 {
-	position: absolute;
-	left: 35%;
+	left: 32%;
 	top: 64%;
-	width: 40%;
-	height: 10%;
-	overflow: hidden;
-	background-color: #f2f2f2;
-	border-radius: 3vw;
-	padding: 1.5vw;
-	font-family: 'Montserrat Alternates', sans-serif !important;
-}
-
-
-.container__what2 p {
-	color: #3f3d56;
-}
-
-.container__what2 h1 {
-	color: #3f3d56;
+	border-radius: 3vw 3vw 3vw 0vw !important;
 }
 
 
 .container__what3 {
-	position: absolute;
 	left: 24%;
-	top: 77%;
-	width: 40%;
-	height: 10%;
-	overflow: hidden;
-	background-color: #f2f2f2;
-	border-radius: 3vw;
-	padding: 1.5vw;
-	font-family: 'Montserrat Alternates', sans-serif !important;
+	top: 76%;
 }
 
-
-.container__what3 p {
+.container__what1 p, h1 {
 	color: #3f3d56;
 }
 
-.container__what3 h1 {
+.container__what2 p, h1 {
+	color: #3f3d56;
+}
+
+.container__what3 p, h1 {
 	color: #3f3d56;
 }
 
 
-.aboutTitle {
-	font-family: 'Montserrat Alternates', sans-serif !important;
-	font-size: 5vw;
-}
-
-.aboutSubtitle {
-	font-family: 'Montserrat Alternates', sans-serif !important;
-	font-size: 2.5vw;
-}
-
-.aboutSubtitle2 {
-	font-family: 'Montserrat Alternates', sans-serif !important;
-	font-size: 1.5vw;
-}
-
-.aboutParagraph {
-	font-size: 1.2vw;
-	padding-left: 0.3vw;
-}
 
 
 
-.rocketShipImg {
-	position: absolute;
-	top: 30%;
-	left: -10%;
-	width: 35%;
-}
 
-.spaceAlien2Img {
-	position: absolute;
-	top: 59.1%;
-	left: 67%;
-	width: 5%;
-	height: 5%;
-}
+
+
+
+
