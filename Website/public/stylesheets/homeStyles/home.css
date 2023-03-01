@@ -672,6 +672,7 @@ body {
 	left: 24%;
 	top: 35%;
 	width: 40%;
+	height: 10%;
 	overflow: hidden;
 	background-color: #f2f2f2;
 	border-radius: 3vw;
@@ -690,9 +691,9 @@ body {
 .container__what2 {
 	position: absolute;
 	left: 35%;
-	top:69%;
-	transform: translateY(-50%);
+	top: 64%;
 	width: 40%;
+	height: 10%;
 	overflow: hidden;
 	background-color: #f2f2f2;
 	border-radius: 3vw;
@@ -713,9 +714,9 @@ body {
 .container__what3 {
 	position: absolute;
 	left: 24%;
-	top: 87%;
-	transform: translateY(-100%);
+	top: 77%;
 	width: 40%;
+	height: 10%;
 	overflow: hidden;
 	background-color: #f2f2f2;
 	border-radius: 3vw;
@@ -764,7 +765,8 @@ body {
 
 .spaceAlien2Img {
 	position: absolute;
-	top: 58.3%;
+	top: 59.1%;
 	left: 67%;
 	width: 5%;
+	height: 5%;
 }
