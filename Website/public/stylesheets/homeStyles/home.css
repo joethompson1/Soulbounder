@@ -460,9 +460,10 @@ body {
 
 .container__aboutPanel {
 	position: absolute;
+	left: 50%;
 	top: 295%;
 	width: 140vw;
-	height: 80vw;
+	height: 125vw;
 	background-color: #3f3d56;
 	transform: translateX(-50%);
 }
@@ -471,8 +472,8 @@ body {
 
 .spaceBackgroundImg {
 	position: absolute;
-	left: 94%;
-	top: 60%;
+	left: 89%;
+	top: 40%;
 	transform: translate(-50%, -50%);
 	width: 40%;
 	overflow: hidden;
@@ -481,8 +482,8 @@ body {
 
 .astronaut {
 	position: absolute;
-	left: 54%;
-	top: 22%;
+	left: 50%;
+	top: 15%;
 	transform: translate(-50%, -50%);
 	width: 35%;
 	overflow: hidden;
@@ -496,7 +497,7 @@ body {
 
 @keyframes floating {
     0% { transform: translate(0,  0); }
-    50%  { transform: translate(-15px, 15px); }
+    50%  { transform: translate(-3%, 3%); }
     100%   { transform: translate(0, 0); }   
 }
 
@@ -524,10 +525,66 @@ body {
 }
 
 
+.alienShipImg {
+	position: absolute;
+	left: 13%;
+	top: 0%;
+	transform: translate(-50%, -50%);
+	width: 18%;
+	overflow: hidden;
+	transform: rotate(315deg);
+}
+
+
+.spaceAlienImg {
+	position: relative;
+	left: 25%;
+	top: 15%;
+	transform: translate(-50%, -50%);
+	width: 4.5%;
+	overflow: hidden;
+	transform: rotate(315deg);
+	cursor: pointer;
+}
+
+
+
+.vortexAnimation {
+	position: relative;
+	left: 25%;
+	top: 19%;
+	transform: translate(-50%, -50%);
+	width: 4.5%;
+	overflow: hidden;
+	transform: rotate(315deg);
+	animation-name: vortex;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+}
+
+
+
+@keyframes vortex {
+    0% { 
+    	transform: translate(0,  0); 
+    }
+    80%  { 
+/*    	transform: translate(-185%, -185%); */
+    }
+    100% { 
+    	transform: translate(-150%, -150%); 
+    	opacity: 0;
+/*    	display: none;*/
+/*    	pointer-events: none;*/
+    }   
+}
+
+
+
 .container__aboutDescription {
 	position: absolute;
-	left: 45%;
-	top: 45%;
+	left: 40%;
+	top: 30%;
 	transform: translate(-50%, -50%);
 	width: 30%;
 	overflow: hidden;
@@ -537,13 +594,177 @@ body {
 }
 
 
-.aboutText {
-	font-family: 'Montserrat Alternates', sans-serif !important;
+.container__aboutDescription h1 {
 	color: #f2f2f2;
-	font-size: 5vw;
 }
 
 .container__aboutDescription p {
 	color: #f2f2f2;
+}
+
+.container__aboutDescription2 {
+	position: relative;
+	left: 35%;
+	top: 38%;
+	transform: translate(-50%, -50%);
+	width: 20%;
+	height: 11%;
+	overflow: hidden;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 15%;
+	background-color: transparent;
+	font-family: 'Montserrat Alternates', sans-serif !important;
+}
+
+
+.container__aboutBox {
+	position: relative;
+/*	background-color: #f2f2f2;*/
+/*	background-color: #D8D8D8;*/
+	background-color: transparent;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	top: 35%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 5vw;
+}
+
+.container__aboutBox h2 {
+	position: absolute;
+	top: 84%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-family: 'Montserrat Alternates', sans-serif !important;
+	color: #f2f2f2;
+}
+
+
+.aboutBoxImg {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+	transition: all 0.3s;
+}
+
+.aboutBoxImg:hover {
+	transition: all 0.3s;
+	width: 95%;
+	height: 95%;
+}
+
+.container__what {
+	position: absolute;
+/*	background-color: red;*/
+	top: 50%;
+	left: 24%;
+	width: 50%;
+	height: 36%;
+}
+
+
+.container__what1 {
+	position: relative;
+	left: 24%;
+	top: 35%;
+	width: 40%;
+	overflow: hidden;
+	background-color: #f2f2f2;
+	border-radius: 3vw;
+	padding: 1.5vw;
+	font-family: 'Montserrat Alternates', sans-serif !important;
+}
+
+.container__what1 p {
+	color: #3f3d56;
+}
+
+.container__what1 h1 {
+	color: #3f3d56;
+}
+
+.container__what2 {
+	position: absolute;
+	left: 35%;
+	top:69%;
+	transform: translateY(-50%);
+	width: 40%;
+	overflow: hidden;
+	background-color: #f2f2f2;
+	border-radius: 3vw;
+	padding: 1.5vw;
+	font-family: 'Montserrat Alternates', sans-serif !important;
+}
+
+
+.container__what2 p {
+	color: #3f3d56;
+}
+
+.container__what2 h1 {
+	color: #3f3d56;
+}
+
+
+.container__what3 {
+	position: absolute;
+	left: 24%;
+	top: 87%;
+	transform: translateY(-100%);
+	width: 40%;
+	overflow: hidden;
+	background-color: #f2f2f2;
+	border-radius: 3vw;
+	padding: 1.5vw;
+	font-family: 'Montserrat Alternates', sans-serif !important;
+}
+
+
+.container__what3 p {
+	color: #3f3d56;
+}
+
+.container__what3 h1 {
+	color: #3f3d56;
+}
+
+
+.aboutTitle {
+	font-family: 'Montserrat Alternates', sans-serif !important;
+	font-size: 5vw;
+}
+
+.aboutSubtitle {
+	font-family: 'Montserrat Alternates', sans-serif !important;
+	font-size: 2.5vw;
+}
+
+.aboutSubtitle2 {
+	font-family: 'Montserrat Alternates', sans-serif !important;
+	font-size: 1.5vw;
+}
+
+.aboutParagraph {
 	font-size: 1.2vw;
+	padding-left: 0.3vw;
+}
+
+
+
+.rocketShipImg {
+	position: absolute;
+	top: 30%;
+	left: -10%;
+	width: 35%;
+}
+
+.spaceAlien2Img {
+	position: absolute;
+	top: 58.3%;
+	left: 67%;
+	width: 5%;
 }
