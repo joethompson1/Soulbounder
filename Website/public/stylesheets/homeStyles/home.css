@@ -481,6 +481,13 @@ body {
 }
 
 
+.aboutLink {
+	position: absolute;
+	left: 0%;
+	top: 5%;
+}
+
+
 
 
 /*------ About text -------*/
