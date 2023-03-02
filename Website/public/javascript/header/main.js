@@ -27,7 +27,6 @@ $(function() {
       if ( $('body').hasClass('show-sidebar') ) {
 				$('body').removeClass('show-sidebar');
 				$('body').find('.js-menu-toggle').removeClass('active');
-        // $(".burgerImg").fadeIn();
         $(".burgerImg").delay(125).fadeIn(300);
 			}
     }
