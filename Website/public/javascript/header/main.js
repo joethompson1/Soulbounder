@@ -2,6 +2,15 @@ $(function() {
 
   'use strict';
 
+  if (window.location.pathname == "/home" || window.location.pathname == "/") {
+    $('#home').addClass('active');
+
+  } 
+
+  else if (window.location.pathname == "/createSBT") {
+    $('#createSBT').addClass('active');
+  }
+
   $('.js-menu-toggle').click(function(e) {
 
   	var $this = $(this);
