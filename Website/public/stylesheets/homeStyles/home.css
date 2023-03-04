@@ -6,6 +6,8 @@ body::-webkit-scrollbar {
     display: none;
 }
 body {
+	background-color: var(--color-off-white);
+/*	height: 1000vh;*/
 	overflow-x: hidden;
 	-ms-overflow-style: none;  /* IE and Edge */
 	scrollbar-width: none;  /* Firefox */
@@ -16,9 +18,18 @@ body {
 	position: relative;
 	width: 100%;
 	height: 100vh;
+/*	overflow-x: hidden;*/
 }
 
 
+
+.container__home {
+	position: relative;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100vh;
+}
 
 
 
@@ -455,11 +466,11 @@ body {
 
 /* --------------------- About Container ------------------ */
 
-.container__about {
+.container__focul {
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	width: 18vw;
+	width: 100%;
 	height: 18vw;
 	transform: translate(-50%, -50%);
 	opacity: 1;
@@ -620,6 +631,37 @@ body {
 }
 
 
+.rocketShip {
+	position: absolute;
+	width: 50%;
+	height: 50%;
+/*	top: 0%;
+	left: -10%;*/
+	top: -7%;
+	left: 7.5%;
+	transform: rotate(24deg);
+}
+
+
+.jupiter {
+	position: absolute;
+	width: 45%;
+	height: 45%;
+	top: -15%;
+	left: -10%;
+}
+
+
+.mars {
+	position: absolute;
+	width: 25%;
+	height: 25%;
+	top: 15%;
+	left: 50%;
+}
+
+
+
 
 .vortexAnimation {
 	animation-name: vortex;
@@ -762,6 +804,32 @@ body {
 	color: #3f3d56;
 }
 
+
+
+/* ------------- Getting Started section ------------ */
+
+
+.container__gettingStarted {
+	position: absolute;
+	left: -1%;
+	top: 988%;
+	width: 140vw;
+	height: 500%;
+	background-color: var(--color-charcoal);
+}
+
+
+.container__star {
+	position: fixed;
+	left: 50%;
+	will-change: width;
+	width: 1%;
+	height: 1%;
+/*	transform: translate(-50%, -50%);*/
+	border-radius: 100%;
+	background-color: var(--color-off-white);
+/*	background-color: #e6e6e6;*/
+}
 
 
 

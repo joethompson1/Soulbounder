@@ -12,55 +12,59 @@
 
 <body>
 	<div class="container__body">
-		<div class="container__background" id="container__background">
-			<img class="spaceRip" id="" src="/images/spaceRip.svg">
-			<img class="spaceRip2" id="" src="/images/spaceRip2.svg">
-		</div>
-		
-		<div class="container__launchPad" id="container__launchPad">	
-			<div class="container__polaroid" id="container__polaroid">
-				<div class="pol__center">
-					<div class="polaroid__background pre">
-						<img class="polaroid__mainPicture pre" id="" src="/images/rocketLaunch2.svg">
-					</div>
-					<div class="polaroid__background post">
-						<img class="launchPad__picture polaroid__metaMask post" id="" src="/images/metamask.svg">
-					</div>
-					<h1 class="connectText pre">Launch</h1>
-					<h1 class="connectText post">Connect</h1>
-				</div>
-
-				<div class="pol__topLeft pol">
-					<a class="polaroid__background about__background" href="#About">
-						<img class="launchPad__picture polaroid__about" id="" src="/images/about.svg">
-					</a>
-					<h1 class="launchPad__text">About</h1>
-				</div>
-
-				<div class="pol__topRight pol">
-					<div class="polaroid__background">
-						<img class="polaroid__mainPicture" id="" src="/images/libraryBook.svg">
-					</div>
-					<h1 class="launchPad__text">Library</h1>
-				</div>
-
-				<div class="pol__bottomLeft pol">
-					<a class="polaroid__background" href="/createSBT">
-						<img class="polaroid__mainPicture" id="" src="/images/paintBrush.svg">
-					</a>
-					<h1 class="launchPad__text">Create</h1>
-				</div>
-
-				<div class="pol__bottomRight pol">
-					<div class="polaroid__background">
-						<img class="polaroid__mainPicture" id="" src="/images/rocketLaunch.svg">
-					</div>
-					<h1 class="launchPad__text">Something</h1>
-				</div>
+		<div class="container__home" id="container__home">
+			<div class="container__background" id="container__background">
+				<img class="spaceRip" id="" src="/images/spaceRip.svg">
+				<img class="spaceRip2" id="" src="/images/spaceRip2.svg">
 			</div>
-		</div>	
+			
+			<div class="container__launchPad" id="container__launchPad">	
+				<div class="container__polaroid" id="container__polaroid">
+					<div class="pol__center pre">
+						<div class="polaroid__background">
+							<img class="polaroid__mainPicture pre" id="" src="/images/rocketLaunch2.svg">
+						</div>
+						<h1 class="connectText">Launch</h1>
+					</div>
+					<div class="pol__center post" id="connectButton">
+						<div class="polaroid__background">
+							<img class="launchPad__picture polaroid__metaMask post" id="" src="/images/metamask.svg">
+						</div>
+						<h1 class="connectText">Connect</h1>
+					</div>
 
-		<div class="container__about">
+					<div class="pol__topLeft pol">
+						<a class="polaroid__background about__background" href="#About">
+							<img class="launchPad__picture polaroid__about" id="" src="/images/about.svg">
+						</a>
+						<h1 class="launchPad__text">About</h1>
+					</div>
+
+					<div class="pol__topRight pol">
+						<div class="polaroid__background">
+							<img class="polaroid__mainPicture" id="" src="/images/libraryBook.svg">
+						</div>
+						<h1 class="launchPad__text">Library</h1>
+					</div>
+
+					<div class="pol__bottomLeft pol">
+						<a class="polaroid__background" href="/createSBT">
+							<img class="polaroid__mainPicture" id="" src="/images/paintBrush.svg">
+						</a>
+						<h1 class="launchPad__text">Create</h1>
+					</div>
+
+					<div class="pol__bottomRight pol">
+						<div class="polaroid__background">
+							<img class="polaroid__mainPicture" id="" src="/images/rocketLaunch.svg">
+						</div>
+						<h1 class="launchPad__text">Something</h1>
+					</div>
+				</div>
+			</div>	
+		</div>
+
+		<div class="container__focul">
 			<div class="container__aboutPanel" id="">
 				<div class="aboutLink" id="About"></div>
 				<img class="spaceBackgroundImg" id="" src="/images/spaceBackground.svg">
@@ -93,7 +97,7 @@
 
 				<img class="spaceAlien spaceAlien2Img" src="/images/spaceAlien.svg">
 				<img class="spaceAlien spaceAlien3Img" src="/images/spaceAlien3.svg">
-				<img class=" spaceAlien spaceAlien4Img" src="/images/spaceAlien4.svg">
+				<img class="spaceAlien spaceAlien4Img" src="/images/spaceAlien4.svg">
 			
 				<div class="container__what container__what1">
 					<h1 class="aboutSubtitle">What are SBTs?</h1>
@@ -109,23 +113,119 @@
 				</div>
 
 			</div>
+
+			<div class="container__gettingStarted" id="container__gettingStarted">
+				<img class="mars" id="" src="/images/mars.svg">
+				<img class="jupiter" id="" src="/images/jupiter.svg">
+				<img class="rocketShip" id="" src="/images/rocketShipBackground.svg">
+				<img class="rocketShip" id="rocketShip" src="/images/rocketShip.svg">
+
+
+				<div class="container__star" id="container__star">
+					
+				</div>
+			</div>
 		</div>
 	</div>
+
+
+
+	<script>
+		$(document).ready(function(){
+			$('#container__launchPad').hover(function(){ 
+		    	$('#container__background').hide(100);
+			}, function(){
+		        $('#container__background').show(100);
+		    });
+		});
+
+
+		function ani() {
+		  document.getElementById('spaceAlienImg').classList.add("vortexAnimation");
+		}
+	</script>
+
+
+
+
+	<script type="text/javascript">
+		// const showAccount = document.querySelector('.showAccount');
+
+		$(function() // execute once the DOM has loaded
+		{
+
+			// wire up Add Item button click event
+			$("#connectButton").click(async function(event) {
+				event.preventDefault(); // cancel default behavior
+
+				const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+				const userWalletAddress = accounts[0];
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				const signer = provider.getSigner(userWalletAddress);
+				window.alert(userWalletAddress)
+				// showAccount.innerHTML = userWalletAddress;
+
+		  	});
+		});
+	</script>
+
+
+	<script type="text/javascript">
+
+		function expanding() {
+			var scrollHeight = $(window).scrollTop();
+
+		    var offsets = $('#container__gettingStarted').offset();
+			var gettingStartedTop = offsets.top;
+
+		    var windowWidth = $(window).width();
+			var windowHeight = $(window).height();
+
+			var containerStar = document.getElementById("container__star");
+			var rocketShip = document.getElementById("rocketShip");
+
+			var width = (scrollHeight - (gettingStartedTop - windowHeight/2));
+
+			rocketShip.style.top = -7 -(width/10) + "%";
+
+			// Keeps the star in the middle of the page even as it grows
+			containerStar.style.left = 50 - ((width/3)/2) + '%';
+			containerStar.style.top = 1190 - ((width)/2) +"%";
+
+			containerStar.style.width = width/3 + "vw";
+			containerStar.style.height = width/3 + "vw"; 
+
+		}
+
+
+		$(window).scroll(function (event) {
+		    var scrollHeight = $(window).scrollTop();
+
+		    var offsets = $('#container__gettingStarted').offset();
+			var gettingStartedTop = offsets.top;
+
+		    var windowWidth = $(window).width();
+			var windowHeight = $(window).height();
+
+			console.log(scrollHeight + " > (" + (gettingStartedTop - windowHeight/2) +"))" )
+			var containerBottom = (gettingStartedTop + $('#container__gettingStarted').height())*0.7;
+			console.log(containerBottom);
+
+
+			// Starts the animation only when its in the middle of the page
+		    if (scrollHeight > (gettingStartedTop - windowHeight/2) && scrollHeight < (containerBottom+(windowHeight/2))) {
+			    requestAnimationFrame(expanding);
+			    document.getElementById("container__home").style.display = "none";
+
+		    } else if (scrollHeight < (gettingStartedTop - windowHeight/2)) {
+		    	document.getElementById("container__home").style.display = "block";
+		    	var containerStar = document.getElementById("container__star");
+		    	containerStar.style.width = 0.25 + "%";
+				containerStar.style.height = 1 + "%";
+				containerStar.style.left = 50 + '%'; 
+		    }
+		});
+
+	</script>
+
 </body>
-
-
-
-<script>
-	$(document).ready(function(){
-		$('#container__launchPad').hover(function(){ 
-	    	$('#container__background').hide(100);
-		}, function(){
-	        $('#container__background').show(100);
-	    });
-	});
-
-
-	function ani() {
-	  document.getElementById('spaceAlienImg').classList.add("vortexAnimation");
-	}
-</script>
