@@ -98,18 +98,19 @@
 				<img class="spaceAlien spaceAlien2Img" src="/images/spaceAlien.svg">
 				<img class="spaceAlien spaceAlien3Img" src="/images/spaceAlien3.svg">
 				<img class="spaceAlien spaceAlien4Img" src="/images/spaceAlien4.svg">
+
 			
 				<div class="container__what container__what1">
 					<h1 class="aboutSubtitle">What are SBTs?</h1>
 					<p class="aboutParagraph">A Soul Bound Token, or an SBT is a one time transfer token. This allows you to associate a piece of data with a token and then transfer and store that token in yours or another user's wallet.</p>
 				</div>
 				<div class="container__what container__what2">
-					<h1 class="aboutSubtitle">Why are SBTs so important?</h1>
+					<h1 class="aboutSubtitle">Why are SBTs important?</h1>
 					<p class="aboutParagraph">SBT's give us the ability to carry valuable information within your digital wallets. This can come in many forms such as ID's, certificates and even login and account details that can be used across platforms.</p>
 				</div>
 				<div class="container__what container__what3">
 					<h1 class="aboutSubtitle">How do SBTs work?</h1>
-					<p class="aboutParagraph">SBT's use the Ethereum blockchain to store details about each token in a decentralised permissionless manner. This means you are in full control of your own data as your not having to rely on us or another third party to store your data.</p>
+					<p class="aboutParagraph">SBT's use the Ethereum blockchain to store details about each token in a decentralised permissionless manner. This means you are in full control of your own data as you're not having to rely on us or another third party to store your data.</p>
 				</div>
 
 			</div>
@@ -119,10 +120,49 @@
 				<img class="jupiter" id="" src="/images/jupiter.svg">
 				<img class="rocketShip" id="" src="/images/rocketShipBackground.svg">
 				<img class="rocketShip" id="rocketShip" src="/images/rocketShip.svg">
+				<img class="galaxy" src="/images/galaxy.svg">
 
 
 				<div class="container__star" id="container__star">
-					
+					<div class="container__insideStar" id="container__insideStar">
+						<div class="starTitle">
+							<div class="starTitle__col1">
+								<h1>Getting</h1>
+							</div>
+							<div class="starTitle__col2">
+								<h1>Started.</h1>
+							</div>
+						</div>
+
+						<div class="container__gettingStartedPanel">
+							<div class="container__gettingStartedDetails">
+								<div class="createAccount">
+									<h2>Create an Account.</h2>
+								</div>					
+								<div class="gettingStarted1">
+									<p>Accounts on Soulbounder work a bit differently. <br><br> When you create your account, you will be sent your very own SBT which will store all the necessary details, acting as your account. <br><br>This gives you total control of your own data, whilst  allowing your data to be portable across other platforms.</p>
+								</div>
+							</div>
+
+<!-- 							<div class="container__gettingStartedDetails">
+								<div class="gettingStarted2">
+
+								</div>
+								<div class="createCollection">
+									<h2>Create a Collection.</h2>
+								</div>					
+							</div>
+
+							<div class="container__gettingStartedDetails">
+								<div class="createAccount">
+									<h2>Browse the Library.</h2>
+								</div>					
+								<div class="gettingStarted1">
+
+								</div>
+							</div> -->
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -183,10 +223,12 @@
 
 			var containerStar = document.getElementById("container__star");
 			var rocketShip = document.getElementById("rocketShip");
+			var containerInsideStar = document.getElementById("container__insideStar");
 
 			var width = (scrollHeight - (gettingStartedTop - windowHeight/2));
 
 			rocketShip.style.top = -7 -(width/10) + "%";
+			containerInsideStar.style.display = "block";
 
 			// Keeps the star in the middle of the page even as it grows
 			containerStar.style.left = 50 - ((width/3)/2) + '%';
