@@ -931,6 +931,37 @@ body {
 	border-radius: 2vw;
 }
 
+
+.createAccountButton {
+	position: absolute;
+	margin-top: 6%;
+	border-radius: 0.65vw;
+	border: 0.2vw solid var(--color-charcoal);
+/*	margin-top: 25%;*/
+	padding: 2.5% 2.5% 2.5% 2.5%;
+	text-align: center;
+	color: var(--color-charcoal);
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.createAccountButton h3 {
+	font-family: var(--font-montserrat) !important;
+	font-weight: bolder !important;
+	font-size: 1.8vw;
+}
+
+.createAccountButton:hover {
+/*	background-color: var(--color-charcoal);*/
+	background-color: #90EE90;
+	border: 3px solid var(--color-off-white);
+	color: var(--color-off-white);
+	transition: all 0.3s;
+}
+
+
+
+
 .createAccount {
 	position: relative;
 	width: 100%;
@@ -940,6 +971,40 @@ body {
 /*	border-radius: 2vw;*/
 	padding-right: 2vw;
 	border-radius: 1vw;
+}
+
+
+.container__createAccountImg {
+	position: relative;
+	width: 37vw;
+	height: 42vw;
+/*	background-color: red;*/
+	margin-left: 28%;
+	margin-top: 3%;
+}
+
+.polaroidFull {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+	height: 100%;
+}
+
+.playingCards {
+	position: absolute;
+	top: 43%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 72.5%;
+	background-color: var(--color-washed-blue);
+	padding-top: 10%;
+	padding-bottom: 10%;
+	padding-left: 9%;
+	padding-right: 9%;
+	border-radius: 1vw;
+/*	height: 73%;*/
 }
 
 

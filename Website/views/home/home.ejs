@@ -64,8 +64,8 @@
 			</div>	
 		</div>
 
-		<div class="container__focul">
-			<div class="container__aboutPanel" id="">
+		<div class="container__focul" id="">
+			<div class="container__aboutPanel" id="container__aboutPanel">
 				<div class="aboutLink" id="About"></div>
 				<img class="spaceBackgroundImg" id="" src="/images/spaceBackground.svg">
 				<img class="astronaut" id="" src="/images/astronaut.svg">
@@ -138,9 +138,17 @@
 							<div class="container__gettingStartedDetails">
 								<div class="createAccount">
 									<h2>Create an Account.</h2>
+									<div class="container__createAccountImg">
+										<img class="polaroidFull" src="/images/polaroidFull.svg">
+										<img class="playingCards" src="/images/filter.svg">
+									</div>
 								</div>					
 								<div class="gettingStarted1">
-									<p>Accounts on Soulbounder work a bit differently. <br><br> When you create your account, you will be sent your very own SBT which will store all the necessary details, acting as your account. <br><br>This gives you total control of your own data, whilst  allowing your data to be portable across other platforms.</p>
+									<p>Accounts on Soulbounder work a bit differently. <br><br> When you create your account, you will be sent your very own SBT which will store all the necessary details, with the SBT acting as your account. <br><br>This gives you total control of your own data, whilst allowing your account to be portable across other platforms.</p>
+
+									<a class="createAccountButton" href="/createSBT#account">
+										<h3>Create Account</h3>
+									</a>
 								</div>
 							</div>
 
@@ -211,15 +219,9 @@
 
 
 	<script type="text/javascript">
+		var aboutPanelBottomFinal;
 
-		function expanding() {
-			var scrollHeight = $(window).scrollTop();
-
-		    var offsets = $('#container__gettingStarted').offset();
-			var gettingStartedTop = offsets.top;
-
-		    var windowWidth = $(window).width();
-			var windowHeight = $(window).height();
+		function expanding(scrollHeight, gettingStartedTop, windowHeight) {
 
 			var containerStar = document.getElementById("container__star");
 			var rocketShip = document.getElementById("rocketShip");
@@ -243,28 +245,43 @@
 		$(window).scroll(function (event) {
 		    var scrollHeight = $(window).scrollTop();
 
-		    var offsets = $('#container__gettingStarted').offset();
-			var gettingStartedTop = offsets.top;
+		    var gettingStartedOffsets = $('#container__gettingStarted').offset();
+			var gettingStartedTop = gettingStartedOffsets.top;
 
-		    var windowWidth = $(window).width();
+			var aboutPanelOffsets = $('#container__aboutPanel').offset();
+			var aboutPanelBottom = aboutPanelOffsets.top + $('#container__aboutPanel').outerHeight();
+
 			var windowHeight = $(window).height();
 
-			console.log(scrollHeight + " > (" + (gettingStartedTop - windowHeight/2) +"))" )
+			// console.log(scrollHeight + " > (" + (gettingStartedTop - windowHeight/2) +"))" )
 			var containerBottom = (gettingStartedTop + $('#container__gettingStarted').height())*0.7;
 			console.log(containerBottom);
 
 
 			// Starts the animation only when its in the middle of the page
+			// And stops the scrolling animation at bottom of container
 		    if (scrollHeight > (gettingStartedTop - windowHeight/2) && scrollHeight < (containerBottom+(windowHeight/2))) {
-			    requestAnimationFrame(expanding);
+			    expanding(scrollHeight, gettingStartedTop, windowHeight);
 			    document.getElementById("container__home").style.display = "none";
 
+			// Checks if back above rocket animation
 		    } else if (scrollHeight < (gettingStartedTop - windowHeight/2)) {
 		    	document.getElementById("container__home").style.display = "block";
 		    	var containerStar = document.getElementById("container__star");
 		    	containerStar.style.width = 0.25 + "%";
 				containerStar.style.height = 1 + "%";
 				containerStar.style.left = 50 + '%'; 
+		    }
+
+		    if (scrollHeight > aboutPanelBottom) {
+		    	document.getElementById("container__aboutPanel").style.display = "none";
+		    
+		    } else if (scrollHeight < aboutPanelBottom) {
+		    	aboutPanelBottomFinal = aboutPanelBottom;
+		    }
+
+		    if (scrollHeight < aboutPanelBottomFinal+150) {
+		    	document.getElementById("container__aboutPanel").style.display = "block";
 		    }
 		});
 

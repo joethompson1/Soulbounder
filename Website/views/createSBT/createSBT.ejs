@@ -32,11 +32,14 @@
 				<div class="col">
 					<input class="SBTName" type="text" name="SBTName" placeholder="SBT Name" id="SBTName">
 					<div class="dropdown">
-						<button onclick="dropdownFunction()" class="btn-lg dropdown-toggle dropbtn">Type of SBT</button>
+						<div class="btn-lg dropdown-toggle dropbtn" id="dropDownButton">
+							Type of SBT
+						</div>
 						<div id="myDropdown" class="dropdown-content">
-							<a href="#home">Event / Attendance</a>
-							<a href="#about">Certificate (Coming soon)</a>
-							<a href="#contact">Ticket (Coming soon)</a>
+							<a onclick="displayForms('account')">Account</a>
+							<a onclick="displayForms('attendance')">Attendance</a>
+							<a onclick="displayForms('certificate')">Certificate (Coming soon)</a>
+							<a onclick="displayForms('ticket')">Ticket (Coming soon)</a>
 						</div>
 					</div>
 				</div>
@@ -53,112 +56,158 @@
 					</div>
 				</div>
 			</div>
+
+			<div id="account" class=""> 
+
+			</div>
 			
-			<div class="row textareaContainer">
-				<label class="label"><u>Description:</u></label>
-				<textarea class="SBTDescription" type="text" name="SBTDescription" placeholder="Enter a short description about what your SBT is for." id="SBTDescription"></textarea>
+			<div id="attendance" class="">	
+				<div class="row textareaContainer">
+					<label class="label"><u>Description:</u></label>
+					<textarea class="SBTDescription" type="text" name="SBTDescription" placeholder="Enter a short description about what your SBT is for." id="SBTDescription"></textarea>
+				</div>
+
+				<div class="row">
+					<div class="col inputContainer" style="margin-right: 1vw;">
+						<label class="inputLabel">City (Optional):</label>
+						<input class="input" type="text" name="SBTCity" id="SBTCity"></input>
+					</div>
+
+					<div class="col inputContainer">
+						<label class="inputLabel">Country (Optional):</label>
+						<input class="input" type="text" name="SBTCountry" id="SBTCountry"></input>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col inputContainer" style="margin-right: 1vw;">
+						<label class="inputLabel">Start Date:</label>
+						<input class="input" type="text" name="SBTStartDate" id="SBTStartDate"></input>
+					</div>
+
+					<div class="col inputContainer">
+						<label class="inputLabel">End Date (Optional):</label>
+						<input class="input" type="text" name="SBTEndDate" id="SBTEndDate"></input>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col inputContainer">
+						<label class="inputLabel">Website (Optional):</label>
+						<input class="input" type="text" name="SBTWebsite" id="SBTWebsite"></input>
+					</div>
+				</div>
+
+				<div class="row">
+					<button class="submitButton" id="formSubitButton">Create!</button>
+				</div>
 			</div>
 
+			<div id="certificate" class=""> 
 
-			<div class="row">
-				<div class="col inputContainer" style="margin-right: 1vw;">
-					<label class="inputLabel">City (Optional):</label>
-					<input class="input" type="text" name="SBTCity" id="SBTCity"></input>
-				</div>
-
-				<div class="col inputContainer">
-					<label class="inputLabel">Country (Optional):</label>
-					<input class="input" type="text" name="SBTCountry" id="SBTCountry"></input>
-				</div>
 			</div>
 
-			<div class="row">
-				<div class="col inputContainer" style="margin-right: 1vw;">
-					<label class="inputLabel">Start Date:</label>
-					<input class="input" type="text" name="SBTStartDate" id="SBTStartDate"></input>
-				</div>
+			<div id="ticket" class=""> 
 
-				<div class="col inputContainer">
-					<label class="inputLabel">End Date (Optional):</label>
-					<input class="input" type="text" name="SBTEndDate" id="SBTEndDate"></input>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col inputContainer">
-					<label class="inputLabel">Website (Optional):</label>
-					<input class="input" type="text" name="SBTWebsite" id="SBTWebsite"></input>
-				</div>
-			</div>
-
-			<div class="row">
-				<button class="submitButton" id="formSubitButton">Create!</button>
 			</div>
 		</form>
 	</div>
+
+
+
+
+	<script type="text/javascript">
+		$('div[id^=loadingContainer]').hide();
+		$('div[id^=storingText').hide();
+		$('div[id^=hideHeader').hide();
+		var base64String = "";
+
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				const file = input.files[0];
+				var reader = new FileReader();
+
+
+				reader.onload = function (e) {
+					$('#displayImage').attr('src', e.target.result);
+					$('#stockImage').hide();
+					$('#displayImage').show();
+
+					base64String = reader.result.split(',')[1];
+					$('input.SBTPicture').val(base64String);
+
+				}
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+
+
+		var myHash = window.location.hash
+		// window.onload = function() {
+			displayForms(myHash.substring(1)); // Slices the # off
+		// }
+
+		function displayForms(dropDwnChoice) {	
+		 	window.location.hash = '#'+dropDwnChoice;
+			var myURL = window.location;
+			document.getElementById("attendance").style.display = 'none';
+
+			console.log(dropDwnChoice);
+			document.getElementById(dropDwnChoice).style.display = 'block';
+			var linkText = capitalizeFirstLetter(dropDwnChoice);
+			$('#dropDownButton').html(linkText+" SBT ");
+		}
+
+		function capitalizeFirstLetter(str) {
+	    // converting first letter to uppercase
+	    const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
+
+	    return capitalized;
+}
+
+
+
+		const dropDownButton = document.querySelector('#dropDownButton');
+
+		// Checks for when the drop down list is clicked
+		dropDownButton.addEventListener('click', (e) => {
+			// e.stopPropagation();
+	    	document.getElementById("myDropdown").classList.toggle("show");
+		});
+
+		// Close the dropdown if the user clicks outside of it
+		window.onclick = function(event) {
+		  if (!event.target.matches('.dropbtn')) {
+		  	var dropdowns = document.getElementsByClassName("dropdown-content");
+		  	var i;
+		  	for (i = 0; i < dropdowns.length; i++) {
+		  		var openDropdown = dropdowns[i];
+		  		if (openDropdown.classList.contains('show')) {
+		  			openDropdown.classList.remove('show');
+		  		}
+		  	}
+		  }
+		}
+
+		$("#formSubitButton").click(function(){
+	        $('div[id^=formContainer]').fadeOut(2500);
+			$('div[id^=loadingContainer]').delay(2500).fadeIn(2500);
+			$('div[id^=hideHeader').delay(1500).fadeIn(500);
+
+			$('div[id^=contactingText]').delay(7000).fadeOut(2500);
+			$('div[id^=storingText]').delay(9600).fadeIn(2500);
+			$('div[id^=storingText]').delay(17500).fadeOut(2500);
+	    }); 
+
+	</script>
+
+
 </body>
 
 
 
-<script type="text/javascript">
-	$('div[id^=loadingContainer]').hide();
-	$('div[id^=storingText').hide();
-	$('div[id^=hideHeader').hide();
-	var base64String = "";
 
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			const file = input.files[0];
-			var reader = new FileReader();
-
-
-			reader.onload = function (e) {
-				$('#displayImage').attr('src', e.target.result);
-				$('#stockImage').hide();
-				$('#displayImage').show();
-
-				base64String = reader.result.split(',')[1];
-				$('input.SBTPicture').val(base64String);
-
-			}
-
-			reader.readAsDataURL(input.files[0]);
-		}
-	}
-
-
-
-	/* When the user clicks on the button, 
-	toggle between hiding and showing the dropdown content */
-	function dropdownFunction() {
-		document.getElementById("myDropdown").classList.toggle("show");
-	}
-
-	// Close the dropdown if the user clicks outside of it
-	window.onclick = function(event) {
-	  if (!event.target.matches('.dropbtn')) {
-	  	var dropdowns = document.getElementsByClassName("dropdown-content");
-	  	var i;
-	  	for (i = 0; i < dropdowns.length; i++) {
-	  		var openDropdown = dropdowns[i];
-	  		if (openDropdown.classList.contains('show')) {
-	  			openDropdown.classList.remove('show');
-	  		}
-	  	}
-	  }
-	}
-
-	$("#formSubitButton").click(function(){
-        $('div[id^=formContainer]').fadeOut(2500);
-		$('div[id^=loadingContainer]').delay(2500).fadeIn(2500);
-		$('div[id^=hideHeader').delay(1500).fadeIn(500);
-
-		$('div[id^=contactingText]').delay(7000).fadeOut(2500);
-		$('div[id^=storingText]').delay(9600).fadeIn(2500);
-		$('div[id^=storingText]').delay(17500).fadeOut(2500);
-    }); 
-
-</script>
 
 
 

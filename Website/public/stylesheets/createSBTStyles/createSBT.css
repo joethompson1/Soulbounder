@@ -1,35 +1,9 @@
 /* ---------- Fonts ---------- */
-@font-face {
-    font-family: 'Righteous';
-    src: url('../../fonts/Righteous/Righteous-Regular.eot');
-    src: url('../../fonts/Righteous/Righteous-Regular.eot?#iefix') format('embedded-opentype'),
-        url('../../fonts/Righteous/Righteous-Regular.woff2') format('woff2'),
-        url('../../fonts/Righteous/Righteous-Regular.woff') format('woff'),
-        url('../../fonts/Righteous/Righteous-Regular.svg#Righteous-Regular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
-@font-face {
-    font-family: 'Quattrocento Sans';
-    src: url('../../fonts/Quattrocento_Sans/QuattrocentoSans.eot');
-    src: url('../../fonts/Quattrocento_Sans/QuattrocentoSans.eot?#iefix') format('embedded-opentype'),
-        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.woff2') format('woff2'),
-        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.woff') format('woff'),
-        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.ttf') format('truetype'),
-        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.svg#QuattrocentoSans') format('svg');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-@font-face {
-  font-family: 'Raleway';
-  src:  url('../../fonts/Raleway/Raleway-VariableFont_wght.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,800;1,100;1,200;1,300;1,400;1,800&display=swap');
 
 
 
@@ -112,6 +86,10 @@
 	padding-left: 1.2vw;
 }
 
+.SBTName:hover {
+	opacity: 0.8;
+}
+
 .SBTName:focus {
 	background-color: whitesmoke;
 	color: black;
@@ -129,6 +107,7 @@
 .dropbtn {
 	font-family: Quattrocento Sans;
 	background-color: #3498DB;
+	text-align: center;
 	color: white;
 	padding: 0.75vw;
 	font-size: 1.3vw;
@@ -170,8 +149,9 @@
 
 .dropdown a:hover {background-color: #ddd;}
 
-.show {display: block;}
+.show {display: block !important;}
 
+.hide {display: none;}
 
 
 
@@ -227,6 +207,7 @@
 
 
 
+/*================================================== Attendance Form ===============================================*/
 
 
 /* SBT Attributes */
