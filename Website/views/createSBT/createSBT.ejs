@@ -28,12 +28,12 @@
 
 	<div class="container formContainer" id="formContainer">
 		<form name="sbtForm" id="sbtForm" method="POST" action="/createSBT">
-			<div class="row">
-				<div class="col">
+			<div class="rowContainer">
+				<div class="colContainer">
 					<input class="SBTName" type="text" name="SBTName" placeholder="SBT Name" id="SBTName">
 					<div class="dropdown">
 						<div class="btn-lg dropdown-toggle dropbtn" id="dropDownButton">
-							Type of SBT
+							SBT Type
 						</div>
 						<div id="myDropdown" class="dropdown-content">
 							<a onclick="displayForms('account')">Account</a>
@@ -44,7 +44,7 @@
 					</div>
 				</div>
 
-				<div class="col">
+				<div class="colContainer">
 					<div class="SBTPictureContainer">
 						<label class="imageLabel" for="fileInput">
 							<img class="SBTDisplayPicture" id="stockImage" src="/images/handWithPicture.png">
@@ -57,11 +57,33 @@
 				</div>
 			</div>
 
-			<div id="account" class=""> 
 
+
+
+
+			<!-- Account Form -->
+			<div id="account" class="account"> 
+
+				<div class="repeatingInputContainer" id="repeatingInputContainer">				
+				</div>
+
+				<div class="row createContainer" id="createInputButton">
+					<div class="createNewInputButton">
+						<img class="plusSquare" src="/images/plus-square.svg">
+						<h2 class="createNewInputButton-text">Add Custom Field</h2>
+					</div>
+				</div>
+
+				<div class="row">
+					<button class="submitButton" id="accountSubitButton">Create!</button>
+				</div>
 			</div>
-			
-			<div id="attendance" class="">	
+
+
+
+
+			<!-- Attendance Form -->
+			<div id="attendance" class="attendance">	
 				<div class="row textareaContainer">
 					<label class="label"><u>Description:</u></label>
 					<textarea class="SBTDescription" type="text" name="SBTDescription" placeholder="Enter a short description about what your SBT is for." id="SBTDescription"></textarea>
@@ -99,7 +121,7 @@
 				</div>
 
 				<div class="row">
-					<button class="submitButton" id="formSubitButton">Create!</button>
+					<button class="submitButton" id="attendanceSubitButton">Create!</button>
 				</div>
 			</div>
 
@@ -143,28 +165,32 @@
 		}
 
 
-		var myHash = window.location.hash
-		// window.onload = function() {
+		var myHash = window.location.hash;
+		window.onload = function() {
 			displayForms(myHash.substring(1)); // Slices the # off
-		// }
+		}
 
 		function displayForms(dropDwnChoice) {	
 		 	window.location.hash = '#'+dropDwnChoice;
-			var myURL = window.location;
+		 	document.getElementById("account").style.display = 'none';
 			document.getElementById("attendance").style.display = 'none';
+			// document.getElementById("account").classList.remove('show');
+			// document.getElementById("attendance").classList.remove('show');
 
-			console.log(dropDwnChoice);
-			document.getElementById(dropDwnChoice).style.display = 'block';
-			var linkText = capitalizeFirstLetter(dropDwnChoice);
-			$('#dropDownButton').html(linkText+" SBT ");
+			if (dropDwnChoice !== null) {
+				document.getElementById(dropDwnChoice).style.display = 'block';
+				// document.getElementById(dropDwnChoice).classList.add('show');
+				var linkText = capitalizeFirstLetter(dropDwnChoice);
+				$('#dropDownButton').html(linkText+" ");
+			}
 		}
 
 		function capitalizeFirstLetter(str) {
-	    // converting first letter to uppercase
-	    const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
+			// converting first letter to uppercase
+			const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
 
-	    return capitalized;
-}
+			return capitalized;
+		}
 
 
 
@@ -172,25 +198,60 @@
 
 		// Checks for when the drop down list is clicked
 		dropDownButton.addEventListener('click', (e) => {
-			// e.stopPropagation();
+			formChoice = $('#dropDownButton').html();
+
 	    	document.getElementById("myDropdown").classList.toggle("show");
+	    	document.getElementById("dropDownButton").style.borderRadius = "1vw 1vw 0vw 0vw";
+	    	$('#dropDownButton').html(" SBT Type ");
 		});
 
 		// Close the dropdown if the user clicks outside of it
 		window.onclick = function(event) {
-		  if (!event.target.matches('.dropbtn')) {
-		  	var dropdowns = document.getElementsByClassName("dropdown-content");
-		  	var i;
-		  	for (i = 0; i < dropdowns.length; i++) {
-		  		var openDropdown = dropdowns[i];
-		  		if (openDropdown.classList.contains('show')) {
-		  			openDropdown.classList.remove('show');
-		  		}
+		  	if (!event.target.matches('.dropbtn')) {
+			  	var dropdowns = document.getElementsByClassName("dropdown-content");
+			  	var i;
+			  	for (i = 0; i < dropdowns.length; i++) {
+			  		var openDropdown = dropdowns[i];
+			  		if (openDropdown.classList.contains('show')) {
+			  			openDropdown.classList.remove('show');
+			  		}
+			  	}
+			  	document.getElementById("dropDownButton").style.borderRadius = "1vw";
+			  	$('#dropDownButton').html(capitalizeFirstLetter(window.location.hash.substring(1))+" ");
 		  	}
-		  }
 		}
 
-		$("#formSubitButton").click(function(){
+
+
+
+
+
+		const createInputButton = document.querySelector('#createInputButton');
+		var numberOfCustomInputs = 0
+
+		createInputButton.addEventListener('click', (e) => {
+			numberOfCustomInputs += 1;
+			console.log(numberOfCustomInputs);
+			var repeatingInputContainer = document.getElementById('repeatingInputContainer');
+
+			repeatingInputContainer.innerHTML += 
+				`<div class="row createContainer blankInputContainer" id="blankInputBox${numberOfCustomInputs}">
+					<input class="blankInputTitle" placeholder="Title" type="text" name="blankInputLabel"></input>
+					<input class="blankInputContents" placeholder="Contents" type="text" name="blankInputContents"></input>
+					<div class="closeInputButton" id="closeInputButton${numberOfCustomInputs}" onclick="closeInput('blankInputBox${numberOfCustomInputs}')">X</div>
+				</div>`;
+		});
+
+
+		function closeInput(blankInputBoxX) {
+			console.log("made it");
+			document.getElementById(blankInputBoxX).classList.add("hide");
+		}
+
+
+
+
+		$("#attendanceSubitButton").click(function(){
 	        $('div[id^=formContainer]').fadeOut(2500);
 			$('div[id^=loadingContainer]').delay(2500).fadeIn(2500);
 			$('div[id^=hideHeader').delay(1500).fadeIn(500);
