@@ -132,10 +132,15 @@
 	width: 25vw;
 	border-radius: 1vw;
 	box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.2);
+	transition: all 0.3s;
 }
 
 .dropbtn:hover, .dropbtn:focus {
-	background-color: #2980B9;
+/*	background-color: #2980B9;*/
+	background-color: var(--color-turqoise);
+	box-shadow: 0vw 2vw 4vw 0vw rgba(0,0,0,0.4);
+	transform: scale(1.02);
+	transition: all 0.3s;
 }
 
 .dropdown {
@@ -196,13 +201,14 @@
 	border-style: ridge;
 	border-width: thick;
 	transition: all 0.3s;
+	box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.2);
 }
 
 .SBTPictureContainer:hover {
 	background-color: lightgray;
 	transform: scale(1.05);
 	transition: all 0.3s;
-	box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.2);
+	box-shadow: 0vw 2vw 4vw 0vw rgba(0,0,0,0.4);
 }
 
 .SBTPictureContainer>input {
@@ -270,9 +276,10 @@
 
 #createInputButton:hover {
 /*	background-color: lightgray;*/
-	transform: scale(0.99);
+	transform: scale(1.02);
 	box-shadow: none;
 	transition: all 0.3s;
+	box-shadow: 0vw 2vw 4vw 0vw rgba(0,0,0,0.4);
 }
 
 
@@ -314,12 +321,14 @@
 
 
 .blankInputContainer {
-	grid-template-columns: 1fr 2fr;
+	position: relative;
+	grid-template-columns: 1fr 2fr !important;
 	display: inline-grid;
 	border-radius: 1vw;
 }
 
 .blankInputTitle {
+	position: relative;
 	padding-left: 5%;
 	font-size: 1.2vw;
 	border-radius: 1vw 0vw 0vw 1vw;
@@ -331,10 +340,12 @@
 }
 
 .blankInputContents {
+	position: relative;
 	padding-left: 3%;
 	font-size: 1.2vw;
 	border-radius: 0vw 1vw 1vw 0vw;
 	border: none;
+/*	width: 100%;*/
 	font-family: Quattrocento Sans;
 }
 
@@ -351,7 +362,7 @@
 	color: white;
 	cursor: pointer;
 	font-family: Righteous;
-	transition: all 0.05s;
+	font-size: 1.2vw;
 	box-shadow: 0vw 0.25vw 0.5vw 0vw rgba(0,0,0,0.5);
 	transition: all 0.25s;
 }
@@ -462,14 +473,16 @@
 	padding-right: 2vw;
 	font-size: 1.3vw;
 	border: none;
-	transition: all 0.15s;
+	transition: all 0.3s;
+	box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.2);
 }
 
 
 .submitButton:hover {
-	transform: scale(0.95);
-	transition: all 0.15s;
-	box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.2);
+	transform: scale(1.04);
+	transition: all 0.3s;
+	box-shadow: 0vw 2vw 4vw 0vw rgba(0,0,0,0.4);
+	background-color: var(--color-turqoise);
 }
 
 
