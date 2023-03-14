@@ -1,35 +1,9 @@
 /* ---------- Fonts ---------- */
-@font-face {
-    font-family: 'Righteous';
-    src: url('../../fonts/Righteous/Righteous-Regular.eot');
-    src: url('../../fonts/Righteous/Righteous-Regular.eot?#iefix') format('embedded-opentype'),
-        url('../../fonts/Righteous/Righteous-Regular.woff2') format('woff2'),
-        url('../../fonts/Righteous/Righteous-Regular.woff') format('woff'),
-        url('../../fonts/Righteous/Righteous-Regular.svg#Righteous-Regular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
-@font-face {
-    font-family: 'Quattrocento Sans';
-    src: url('../../fonts/Quattrocento_Sans/QuattrocentoSans.eot');
-    src: url('../../fonts/Quattrocento_Sans/QuattrocentoSans.eot?#iefix') format('embedded-opentype'),
-        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.woff2') format('woff2'),
-        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.woff') format('woff'),
-        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.ttf') format('truetype'),
-        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.svg#QuattrocentoSans') format('svg');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-@font-face {
-  font-family: 'Raleway';
-  src:  url('../../fonts/Raleway/Raleway-VariableFont_wght.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,800;1,100;1,200;1,300;1,400;1,800&display=swap');
 
 
 
@@ -63,7 +37,7 @@
 }
 
 .loadingTextContainer h1 {
-	font-family: 'Raleway' !important;
+	font-family: 'Raleway';
 	speak: none;
 	font-style: normal;
 	font-weight: normal;
@@ -93,7 +67,22 @@
 	padding-top: 3vw;
 	padding-left: 6vw;
 	padding-right: 5vw;
+	box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.2);
+}
 
+
+.rowContainer {
+	position: relative;
+	width: 100%;
+	height: 17vw;
+	grid-template-columns: 1fr 1fr;
+	display: grid;
+}
+
+.colContainer {
+	position: relative;
+	width: 100%;
+	height: 100%;
 }
 
 
@@ -110,6 +99,10 @@
 	width: 110%;
 	height: 6vw;
 	padding-left: 1.2vw;
+}
+
+.SBTName:hover {
+	opacity: 0.8;
 }
 
 .SBTName:focus {
@@ -129,6 +122,7 @@
 .dropbtn {
 	font-family: Quattrocento Sans;
 	background-color: #3498DB;
+	text-align: center;
 	color: white;
 	padding: 0.75vw;
 	font-size: 1.3vw;
@@ -137,10 +131,16 @@
 	margin-top: 1.5vw;
 	width: 25vw;
 	border-radius: 1vw;
+	box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.2);
+	transition: all 0.3s;
 }
 
 .dropbtn:hover, .dropbtn:focus {
-	background-color: #2980B9;
+/*	background-color: #2980B9;*/
+	background-color: var(--color-turqoise);
+	box-shadow: 0vw 2vw 4vw 0vw rgba(0,0,0,0.4);
+	transform: scale(1.02);
+	transition: all 0.3s;
 }
 
 .dropdown {
@@ -154,24 +154,31 @@
 	background-color: #f1f1f1;
 	width: 25vw;
 	min-width: 160px;
-	border-radius: 1vw;
+	border-radius: 0vw 0vw 1vw 1vw;
 	overflow: auto;
-	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.2);
 	z-index: 1;
 }
+
 
 .dropdown-content a {
 	font-family: Quattrocento Sans;
 	color: black;
-	padding: 12px 16px;
+	padding: 1vw 1.2vw;
 	text-decoration: none;
 	display: block;
+	cursor: pointer;
 }
 
 .dropdown a:hover {background-color: #ddd;}
 
-.show {display: block;}
+.show {
+	display: block !important;
+}
 
+.hide {
+	display: none !important;
+}
 
 
 
@@ -181,20 +188,28 @@
 /* SBT Picture */
 
 .SBTPictureContainer {
+	position: absolute;
+	top: -50%;
+	left: 37%;
 	background-color: whitesmoke;
 	width: 20vw;
 	height: 20vw;
 	border-radius: 1.5vw;
-	transform: translateY(-8vw);
+/*	transform: translateY(-8vw);*/
 	margin-right: 0;
 	margin-left: auto;
 	border: lightgray;
 	border-style: ridge;
 	border-width: thick;
+	transition: all 0.3s;
+	box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.2);
 }
 
 .SBTPictureContainer:hover {
 	background-color: lightgray;
+	transform: scale(1.05);
+	transition: all 0.3s;
+	box-shadow: 0vw 2vw 4vw 0vw rgba(0,0,0,0.4);
 }
 
 .SBTPictureContainer>input {
@@ -229,12 +244,181 @@
 
 
 
+
+
+
+
+
+
+/*================================================== Account Form ===============================================*/
+
+.account {
+	display: none;
+}
+
+
+
+.createContainer {
+	position: relative;
+	width: 100%;
+	height: 4vw;
+	margin: 0;
+	top: 0;
+	border-radius: 1vw;
+	margin-bottom: 3vw;
+	background-color: white;
+	transition: all 0.3s;
+	box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.2);
+}
+
+
+#createInputButton {
+}
+
+#createInputButton:hover {
+/*	background-color: lightgray;*/
+	transform: scale(1.02);
+	box-shadow: none;
+	transition: all 0.3s;
+	box-shadow: 0vw 2vw 4vw 0vw rgba(0,0,0,0.4);
+}
+
+
+
+.customInput {
+	position: relative;
+	width: 100%;
+}
+
+
+.createNewInputButton {
+	position: relative;
+	width: 100%;
+	cursor: pointer;
+	border-radius: 1vw;
+}
+
+
+
+.createNewInputButton-text {
+	position: absolute;
+	display: inline-block;
+	top: 50%;
+	transform: translate(0, -50%);
+	left: 8%;
+	font-size: 1.4vw;
+	font-family: Quattrocento Sans;
+}
+
+
+.plusSquare {
+	position: absolute;
+	top: 50%;
+	left: 0.8%;
+	transform: translate(0, -50%);
+	height: 75%;
+}
+
+
+
+.blankInputContainer {
+	position: relative;
+	grid-template-columns: 1fr 2fr !important;
+	display: inline-grid;
+	border-radius: 1vw;
+	box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.2);
+}
+
+
+
+.blankInputTitle {
+	position: relative;
+	padding-left: 5%;
+	font-size: 1.2vw;
+	border-radius: 1vw 0vw 0vw 1vw;
+	border-top: none;
+	border-right: 1vw solid ridge;;
+	border-bottom: none;
+	border-left: none;
+	font-family: Quattrocento Sans;
+}
+
+.blankInputTitle:focus {
+    outline-color: var(--color-turqoise);
+    border-color: var(--color-turqoise);
+}
+
+
+.blankInputContents {
+	position: relative;
+	padding-left: 3%;
+	font-size: 1.2vw;
+	border-radius: 0vw 1vw 1vw 0vw;
+	border: none;
+/*	width: 100%;*/
+	font-family: Quattrocento Sans;
+}
+
+.blankInputContents:focus {
+    outline-color: var(--color-turqoise);
+    border-color: var(--color-turqoise);
+}
+
+
+
+.closeInputButton {
+	position: absolute;
+	top: -10%;
+	right: -1%;
+	width: 3%;
+	border-radius: 0.5vw;
+	text-align: center;
+	background-color: #758CA3;
+	color: white;
+	cursor: pointer;
+	font-family: Righteous;
+	font-size: 1.2vw;
+	box-shadow: 0vw 0.25vw 0.5vw 0vw rgba(0,0,0,0.5);
+	transition: all 0.25s;
+}
+
+.closeInputButton:hover {
+	transform: scale(1.05);
+	transition: all 0.25s;
+	box-shadow: 0vw 0.5vw 1vw 0vw rgba(0,0,0,0.5);
+	background-color: #C04000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*================================================== Attendance Form ===============================================*/
+
+.attendance {
+	display: none;
+}
+
 /* SBT Attributes */
 
 .SBTDescription {
 	font-family: Quattrocento Sans;
 	width: 100%;
 	height: 10vw;
+	min-height: 4vw;
 	border-top-right-radius: 2vw;
 	border-bottom-right-radius: 2vw;
 	border-bottom-left-radius: 2vw;
@@ -247,14 +431,14 @@
 
 .textareaContainer {
 	width: 100%;
+	min-height: 4vw;
 	background-color: white;
 	border-top-right-radius: 2vw;
 	border-bottom-right-radius: 2vw;
 	border-bottom-left-radius: 2vw;
-	margin-bottom: 1vw;
+	margin-bottom: 3vw;
 	margin-left: 0.2vw;
 	margin-right: 0.2;
-	transform: translateY(-2vw);
 }
 
 .label {
@@ -303,7 +487,21 @@
 	padding-right: 2vw;
 	font-size: 1.3vw;
 	border: none;
+	transition: all 0.3s;
+	box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.2);
 }
+
+
+.submitButton:hover {
+	transform: scale(1.04);
+	transition: all 0.3s;
+	box-shadow: 0vw 2vw 4vw 0vw rgba(0,0,0,0.4);
+	background-color: var(--color-turqoise);
+}
+
+
+
+
 
 
 

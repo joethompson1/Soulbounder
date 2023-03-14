@@ -2,6 +2,15 @@ $(function() {
 
   'use strict';
 
+  if (window.location.pathname == "/home" || window.location.pathname == "/") {
+    $('#home').addClass('active');
+
+  } 
+
+  else if (window.location.pathname == "/createSBT") {
+    $('#createSBT').addClass('active');
+  }
+
   $('.js-menu-toggle').click(function(e) {
 
   	var $this = $(this);
@@ -27,7 +36,6 @@ $(function() {
       if ( $('body').hasClass('show-sidebar') ) {
 				$('body').removeClass('show-sidebar');
 				$('body').find('.js-menu-toggle').removeClass('active');
-        // $(".burgerImg").fadeIn();
         $(".burgerImg").delay(125).fadeIn(300);
 			}
     }

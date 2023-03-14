@@ -1,6 +1,6 @@
 import * as IPFS from 'ipfs-core';
 import { node } from '../server.js';
-import Meme from '../truffle/build/Meme.json' assert { type: "json"};
+import Meme from '../builtContracts/Meme.json' assert { type: "json"};
 import Web3 from 'web3';
 
 
