@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import Meme from '../truffle/build/Meme.json' assert { type: "json"};
+import Meme from '../builtContracts/Meme.json' assert { type: "json"};
 
 // controller actions
 export const home_get = async (req, res) => {

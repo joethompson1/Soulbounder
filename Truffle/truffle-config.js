@@ -99,7 +99,7 @@ module.exports = {
   },
 
   contracts_directory: './contracts/',
-  contracts_build_directory: './build/',
+  contracts_build_directory: './../Website/builtContracts/',
 
   // Set default mocha options here, use special reporters, etc.
   mocha: {
@@ -109,6 +109,7 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
+      version: "^0.8.9",
       optimizer: {
         enabled: true,
         runs: 200

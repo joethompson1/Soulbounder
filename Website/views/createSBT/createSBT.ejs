@@ -174,12 +174,9 @@
 		 	window.location.hash = '#'+dropDwnChoice;
 		 	document.getElementById("account").style.display = 'none';
 			document.getElementById("attendance").style.display = 'none';
-			// document.getElementById("account").classList.remove('show');
-			// document.getElementById("attendance").classList.remove('show');
 
 			if (dropDwnChoice !== null) {
 				document.getElementById(dropDwnChoice).style.display = 'block';
-				// document.getElementById(dropDwnChoice).classList.add('show');
 				var linkText = capitalizeFirstLetter(dropDwnChoice);
 				$('#dropDownButton').html(linkText+" ");
 			}
@@ -231,7 +228,6 @@
 
 		createInputButton.addEventListener('click', (e) => {
 			numberOfCustomInputs += 1;
-			console.log(numberOfCustomInputs);
 			var repeatingInputContainer = document.getElementById('repeatingInputContainer');
 
 			const divBlankInputContainer = document.createElement("div");
@@ -263,8 +259,7 @@
 
 
 		function closeInput(blankInputBoxX) {
-			console.log(blankInputBoxX);
-			document.getElementById(blankInputBoxX).classList.add("hide");
+			document.getElementById(blankInputBoxX).remove();
 		}
 
 

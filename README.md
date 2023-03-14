@@ -117,56 +117,7 @@ If you don't have them installed then copy and paste the necessary lines below i
 
 <br></br>
 
-### Installation
-
-Follow the steps below to set up and start the project locally:
-
-
-1. Go to the website folder
-   ```sh
-   cd Soulbounder/Website/
-   ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-
-
-### Set up of Back End
-
-1. Go to the truffle folder
-   ```sh
-   cd Soulbounder/Website/truffle
-   ```
-1. Enter command to tell truffle to compile the contracts
-   ```sh
-   truffle --config truffle-config.cjs compile
-   ```
-1. Deploy the smart contract to the blockchain
-   ```sh
-   truffle --config truffle-config.cjs migrate
-   ```
-* (If you wish to use interect with the smart contract through the truffle console) Command to bring up the truffle console
-   ```sh
-   truffle --config truffle-config.cjs console
-   ```
-* Once in the console you can interact with the functions of the smart contract, for example:
-   ```js
-   const meme = await Meme.deployed()
-   ```
-   ```js
-   meme
-   ```
-   ```js
-   meme.set('Test123')
-   ```
-   ```js
-   meme.get()
-   ```
-
-
-
-### Set up of Front End
+### Installation and Set Up
 
 Follow the steps below to set up and start the project locally:
 
@@ -183,6 +134,43 @@ Follow the steps below to set up and start the project locally:
    ```sh
    npm run devStart
    ```
+
+
+
+
+### Compile and Deploy the Smart Contract
+This is only required if changes have been made to the smart contracts. Files are built to Website/builtContracts.
+
+1. Go to the Truffle folder
+   ```sh
+   cd Soulbounder/Truffle
+   ```
+1. Enter command to tell truffle to compile the contracts (old: truffle --config truffle-config.cjs compile)
+   ```sh
+   truffle compile
+   ```
+1. Deploy the smart contract to the blockchain
+   ```sh
+   truffle migrate
+   ```
+* (If you wish to use interect with the smart contract through the truffle console) Command to bring up the truffle console
+   ```sh
+   truffle console
+   ```
+* Once in the console you can interact with the functions of the smart contract, for example:
+   ```js
+   const meme = await Meme.deployed()
+   ```
+   ```js
+   meme
+   ```
+   ```js
+   meme.set('Test123')
+   ```
+   ```js
+   meme.get()
+   ```
+
 
 
 

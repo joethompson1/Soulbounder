@@ -37,7 +37,7 @@
 }
 
 .loadingTextContainer h1 {
-	font-family: 'Raleway' !important;
+	font-family: 'Raleway';
 	speak: none;
 	font-style: normal;
 	font-weight: normal;
@@ -167,6 +167,7 @@
 	padding: 1vw 1.2vw;
 	text-decoration: none;
 	display: block;
+	cursor: pointer;
 }
 
 .dropdown a:hover {background-color: #ddd;}
@@ -325,7 +326,10 @@
 	grid-template-columns: 1fr 2fr !important;
 	display: inline-grid;
 	border-radius: 1vw;
+	box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.2);
 }
+
+
 
 .blankInputTitle {
 	position: relative;
@@ -339,6 +343,12 @@
 	font-family: Quattrocento Sans;
 }
 
+.blankInputTitle:focus {
+    outline-color: var(--color-turqoise);
+    border-color: var(--color-turqoise);
+}
+
+
 .blankInputContents {
 	position: relative;
 	padding-left: 3%;
@@ -347,6 +357,11 @@
 	border: none;
 /*	width: 100%;*/
 	font-family: Quattrocento Sans;
+}
+
+.blankInputContents:focus {
+    outline-color: var(--color-turqoise);
+    border-color: var(--color-turqoise);
 }
 
 
@@ -358,7 +373,7 @@
 	width: 3%;
 	border-radius: 0.5vw;
 	text-align: center;
-	background-color: #C04000;
+	background-color: #758CA3;
 	color: white;
 	cursor: pointer;
 	font-family: Righteous;
@@ -368,12 +383,11 @@
 }
 
 .closeInputButton:hover {
-	transform: scale(0.95);
+	transform: scale(1.05);
 	transition: all 0.25s;
-	box-shadow: none;
+	box-shadow: 0vw 0.5vw 1vw 0vw rgba(0,0,0,0.5);
+	background-color: #C04000;
 }
-
-
 
 
 
