@@ -12,20 +12,20 @@
 			<div class="row rowBoarder">
 				<div class="col">
 					<!-- <h1 class="SBTName" id="SBTName">1234567890</h1> -->
-					<h1 class="SBTName" id="SBTName"><%= SBTData.Name %></h1>
+					<h1 class="SBTName" id="SBTName"><%= SBTData.name %></h1>
 					<div class="SBTType">
 						<p>
 							Type: Certificate
 						</p>
 					</div>
-					<p class="SBTDescription" id="SBTDescription"><%= SBTData.Description %></p>
+					<p class="SBTDescription" id="SBTDescription"><%= SBTData.description %></p>
 					<!-- <p class="SBTDescription" id="SBTDescription">Example description. Here is the SBT description.</p> -->
 				</div>
 
 				<div class="col-auto">
 					<div class="picturePadding">	
 						<div class="SBTPictureContainer">
-							<img class="SBTDisplayPicture" id="imageSBT" src="<%= SBTData.Picture %>">
+							<img class="SBTDisplayPicture" id="imageSBT" src="<%= SBTData.image %>">
 							<!-- <img class="SBTDisplayPicture" id="imageSBT" src="<%= SBTData %>"> -->
 							<div class="quantityContainer">
 								<div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
@@ -67,19 +67,20 @@
 				const contractNetworkId = "<%= contractNetworkId %>"
 
 
+
 				if (contractNetworkId == networkId) {
 					let contractAbi = '<%- contractAbi %>';
 					const contractAddress = "<%= contractAddress %>";
 
 					const contract = new ethers.Contract(contractAddress, contractAbi, signer);
 
-					let memeHash = await contract.get();
-					console.log(memeHash);
+					let walletBalance = await contract.balanceOf('0x6b86fc50710801e65662688673c0aac3c3225904');
+					console.log(walletBalance);
 
-					await contract.set("<%= sbtHash %>");
+					await contract.safeMint(userWalletAddress, "<%= sbtHash %>");
 
-					memeHash = await contract.get();
-					console.log(memeHash);
+					walletBalance = await contract.balanceOf('0x6b86fc50710801e65662688673c0aac3c3225904');
+					console.log(walletBalance);
 
 				} else {
 					window.alert("Smart contract not deployed to detected network!");

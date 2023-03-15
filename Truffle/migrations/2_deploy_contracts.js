@@ -1,7 +1,7 @@
-const Meme = artifacts.require("Meme");
-const Soulbound = artifacts.require("Soulbound");
+// const Meme = artifacts.require("Meme");
+const Soulbounder = artifacts.require("Soulbounder");
 
 module.exports = function(deployer) {
-	deployer.deploy(Meme);
-	deployer.deploy(Soulbound);
+	deployer.deploy(Soulbounder);
+	// deployer.deploy(Meme);
 };
