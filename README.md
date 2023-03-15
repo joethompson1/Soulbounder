@@ -159,16 +159,13 @@ This is only required if changes have been made to the smart contracts. Files ar
    ```
 * Once in the console you can interact with the functions of the smart contract, for example:
    ```js
-   const meme = await Meme.deployed()
+   const soulbounder = await Soulbounder.deployed()
    ```
    ```js
-   meme
+   soulbounder
    ```
    ```js
-   meme.set('Test123')
-   ```
-   ```js
-   meme.get()
+   soulbounder.safeMint('<ReceiverWallet>', '<TOKENURI>')
    ```
 
 
