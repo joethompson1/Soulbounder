@@ -32,6 +32,7 @@
 				<div class="colContainer">
 					<input class="SBTName" type="text" name="SBTName" placeholder="SBT Name" id="SBTName">
 					<div class="dropdown">
+						<input type="text" name="sbtType" id="sbtType">
 						<div class="btn-lg dropdown-toggle dropbtn" id="dropDownButton">
 							SBT Type
 						</div>
@@ -178,6 +179,7 @@
 			if (dropDwnChoice !== null) {
 				document.getElementById(dropDwnChoice).style.display = 'block';
 				var linkText = capitalizeFirstLetter(dropDwnChoice);
+				$('#sbtType').val(linkText);
 				$('#dropDownButton').html(linkText+" ");
 			}
 		}

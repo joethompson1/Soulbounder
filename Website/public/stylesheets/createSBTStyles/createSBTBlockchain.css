@@ -1,279 +1,347 @@
 /* ---------- Fonts ---------- */
-@font-face {
-    font-family: 'Righteous';
-    src: url('../../fonts/Righteous/Righteous-Regular.eot');
-    src: url('../../fonts/Righteous/Righteous-Regular.eot?#iefix') format('embedded-opentype'),
-        url('../../fonts/Righteous/Righteous-Regular.woff2') format('woff2'),
-        url('../../fonts/Righteous/Righteous-Regular.woff') format('woff'),
-        url('../../fonts/Righteous/Righteous-Regular.svg#Righteous-Regular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
-@font-face {
-    font-family: 'Quattrocento Sans';
-    src: url('../../fonts/Quattrocento_Sans/QuattrocentoSans.eot');
-    src: url('../../fonts/Quattrocento_Sans/QuattrocentoSans.eot?#iefix') format('embedded-opentype'),
-        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.woff2') format('woff2'),
-        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.woff') format('woff'),
-        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.ttf') format('truetype'),
-        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.svg#QuattrocentoSans') format('svg');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-@font-face {
-  font-family: 'Raleway';
-  src:  url('../../fonts/Raleway/Raleway-VariableFont_wght.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,800;1,100;1,200;1,300;1,400;1,800&display=swap');
+
+
+
+
+
+/* ---------------- Main ------------------ */
+
+
+.container__body {
+    position: relative;
+    top: 0;
+    width: 100%;
+    padding-top: 2%;
+    padding-left: 11%;
+    padding-right: 3%;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* SBT Picture */
-
-.SBTPictureContainer {
-    background-color: whitesmoke;
-    width: 20vw;
-    height: 20vw;
-    border-radius: 1.5vw 1.5vw 1.5vw 1.5vw;
-    margin-left: 50%;
-    margin-right: auto;
-    transform: translateX(-50%);
+.container__tokenStatus {
+/*    border-top: 1px solid lightgray;*/
+    display: flex;
+/*    padding-top: 0.25%;*/
 }
 
 
-.SBTDisplayPicture {
+.container__statusLight {
+    border-radius: 100%;
+    width: 0.91vw;
+    height: 1vw;
+    background-color: red;
+    margin-right: 0.5%;
+    margin-top: 0.3%;
+}
+
+
+.text__status {
+    font-family: Raleway;
+    font-size: 1vw;
+}
+
+
+
+
+
+.container__mainContents {
+    position: relative;
+    grid-template-columns: 5fr 7fr;
+    gap: 3%;
+    padding-top: 0.5%;
+    display: grid;
+/*    border-top: 1px solid lightgray;*/
+}
+
+
+
+
+.container__image {
+    position: relative;
+    border: 1px solid lightgray;
+    border-radius: 1vw;
+    padding: 8%;
+/*    width: 40vw;*/
+    width: 100%;
+}
+
+
+.imageSBT {
+    position: relative;
     width: 100%;
     height: 100%;
-    border-radius: 1.25vw 1.25vw 1.25vw 1.25vw;
-}
-
-.picturePadding {
-    display: inline-block;
-    margin: 0 auto;
-    padding-top: 1vw;
-    width: 21vw;
-    height: 27vw;
-    border-radius: 1.5vw;
-    transform: translateX(0.5vw);
 }
 
 
-
-
-
-/* Increase/Decrease Input */
-
-
-.quantityContainer {
-    margin-top: 1vw;
-    height: 4vw;
-}
-
-form {
-  width: 300px;
-  margin: 0 auto;
-  text-align: center;
-  padding-top: 50px;
-}
-
-.value-button {
-  display: inline-block;
-  width: 6.3vw;
-  height: 100%;
-  color: black;
-  text-align: center;
-  vertical-align: middle;
-  transform: translateY(-0.2vw);
-  background: transparent;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.value-button:hover {
-  cursor: pointer;
-}
-
-form #decrease {
-    border-radius: 0.85vw;
-    border-right: 1px solid black;
-    font-size: 2.5vw;
-    padding-top: 0.25vw;
-    background-color: #3445b4;
-    color: white;
-    float: left;
-}
-
-#decrease:active {
-    background-color: #3498DB;
-}
-
-form #increase {
-    border-radius: 0.85vw;
-    border-left: 1px solid black;
-    font-size: 2vw;
-    padding-top: 0.5vw;
-    background-color: #3445b4;
-    color: white;
-    float: right;
-}
-
-#increase:active {
-    background-color: #3498DB;
-}
-
-
-form #input-wrap {
-  margin: 0px;
-  padding: 0px;
-}
-
-input#number {
-    text-align: center;
-    border: none;
-    background-color: transparent;
-    width: 6vw;
-    height: 100%;
-    font-size: 1.5vw;
-    border-radius: 0.85vw;
-    vertical-align: top;
-}
-
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-
-
-
-
-/* ---------- Form CSS ---------- */
-
-.formContainer {
-    width: 50%;
-    padding-bottom: 2vw;
-    transform: translateY(7vw);
-    margin-bottom: 30vw;
-    border-radius: 2vw;
-/*    background-color: lightgray;*/
-}
-
-
-.rowBoarder {
-    border-radius: 1.5vw;
-    border-style: solid;
-    border-color: gray;
-    background-color: whitesmoke;
-}
-
-
-.dropdown-content {
-    display: none;
+.ethereumIcon {
     position: absolute;
-    background-color: #f1f1f1;
-    width: 25vw;
-    min-width: 160px;
-    border-radius: 1vw;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    top: 2.5%;
+    left: 1%;
+    width: 5%;
 }
 
 
-.SBTType {
-    border-radius: 0.75vw;
-    background-color: #3445b4;
-    margin-top: 0.5vw;
+
+
+
+.container__sbtContentsMain {
+    
 }
-
-.SBTType p {
-    font-size: 1.25vw;
-    padding-top: 0.1vw;
-    padding-bottom: 0.1vw;
-    margin: 0vw;
-}
-
-
-.SBTDescription {
-    margin-top: 1.3vw;
-    font-size: 1.1vw;
-    background-color: white;
-    border-radius: 0.5vw;
-    border-style: solid;
-    border-width: thin;
-    height: 17.6vw;
-    padding: 0.5vw;
-    color: darkgray;
-    overflow-y: scroll;
-    text-align: left;
-    margin-bottom: 0vw;
-}
-
-
 
 
 .SBTName {
     font-family: Righteous;
-    font-size: 3vw;
-    color: black;
-    padding-top: 0.6vw;
-    margin: 0vw;
+    font-size: 2.42vw;
+}
+
+
+.SBTOwner {
+    font-family: Raleway;
+    font-size: 1.24vw;
+    margin-bottom: 1.5vw;
 }
 
 
 
-.submitButton {
-    font-family: Righteous;
-    font-size: 1.5vw;
-    border-radius: 1vw;
-    margin-top: 15px;
-    height: 3vw;
-    border-style: solid;
-    border-color: gray;
-    background-color: #3445b4;
-    width: 100%;
+.container__SBTType {
+    display: flex;
+}
+
+
+.type {
+    font-family: Raleway;
+    font-size: 1.24vw;
+    margin-right: 2%;
+}
+
+
+.SBTType {
+    font-family: Raleway;
+    font-size: 1.24vw;
+    background-color: #e8f4f8;
+    border-radius: 0.5vw;
+    text-align: center;
+    padding: 0.1% 2%;
+}
+
+
+
+.container__createButton {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    width: 4vw;
+    height: 4vw;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+
+.container__createButton:hover {
+    border: none;
+    box-shadow: 0vw 0.2vw 1vw 0vw rgba(0,0,0,0.5);
+    transform: scale(1.1);
+    transition: all 0.3s;
+}
+
+
+.sendIcon {
+    position: absolute;
+    top: 55%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+}
+
+
+
+.container__createButtonText {
+    position: relative;
+    top: 10%;
+    right: 0%;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.container__createButtonBubble {
+/*    display: none;*/
+    opacity: 0;
+    position: absolute;
+    top: 13%;
+    right: -1%;
+    padding: 0.5vw 1vw 0.5vw 1vw;
+    background-color: var(--color-charcoal);
+    border-radius: 0.5vw;
+    transition: all 0.3s;
+}
+
+.container__createButton:hover + .container__createButtonBubble {
+    transition: all 0.3s;
+/*    display: block;*/
+    opacity: 1;
+}
+
+.container__createButtonBubble h5 {
     color: white;
+    font-size: 1.1vw;
+    padding: 0;
+    margin: 0;
+    font-weight: bolder;
 }
 
 
-.submitButton:hover {
-    background-color: #9445c6;
-    color: #1FD6D0;
+.pointer {
+    position: absolute;
+    top: -10%;
+    left: calc(50% - 0.5vw);
+    height: 1vw;
+    width: 1vw;
+    background-color: var(--color-charcoal);
+    transform: rotate(45deg);
+    border-radius: 0 0 12px 0;
 }
 
 
 
-/* ----- Max Width ----- */
+.container__dates {
+    position: relative;
+    grid-template-columns: 1fr 1fr;
+    display: grid;
+    gap: 5%;
+    margin-top: 5%;
+    text-align: center;
+}
 
-/*@media (max-width: 1200px) {
-    .SBTDescription {
-        margin-top: 1.1vw !important;
-    }
-}*/
+
+.container__date {
+    position: relative;
+    border-radius: 1vw;
+    border: 1px solid lightgray;
+    padding: 5%;
+    background-color: #f8fcfd;
+}
+
+.container__date {
+    position: relative;
+    border-radius: 1vw;
+    border: 1px solid lightgray;
+    padding: 5%;
+    background-color: #f8fcfd;
+}
+
+
+
+.dateTitle {
+    position: relative;
+    font-family: Raleway;
+    font-size: 1.1vw;
+    font-weight: 800;
+    padding: 0;
+    margin: 0;
+}
+
+
+.dateContents {
+    position: relative;
+    font-size: 1.5vw;
+    padding: 0;
+    margin: 0;
+    font-family: Raleway;
+}
+
+
+
+
+
+/*-------------------- Description --------------------*/
+
+
+.container__attribute {
+    position: relative;
+    margin-top: 5%;
+    border-radius: 1vw;
+    border: 1px solid lightgray;
+}
+
+
+
+.container__description-title {
+    position: relative;
+    padding: 1vw;
+    display: flex;
+}
+
+.dropDownCursor {
+    cursor: pointer;
+}
+
+.descriptionTitle {
+    position: relative;
+    margin: 0;
+    padding: 0.8% 0% 0% 2%;
+    font-family: Raleway;
+    font-size: 1.25vw;
+    font-weight: 800;
+}
+
+.descriptionIcon {
+    width: 5%;
+}
+
+
+.container__description-contents {
+    padding: 2% 2% 2% 2.4%;
+    background-color: #f8fcfd;
+    border-radius: 0 0vw 1vw 1vw;
+    border-top: 1px solid lightgray;
+}
+
+.dropDown {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.container__description-contents p {
+    font-size: 1.15vw;
+}
+
+.container__description-contents a {
+    font-size: 1.15vw;
+}
+
+
+
+.container__location {
+    display: flex;
+    padding-top: 1%;
+}
+
+
+.arrowDropDown {
+    position: absolute;
+    right: 2%;
+    top: 23%;
+    width: 5%;
+}
+
+
+.locationTrait {
+    margin-right: 1.5%;
+}
+
+
+.descriptionContents {
+/*    font-family: Raleway;*/
+/*    font-size: 1.2%;*/
+}
+
+
 

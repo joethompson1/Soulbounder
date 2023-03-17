@@ -45,8 +45,16 @@ export const createSBT_post = async (req, res) => {
 							  "description" : req.body.SBTDescription,
 							  "attributes" : [
 							  		{
+							  			"trait_type": "Type",
+							  			"value": req.body.sbtType
+							  		},
+							  		{
 							  			"trait_type": "City",
 							  			"value": req.body.SBTCity
+							  		},
+							  		{
+							  			"trait_type": "Country",
+							  			"value": req.body.SBTCountry
 							  		},
 							  		{
 							  			"trait_type": "Start Date",

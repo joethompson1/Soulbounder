@@ -7,41 +7,87 @@
 </head>
 
 <body>
-	<div class="text-center">
+	<div class="container__body">
+		<div class="container__tokenStatus">
+			<div class="container__statusLight">
+			</div>
+			<p class="text__status">Not Published</p>
+		</div>
 		<form class="formContainer">
-			<div class="row rowBoarder">
-				<div class="col">
-					<!-- <h1 class="SBTName" id="SBTName">1234567890</h1> -->
-					<h1 class="SBTName" id="SBTName"><%= SBTData.name %></h1>
-					<div class="SBTType">
-						<p>
-							Type: Certificate
-						</p>
+			<div class="container__mainContents">
+				<div class="container__left">
+					<div class="container__image">
+						<img class="ethereumIcon" src="/images/ethereum.svg">
+						<img class="imageSBT" id="imageSBT" src="<%= SBTData.image %>">
 					</div>
-					<p class="SBTDescription" id="SBTDescription"><%= SBTData.description %></p>
-					<!-- <p class="SBTDescription" id="SBTDescription">Example description. Here is the SBT description.</p> -->
+					<div class="container__dates">
+						<div class="container__date">
+							<h2 class="dateTitle">Start Date:</h2>
+							<p class="dateContents" id=""><%= SBTData.attributes[3].value %></p>
+						</div>
+						<div class="container__date">
+							<h2 class="dateTitle">End Date:</h2>
+							<p class="dateContents" id=""><%= SBTData.attributes[4].value %></p>
+						</div>
+					</div>
 				</div>
+				<div class="container__right">
+					<div class="container__sbtContentsMain">
+						<h5 class="SBTOwner">Created By: <a>You</a></h5>
+						<h1 class="SBTName" id="SBTName"><%= SBTData.name %></h1>
+						<div class="container__SBTType">
+							<h5 class="type">Type: </h5>
+							<h5 class="SBTType"><%= SBTData.attributes[0].value %></h5>
+						</div>
+						<div class="container__createButton" id="submitButton">
+							<img class="sendIcon" src="/images/send.svg">
+						</div>
+						<div class="container__createButtonBubble">
+							<div class="pointer"></div>
+							<h5>Publish</h5>
+						</div>
+					</div>
 
-				<div class="col-auto">
-					<div class="picturePadding">	
-						<div class="SBTPictureContainer">
-							<img class="SBTDisplayPicture" id="imageSBT" src="<%= SBTData.image %>">
-							<!-- <img class="SBTDisplayPicture" id="imageSBT" src="<%= SBTData %>"> -->
-							<div class="quantityContainer">
-								<div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-								<input type="number" id="number" value="0" />
-								<div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+					<div class="container__attribute" id="description">
+						<div class="container__description-title">
+							<img class="descriptionIcon" src="/images/description.svg">
+							<h2 class="descriptionTitle">Description</h2>
+						</div>
+						<div class="container__description-contents">
+							<p class="descriptionContents" id=""><%= SBTData.description %></p>
+						</div>
+					</div>
+
+					<div class="container__attribute">
+						<div class="container__description-title dropDownCursor" onclick="hideContents('location')">
+							<img class="descriptionIcon" src="/images/location.svg">
+							<h2 class="descriptionTitle">Location</h2>
+							<img class="arrowDropDown" src="/images/arrowDropDown.svg">
+						</div>
+						<div class="container__description-contents dropDown" id="location">
+							<div class="row container__location">
+								<p class="locationTrait"><%= SBTData.attributes[1].trait_type %>: </p>
+								<p class="" id=""><%= SBTData.attributes[1].value %></p>
 							</div>
+							<div class="row container__location">
+								<p class="locationTrait"><%= SBTData.attributes[2].trait_type %>: </p>
+								<p class="" id=""><%= SBTData.attributes[2].value %></p>
+							</div>
+						</div>
+					</div>
+
+					<div class="container__attribute">
+						<div class="container__description-title dropDownCursor" onclick="hideContents('website')">
+							<img class="descriptionIcon" src="/images/website.svg">
+							<h2 class="descriptionTitle">Website</h2>
+							<img class="arrowDropDown" src="/images/arrowDropDown.svg">
+						</div>
+						<div class="container__description-contents dropDown" id="website">
+							<a href="https://<%= SBTData.attributes[3].value %>" target=”_blank” class="" id=""><%= SBTData.attributes[5].value %></a>
 						</div>
 					</div>
 				</div>
 			</div>
-
-			<div class="row">
-				<button class="submitButton" id="submitButton" type="button">PUBLISH</button>
-				<h2>Account: <span class="showAccount"></span></h2>
-			</div>
-			
 		</form>
 	</div>
 
@@ -61,11 +107,12 @@
 				const userWalletAddress = accounts[0];
 				const provider = new ethers.providers.Web3Provider(window.ethereum);
 				const signer = provider.getSigner(userWalletAddress);
-				showAccount.innerHTML = userWalletAddress;
+				// showAccount.innerHTML = userWalletAddress;
 
 				const networkId = await window.ethereum.request({ method: 'net_version' });
 				const contractNetworkId = "<%= contractNetworkId %>"
 
+				let tokenIds = []
 
 
 				if (contractNetworkId == networkId) {
@@ -74,13 +121,21 @@
 
 					const contract = new ethers.Contract(contractAddress, contractAbi, signer);
 
-					let walletBalance = await contract.balanceOf('0x6b86fc50710801e65662688673c0aac3c3225904');
-					console.log(walletBalance);
+					let walletBalance = await contract.balanceOf(userWalletAddress);
+					console.log(walletBalance.toNumber());
 
 					await contract.safeMint(userWalletAddress, "<%= sbtHash %>");
 
-					walletBalance = await contract.balanceOf('0x6b86fc50710801e65662688673c0aac3c3225904');
-					console.log(walletBalance);
+					walletBalance = await contract.balanceOf(userWalletAddress);
+					console.log(walletBalance.toString());
+
+
+					for (var i=0; i < walletBalance.toString(); i++) {
+						const tokenId = await contract.tokenURI(i);
+						tokenIds.push(tokenId);
+					}
+
+					console.log(tokenIds);
 
 				} else {
 					window.alert("Smart contract not deployed to detected network!");
@@ -89,54 +144,13 @@
 		});
 
 
-	</script>
 
 
-	<script type="text/javascript">
-		function increaseValue() {
-			var value = parseInt(document.getElementById('number').value, 10);
-		  	value = isNaN(value) ? 0 : value;
-		  	value++;
-		  	document.getElementById('number').value = value;
+		function hideContents(contentId) {
+			document.getElementById(contentId).classList.toggle('show');
 		}
 
-		function decreaseValue() {
-			var value = parseInt(document.getElementById('number').value, 10);
-		  	value = isNaN(value) ? 0 : value;
-		  	value < 1 ? value = 1 : '';
-		  	value--;
-		  	document.getElementById('number').value = value;
-		}
 
-		$('#SBTName').each(function() {
-			var el= $(this);
-			var textLength = el.html().length;
-
-			if (textLength > 11) {
-		   		el.css('font-size', '2.7vw');
-		   		$('#SBTDescription').css('height', '18.2vw');
-		   	}
-
-			if (textLength > 13) {
-		   		el.css('font-size', '2.3vw');
-		   		$('#SBTDescription').css('height', '18.8vw');
-			}
-		   
-			if (textLength > 15) {
-		       el.css('font-size', '2.1vw');
-		       $('#SBTDescription').css('height', '19vw');
-		   }
-
-			if (textLength > 17) {
-		   		el.css('font-size', '1.8vw');
-		   		$('#SBTDescription').css('height', '19.2vw');
-			}
-
-			if (textLength > 19) {
-		   		el.css('font-size', '1.6vw');
-		   		$('#SBTDescription').css('height', '19.4vw');
-			}
-		});
 	</script>
 
 </body>

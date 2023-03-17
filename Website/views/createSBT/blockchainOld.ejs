@@ -1,0 +1,157 @@
+<head>
+	<!-- Stylesheets -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+	<link rel="stylesheet" href="/stylesheets/createSBTStyles/createSBTBlockchain.css">
+
+	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+</head>
+
+<body>
+	<div class="text-center">
+		<form class="formContainer">
+			<div class="row rowBoarder">
+				<div class="col">
+					<!-- <h1 class="SBTName" id="SBTName">1234567890</h1> -->
+					<h1 class="SBTName" id="SBTName"><%= SBTData.name %></h1>
+					<div class="SBTType">
+						<p>
+							Type: Certificate
+						</p>
+					</div>
+					<p class="SBTDescription" id="SBTDescription"><%= SBTData.description %></p>
+					<!-- <p class="SBTDescription" id="SBTDescription">Example description. Here is the SBT description.</p> -->
+				</div>
+
+				<div class="col-auto">
+					<div class="picturePadding">	
+						<div class="SBTPictureContainer">
+							<img class="SBTDisplayPicture" id="imageSBT" src="<%= SBTData.image %>">
+							<!-- <img class="SBTDisplayPicture" id="imageSBT" src="<%= SBTData %>"> -->
+							<div class="quantityContainer">
+								<div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+								<input type="number" id="number" value="0" />
+								<div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<button class="submitButton" id="submitButton" type="button">PUBLISH</button>
+				<!-- <h2>Account: <span class="showAccount"></span></h2> -->
+			</div>
+			
+		</form>
+	</div>
+
+
+
+	<script type="text/javascript">
+		const showAccount = document.querySelector('.showAccount');
+
+		$(function() // execute once the DOM has loaded
+		{
+
+			// wire up Add Item button click event
+			$("#submitButton").click(async function(event) {
+				event.preventDefault(); // cancel default behavior
+
+				const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+				const userWalletAddress = accounts[0];
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				const signer = provider.getSigner(userWalletAddress);
+				// showAccount.innerHTML = userWalletAddress;
+
+				const networkId = await window.ethereum.request({ method: 'net_version' });
+				const contractNetworkId = "<%= contractNetworkId %>"
+
+				let tokenIds = []
+
+
+				if (contractNetworkId == networkId) {
+					let contractAbi = '<%- contractAbi %>';
+					const contractAddress = "<%= contractAddress %>";
+
+					const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+
+					let walletBalance = await contract.balanceOf(userWalletAddress);
+					console.log(walletBalance.toNumber());
+
+					await contract.safeMint(userWalletAddress, "<%= sbtHash %>");
+
+					walletBalance = await contract.balanceOf(userWalletAddress);
+					console.log(walletBalance.toString());
+
+
+					for (var i=0; i < walletBalance.toString(); i++) {
+						const tokenId = await contract.tokenURI(i);
+						tokenIds.push(tokenId);
+					}
+
+					console.log(tokenIds);
+
+				} else {
+					window.alert("Smart contract not deployed to detected network!");
+				}
+		  	});
+		});
+
+
+	</script>
+
+
+	<script type="text/javascript">
+		function increaseValue() {
+			var value = parseInt(document.getElementById('number').value, 10);
+		  	value = isNaN(value) ? 0 : value;
+		  	value++;
+		  	document.getElementById('number').value = value;
+		}
+
+		function decreaseValue() {
+			var value = parseInt(document.getElementById('number').value, 10);
+		  	value = isNaN(value) ? 0 : value;
+		  	value < 1 ? value = 1 : '';
+		  	value--;
+		  	document.getElementById('number').value = value;
+		}
+
+		$('#SBTName').each(function() {
+			var el= $(this);
+			var textLength = el.html().length;
+
+			if (textLength > 11) {
+		   		el.css('font-size', '2.7vw');
+		   		$('#SBTDescription').css('height', '18.2vw');
+		   	}
+
+			if (textLength > 13) {
+		   		el.css('font-size', '2.3vw');
+		   		$('#SBTDescription').css('height', '18.8vw');
+			}
+		   
+			if (textLength > 15) {
+		       el.css('font-size', '2.1vw');
+		       $('#SBTDescription').css('height', '19vw');
+		   }
+
+			if (textLength > 17) {
+		   		el.css('font-size', '1.8vw');
+		   		$('#SBTDescription').css('height', '19.2vw');
+			}
+
+			if (textLength > 19) {
+		   		el.css('font-size', '1.6vw');
+		   		$('#SBTDescription').css('height', '19.4vw');
+			}
+		});
+	</script>
+
+</body>
+
+
+
+
+
+

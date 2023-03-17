@@ -172,6 +172,11 @@
 
 .dropdown a:hover {background-color: #ddd;}
 
+
+#sbtType {
+	display: none;
+}
+
 .show {
 	display: block !important;
 }

@@ -1,0 +1,272 @@
+/* ---------- Fonts ---------- */
+@font-face {
+    font-family: 'Righteous';
+    src: url('../../fonts/Righteous/Righteous-Regular.eot');
+    src: url('../../fonts/Righteous/Righteous-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../../fonts/Righteous/Righteous-Regular.woff2') format('woff2'),
+        url('../../fonts/Righteous/Righteous-Regular.woff') format('woff'),
+        url('../../fonts/Righteous/Righteous-Regular.svg#Righteous-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Quattrocento Sans';
+    src: url('../../fonts/Quattrocento_Sans/QuattrocentoSans.eot');
+    src: url('../../fonts/Quattrocento_Sans/QuattrocentoSans.eot?#iefix') format('embedded-opentype'),
+        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.woff2') format('woff2'),
+        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.woff') format('woff'),
+        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.ttf') format('truetype'),
+        url('../../fonts/Quattrocento_Sans/QuattrocentoSans.svg#QuattrocentoSans') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+  font-family: 'Raleway';
+  src:  url('../../fonts/Raleway/Raleway-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* SBT Picture */
+
+.SBTPictureContainer {
+    background-color: whitesmoke;
+    width: 20vw;
+    height: 20vw;
+    border-radius: 1.5vw 1.5vw 1.5vw 1.5vw;
+    margin-left: 50%;
+    margin-right: auto;
+    transform: translateX(-50%);
+}
+
+
+.SBTDisplayPicture {
+    width: 100%;
+    height: 100%;
+    border-radius: 1.25vw 1.25vw 1.25vw 1.25vw;
+}
+
+.picturePadding {
+    display: inline-block;
+    margin: 0 auto;
+    padding-top: 1vw;
+    width: 21vw;
+    height: 27vw;
+    border-radius: 1.5vw;
+    transform: translateX(0.5vw);
+}
+
+
+
+
+
+/* Increase/Decrease Input */
+
+
+.quantityContainer {
+    margin-top: 1vw;
+    height: 4vw;
+}
+
+form {
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.value-button {
+  display: inline-block;
+  width: 6.3vw;
+  height: 100%;
+  color: black;
+  text-align: center;
+  vertical-align: middle;
+  transform: translateY(-0.2vw);
+  background: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.value-button:hover {
+  cursor: pointer;
+}
+
+form #decrease {
+    border-radius: 0.85vw;
+    border-right: 1px solid black;
+    font-size: 2.5vw;
+    padding-top: 0.25vw;
+    background-color: #3445b4;
+    color: white;
+    float: left;
+}
+
+#decrease:active {
+    background-color: #3498DB;
+}
+
+form #increase {
+    border-radius: 0.85vw;
+    border-left: 1px solid black;
+    font-size: 2vw;
+    padding-top: 0.5vw;
+    background-color: #3445b4;
+    color: white;
+    float: right;
+}
+
+#increase:active {
+    background-color: #3498DB;
+}
+
+
+form #input-wrap {
+  margin: 0px;
+  padding: 0px;
+}
+
+input#number {
+    text-align: center;
+    border: none;
+    background-color: transparent;
+    width: 6vw;
+    height: 100%;
+    font-size: 1.5vw;
+    border-radius: 0.85vw;
+    vertical-align: top;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+
+
+
+/* ---------- Form CSS ---------- */
+
+.formContainer {
+    width: 50%;
+    padding-bottom: 2vw;
+    transform: translateY(7vw);
+    margin-bottom: 30vw;
+    border-radius: 2vw;
+/*    background-color: lightgray;*/
+}
+
+
+.rowBoarder {
+    border-radius: 1.5vw;
+    border-style: solid;
+    border-color: gray;
+    background-color: whitesmoke;
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    width: 25vw;
+    min-width: 160px;
+    border-radius: 1vw;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+
+.SBTType {
+    border-radius: 0.75vw;
+    background-color: #3445b4;
+    margin-top: 0.5vw;
+}
+
+.SBTType p {
+    font-size: 1.25vw;
+    padding-top: 0.1vw;
+    padding-bottom: 0.1vw;
+    margin: 0vw;
+}
+
+
+.SBTDescription {
+    margin-top: 1.3vw;
+    font-size: 1.1vw;
+    background-color: white;
+    border-radius: 0.5vw;
+    border-style: solid;
+    border-width: thin;
+    height: 17.6vw;
+    padding: 0.5vw;
+    color: darkgray;
+    overflow-y: scroll;
+    text-align: left;
+    margin-bottom: 0vw;
+}
+
+
+
+
+.SBTName {
+    font-family: Righteous;
+    font-size: 3vw;
+    color: black;
+    padding-top: 0.6vw;
+    margin: 0vw;
+}
+
+
+
+.submitButton {
+    font-family: Righteous;
+    font-size: 1.5vw;
+    border-radius: 1vw;
+    margin-top: 15px;
+    height: 3vw;
+    border-style: solid;
+    border-color: gray;
+    background-color: #3445b4;
+    width: 100%;
+    color: white;
+}
+
+
+.submitButton:hover {
+    background-color: #9445c6;
+    color: #1FD6D0;
+}
+
+
+
+/* ----- Max Width ----- */
+
+/*@media (max-width: 1200px) {
+    .SBTDescription {
+        margin-top: 1.1vw !important;
+    }
+}*/
+
