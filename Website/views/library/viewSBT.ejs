@@ -13,87 +13,83 @@
 			</div>
 			<p class="text__status" id="text__status">Not Published</p>
 		</div>
-		<form class="formContainer">
-			<div class="container__mainContents">
-				<div class="container__left">
-					<div class="container__image">
-						<img class="ethereumIcon" src="/images/ethereum.svg">
-						<img class="imageSBT" id="imageSBT" src="">
-					</div>
-					<div class="container__dates">
-						<div class="container__date">
-							<h2 class="dateTitle">Start Date:</h2>
-							<p class="dateContents" id=""></p>
-						</div>
-						<div class="container__date">
-							<h2 class="dateTitle">End Date:</h2>
-							<p class="dateContents" id=""></p>
-						</div>
-					</div>
+		<div class="container__mainContents">
+			<div class="container__left">
+				<div class="container__image">
+					<img class="ethereumIcon" src="/images/ethereum.svg">
+					<img class="imageSBT" id="imageSBT" src="<%= SBTData.image %>">
 				</div>
-				<div class="container__right">
-					<div class="container__sbtContentsMain">
-						<h5 class="SBTOwner">Created By: <a>You</a></h5>
-						<h1 class="SBTName" id="SBTName">Name</h1>
-						<div class="container__SBTType">
-							<h5 class="type">Type: </h5>
-							<h5 class="SBTType">type</h5>
-						</div>
-<!-- 						<div class="container__createButton" id="submitButton">
-							<img class="sendIcon" src="/images/send.svg">
-						</div>
-						<div class="container__createButtonBubble">
-							<div class="pointer"></div>
-							<h5>Publish</h5>
-						</div> -->
+				<div class="container__dates">
+					<div class="container__date">
+						<h2 class="dateTitle">Start Date:</h2>
+						<p class="dateContents" id=""><%= SBTData.attributes[3].value %></p>
 					</div>
-
-					<div class="container__attribute" id="description">
-						<div class="container__description-title">
-							<img class="descriptionIcon" src="/images/description.svg">
-							<h2 class="descriptionTitle">Description</h2>
-						</div>
-						<div class="container__description-contents">
-							<p class="descriptionContents" id="">description</p>
-						</div>
-					</div>
-
-					<div class="container__attribute">
-						<div class="container__description-title dropDownCursor" onclick="hideContents('location')">
-							<img class="descriptionIcon" src="/images/location.svg">
-							<h2 class="descriptionTitle">Location</h2>
-							<img class="arrowDropDown" src="/images/arrowDropDown.svg">
-						</div>
-						<div class="container__description-contents dropDown" id="location">
-							<div class="container__location">
-								<p class="locationTrait">trait type: </p>
-								<p class="" id="">value</p>
-							</div>
-							<div class="container__location">
-								<p class="locationTrait">trait type: </p>
-								<p class="" id="">value</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="container__attribute">
-						<div class="container__description-title dropDownCursor" onclick="hideContents('website')">
-							<img class="descriptionIcon" src="/images/website.svg">
-							<h2 class="descriptionTitle">Website</h2>
-							<img class="arrowDropDown" src="/images/arrowDropDown.svg">
-						</div>
-						<div class="container__description-contents dropDown" id="website">
-							<a href="" target=”_blank” class="" id="">website</a>
-						</div>
+					<div class="container__date">
+						<h2 class="dateTitle">End Date:</h2>
+						<p class="dateContents" id=""><%= SBTData.attributes[4].value %></p>
 					</div>
 				</div>
 			</div>
-		</form>
+			<div class="container__right">
+				<div class="container__sbtContentsMain">
+					<h5 class="SBTOwner">Created By: <a>You</a></h5>
+					<h1 class="SBTName" id="SBTName"><%= SBTData.name %></h1>
+					<div class="container__SBTType">
+						<h5 class="type">Type: </h5>
+						<h5 class="SBTType"><%= SBTData.attributes[0].value %></h5>
+					</div>
+				</div>
+
+				<div class="container__attribute" id="description">
+					<div class="container__description-title">
+						<img class="descriptionIcon" src="/images/description.svg">
+						<h2 class="descriptionTitle">Description</h2>
+					</div>
+					<div class="container__description-contents">
+						<p class="descriptionContents" id=""><%= SBTData.description %></p>
+					</div>
+				</div>
+
+				<div class="container__attribute">
+					<div class="container__description-title dropDownCursor" onclick="hideContents('location')">
+						<img class="descriptionIcon" src="/images/location.svg">
+						<h2 class="descriptionTitle">Location</h2>
+						<img class="arrowDropDown" src="/images/arrowDropDown.svg">
+					</div>
+					<div class="container__description-contents dropDown" id="location">
+						<div class="container__location">
+								<p class="locationTrait"><%= SBTData.attributes[1].trait_type %>: </p>
+								<p class="" id=""><%= SBTData.attributes[1].value %></p>
+							</div>
+							<div class="container__location">
+								<p class="locationTrait"><%= SBTData.attributes[2].trait_type %>: </p>
+								<p class="" id=""><%= SBTData.attributes[2].value %></p>
+							</div>
+					</div>
+				</div>
+
+				<div class="container__attribute">
+					<div class="container__description-title dropDownCursor" onclick="hideContents('website')">
+						<img class="descriptionIcon" src="/images/website.svg">
+						<h2 class="descriptionTitle">Website</h2>
+						<img class="arrowDropDown" src="/images/arrowDropDown.svg">
+					</div>
+					<div class="container__description-contents dropDown" id="website">
+						<a href="" target=”_blank” class="" id=""><%= SBTData.attributes[5].value %></a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 
 
 	<script type="text/javascript">
+		const textStatus = document.querySelector('.text__status');
+		textStatus.innerHTML = "Published"
+		document.getElementById('container__statusLight').style.background = "green";
+
+
 
 		function hideContents(contentId) {
 			document.getElementById(contentId).classList.toggle('show');
