@@ -216,11 +216,11 @@ aside {
 
 
 .burgerImg {
-  width: 100px;
+  position: fixed;
+  width: 6vw;
   cursor: pointer;
-  position: relative;
-  z-index: 98;
-  float: right;
+  z-index: 999;
+/*  float: right;*/
 }
 
 .burgerImg:before, .burgerImg span, .burgerImg:after {

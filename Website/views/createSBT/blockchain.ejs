@@ -9,9 +9,9 @@
 <body>
 	<div class="container__body">
 		<div class="container__tokenStatus">
-			<div class="container__statusLight">
+			<div class="container__statusLight" id="container__statusLight">
 			</div>
-			<p class="text__status">Not Published</p>
+			<p class="text__status" id="text__status">Not Published</p>
 		</div>
 		<form class="formContainer">
 			<div class="container__mainContents">
@@ -65,11 +65,11 @@
 							<img class="arrowDropDown" src="/images/arrowDropDown.svg">
 						</div>
 						<div class="container__description-contents dropDown" id="location">
-							<div class="row container__location">
+							<div class="container__location">
 								<p class="locationTrait"><%= SBTData.attributes[1].trait_type %>: </p>
 								<p class="" id=""><%= SBTData.attributes[1].value %></p>
 							</div>
-							<div class="row container__location">
+							<div class="container__location">
 								<p class="locationTrait"><%= SBTData.attributes[2].trait_type %>: </p>
 								<p class="" id=""><%= SBTData.attributes[2].value %></p>
 							</div>
@@ -116,18 +116,44 @@
 
 
 				if (contractNetworkId == networkId) {
+					const textStatus = document.querySelector('.text__status');
+					textStatus.innerHTML = "Publishing..."
+					document.getElementById('container__statusLight').style.background = "orange";
+
 					let contractAbi = '<%- contractAbi %>';
 					const contractAddress = "<%= contractAddress %>";
 
 					const contract = new ethers.Contract(contractAddress, contractAbi, signer);
 
 					let walletBalance = await contract.balanceOf(userWalletAddress);
-					console.log(walletBalance.toNumber());
+					// console.log(walletBalance.toNumber());
 
-					await contract.safeMint(userWalletAddress, "<%= sbtHash %>");
+					try {
+						let mintResult = await contract.safeMint(userWalletAddress, "<%= sbtHash %>");
+						console.log(mintResult);
+
+						let txReceipt = await provider.getTransactionReceipt(mintResult.hash);
+						console.log(txReceipt);
+
+						while (!txReceipt && !txReceipt.blockNumber) {
+							console.log("waiting: "+txReceipt);
+							txReceipt = await provider.getTransactionReceipt(mintResult.hash);
+						}
+
+						textStatus.innerHTML = "Published"
+						document.getElementById('container__statusLight').style.background = "green";
+
+						location.href = "/library/viewSBT#<%= sbtHash %>";
+
+					} catch(error) {
+
+						textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";
+						document.getElementById('container__statusLight').style.background = "red";
+					}
+
 
 					walletBalance = await contract.balanceOf(userWalletAddress);
-					console.log(walletBalance.toString());
+					// console.log(walletBalance.toString());
 
 
 					for (var i=0; i < walletBalance.toString(); i++) {
@@ -135,7 +161,7 @@
 						tokenIds.push(tokenId);
 					}
 
-					console.log(tokenIds);
+					// console.log(tokenIds);
 
 				} else {
 					window.alert("Smart contract not deployed to detected network!");
