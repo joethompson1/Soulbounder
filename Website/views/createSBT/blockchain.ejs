@@ -125,9 +125,6 @@
 
 					const contract = new ethers.Contract(contractAddress, contractAbi, signer);
 
-					// let walletBalance = await contract.balanceOf(userWalletAddress);
-					// console.log(walletBalance.toNumber());
-
 					try {
 						let mintResult = await contract.safeMint(userWalletAddress, "<%= sbtHash %>");
 						console.log(mintResult);
@@ -155,17 +152,6 @@
 						document.getElementById('container__statusLight').style.background = "red";
 					}
 
-
-					// walletBalance = await contract.balanceOf(userWalletAddress);
-					// console.log(walletBalance.toString());
-
-
-					// for (var i=0; i < walletBalance.toString(); i++) {
-					// 	const tokenId = await contract.tokenURI(i);
-					// 	tokenIds.push(tokenId);
-					// }
-
-					// console.log(tokenIds);
 
 				} else {
 					window.alert("Smart contract not deployed to detected network!");
