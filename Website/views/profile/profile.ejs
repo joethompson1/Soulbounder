@@ -1,0 +1,79 @@
+<head>
+	<!-- Stylesheets -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+	<link rel="stylesheet" href="/stylesheets/createSBTStyles/createSBTBlockchain.css">
+
+	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+</head>
+
+<body>
+	<div class="container__body">
+		<div class="container__createButton" id="submitButton">
+			<img class="sendIcon" src="/images/send.svg">
+		</div>
+		<div class="userAccount" id="userAccount"></div>
+		<div class="tokenIds" id="tokenIds"></div>
+	</div>
+
+
+
+	<script type="text/javascript">
+		$(function() {// execute once the DOM has loaded
+
+			$("#submitButton").click(async function(event) {
+
+				const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+				const userWalletAddress = accounts[0];
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				const signer = provider.getSigner(userWalletAddress);
+
+				const networkId = await window.ethereum.request({ method: 'net_version' });
+				const contractNetworkId = "<%= contractNetworkId %>"
+
+				const userAccount = document.getElementById("userAccount");
+				userAccount.innerHTML = userWalletAddress;
+
+				let tokenIds = []
+
+				let contractAbi = '<%- contractAbi %>';
+				const contractAddress = "<%= contractAddress %>";
+
+				const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+
+
+				walletBalance = await contract.balanceOf(userWalletAddress);
+
+				const tokenIdHTML = document.getElementById("tokenIds");
+
+				for (var i=0; i < walletBalance.toString(); i++) {
+					// const tokenId = await contract.tokenURI(i);
+					const tokenId = await contract.tokenOfOwnerByIndex(userWalletAddress, i);
+					tokenIds.push(tokenId);
+					tokenIdHTML.innerHTML += `<a href="/profile/viewSBT#${tokenId}">${tokenId}\n</a>`;
+					tokenId+" ";
+				}
+
+				localStorage.setItem('userWalletAddress', userWalletAddress);
+				var result = localStorage.getItem('userWalletAddress');
+
+				console.log(result);
+
+				userAccount.innerHTML = userWalletAddress;
+
+
+
+			});
+
+
+		});
+
+
+	</script>
+
+</body>
+
+
+
+
+
+

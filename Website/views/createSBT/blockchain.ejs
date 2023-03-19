@@ -143,7 +143,10 @@
 						textStatus.innerHTML = "Published"
 						document.getElementById('container__statusLight').style.background = "green";
 
-						location.href = "/library/viewSBT?hash=<%= sbtHash %>";
+						// location.href = "/library/viewSBT?hash=<%= sbtHash %>";
+						window.location.assign(
+						  "/profile"
+						);
 
 
 					} catch(error) {

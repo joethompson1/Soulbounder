@@ -151,7 +151,7 @@ This is only required if changes have been made to the smart contracts. Files ar
    ```
 1. Deploy the smart contract to the blockchain
    ```sh
-   truffle migrate
+   truffle deploy
    ```
 * (If you wish to use interect with the smart contract through the truffle console) Command to bring up the truffle console
    ```sh
