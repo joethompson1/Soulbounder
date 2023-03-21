@@ -8,10 +8,10 @@
 
 <body>
 	<div class="container__body">
-		<div class="container__tokenStatus">
+		<div class="container__tokenStatus" id="container__tokenStatus">
 			<div class="container__statusLight" id="container__statusLight">
 			</div>
-			<p class="text__status" id="text__status">Not Published</p>
+			<p class="text__status" id="text__status">Wallet not connected</p>
 		</div>
 		<div class="container__mainContents">
 			<div class="container__left">
@@ -38,13 +38,15 @@
 						<h5 class="type">Type: </h5>
 						<h5 class="SBTType" id="SBTType"></h5>
 					</div>
-					<div class="container__createButton" id="submitButton">
-						<img class="sendIcon" src="/images/send.svg">
-					</div>
-					<div class="container__createButtonBubble">
-						<div class="pointer"></div>
-						<h5>Connect Wallet</h5>
-					</div>
+					<!-- <div class="container__hoverButton">					 -->
+						<div class="container__createButton" id="submitButton">
+							<img class="sendIcon" src="/images/share.svg">
+							<div class="container__createButtonBubble">
+								<div class="pointer"></div>
+								<h5>Share</h5>
+							</div>
+						</div>
+					<!-- </div> -->
 				</div>
 
 				<div class="container__attribute" id="description">
@@ -93,68 +95,103 @@
 
 	<script type="text/javascript">
 
+		let connectionText = document.getElementById("text__status").innerHTML;
+		let statusLight = document.getElementById('container__statusLight').style.background;
 
+
+		$("#container__tokenStatus").click(async function(event) {
+			const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+			const userWalletAddress = accounts[0];
+			localStorage.setItem('userWalletAddress', userWalletAddress);
+			await loadSBTData();	
+			location.reload();
+		});
 
 		$(async function() { // execute once the DOM has loaded
+			await loadSBTData()
+		});
 
+
+		async function loadSBTData() {
 			var userWalletAddress = localStorage.getItem('userWalletAddress');
+
+			console.log(userWalletAddress);
 
 			if (userWalletAddress) {
 				const textStatus = document.querySelector('.text__status');
-				textStatus.innerHTML = "Wallet connected ("+userWalletAddress+")";
+				// textStatus.innerHTML = "Wallet: "+userWalletAddress;
+				textStatus.innerHTML = "Wallet connected";
+				connectionText = textStatus.innerHTML;
 				document.getElementById('container__statusLight').style.background = "lightgreen";
-
+				statusLight = "lightgreen"
 			}
 
 
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			const signer = provider.getSigner(userWalletAddress);
+			let provider = new ethers.providers.Web3Provider(window.ethereum);
+			let signer = provider.getSigner(userWalletAddress);
 
-			const contractNetworkId = "<%= contractNetworkId %>"
+			let contractNetworkId = "<%= contractNetworkId %>"
 
 			let contractAbi = '<%- contractAbi %>';
-			const contractAddress = "<%= contractAddress %>";
+			let contractAddress = "<%= contractAddress %>";
 
-			const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+			let contract = new ethers.Contract(contractAddress, contractAbi, signer);
 
 			const tokenId = window.location.hash.substring(1);
 			let tokenURI = await contract.tokenURI(tokenId);
 
-			const request = new Request("https://ipfs.io/ipfs/"+tokenURI);
-			const response = await fetch(request);
-			const SBTData = await response.json();
+			let request = new Request("https://ipfs.io/ipfs/"+tokenURI);
+			let response = await fetch(request);
+			let SBTData = await response.json();
 
 			document.getElementById("imageSBT").src = SBTData.image;
 
-			const name = document.getElementById('SBTName');
+			let name = document.getElementById('SBTName');
 			name.innerHTML = SBTData.name;
 
-			const type = document.getElementById('SBTType');
+			let type = document.getElementById('SBTType');
 			type.innerHTML = SBTData.attributes[0].value;
 
-			const description = document.getElementById('descriptionContents');
+			let description = document.getElementById('descriptionContents');
 			description.innerHTML = SBTData.description;
 
-			const city = document.getElementById('city');
-			const country = document.getElementById('country');
+			let city = document.getElementById('city');
+			let country = document.getElementById('country');
 			city.innerHTML = SBTData.attributes[1].value;
 			country.innerHTML = SBTData.attributes[2].value;
 
-			const startDate = document.getElementById('startDate');
-			const endDate = document.getElementById('endDate');
+			let startDate = document.getElementById('startDate');
+			let endDate = document.getElementById('endDate');
 			startDate.innerHTML = SBTData.attributes[3].value;
 			endDate.innerHTML = SBTData.attributes[4].value;
 
-			const website = document.getElementById('SBTWebsite');
+			let website = document.getElementById('SBTWebsite');
 			website.innerHTML = SBTData.attributes[5].value;
 
-		});
+		}
 
 
 
 		function hideContents(contentId) {
 			document.getElementById(contentId).classList.toggle('show');
 		}
+
+
+
+		console.log(connectionText);
+	    $( "#container__tokenStatus" ).hover(
+		  function() {
+		  	if (connectionText == "Wallet not connected") {
+			    $(".text__status").text("Connect Wallet");
+			    document.getElementById('container__statusLight').style.background="lightgreen";
+		  	} else if (connectionText == "Wallet connected") {
+		  		$(".text__status").text("Refresh wallet");
+		  	}
+		  }, function() {
+		    $(".text__status").text(connectionText);
+		    document.getElementById('container__statusLight').style.background=statusLight;
+		  }
+		);
 
 
 	</script>
