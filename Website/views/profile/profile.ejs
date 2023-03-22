@@ -2,6 +2,7 @@
 	<!-- Stylesheets -->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 	<link rel="stylesheet" href="/stylesheets/profileStyles/profile.css">
+	<link rel="stylesheet" href="/stylesheets/viewSBT.css">
 
 	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
 </head>
@@ -15,15 +16,54 @@
 		</div>
 
 
+		<div class="container__mainContents">
+			<div class="container__left">
+				<div class="container__image">
+					<img class="ethereumIcon" src="/images/ethereum.svg">
+					<img class="imageSBT" id="imageSBT" src="">
+				</div>
+			</div>
+			<div class="container__right">
+				<div class="container__sbtContentsMain">
+					<h5 class="SBTOwner" id="SBTOwner"></h5>
+					<h1 class="SBTName" id="SBTName">Joe Thompson</h1>
+					<div class="container__SBTType">
+						<h5 class="type">Type: </h5>
+						<h5 class="SBTType" id="SBTType"></h5>
+					</div>
+					<!-- <div class="container__hoverButton">					 -->
+						<div class="container__createButton" id="submitButton">
+							<img class="sendIcon" src="/images/share.svg">
+							<div class="container__createButtonBubble">
+								<div class="pointer"></div>
+								<h5>Share</h5>
+							</div>
+						</div>
+					<!-- </div> -->
+				</div>
+
+				<div class="container__attribute" id="description">
+					<div class="container__description-title">
+						<img class="descriptionIcon" src="/images/description.svg">
+						<h2 class="descriptionTitle">Description</h2>
+					</div>
+					<div class="container__description-contents">
+						<p class="descriptionContents" id="descriptionContents"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 		<div class="container__profile-library">
 			<div class="container__profile-libraryColumns">
-				<div class="container__profile-libraryColumn active" id="attendance">
+				<div class="container__profile-libraryColumn active" id="attendance" onclick="changeTab('attendance')">
 					<h2 class="sectionTitle">Attendance</h2>
 				</div>
-				<div class="container__profile-libraryColumn" id="certificate">
+				<div class="container__profile-libraryColumn" id="certificate" onclick="changeTab('certificate')">
 					<h2 class="sectionTitle">Certificates</h2>
 				</div>
-				<div class="container__profile-libraryColumn" id="ticket">
+				<div class="container__profile-libraryColumn" id="ticket" onclick="changeTab('ticket')">
 					<h2 class="sectionTitle">Tickets</h2>
 				</div>
 			</div>
@@ -36,6 +76,37 @@
 
 
 	<script type="text/javascript">
+		function changeTab(tabId) {
+			let tabs = ['attendance', 'certificate', 'ticket'];
+
+			for (var i = 0; i < tabs.length; i++ ) {
+				let tab = document.getElementById(tabs[i]);
+				if (tab.classList.contains('active')) {
+					tab.classList.remove('active');
+				}
+			}
+
+			let chosenTab = document.getElementById(tabId);
+			chosenTab.classList.add("active");
+			window.location.hash = capitalizeFirstLetter(tabId);
+
+			let tabContents = document.getElementById('container__profile-viewSBTs');
+			let color = window.getComputedStyle(chosenTab).backgroundColor;
+			tabContents.style.backgroundColor = color;
+			loadSBTData();
+		}
+
+
+		function capitalizeFirstLetter(str) {
+			// converting first letter to uppercase
+			const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
+
+			return capitalized;
+		}
+
+
+
+
 		let connectionText = document.getElementById("text__status").innerHTML;
 		let statusLight = document.getElementById('container__statusLight').style.background;
 
@@ -43,18 +114,28 @@
 			const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 			const userWalletAddress = accounts[0];
 			localStorage.setItem('userWalletAddress', userWalletAddress);
-			await loadSBTData();	
+			await loadSBTData(window.location.hash);	
 		});
 
+
+
+
 		$(async function() { // execute once the DOM has loaded
-			await loadSBTData()
+			let sbtType;
+			if (window.location.hash == "Attendance" || window.location.hash == "Certificate" || window.location.hash == "Ticket"  ) {
+				// sbtType = window.location.hash
+			} else {
+				sbtType = "Attendance"
+				window.location.hash = sbtType;
+			}
+			await loadSBTData();
 		});
 
 
 		async function loadSBTData() {
 			var userWalletAddress = localStorage.getItem('userWalletAddress');
-
-			console.log(userWalletAddress);
+			let sbtType = window.location.hash;
+			console.log(sbtType);
 
 			if (userWalletAddress) {
 				const textStatus = document.querySelector('.text__status');
@@ -71,9 +152,6 @@
 
 				const userAccount = document.getElementById("userAccount");
 
-				let tokenIds = []
-				let attendanceTokenIds = []
-
 				let contractAbi = '<%- contractAbi %>';
 				const contractAddress = "<%= contractAddress %>";
 
@@ -88,15 +166,13 @@
 
 				for (var i=0; i < walletBalance.toString(); i++) {
 					const tokenId = await contract.tokenOfOwnerByIndex(userWalletAddress, i);
-					tokenIds.push(tokenId);
 
 					let tokenURI = await contract.tokenURI(tokenId);
 					let request = new Request("https://ipfs.io/ipfs/"+tokenURI);
 					let response = await fetch(request);
 					let SBTData = await response.json();
 
-					if (SBTData.attributes[0].value == "Attendance") {
-						attendanceTokenIds.push(tokenId);
+					if (SBTData.attributes[0].value == sbtType.substring(1)) {
 
 						const container__sbt = document.createElement("a");
 						container__sbt.className = 'container__sbt';
@@ -118,12 +194,6 @@
 
 
 					}
-
-
-				// <div class="container__sbt">
-				// 	<img class="sbtImage" src="https://ipfs.io/ipfs/QmejoigXzRAG64TEZfZKQNyGvARKovD62ix9FqGumcHJyw">
-				// 	<h2 class="sbtName">SBT Name</h2>
-				// </div>
 
 				}
 

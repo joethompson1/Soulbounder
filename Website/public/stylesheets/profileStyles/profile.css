@@ -61,23 +61,12 @@
 /* ============================== Profile Library =========================== */
 
 
-/*.container__profile-library {
-	position: absolute;
-	left: 50%;
-	top: 100%;
-	transform: translate(-50%, 0%);
-	width: 50%;
-	border: 0.1vw solid lightgray;
-	border-radius: 1vw;
-}*/
-
 
 
 .container__profile-library {
 	position: relative;
 	width: 100%;
-	margin-top: 1vh;
-/*	border: 0.1vw solid lightgray;*/
+	margin-top: 5vw;
 }
 
 
@@ -198,7 +187,9 @@
 
 
 .sbtName {
-	margin: 4.2% 0 0 4.2%;
+	font-size: 1.5vw;
+	color: var(--color-washed-blue);
+	margin: 5.2% 0 0 6.2%;
 
 /*	text-align: center;*/
 }

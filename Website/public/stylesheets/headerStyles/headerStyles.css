@@ -172,11 +172,12 @@ aside {
       aside .side-inner .nav-menu ul li a:before {
         content: "";
         position: absolute;
+        border-radius: 0 1vw 1vw 0;  
         left: 0;
         top: 0;
         bottom: 0;
         width: 0px;
-        background-color: #011AA3;
+        background: var(--color-dark-blue);
         opacity: 0;
         visibility: hidden;
         -webkit-transition: .3s opacity ease, .3s visibility ease, .3s width ease;
@@ -194,9 +195,10 @@ aside {
       }
 
         aside .side-inner .nav-menu ul li a:hover:before {
-          width: 4px;
+          width: 0.75vw;
           opacity: 1;
-          visibility: visible; 
+          visibility: visible;
+          border-radius: 0 0.65vw 0.65vw 0;  
         }
 
     aside .side-inner .nav-menu ul li.active a {
@@ -207,7 +209,8 @@ aside {
       aside .side-inner .nav-menu ul li.active a:before {
         opacity: 1;
         visibility: visible;
-        width: 4px; 
+        width: 1vw;
+        border-radius: 0 0.65vw 0.65vw 0; 
       }
 
 

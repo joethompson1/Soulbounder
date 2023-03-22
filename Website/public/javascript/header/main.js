@@ -11,6 +11,10 @@ $(function() {
     $('#createSBT').addClass('active');
   }
 
+  else if (window.location.pathname == "/profile") {
+    $('#profile').addClass('active');
+  }
+
   $('.js-menu-toggle').click(function(e) {
 
   	var $this = $(this);
