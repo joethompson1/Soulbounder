@@ -156,10 +156,12 @@ Files are built to Website/builtContracts.
    ```sh
    npm install
    ```
-3. Enter command to tell truffle to compile the contracts (old: truffle --config truffle-config.cjs compile)
+3. Enter command to tell truffle to compile the contracts
    ```sh
    truffle compile
    ```
+3. Make sure Ganache is open (can set up new environment using quickstart)
+
 4. Deploy the smart contract to the blockchain
    ```sh
    truffle deploy
