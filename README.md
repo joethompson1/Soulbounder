@@ -123,28 +123,6 @@ If you don't have them installed then copy and paste the necessary lines below i
 
 
 <br></br>
-
-### Installation and Set Up
-
-Follow the steps below to set up and start the project locally:
-
-
-1. Go to the website folder
-   ```sh
-   cd Soulbounder/Website/
-   ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-3. Start the development server
-   ```sh
-   npm run devStart
-   ```
-
-
-
-
 ### Compile and Deploy the Smart Contract
 Files are built to Website/builtContracts.
 
@@ -180,6 +158,30 @@ Files are built to Website/builtContracts.
    ```js
    soulbounder.safeMint('<ReceiverWallet>', '<TOKENURI>')
    ```
+
+<br></br>
+
+### Installation and Set Up
+
+Follow the steps below to set up and start the project locally:
+
+
+1. Go to the website folder
+   ```sh
+   cd Soulbounder/Website/
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Start the development server
+   ```sh
+   npm run devStart
+   ```
+
+
+
+
 
 
 
