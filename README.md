@@ -161,7 +161,7 @@ Files are built to Website/builtContracts.
 
 <br></br>
 
-### Installation and Set Up
+### Installation and Set Up of Front End
 
 Follow the steps below to set up and start the project locally:
 
@@ -178,6 +178,30 @@ Follow the steps below to set up and start the project locally:
    ```sh
    npm run devStart
    ```
+
+
+
+### Connect MetaMask to Ganache
+
+Follow the steps below to set up MetaMask so that it connects to your Ganache wallet:
+
+
+1. In MetaMask add a new network with the following details:
+  Network Name:
+   ```
+   Ganache
+   ```
+   New RPC URL:
+   ```
+   HTTP://127.0.0.1:7545
+   ```
+   Chain ID:
+   ```
+   1337
+   ```
+2. Import your 1st Ganache wallet into MetaMask by copying the wallets private key from Ganache and pasting it into MetaMask import account page
+
+3. In metamask make sure you have Ganache selected as your network and you are using the account of the wallet you have just imported.
 
 
 
