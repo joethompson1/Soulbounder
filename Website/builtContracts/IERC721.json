@@ -301,7 +301,7 @@
     "absolutePath": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
     "exportedSymbols": {
       "IERC165": [
-        1962
+        2347
       ],
       "IERC721": [
         1155
@@ -329,7 +329,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 1156,
-        "sourceUnit": 1963,
+        "sourceUnit": 2348,
         "src": "133:47:2",
         "symbolAliases": [],
         "unitAlias": ""
@@ -345,7 +345,7 @@
                 "271:7:2"
               ],
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 1962,
+              "referencedDeclaration": 2347,
               "src": "271:7:2"
             },
             "id": 1045,
@@ -366,7 +366,7 @@
         "id": 1155,
         "linearizedBaseContracts": [
           1155,
-          1962
+          2347
         ],
         "name": "IERC721",
         "nameLocation": "260:7:2",
@@ -1654,7 +1654,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.13",
-  "updatedAt": "2023-03-15T14:57:47.627Z",
+  "updatedAt": "2023-04-07T18:03:32.115Z",
   "devdoc": {
     "details": "Required interface of an ERC721 compliant contract.",
     "events": {

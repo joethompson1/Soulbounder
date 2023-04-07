@@ -107,6 +107,13 @@ If you don't have them installed then copy and paste the necessary lines below i
   ```
 
 
+#### Truffle
+* Download and Install Truffle globally by copying the following command into terminal
+  ```sh
+  npm install -g truffle
+  ```
+
+
 #### Ganache
 * Download and Install Ganache from the following
   ```url
@@ -139,17 +146,21 @@ Follow the steps below to set up and start the project locally:
 
 
 ### Compile and Deploy the Smart Contract
-This is only required if changes have been made to the smart contracts. Files are built to Website/builtContracts.
+Files are built to Website/builtContracts.
 
 1. Go to the Truffle folder
    ```sh
    cd Soulbounder/Truffle
    ```
-1. Enter command to tell truffle to compile the contracts (old: truffle --config truffle-config.cjs compile)
+2. Install the OpenZeppelin contracts by pasting the following command into terminal inside the Truffle folder
+   ```sh
+   npm install
+   ```
+3. Enter command to tell truffle to compile the contracts (old: truffle --config truffle-config.cjs compile)
    ```sh
    truffle compile
    ```
-1. Deploy the smart contract to the blockchain
+4. Deploy the smart contract to the blockchain
    ```sh
    truffle deploy
    ```
