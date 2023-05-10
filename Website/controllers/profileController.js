@@ -1,5 +1,5 @@
 import * as IPFS from 'ipfs-core';
-import { node } from '../server.js';
+// import { node } from '../server.js';
 import Soulbounder from '../builtContracts/Soulbounder.json' assert { type: "json"};
 import Web3 from 'web3';
 

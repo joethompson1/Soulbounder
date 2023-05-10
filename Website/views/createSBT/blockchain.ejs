@@ -83,7 +83,7 @@
 							<img class="arrowDropDown" src="/images/arrowDropDown.svg">
 						</div>
 						<div class="container__description-contents dropDown" id="website">
-							<a href="https://<%= SBTData.attributes[3].value %>" target=”_blank” class="" id=""><%= SBTData.attributes[5].value %></a>
+							<a href="https://<%= SBTData.attributes[5].value %>" target=”_blank” class="" id=""><%= SBTData.attributes[5].value %></a>
 						</div>
 					</div>
 				</div>
@@ -96,75 +96,89 @@
 	<script type="text/javascript">
 		const showAccount = document.querySelector('.showAccount');
 
-		$(function() // execute once the DOM has loaded
-		{
+		function hideContents(contentId) {
+			document.getElementById(contentId).classList.toggle('show');
+		}	
 
+		$(function() // execute once the DOM has loaded
+		{	
+		
 			// wire up Add Item button click event
 			$("#submitButton").click(async function(event) {
 				event.preventDefault(); // cancel default behavior
 
-				const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-				const userWalletAddress = accounts[0];
-				const provider = new ethers.providers.Web3Provider(window.ethereum);
-				const signer = provider.getSigner(userWalletAddress);
-				// showAccount.innerHTML = userWalletAddress;
+				let data;
 
-				const networkId = await window.ethereum.request({ method: 'net_version' });
-				const contractNetworkId = "<%= contractNetworkId %>"
+				try {
+					const SBTData = JSON.parse('<%- JSON.stringify(SBTData) %>');
 
-				let tokenIds = []
+					const res = await fetch('/createSBT/blockchain', { 
+					  method: 'POST', 
+					  body: JSON.stringify({ SBTData }),
+					  headers: {'Content-Type': 'application/json'}
+					});
+
+					data = await res.json();
+
+				} catch(error) {
+					textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";
+					document.getElementById('container__statusLight').style.background = "red";
+				}
+
+				if (data.sbtHash) {
+
+					const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+					const userWalletAddress = accounts[0];
+					const provider = new ethers.providers.Web3Provider(window.ethereum);
+					const signer = provider.getSigner(userWalletAddress);
+
+					const networkId = await window.ethereum.request({ method: 'net_version' });
+					const contractNetworkId = "<%= contractNetworkId %>"
 
 
-				if (contractNetworkId == networkId) {
-					const textStatus = document.querySelector('.text__status');
-					textStatus.innerHTML = "Publishing..."
-					document.getElementById('container__statusLight').style.background = "orange";
+					if (contractNetworkId == networkId) {
+						const textStatus = document.querySelector('.text__status');
+						textStatus.innerHTML = "Publishing..."
+						document.getElementById('container__statusLight').style.background = "orange";
 
-					let contractAbi = '<%- contractAbi %>';
-					const contractAddress = "<%= contractAddress %>";
+						let contractAbi = '<%- contractAbi %>';
+						const contractAddress = "<%= contractAddress %>";
 
-					const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+						const contract = new ethers.Contract(contractAddress, contractAbi, signer);
 
-					try {
-						let mintResult = await contract.safeMint(userWalletAddress, "<%= sbtHash %>");
-						console.log(mintResult);
+						try {
+							let mintResult = await contract.safeMint(userWalletAddress, data.sbtHash.toString());
 
-						let txReceipt = await provider.getTransactionReceipt(mintResult.hash);
-						console.log(txReceipt);
+							let txReceipt = await provider.getTransactionReceipt(mintResult.hash);
 
-						while (!txReceipt && !txReceipt.blockNumber) {
-							console.log("waiting: "+txReceipt);
-							txReceipt = await provider.getTransactionReceipt(mintResult.hash);
+							while (!txReceipt && !txReceipt.blockNumber) {
+								txReceipt = await provider.getTransactionReceipt(mintResult.hash);
+							}
+
+							textStatus.innerHTML = "Published"
+							document.getElementById('container__statusLight').style.background = "green";
+
+							location.href = "/library/viewSBT?hash="+data.sbtHash;
+							window.location.assign(
+							  "/profile"
+							);
+
+
+						} catch(error) {
+
+							textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";
+							document.getElementById('container__statusLight').style.background = "red";
 						}
 
-						textStatus.innerHTML = "Published"
-						document.getElementById('container__statusLight').style.background = "green";
 
-						// location.href = "/library/viewSBT?hash=<%= sbtHash %>";
-						window.location.assign(
-						  "/profile"
-						);
-
-
-					} catch(error) {
-
-						textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";
-						document.getElementById('container__statusLight').style.background = "red";
+					} else {
+						window.alert("Smart contract not deployed to detected network!");
 					}
-
-
 				} else {
-					window.alert("Smart contract not deployed to detected network!");
+					window.alert("Error uploading data to IPFS");
 				}
 		  	});
 		});
-
-
-
-
-		function hideContents(contentId) {
-			document.getElementById(contentId).classList.toggle('show');
-		}
 
 
 	</script>

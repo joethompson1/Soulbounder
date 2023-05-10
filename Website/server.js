@@ -38,16 +38,8 @@ app.use('/profile', profileRouter);
 
 
 
-// IPFS Connection
-import * as IPFS from 'ipfs-core';
-
-const ifpsConfig = {
-  host: "ipfs.infura.io",
-  port: 5001,
-  protocol: "https"
-};
-
-export const node = await IPFS.create(ifpsConfig);
+// Serve static files from the public directory
+app.use(express.static('public'));
 
 
 export default app;

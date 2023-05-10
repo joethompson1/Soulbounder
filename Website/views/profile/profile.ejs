@@ -135,14 +135,13 @@
 		async function loadSBTData() {
 			var userWalletAddress = localStorage.getItem('userWalletAddress');
 			let sbtType = window.location.hash;
-			console.log(sbtType);
 
 			if (userWalletAddress) {
 				const textStatus = document.querySelector('.text__status');
 				textStatus.innerHTML = "Wallet connected";
 				connectionText = textStatus.innerHTML;
 				document.getElementById('container__statusLight').style.background = "lightgreen";
-				statusLight = "lightgreen"
+				statusLight = "lightgreen";
 
 				const provider = new ethers.providers.Web3Provider(window.ethereum);
 				const signer = provider.getSigner(userWalletAddress);
@@ -159,21 +158,25 @@
 
 
 				walletBalance = await contract.balanceOf(userWalletAddress);
-
+				console.log("walletBalance", walletBalance);
 
 				const sbtContainer = document.getElementById("container__profile-viewSBTs");
 				sbtContainer.innerHTML = "";
 
+				// Runs through all the users tokens
 				for (var i=0; i < walletBalance.toString(); i++) {
 					const tokenId = await contract.tokenOfOwnerByIndex(userWalletAddress, i);
+					console.log("tokenId: ", tokenId);
 
 					let tokenURI = await contract.tokenURI(tokenId);
-					let request = new Request("https://ipfs.io/ipfs/"+tokenURI);
+					console.log("tokenURI: ", tokenURI);
+					let request = new Request("https://soulbounder.infura-ipfs.io/ipfs/"+tokenURI);
+					// let request = new Request("/SBT-data/"+tokenURI);
 					let response = await fetch(request);
 					let SBTData = await response.json();
 
+					// Checks which SBT should be shown based on selected folder on profile
 					if (SBTData.attributes[0].value == sbtType.substring(1)) {
-
 						const container__sbt = document.createElement("a");
 						container__sbt.className = 'container__sbt';
 						let href = "/profile/viewSBT#"+tokenId;
@@ -181,8 +184,8 @@
 
 						var sbtImage = new Image();
 						sbtImage.className = 'sbtImage';
-						sbtImage.src = SBTData.image;
-						console.log(SBTData.image);
+						// sbtImage.src = SBTData.image;
+						sbtImage.src = "./SBT-image/"+SBTData.path;
 
 						const sbtName = document.createElement("h2");
 						sbtName.className = "sbtName";
@@ -192,7 +195,6 @@
 						container__sbt.appendChild(sbtName);
 						sbtContainer.appendChild(container__sbt);
 
-
 					}
 
 				}
@@ -200,7 +202,6 @@
 				localStorage.setItem('userWalletAddress', userWalletAddress);
 				var result = localStorage.getItem('userWalletAddress');
 
-				console.log(result);
 			}
 
 			else {

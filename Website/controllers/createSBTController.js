@@ -1,15 +1,9 @@
-import * as IPFS from 'ipfs-core';
-import { node } from '../server.js';
+import { initIpfs, addFileToIPFS } from '../models/ipfs.js';
 import Soulbounder from '../builtContracts/Soulbounder.json' assert { type: "json"};
 import Web3 from 'web3';
-
-
-const ifpsConfig = {
-  host: "ipfs.infura.io",
-  port: 5001,
-  protocol: "https"
-};
-
+import stream from 'stream';
+import streamifier from 'streamifier';
+import fs from 'fs';
 
 // controller actions
 export const createSBT_get = async (req, res) => {
@@ -30,61 +24,159 @@ export const createSBT_post = async (req, res) => {
 	const networkData = Soulbounder.networks[contractNetworkId];
 	const contractAddress = networkData.address;
 
-	try {
-			const buffer = Buffer.from(req.body.SBTPicture, 'base64');
-			console.log('myBuffer: ', buffer);
+	const buffer = Buffer.from(req.body.SBTPicture, 'base64');
+	console.log('myBuffer: ', buffer);
 
-			const pictureAdded = await node.add(buffer);
+	// Generate random string of numbers to act as temp file name
+	const randomInt = Math.floor(Math.random() * 1000).toString();
+	const imagePath = `./public/tempImages/${randomInt}`;
+	// Save the buffer to a file
+	fs.writeFile(imagePath, buffer, (err) => {
+	  if (err) {
+	    console.error("Error saving image buffer to application: ", err);
+	    return;
+	  }
+
+	  console.log('The image file was saved!');
+	});
+
+	const SBTData = { 
+		"name" : req.body.SBTName,
+		"image" : "./tempImages/"+randomInt,
+	  // "external_url": "https://soulbounder.org/SBT/hash",
+	  "description" : req.body.SBTDescription,
+	  "attributes" : [
+	  		{
+	  			"trait_type": "Type",
+	  			"value": req.body.sbtType
+	  		},
+	  		{
+	  			"trait_type": "City",
+	  			"value": req.body.SBTCity
+	  		},
+	  		{
+	  			"trait_type": "Country",
+	  			"value": req.body.SBTCountry
+	  		},
+	  		{
+	  			"trait_type": "Start Date",
+	  			"value" : req.body.SBTStartDate	
+	  		},
+	  		{
+	  			"trait_type": "End Date",
+	  			"value" : req.body.SBTEndDate
+	  		},
+	  		{
+	  			"trait_type": "Website",
+	  			"value" : req.body.SBTWebsite
+	  		},
+	  ]
+	};
+
+	console.log(JSON.stringify(SBTData));
+
+	res.status(200).render('createSBT/blockchain', { SBTData, contractNetworkId, contractAddress, contractAbi : JSON.stringify(contractAbi) });
+
+}
+
+
+
+
+
+
+
+
+export const blockchain_post = async (req, res) => {
+
+	try {
+			// Read the contents of the temp file
+			const imageBuffer = fs.readFileSync('./public/'+req.body.SBTData.image);
+
+			// Use the unlink() method to delete the temporary file
+			fs.unlink('./public/'+req.body.SBTData.image, (err) => {
+			  if (err) {
+			    console.error(err);
+			    return;
+			  }
+			  console.log('File deleted successfully');
+			});
+
+			const ipfs = await initIpfs();
+			const pictureAdded = await addFileToIPFS(imageBuffer, ipfs);
 			console.log("Added file CID:", pictureAdded);
 
-			const SBTData = { 
-								"name" : req.body.SBTName,
-							  "image" : "https://ipfs.io/ipfs/"+pictureAdded.path,
-							  // "external_url": "https://soulbounder.org/SBT/hash",
-							  "description" : req.body.SBTDescription,
-							  "attributes" : [
-							  		{
-							  			"trait_type": "Type",
-							  			"value": req.body.sbtType
-							  		},
-							  		{
-							  			"trait_type": "City",
-							  			"value": req.body.SBTCity
-							  		},
-							  		{
-							  			"trait_type": "Country",
-							  			"value": req.body.SBTCountry
-							  		},
-							  		{
-							  			"trait_type": "Start Date",
-							  			"value" : req.body.SBTStartDate
-							  		},
-							  		{
-							  			"trait_type": "End Date",
-							  			"value" : req.body.SBTEndDate
-							  		},
-							  		{
-							  			"trait_type": "Website",
-							  			"value" : req.body.SBTWebsite
-							  		},
-							  	]
-							  };
+			const imagePath = `./public/SBT-image/${pictureAdded.path}`;
+			// Save the buffer to a file
+			fs.writeFile(imagePath, imageBuffer, (err) => {
+			  if (err) {
+			    console.error("Error saving image buffer to application: ", err);
+			    return;
+			  }
 
-			console.log(JSON.stringify(SBTData));
+			  console.log('The image file was saved!');
+			});
 
-			const sbtHash = await node.add(JSON.stringify(SBTData));
-			console.log("Added file CID:", sbtHash);
+			const sbtMetadata = { 
+				"name" : req.body.SBTData.name,
+			  "image" : "https://soulbounder.infura-ipfs.io/ipfs/"+pictureAdded.path,
+			  "path" : pictureAdded.path,
+			  // "external_url": "https://soulbounder.org/SBT/hash",
+			  "description" : req.body.SBTData.description,
+			  "attributes" : [
+			  		{
+			  			"trait_type": "Type",
+			  			"value": req.body.SBTData.attributes[0].value
+			  		},
+			  		{
+			  			"trait_type": "City",
+			  			"value": req.body.SBTData.attributes[1].value
+			  		},
+			  		{
+			  			"trait_type": "Country",
+			  			"value": req.body.SBTData.attributes[2].value
+			  		},
+			  		{
+			  			"trait_type": "Start Date",
+			  			"value" : req.body.SBTData.attributes[3].value
+			  		},
+			  		{
+			  			"trait_type": "End Date",
+			  			"value" : req.body.SBTData.attributes[4].value
+			  		},
+			  		{
+			  			"trait_type": "Website",
+			  			"value" : req.body.SBTData.attributes[5].value
+			  		},
+			  	]
+			  };
+
+			console.log(JSON.stringify(sbtMetadata));
+
+			const sbtHash = await addFileToIPFS(JSON.stringify(sbtMetadata), ipfs);
+			console.log("Added file (CID):", sbtHash);
 			const path =  sbtHash.path.toString();
 			console.log("Path:", path);
 
-			res.status(200).render('createSBT/blockchain', { SBTData, sbtHash: path, contractNetworkId, contractAddress, contractAbi : JSON.stringify(contractAbi) });
+			const metadataPath = `./public/SBT-data/${sbtHash.path}`;
+			// Save the buffer to a file
+			fs.writeFile(metadataPath, JSON.stringify(sbtMetadata), (err) => {
+			  if (err) {
+			    console.error("Error saving metadata to application: ", err);
+			    return;
+			  }
+
+			  console.log('The metadata file was saved!');
+			});
+
+			res.status(201).json({ sbtHash: sbtHash.path });
 
 	} catch (err) {
-			console.log("error in uploading IPFS data: ", err);
-			res.status(400).json({ errors: "error in uploading IPFS data: ", err });
+			console.error("Error in uploading IPFS data: ", err);
+			res.status(400).json({ errors: "Error in uploading IPFS data: ", err });
 	}
 
 }
+
 
 
 // Only necessary for testing

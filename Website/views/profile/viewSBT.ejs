@@ -140,11 +140,13 @@
 			const tokenId = window.location.hash.substring(1);
 			let tokenURI = await contract.tokenURI(tokenId);
 
-			let request = new Request("https://ipfs.io/ipfs/"+tokenURI);
+			// let request = new Request("https://ipfs.io/ipfs/"+tokenURI);
+			let request = new Request("/SBT-data/"+tokenURI);
 			let response = await fetch(request);
 			let SBTData = await response.json();
 
-			document.getElementById("imageSBT").src = SBTData.image;
+			// document.getElementById("imageSBT").src = SBTData.image;
+			document.getElementById("imageSBT").src = "/SBT-image/"+SBTData.path;
 
 			let name = document.getElementById('SBTName');
 			name.innerHTML = SBTData.name;
