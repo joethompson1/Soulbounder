@@ -2,9 +2,12 @@
 	<!-- Stylesheets -->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 	<link rel="stylesheet" href="/stylesheets/profileStyles/profile.css">
+	<link rel="stylesheet" href="/stylesheets/connectWalletStyles/connectWalletButton.css">
 	<link rel="stylesheet" href="/stylesheets/viewSBT.css">
 
 	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+	<script src="/javascript/walletButton.js"></script>
+	<script src="/javascript/profile/profile.js"></script>
 </head>
 
 <body>
@@ -57,13 +60,13 @@
 
 		<div class="container__profile-library">
 			<div class="container__profile-libraryColumns">
-				<div class="container__profile-libraryColumn active" id="attendance" onclick="changeTab('attendance')">
+				<div class="container__profile-libraryColumn active" id="Attendance" onclick="changeTab('Attendance')">
 					<h2 class="sectionTitle">Attendance</h2>
 				</div>
-				<div class="container__profile-libraryColumn" id="certificate" onclick="changeTab('certificate')">
+				<div class="container__profile-libraryColumn" id="Certificates" onclick="changeTab('Certificates')">
 					<h2 class="sectionTitle">Certificates</h2>
 				</div>
-				<div class="container__profile-libraryColumn" id="ticket" onclick="changeTab('ticket')">
+				<div class="container__profile-libraryColumn" id="Tickets" onclick="changeTab('Tickets')">
 					<h2 class="sectionTitle">Tickets</h2>
 				</div>
 			</div>
@@ -76,157 +79,45 @@
 
 
 	<script type="text/javascript">
-		function changeTab(tabId) {
-			let tabs = ['attendance', 'certificate', 'ticket'];
 
-			for (var i = 0; i < tabs.length; i++ ) {
-				let tab = document.getElementById(tabs[i]);
-				if (tab.classList.contains('active')) {
-					tab.classList.remove('active');
-				}
-			}
-
-			let chosenTab = document.getElementById(tabId);
-			chosenTab.classList.add("active");
-			window.location.hash = capitalizeFirstLetter(tabId);
-
-			let tabContents = document.getElementById('container__profile-viewSBTs');
-			let color = window.getComputedStyle(chosenTab).backgroundColor;
-			tabContents.style.backgroundColor = color;
-			loadSBTData();
-		}
-
-
-		function capitalizeFirstLetter(str) {
-			// converting first letter to uppercase
-			const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
-
-			return capitalized;
-		}
-
-
-
-
-		let connectionText = document.getElementById("text__status").innerHTML;
-		let statusLight = document.getElementById('container__statusLight').style.background;
-
-		$("#container__connectWallet").click(async function(event) {
-			const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-			const userWalletAddress = accounts[0];
-			localStorage.setItem('userWalletAddress', userWalletAddress);
-			await loadSBTData(window.location.hash);	
-		});
-
-
-
+		let connectionText, statusLight;
+		let attendance, certificates, tickets;
+		const tabsMap = new Map();
 
 		$(async function() { // execute once the DOM has loaded
-			let sbtType;
-			if (window.location.hash == "Attendance" || window.location.hash == "Certificate" || window.location.hash == "Ticket"  ) {
-				// sbtType = window.location.hash
-			} else {
-				sbtType = "Attendance"
-				window.location.hash = sbtType;
-			}
-			await loadSBTData();
+			window.location.hash = "Attendance";
+			const userWalletAddress = localStorage.getItem('userWalletAddress');
+
+			if (userWalletAddress) {
+				setWalletToConnected();
+
+				await loadAllUsersSBTs('<%- contractAbi %>','<%= contractAddress %>', userWalletAddress);
+				showSbtTiles(tabsMap.get("Attendance"));	
+			} 
 		});
 
 
-		async function loadSBTData() {
-			var userWalletAddress = localStorage.getItem('userWalletAddress');
-			let sbtType = window.location.hash;
+		$("#container__connectWallet").click(async function(event) {
+			const userWalletAddress = await setUserWallet();
+			setWalletToConnected(userWalletAddress);
 
-			if (userWalletAddress) {
-				const textStatus = document.querySelector('.text__status');
-				textStatus.innerHTML = "Wallet connected";
-				connectionText = textStatus.innerHTML;
-				document.getElementById('container__statusLight').style.background = "lightgreen";
-				statusLight = "lightgreen";
-
-				const provider = new ethers.providers.Web3Provider(window.ethereum);
-				const signer = provider.getSigner(userWalletAddress);
-
-				const networkId = await window.ethereum.request({ method: 'net_version' });
-				const contractNetworkId = "<%= contractNetworkId %>"
-
-				const userAccount = document.getElementById("userAccount");
-
-				let contractAbi = '<%- contractAbi %>';
-				const contractAddress = "<%= contractAddress %>";
-
-				const contract = new ethers.Contract(contractAddress, contractAbi, signer);
-
-
-				walletBalance = await contract.balanceOf(userWalletAddress);
-				console.log("walletBalance", walletBalance);
-
-				const sbtContainer = document.getElementById("container__profile-viewSBTs");
-				sbtContainer.innerHTML = "";
-
-				// Runs through all the users tokens
-				for (var i=0; i < walletBalance.toString(); i++) {
-					const tokenId = await contract.tokenOfOwnerByIndex(userWalletAddress, i);
-					console.log("tokenId: ", tokenId);
-
-					let tokenURI = await contract.tokenURI(tokenId);
-					console.log("tokenURI: ", tokenURI);
-					let request = new Request("https://soulbounder.infura-ipfs.io/ipfs/"+tokenURI);
-					// let request = new Request("/SBT-data/"+tokenURI);
-					let response = await fetch(request);
-					let SBTData = await response.json();
-
-					// Checks which SBT should be shown based on selected folder on profile
-					if (SBTData.attributes[0].value == sbtType.substring(1)) {
-						const container__sbt = document.createElement("a");
-						container__sbt.className = 'container__sbt';
-						let href = "/profile/viewSBT#"+tokenId;
-						container__sbt.setAttribute('href', href);
-
-						var sbtImage = new Image();
-						sbtImage.className = 'sbtImage';
-						// sbtImage.src = SBTData.image;
-						sbtImage.src = "./SBT-image/"+SBTData.path;
-
-						const sbtName = document.createElement("h2");
-						sbtName.className = "sbtName";
-						sbtName.textContent = SBTData.name;
-
-						container__sbt.appendChild(sbtImage);
-						container__sbt.appendChild(sbtName);
-						sbtContainer.appendChild(container__sbt);
-
-					}
-
-				}
-
-				localStorage.setItem('userWalletAddress', userWalletAddress);
-				var result = localStorage.getItem('userWalletAddress');
-
-			}
-
-			else {
-				window.alert("wallet not connected.")
-			}
-
-
-		};
+			await loadAllUsersSBTs('<%- contractAbi %>','<%= contractAddress %>', userWalletAddress);
+			let tab = window.location.hash.substring(1);
+			showSbtTiles(tabsMap.get(tab));	
+		});
 
 
 
-
-
-	    $( "#container__connectWallet" ).hover(
-		  function() {
-		  	if (connectionText == "Wallet not connected") {
-			    $(".text__status").text("Connect Wallet");
-			    document.getElementById('container__statusLight').style.background="lightgreen";
-		  	} else if (connectionText == "Wallet connected") {
-		  		$(".text__status").text("Refresh wallet");
-		  	}
-		  }, function() {
-		    $(".text__status").text(connectionText);
-		    document.getElementById('container__statusLight').style.background=statusLight;
-		  }
+		// When the user hovers over container__connectWallet
+		$("#container__connectWallet").hover(
+		    // If the wallet is not connected, show "Connect Wallet" text and change the status light
+		    function() {
+		        entersWalletConnect(connectionText);
+		    },
+		    // When the user stops hovering over the container, show the original text and status light
+		    function() {
+		        leavesWalletConnect(connectionText, statusLight);
+		    }
 		);
 
 

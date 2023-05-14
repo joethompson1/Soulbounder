@@ -2,13 +2,16 @@
 	<!-- Stylesheets -->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 	<link rel="stylesheet" href="/stylesheets/viewSBT.css">
+	<link rel="stylesheet" href="/stylesheets/connectWalletStyles/connectWalletButton.css">
 
 	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+	<script src="/javascript/viewSBT.js"></script>
+	<script src="/javascript/walletButton.js"></script>
 </head>
 
 <body>
 	<div class="container__body">
-		<div class="container__tokenStatus" id="container__tokenStatus">
+		<div class="container__connectWallet" id="container__connectWallet">
 			<div class="container__statusLight" id="container__statusLight">
 			</div>
 			<p class="text__status" id="text__status">Wallet not connected</p>
@@ -94,106 +97,39 @@
 
 
 	<script type="text/javascript">
-
-		let connectionText = document.getElementById("text__status").innerHTML;
-		let statusLight = document.getElementById('container__statusLight').style.background;
+		let connectionText, statusLight;
 
 
-		$("#container__tokenStatus").click(async function(event) {
-			const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-			const userWalletAddress = accounts[0];
-			localStorage.setItem('userWalletAddress', userWalletAddress);
-			await loadSBTData();	
+		$(async function() { // execute once the DOM has loaded
+			const userWalletAddress = localStorage.getItem('userWalletAddress');
+
+			if (userWalletAddress) {
+				setWalletToConnected();
+				await loadSBTData('<%- contractAbi %>','<%= contractAddress %>', userWalletAddress);
+			} 
+		});
+
+
+		$("#container__connectWallet").click(async function(event) {
+			const userWalletAddress = await setUserWallet();
+			setWalletToConnected();
+			await loadSBTData('<%- contractAbi %>','<%= contractAddress %>', userWalletAddress);
 			location.reload();
 		});
 
-		$(async function() { // execute once the DOM has loaded
-			await loadSBTData()
-		});
 
-
-		async function loadSBTData() {
-			var userWalletAddress = localStorage.getItem('userWalletAddress');
-
-			console.log(userWalletAddress);
-
-			if (userWalletAddress) {
-				const textStatus = document.querySelector('.text__status');
-				// textStatus.innerHTML = "Wallet: "+userWalletAddress;
-				textStatus.innerHTML = "Wallet connected";
-				connectionText = textStatus.innerHTML;
-				document.getElementById('container__statusLight').style.background = "lightgreen";
-				statusLight = "lightgreen"
-			}
-
-
-			let provider = new ethers.providers.Web3Provider(window.ethereum);
-			let signer = provider.getSigner(userWalletAddress);
-
-			let contractNetworkId = "<%= contractNetworkId %>"
-
-			let contractAbi = '<%- contractAbi %>';
-			let contractAddress = "<%= contractAddress %>";
-
-			let contract = new ethers.Contract(contractAddress, contractAbi, signer);
-
-			const tokenId = window.location.hash.substring(1);
-			let tokenURI = await contract.tokenURI(tokenId);
-
-			// let request = new Request("https://ipfs.io/ipfs/"+tokenURI);
-			let request = new Request("/SBT-data/"+tokenURI);
-			let response = await fetch(request);
-			let SBTData = await response.json();
-
-			// document.getElementById("imageSBT").src = SBTData.image;
-			document.getElementById("imageSBT").src = "/SBT-image/"+SBTData.path;
-
-			let name = document.getElementById('SBTName');
-			name.innerHTML = SBTData.name;
-
-			let type = document.getElementById('SBTType');
-			type.innerHTML = SBTData.attributes[0].value;
-
-			let description = document.getElementById('descriptionContents');
-			description.innerHTML = SBTData.description;
-
-			let city = document.getElementById('city');
-			let country = document.getElementById('country');
-			city.innerHTML = SBTData.attributes[1].value;
-			country.innerHTML = SBTData.attributes[2].value;
-
-			let startDate = document.getElementById('startDate');
-			let endDate = document.getElementById('endDate');
-			startDate.innerHTML = SBTData.attributes[3].value;
-			endDate.innerHTML = SBTData.attributes[4].value;
-
-			let website = document.getElementById('SBTWebsite');
-			website.innerHTML = SBTData.attributes[5].value;
-
-		}
-
-
-
-		function hideContents(contentId) {
-			document.getElementById(contentId).classList.toggle('show');
-		}
-
-
-
-		console.log(connectionText);
-	    $( "#container__tokenStatus" ).hover(
-		  function() {
-		  	if (connectionText == "Wallet not connected") {
-			    $(".text__status").text("Connect Wallet");
-			    document.getElementById('container__statusLight').style.background="lightgreen";
-		  	} else if (connectionText == "Wallet connected") {
-		  		$(".text__status").text("Refresh wallet");
-		  	}
-		  }, function() {
-		    $(".text__status").text(connectionText);
-		    document.getElementById('container__statusLight').style.background=statusLight;
-		  }
+		// When the user hovers over container__connectWallet
+		$("#container__connectWallet").hover(
+		    // If the wallet is not connected, show "Connect Wallet" text and change the status light
+		    function() {
+		        entersWalletConnect(connectionText);
+		    },
+		    // When the user stops hovering over the container, show the original text and status light
+		    function() {
+		        leavesWalletConnect(connectionText, statusLight);
+		    }
 		);
+
 
 
 	</script>

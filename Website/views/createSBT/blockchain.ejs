@@ -4,6 +4,7 @@
 	<link rel="stylesheet" href="/stylesheets/createSBTStyles/createSBTBlockchain.css">
 
 	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+	<script src="/javascript/viewSBT.js"></script>
 </head>
 
 <body>
@@ -96,14 +97,10 @@
 	<script type="text/javascript">
 		const showAccount = document.querySelector('.showAccount');
 
-		function hideContents(contentId) {
-			document.getElementById(contentId).classList.toggle('show');
-		}	
-
 		$(function() // execute once the DOM has loaded
 		{	
 		
-			// wire up Add Item button click event
+			// wire up button click event
 			$("#submitButton").click(async function(event) {
 				event.preventDefault(); // cancel default behavior
 
