@@ -40,43 +40,100 @@ export const createSBT_post = async (req, res) => {
 	  console.log('The image file was saved!');
 	});
 
-	const SBTData = { 
-		"name" : req.body.SBTName,
-		"image" : "./tempImages/"+randomInt,
-	  // "external_url": "https://soulbounder.org/SBT/hash",
-	  "description" : req.body.SBTDescription,
-	  "attributes" : [
-	  		{
-	  			"trait_type": "Type",
-	  			"value": req.body.sbtType
-	  		},
-	  		{
-	  			"trait_type": "City",
-	  			"value": req.body.SBTCity
-	  		},
-	  		{
-	  			"trait_type": "Country",
-	  			"value": req.body.SBTCountry
-	  		},
-	  		{
-	  			"trait_type": "Start Date",
-	  			"value" : req.body.SBTStartDate	
-	  		},
-	  		{
-	  			"trait_type": "End Date",
-	  			"value" : req.body.SBTEndDate
-	  		},
-	  		{
-	  			"trait_type": "Website",
-	  			"value" : req.body.SBTWebsite
-	  		},
-	  ]
-	};
 
-	console.log(JSON.stringify(SBTData));
 
-	res.status(200).render('createSBT/blockchain', { SBTData, contractNetworkId, contractAddress, contractAbi : JSON.stringify(contractAbi) });
+	if (req.body.sbtType == "Account") {
 
+		let trait_types = ["Type","Email"];
+		let values = ["Account",req.body.emailInput];
+
+		const blankInputLabels = req.body.blankInputLabel;
+		if (Array.isArray(blankInputLabels)) {
+		  for (const label of blankInputLabels) {
+		  	trait_types.push(label);
+		  }
+		} else {
+			trait_types.push(blankInputLabels);
+		}
+
+
+		const blankInputContents = req.body.blankInputContent;
+		if (Array.isArray(blankInputContents)) {
+		  for (const label of blankInputContents) {
+		  	values.push(label);
+		  }
+		} else {
+			values.push(blankInputContents);
+		}
+
+		const attributes = [];
+		trait_types.forEach((trait, index) => {
+		  attributes.push({
+		    trait_type: trait,
+		    value: values[index],
+		  });
+		});
+
+		const SBTData = { 
+			"name" : req.body.SBTName,
+			"image" : "./tempImages/"+randomInt,
+		  	// "external_url": "https://soulbounder.org/SBT/hash",
+		 	"description" : req.body.SBTDescription,
+		 	attributes,
+		};
+
+		console.log(JSON.stringify(SBTData));
+
+		res.status(200).render('createSBT/account', { SBTData, contractNetworkId, contractAddress, contractAbi : JSON.stringify(contractAbi) });
+
+	}
+
+
+
+
+
+
+
+	if (req.body.sbtType == "Attendance") {
+
+		const SBTData = { 
+			"name" : req.body.SBTName,
+			"image" : "./tempImages/"+randomInt,
+		  	// "external_url": "https://soulbounder.org/SBT/hash",
+		 	"description" : req.body.SBTDescription,
+		 	"attributes" : [
+		  		{
+		  			"trait_type": "Type",
+		  			"value": req.body.sbtType
+		  		},
+		  		{
+		  			"trait_type": "City",
+		  			"value": req.body.SBTCity
+		  		},
+		  		{
+		  			"trait_type": "Country",
+		  			"value": req.body.SBTCountry
+		  		},
+		  		{
+		  			"trait_type": "Start Date",
+		  			"value" : req.body.SBTStartDate	
+		  		},
+		  		{
+		  			"trait_type": "End Date",
+		  			"value" : req.body.SBTEndDate
+		  		},
+		  		{
+		  			"trait_type": "Website",
+		  			"value" : req.body.SBTWebsite
+		  		},
+		  	]
+		};
+
+		console.log(JSON.stringify(SBTData));
+
+		res.status(200).render('createSBT/blockchain', { SBTData, contractNetworkId, contractAddress, contractAbi : JSON.stringify(contractAbi) });
+
+	}
 }
 
 
@@ -116,38 +173,15 @@ export const blockchain_post = async (req, res) => {
 			  console.log('The image file was saved!');
 			});
 
+			let attributes = req.body.SBTData.attributes;
+			
 			const sbtMetadata = { 
 				"name" : req.body.SBTData.name,
-			  "image" : "https://soulbounder.infura-ipfs.io/ipfs/"+pictureAdded.path,
-			  "path" : pictureAdded.path,
-			  // "external_url": "https://soulbounder.org/SBT/hash",
-			  "description" : req.body.SBTData.description,
-			  "attributes" : [
-			  		{
-			  			"trait_type": "Type",
-			  			"value": req.body.SBTData.attributes[0].value
-			  		},
-			  		{
-			  			"trait_type": "City",
-			  			"value": req.body.SBTData.attributes[1].value
-			  		},
-			  		{
-			  			"trait_type": "Country",
-			  			"value": req.body.SBTData.attributes[2].value
-			  		},
-			  		{
-			  			"trait_type": "Start Date",
-			  			"value" : req.body.SBTData.attributes[3].value
-			  		},
-			  		{
-			  			"trait_type": "End Date",
-			  			"value" : req.body.SBTData.attributes[4].value
-			  		},
-			  		{
-			  			"trait_type": "Website",
-			  			"value" : req.body.SBTData.attributes[5].value
-			  		},
-			  	]
+			  	"image" : "https://soulbounder.infura-ipfs.io/ipfs/"+pictureAdded.path,
+			  	"path" : pictureAdded.path,
+			  	// "external_url": "https://soulbounder.org/SBT/hash",
+			  	"description" : req.body.SBTData.description,
+			  	attributes,
 			  };
 
 			console.log(JSON.stringify(sbtMetadata));
@@ -175,24 +209,6 @@ export const blockchain_post = async (req, res) => {
 			res.status(400).json({ errors: "Error in uploading IPFS data: ", err });
 	}
 
-}
-
-
-
-// Only necessary for testing
-export const blockchain_get = async (req, res) => {
-	let networkDataList = Meme.networks;
-	var contractNetworkId;
-
-	for (var key in networkDataList) {
-		contractNetworkId = key;
-	}
-
-	const contractAbi = Meme.abi;
-	const networkData = Meme.networks[contractNetworkId];
-	const contractAddress = networkData.address;
-	
-	res.status(200).render('createSBT/blockchain', { SBTData: "https://ipfs.io/ipfs/QmdHX5KJ7mAu4VjXz2FNLPQ4NwKBT4sh8tDiEQVD45nB12", SBTHash: 'QmNnUQRr5ie1AFar8QBwMh8P3gkJ7VBoMcy8V6cshWyc51', contractNetworkId, contractAddress, contractAbi : JSON.stringify(contractAbi) });
 }
 
 

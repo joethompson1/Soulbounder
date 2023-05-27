@@ -1,8 +1,10 @@
 async function loadAllUsersSBTs(contractAbi, contractAddress, userWalletAddress) {
-	const 	attendance = new Map(), 
+	const 	account = new Map(),
+			attendance = new Map(), 
 			certificates = new Map(), 
 			tickets = new Map();
 
+	tabsMap.set('Account', account);
 	tabsMap.set('Attendance', attendance);
 	tabsMap.set('Certificates', certificates);
 	tabsMap.set('Tickets', tickets);
@@ -65,7 +67,7 @@ function showSbtTiles(tabMap) {
 		var sbtImage = new Image();
 		sbtImage.className = 'sbtImage';
 		sbtImage.src = SBTData.image;
-		sbtImage.src = "./SBT-image/"+SBTData.path;
+		// sbtImage.src = "./SBT-image/"+SBTData.path;
 
 		const sbtName = document.createElement("h2");
 		sbtName.className = "sbtName";

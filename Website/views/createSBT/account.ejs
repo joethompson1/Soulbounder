@@ -1,0 +1,143 @@
+<head>
+	<!-- Stylesheets -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+	<link rel="stylesheet" href="/stylesheets/createSBTStyles/createSBTBlockchain.css">
+
+	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+	<script src="/javascript/viewSBT.js"></script>
+	<script src="/javascript/profile/viewAccountSBT.js"></script>
+</head>
+
+<body>
+	<div class="container__body">
+		<div class="container__tokenStatus">
+			<div class="container__statusLight" id="container__statusLight">
+			</div>
+			<p class="text__status" id="text__status">Not Published</p>
+		</div>
+		<form class="formContainer">
+			<div class="container__mainContents">
+				<div class="container__left">
+					<div class="container__image">
+						<img class="ethereumIcon" src="/images/ethereum.svg">
+						<img class="imageSBT" id="imageSBT" src="<%= SBTData.image %>">
+					</div>
+					
+				</div>
+				<div class="container__right" id="container__right">
+					<div class="container__sbtContentsMain">
+						<h5 class="SBTOwner">Created By: <a>You</a></h5>
+						<h1 class="SBTName" id="SBTName"><%= SBTData.name %></h1>
+						<div class="container__SBTType">
+							<h5 class="type">Type: </h5>
+							<h5 class="SBTType"><%= SBTData.attributes[0].value %></h5>
+						</div>
+						<div class="container__createButton" id="submitButton">
+							<img class="sendIcon" src="/images/send.svg">
+						</div>
+						<div class="container__createButtonBubble">
+							<div class="pointer"></div>
+							<h5>Publish</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+
+	<script type="text/javascript">
+
+		$(function() // execute once the DOM has loaded
+		{	
+			const SBTData = JSON.parse('<%- JSON.stringify(SBTData) %>');
+			loadSBTAttributes(SBTData);
+		
+			// wire up button click event
+			$("#submitButton").click(async function(event) {
+				event.preventDefault(); // cancel default behavior
+
+				let data;
+
+				try {
+					// const SBTData = JSON.parse('<%- JSON.stringify(SBTData) %>');
+
+					const res = await fetch('/createSBT/blockchain', { 
+					  method: 'POST', 
+					  body: JSON.stringify({ SBTData }),
+					  headers: {'Content-Type': 'application/json'}
+					});
+
+					data = await res.json();
+
+				} catch(error) {
+					textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";
+					document.getElementById('container__statusLight').style.background = "red";
+				}
+
+				if (data.sbtHash) {
+
+					const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+					const userWalletAddress = accounts[0];
+					const provider = new ethers.providers.Web3Provider(window.ethereum);
+					const signer = provider.getSigner(userWalletAddress);
+
+					const networkId = await window.ethereum.request({ method: 'net_version' });
+					const contractNetworkId = "<%= contractNetworkId %>"
+
+
+					if (contractNetworkId == networkId) {
+						const textStatus = document.querySelector('.text__status');
+						textStatus.innerHTML = "Publishing..."
+						document.getElementById('container__statusLight').style.background = "orange";
+
+						let contractAbi = '<%- contractAbi %>';
+						const contractAddress = "<%= contractAddress %>";
+
+						const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+
+						try {
+							let mintResult = await contract.safeMint(userWalletAddress, data.sbtHash.toString());
+
+							let txReceipt = await provider.getTransactionReceipt(mintResult.hash);
+
+							while (!txReceipt && !txReceipt.blockNumber) {
+								txReceipt = await provider.getTransactionReceipt(mintResult.hash);
+							}
+
+							textStatus.innerHTML = "Published"
+							document.getElementById('container__statusLight').style.background = "green";
+
+							location.href = "/library/viewSBT?hash="+data.sbtHash;
+							window.location.assign(
+							  "/profile"
+							);
+
+
+						} catch(error) {
+
+							textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";
+							document.getElementById('container__statusLight').style.background = "red";
+						}
+
+
+					} else {
+						window.alert("Smart contract not deployed to detected network!");
+					}
+				} else {
+					window.alert("Error uploading data to IPFS");
+				}
+		  	});
+		});
+
+
+	</script>
+
+</body>
+
+
+
+
+
+

@@ -37,10 +37,10 @@
 							SBT Type
 						</div>
 						<div id="myDropdown" class="dropdown-content">
-							<a onclick="displayForms('account')">Account</a>
-							<a onclick="displayForms('attendance')">Attendance</a>
-							<a onclick="displayForms('certificate')">Certificate (Coming soon)</a>
-							<a onclick="displayForms('ticket')">Ticket (Coming soon)</a>
+							<a onclick="displayForms('Account')">Account</a>
+							<a onclick="displayForms('Attendance')">Attendance</a>
+							<a onclick="displayForms('Certificate')">Certificate (Coming soon)</a>
+							<a onclick="displayForms('Ticket')">Ticket (Coming soon)</a>
 						</div>
 					</div>
 				</div>
@@ -63,7 +63,11 @@
 
 
 			<!-- Account Form -->
-			<div id="account" class="account"> 
+			<div id="Account" class="account"> 
+
+				<div class="row emailContainer" id="">
+					<input type="text" name="emailInput" class="emailInput" id="emailInput" placeholder="Your Email">
+				</div>
 
 				<div class="repeatingInputContainer" id="repeatingInputContainer">				
 				</div>
@@ -84,7 +88,7 @@
 
 
 			<!-- Attendance Form -->
-			<div id="attendance" class="attendance">	
+			<div id="Attendance" class="attendance">	
 				<div class="row textareaContainer">
 					<label class="label"><u>Description:</u></label>
 					<textarea class="SBTDescription" type="text" name="SBTDescription" placeholder="Enter a short description about what your SBT is for." id="SBTDescription"></textarea>
@@ -126,11 +130,11 @@
 				</div>
 			</div>
 
-			<div id="certificate" class=""> 
+			<div id="Certificate" class=""> 
 
 			</div>
 
-			<div id="ticket" class=""> 
+			<div id="Ticket" class=""> 
 
 			</div>
 		</form>
@@ -173,22 +177,14 @@
 
 		function displayForms(dropDwnChoice) {	
 		 	window.location.hash = '#'+dropDwnChoice;
-		 	document.getElementById("account").style.display = 'none';
-			document.getElementById("attendance").style.display = 'none';
+		 	document.getElementById("Account").style.display = 'none';
+			document.getElementById("Attendance").style.display = 'none';
 
 			if (dropDwnChoice !== null) {
 				document.getElementById(dropDwnChoice).style.display = 'block';
-				var linkText = capitalizeFirstLetter(dropDwnChoice);
-				$('#sbtType').val(linkText);
-				$('#dropDownButton').html(linkText+" ");
+				$('#sbtType').val(dropDwnChoice);
+				$('#dropDownButton').html(dropDwnChoice+" ");
 			}
-		}
-
-		function capitalizeFirstLetter(str) {
-			// converting first letter to uppercase
-			const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
-
-			return capitalized;
 		}
 
 
@@ -216,7 +212,7 @@
 			  		}
 			  	}
 			  	document.getElementById("dropDownButton").style.borderRadius = "1vw";
-			  	$('#dropDownButton').html(capitalizeFirstLetter(window.location.hash.substring(1))+" ");
+			  	$('#dropDownButton').html(window.location.hash.substring(1)+" ");
 		  	}
 		}
 
@@ -241,12 +237,14 @@
 			blankInputTitle.placeholder = "Title";
 			blankInputTitle.type = "text";
 			blankInputTitle.name = "blankInputLabel";
+			blankInputTitle.id = "blankInputTitle"+numberOfCustomInputs;
 
 			const blankInputContents = document.createElement("input");
 			blankInputContents.className = "blankInputContents";
 			blankInputContents.placeholder = "Contents";
 			blankInputContents.type = "text";
-			blankInputContents.name = "blankInputContents";
+			blankInputContents.name = "blankInputContent";
+			blankInputContents.id = "blankInputContents"+numberOfCustomInputs;
 
 
 			divBlankInputContainer.appendChild(blankInputTitle);

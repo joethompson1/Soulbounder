@@ -8,6 +8,7 @@
 	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
 	<script src="/javascript/walletButton.js"></script>
 	<script src="/javascript/profile/profile.js"></script>
+	<script src="/javascript/profile/viewAccountSBT.js"></script>
 </head>
 
 <body>
@@ -20,40 +21,11 @@
 
 
 		<div class="container__mainContents">
-			<div class="container__left">
-				<div class="container__image">
-					<img class="ethereumIcon" src="/images/ethereum.svg">
-					<img class="imageSBT" id="imageSBT" src="">
-				</div>
-			</div>
-			<div class="container__right">
-				<div class="container__sbtContentsMain">
-					<h5 class="SBTOwner" id="SBTOwner"></h5>
-					<h1 class="SBTName" id="SBTName">Joe Thompson</h1>
-					<div class="container__SBTType">
-						<h5 class="type">Type: </h5>
-						<h5 class="SBTType" id="SBTType"></h5>
-					</div>
-					<!-- <div class="container__hoverButton">					 -->
-						<div class="container__createButton" id="submitButton">
-							<img class="sendIcon" src="/images/share.svg">
-							<div class="container__createButtonBubble">
-								<div class="pointer"></div>
-								<h5>Share</h5>
-							</div>
-						</div>
-					<!-- </div> -->
-				</div>
+			<div class="container__left" id='container__left'>
 
-				<div class="container__attribute" id="description">
-					<div class="container__description-title">
-						<img class="descriptionIcon" src="/images/description.svg">
-						<h2 class="descriptionTitle">Description</h2>
-					</div>
-					<div class="container__description-contents">
-						<p class="descriptionContents" id="descriptionContents"></p>
-					</div>
-				</div>
+			</div>
+			<div class="container__right" id='container__right'>
+
 			</div>
 		</div>
 
@@ -82,7 +54,7 @@
 
 		let connectionText, statusLight;
 		let attendance, certificates, tickets;
-		const tabsMap = new Map();
+		const tabsMap = new Map(); // Tabs map is a map of maps (map of each type)
 
 		$(async function() { // execute once the DOM has loaded
 			window.location.hash = "Attendance";
@@ -92,6 +64,11 @@
 				setWalletToConnected();
 
 				await loadAllUsersSBTs('<%- contractAbi %>','<%= contractAddress %>', userWalletAddress);
+				const accountMap = tabsMap.get("Account");
+				const numberOfValues = accountMap ? Array.from(accountMap.values()).length : 0;
+				if (numberOfValues) {
+					loadAccountSBT(tabsMap.get("Account").values().next().value);
+				}
 				showSbtTiles(tabsMap.get("Attendance"));	
 			} 
 		});
@@ -102,6 +79,11 @@
 			setWalletToConnected(userWalletAddress);
 
 			await loadAllUsersSBTs('<%- contractAbi %>','<%= contractAddress %>', userWalletAddress);
+			const accountMap = tabsMap.get("Account");
+			const numberOfValues = accountMap ? Array.from(accountMap.values()).length : 0;
+			if (numberOfValues) {
+				loadAccountSBT(tabsMap.get("Account").values().next().value);
+			}
 			let tab = window.location.hash.substring(1);
 			showSbtTiles(tabsMap.get(tab));	
 		});
