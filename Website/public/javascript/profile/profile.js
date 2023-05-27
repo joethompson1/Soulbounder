@@ -34,6 +34,7 @@ async function loadAllUsersSBTs(contractAbi, contractAddress, userWalletAddress)
 
 function changeTab(tabId) {
 	for (const [tabKey, value] of tabsMap) {
+		if (tabKey == 'Account') { continue; }
 		let tab = document.getElementById(tabKey);
 		if (tab.classList.contains('active')) {
 			tab.classList.remove('active');
