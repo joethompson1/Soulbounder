@@ -104,6 +104,10 @@
 			$("#submitButton").click(async function(event) {
 				event.preventDefault(); // cancel default behavior
 
+				const textStatus = document.querySelector('.text__status');
+				textStatus.innerHTML = "Publishing..."
+				document.getElementById('container__statusLight').style.background = "orange";
+
 				let data;
 
 				try {
@@ -134,9 +138,6 @@
 
 
 					if (contractNetworkId == networkId) {
-						const textStatus = document.querySelector('.text__status');
-						textStatus.innerHTML = "Publishing..."
-						document.getElementById('container__statusLight').style.background = "orange";
 
 						let contractAbi = '<%- contractAbi %>';
 						const contractAddress = "<%= contractAddress %>";

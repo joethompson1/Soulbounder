@@ -131,7 +131,7 @@ export const createSBT_post = async (req, res) => {
 
 		console.log(JSON.stringify(SBTData));
 
-		res.status(200).render('createSBT/blockchain', { SBTData, contractNetworkId, contractAddress, contractAbi : JSON.stringify(contractAbi) });
+		res.status(200).render('createSBT/attendance', { SBTData, contractNetworkId, contractAddress, contractAbi : JSON.stringify(contractAbi) });
 
 	}
 }
@@ -174,7 +174,7 @@ export const blockchain_post = async (req, res) => {
 			});
 
 			let attributes = req.body.SBTData.attributes;
-			
+
 			const sbtMetadata = { 
 				"name" : req.body.SBTData.name,
 			  	"image" : "https://soulbounder.infura-ipfs.io/ipfs/"+pictureAdded.path,
