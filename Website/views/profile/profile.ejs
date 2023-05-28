@@ -28,24 +28,6 @@
 
 			</div>
 		</div>
-
-
-		<div class="container__profile-library">
-			<div class="container__profile-libraryColumns">
-				<div class="container__profile-libraryColumn active" id="Attendance" onclick="changeTab('Attendance')">
-					<h2 class="sectionTitle">Attendance</h2>
-				</div>
-				<div class="container__profile-libraryColumn" id="Certificates" onclick="changeTab('Certificates')">
-					<h2 class="sectionTitle">Certificates</h2>
-				</div>
-				<div class="container__profile-libraryColumn" id="Tickets" onclick="changeTab('Tickets')">
-					<h2 class="sectionTitle">Tickets</h2>
-				</div>
-			</div>
-			<div class="container__profile-viewSBTs" id="container__profile-viewSBTs">
-
-			</div>
-		</div>
 	</div>
 
 
@@ -53,23 +35,16 @@
 	<script type="text/javascript">
 
 		let connectionText, statusLight;
-		let attendance, certificates, tickets;
-		const tabsMap = new Map(); // Tabs map is a map of maps (map of each type)
 
 		$(async function() { // execute once the DOM has loaded
-			window.location.hash = "Attendance";
 			const userWalletAddress = localStorage.getItem('userWalletAddress');
 
 			if (userWalletAddress) {
 				setWalletToConnected();
 
-				await loadAllUsersSBTs('<%- contractAbi %>','<%= contractAddress %>', userWalletAddress);
-				const accountMap = tabsMap.get("Account");
-				const numberOfValues = accountMap ? Array.from(accountMap.values()).length : 0;
-				if (numberOfValues) {
-					loadAccountSBT(tabsMap.get("Account").values().next().value);
-				}
-				showSbtTiles(tabsMap.get("Attendance"));	
+				const accountSBT = await loadAccountSBT('<%- contractAbi %>','<%= contractAddress %>', userWalletAddress);
+				
+				viewAccountSBT(accountSBT.SBTData);	
 			} 
 		});
 
@@ -78,14 +53,13 @@
 			const userWalletAddress = await setUserWallet();
 			setWalletToConnected(userWalletAddress);
 
-			await loadAllUsersSBTs('<%- contractAbi %>','<%= contractAddress %>', userWalletAddress);
+			await loadAccountSBT('<%- contractAbi %>','<%= contractAddress %>', userWalletAddress);
 			const accountMap = tabsMap.get("Account");
 			const numberOfValues = accountMap ? Array.from(accountMap.values()).length : 0;
 			if (numberOfValues) {
-				loadAccountSBT(tabsMap.get("Account").values().next().value);
+				viewAccountSBT(tabsMap.get("Account").values().next().value);
 			}
 			let tab = window.location.hash.substring(1);
-			showSbtTiles(tabsMap.get(tab));	
 		});
 
 

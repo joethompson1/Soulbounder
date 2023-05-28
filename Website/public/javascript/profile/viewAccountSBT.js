@@ -1,4 +1,4 @@
-function loadAccountSBT(SBTData) {
+function viewAccountSBT(SBTData) {
 	console.log(SBTData);
 	const container__left = document.getElementById('container__left');
 	const container__right = document.getElementById('container__right');

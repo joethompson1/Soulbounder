@@ -33,14 +33,8 @@
 					<input class="SBTName" type="text" name="SBTName" placeholder="SBT Name" id="SBTName">
 					<div class="dropdown">
 						<input type="text" name="sbtType" id="sbtType">
-						<div class="btn-lg dropdown-toggle dropbtn" id="dropDownButton">
-							SBT Type
-						</div>
-						<div id="myDropdown" class="dropdown-content">
-							<a onclick="displayForms('Account')">Account</a>
-							<a onclick="displayForms('Attendance')">Attendance</a>
-							<a onclick="displayForms('Certificate')">Certificate (Coming soon)</a>
-							<a onclick="displayForms('Ticket')">Ticket (Coming soon)</a>
+						<div class="btn-lg dropbtn" id="dropDownButton">
+							Account
 						</div>
 					</div>
 				</div>
@@ -63,7 +57,7 @@
 
 
 			<!-- Account Form -->
-			<div id="Account" class="account"> 
+			<div id="Account" class="account show"> 
 
 				<div class="row emailContainer" id="">
 					<input type="text" name="emailInput" class="emailInput" id="emailInput" placeholder="Your Email">
@@ -82,60 +76,6 @@
 				<div class="row">
 					<button class="submitButton" id="accountSubitButton">Create!</button>
 				</div>
-			</div>
-
-
-
-
-			<!-- Attendance Form -->
-			<div id="Attendance" class="attendance">	
-				<div class="row textareaContainer">
-					<label class="label"><u>Description:</u></label>
-					<textarea class="SBTDescription" type="text" name="SBTDescription" placeholder="Enter a short description about what your SBT is for." id="SBTDescription"></textarea>
-				</div>
-
-				<div class="row">
-					<div class="col inputContainer" style="margin-right: 1vw;">
-						<label class="inputLabel">City (Optional):</label>
-						<input class="input" type="text" name="SBTCity" id="SBTCity"></input>
-					</div>
-
-					<div class="col inputContainer">
-						<label class="inputLabel">Country (Optional):</label>
-						<input class="input" type="text" name="SBTCountry" id="SBTCountry"></input>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col inputContainer" style="margin-right: 1vw;">
-						<label class="inputLabel">Start Date:</label>
-						<input class="input" type="text" name="SBTStartDate" id="SBTStartDate"></input>
-					</div>
-
-					<div class="col inputContainer">
-						<label class="inputLabel">End Date (Optional):</label>
-						<input class="input" type="text" name="SBTEndDate" id="SBTEndDate"></input>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col inputContainer">
-						<label class="inputLabel">Website (Optional):</label>
-						<input class="input" type="text" name="SBTWebsite" id="SBTWebsite"></input>
-					</div>
-				</div>
-
-				<div class="row">
-					<button class="submitButton" id="attendanceSubitButton">Create!</button>
-				</div>
-			</div>
-
-			<div id="Certificate" class=""> 
-
-			</div>
-
-			<div id="Ticket" class=""> 
-
 			</div>
 		</form>
 	</div>
@@ -168,57 +108,6 @@
 				reader.readAsDataURL(input.files[0]);
 			}
 		}
-
-
-		var myHash = window.location.hash;
-		window.onload = function() {
-			displayForms(myHash.substring(1)); // Slices the # off
-		}
-
-		function displayForms(dropDwnChoice) {	
-		 	window.location.hash = '#'+dropDwnChoice;
-		 	document.getElementById("Account").style.display = 'none';
-			document.getElementById("Attendance").style.display = 'none';
-
-			if (dropDwnChoice !== null) {
-				document.getElementById(dropDwnChoice).style.display = 'block';
-				$('#sbtType').val(dropDwnChoice);
-				$('#dropDownButton').html(dropDwnChoice+" ");
-			}
-		}
-
-
-
-		const dropDownButton = document.querySelector('#dropDownButton');
-
-		// Checks for when the drop down list is clicked
-		dropDownButton.addEventListener('click', (e) => {
-			formChoice = $('#dropDownButton').html();
-
-	    	document.getElementById("myDropdown").classList.toggle("show");
-	    	document.getElementById("dropDownButton").style.borderRadius = "1vw 1vw 0vw 0vw";
-	    	$('#dropDownButton').html(" SBT Type ");
-		});
-
-		// Close the dropdown if the user clicks outside of it
-		window.onclick = function(event) {
-		  	if (!event.target.matches('.dropbtn')) {
-			  	var dropdowns = document.getElementsByClassName("dropdown-content");
-			  	var i;
-			  	for (i = 0; i < dropdowns.length; i++) {
-			  		var openDropdown = dropdowns[i];
-			  		if (openDropdown.classList.contains('show')) {
-			  			openDropdown.classList.remove('show');
-			  		}
-			  	}
-			  	document.getElementById("dropDownButton").style.borderRadius = "1vw";
-			  	$('#dropDownButton').html(window.location.hash.substring(1)+" ");
-		  	}
-		}
-
-
-
-
 
 
 		const createInputButton = document.querySelector('#createInputButton');

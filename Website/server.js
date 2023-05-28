@@ -12,7 +12,6 @@ app.listen(process.env.PORT || 3000);
 
 import homeRouter from './routes/homeRoutes.js'
 import createSBTRouter from './routes/createSBTRoutes.js';
-import libraryRouter from './routes/libraryRoutes.js';
 import profileRouter from './routes/profileRoutes.js';
 
 
@@ -33,7 +32,6 @@ app.use(express.json());
 app.use('/', homeRouter);
 app.use('/home', homeRouter);
 app.use('/createSBT', createSBTRouter);
-app.use('/library', libraryRouter);
 app.use('/profile', profileRouter);
 
 

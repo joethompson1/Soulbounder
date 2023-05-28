@@ -1,0 +1,152 @@
+<head>
+	<!-- Stylesheets -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+	<link rel="stylesheet" href="/stylesheets/createSBTStyles/createAccount.css">
+
+	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+</head>
+
+<body>
+	<div class="container__body">
+		<div class="container__tokenStatus">
+			<div class="container__statusLight" id="container__statusLight">
+			</div>
+			<p class="text__status" id="text__status">Not Published</p>
+		</div>
+		<form class="formContainer">
+			<div class="container__mainContents">
+				<div class="container__left">
+					<div class="container__image">
+						<img class="ethereumIcon" src="/images/ethereum.svg">
+						<div class="SBTPictureContainer">
+							<label class="imageLabel" for="fileInput">
+								<img class="SBTDisplayPicture" id="stockImage" src="/images/handWithPicture.png">
+								<img class="displayImage" src="#" id="displayImage">
+							</label>
+
+							<input id="fileInput" type="file" onchange="readURL(this);" name="image">
+							<input class="SBTPicture" type="text" name="SBTPicture" id=SBTPicture>
+						</div>
+					</div>
+					
+				</div>
+				<div class="container__right" id="container__right">
+					<div class="container__sbtContentsMain">
+						<input class="SBTName" type="text" name="SBTName" placeholder="Your Name" id="SBTName">
+						<div class="container__SBTType">
+							<h5 class="type">Type: </h5>
+							<h5 class="SBTType">Account</h5>
+						</div>
+						<div class="container__createButton" id="submitButton">
+							<img class="sendIcon" src="/images/send.svg">
+						</div>
+						<div class="container__createButtonBubble">
+							<div class="pointer"></div>
+							<h5>Publish</h5>
+						</div>
+					</div>
+
+
+					<div class="container__attribute" id="description">
+						<div class="container__description-title">
+							<img class="descriptionIcon" src="/images/email.svg">
+							<h2 class="descriptionTitle">Email</h2>
+						</div>
+						<div class="container__description-contents">
+							<input class="descriptionContents" id="emailContents">
+						</div>
+					</div>
+
+					<div class="repeatingInputContainers" id="repeatingInputContainer">				
+					</div>
+
+					<div class="container__attribute" id="createCustomAttribute">
+						<div class="container__description-title">
+							<img class="descriptionIcon" src="/images/plus-square.svg">
+							<h2 class="descriptionTitle">Add Custom Attribute</h2>
+						</div>
+						<div class="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+
+
+	<script type="text/javascript">
+		var base64String = "";
+
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				const file = input.files[0];
+				var reader = new FileReader();
+
+
+				reader.onload = function (e) {
+					$('#displayImage').attr('src', e.target.result);
+					$('#stockImage').hide();
+					$('#displayImage').show();
+
+					base64String = reader.result.split(',')[1];
+					$('input.SBTPicture').val(base64String);
+
+				}
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+
+
+
+		const createInputButton = document.querySelector('#createCustomAttribute');
+		var numberOfCustomInputs = 0
+
+		createInputButton.addEventListener('click', (e) => {
+			numberOfCustomInputs += 1;
+			var repeatingInputContainer = document.getElementById('repeatingInputContainer');
+
+			const container__attribute = document.createElement('div');
+			container__attribute.className = 'container__attribute';
+			container__attribute.id = 'customAttribute'+numberOfCustomInputs;
+
+			const container__title = document.createElement('div');
+			container__title.className = 'container__description-title';
+
+			var descriptionIcon = new Image();
+			descriptionIcon.src = '/images/description.svg';
+			descriptionIcon.className = 'descriptionIcon';
+			container__title.appendChild(descriptionIcon);
+
+			const descriptionTitle = document.createElement('input');
+			descriptionTitle.className = 'customTitle';
+			descriptionTitle.id = 'customTitle'+numberOfCustomInputs;
+			container__title.appendChild(descriptionTitle);
+			
+			container__title.innerHTML += `<div class="closeInputButton" id="closeInputButton${numberOfCustomInputs}" onclick="closeInput('customAttribute${numberOfCustomInputs}')">X</div>`;
+
+			const container__description__contents = document.createElement('div');
+			container__description__contents.className = 'container__description-contents';
+
+			const descriptionContents = document.createElement('input');
+			descriptionContents.className = 'descriptionContents';
+			container__description__contents.appendChild(descriptionContents);
+
+			container__attribute.appendChild(container__title);
+			container__attribute.appendChild(container__description__contents);
+
+
+			repeatingInputContainer.appendChild(container__attribute);
+
+		});
+
+
+
+		function closeInput(blankInputBoxX) {
+			document.getElementById(blankInputBoxX).remove();
+		}
+
+	</script>
+</body>
