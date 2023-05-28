@@ -4,6 +4,7 @@
 	<link rel="stylesheet" href="/stylesheets/createSBTStyles/createAccount.css">
 
 	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+	<script src="/javascript/createAccount/createAccount.js"></script>
 </head>
 
 <body>
@@ -77,76 +78,121 @@
 
 
 	<script type="text/javascript">
-		var base64String = "";
-
-		function readURL(input) {
-			if (input.files && input.files[0]) {
-				const file = input.files[0];
-				var reader = new FileReader();
-
-
-				reader.onload = function (e) {
-					$('#displayImage').attr('src', e.target.result);
-					$('#stockImage').hide();
-					$('#displayImage').show();
-
-					base64String = reader.result.split(',')[1];
-					$('input.SBTPicture').val(base64String);
-
-				}
-
-				reader.readAsDataURL(input.files[0]);
-			}
-		}
-
-
-
 		const createInputButton = document.querySelector('#createCustomAttribute');
-		var numberOfCustomInputs = 0
-
+		var numberOfCustomInputs = 0;
 		createInputButton.addEventListener('click', (e) => {
-			numberOfCustomInputs += 1;
-			var repeatingInputContainer = document.getElementById('repeatingInputContainer');
-
-			const container__attribute = document.createElement('div');
-			container__attribute.className = 'container__attribute';
-			container__attribute.id = 'customAttribute'+numberOfCustomInputs;
-
-			const container__title = document.createElement('div');
-			container__title.className = 'container__description-title';
-
-			var descriptionIcon = new Image();
-			descriptionIcon.src = '/images/description.svg';
-			descriptionIcon.className = 'descriptionIcon';
-			container__title.appendChild(descriptionIcon);
-
-			const descriptionTitle = document.createElement('input');
-			descriptionTitle.className = 'customTitle';
-			descriptionTitle.id = 'customTitle'+numberOfCustomInputs;
-			container__title.appendChild(descriptionTitle);
-			
-			container__title.innerHTML += `<div class="closeInputButton" id="closeInputButton${numberOfCustomInputs}" onclick="closeInput('customAttribute${numberOfCustomInputs}')">X</div>`;
-
-			const container__description__contents = document.createElement('div');
-			container__description__contents.className = 'container__description-contents';
-
-			const descriptionContents = document.createElement('input');
-			descriptionContents.className = 'descriptionContents';
-			container__description__contents.appendChild(descriptionContents);
-
-			container__attribute.appendChild(container__title);
-			container__attribute.appendChild(container__description__contents);
-
-
-			repeatingInputContainer.appendChild(container__attribute);
-
+			createCustomAttributes(numberOfCustomInputs);
 		});
 
 
+		$(function() // execute once the DOM has loaded
+		{
+			// wire up button click event
+			$("#submitButton").click(async function(event) {
+				event.preventDefault(); // cancel default behavior
 
-		function closeInput(blankInputBoxX) {
-			document.getElementById(blankInputBoxX).remove();
-		}
+				attributes = [];
+				attributes.push({
+					trait_type: "Type",
+					value: "Account",
+				});
+				attributes.push({
+					trait_type: "Email",
+					value: document.getElementById('emailContents').value,
+				});
 
+				var attributeTitles = document.getElementsByClassName("customTitle");
+				var attributeContents = document.getElementsByClassName("descriptionContents");
+
+				for (let i = 1; i <= attributeTitles.length; i++) {
+					const attributeTitle = attributeTitles[i-1].value;
+					const attributeContent = attributeContents[i].value;
+						attributes.push({
+							trait_type: attributeTitle,
+							value: attributeContent,
+						});
+					
+				}
+
+				var SBTData = {
+					"name" : document.getElementById('SBTName').value,
+					"image" : document.getElementById('displayImage').src,
+					attributes,
+				}
+
+				console.log(JSON.stringify(SBTData));
+
+				let data;
+
+				try {
+					const res = await fetch('/createSBT/blockchain', { 
+					  method: 'POST', 
+					  body: JSON.stringify({ SBTData }),
+					  headers: {'Content-Type': 'application/json'}
+					});
+
+					data = await res.json();
+
+				} catch(error) {
+					textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";
+					document.getElementById('container__statusLight').style.background = "red";
+				}
+
+				if (data.sbtHash) {
+
+					const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+					const userWalletAddress = accounts[0];
+					const provider = new ethers.providers.Web3Provider(window.ethereum);
+					const signer = provider.getSigner(userWalletAddress);
+
+					const networkId = await window.ethereum.request({ method: 'net_version' });
+					const contractNetworkId = "<%= contractNetworkId %>"
+
+
+					if (contractNetworkId == networkId) {
+						const textStatus = document.querySelector('.text__status');
+						textStatus.innerHTML = "Publishing..."
+						document.getElementById('container__statusLight').style.background = "orange";
+
+						let contractAbi = '<%- contractAbi %>';
+						const contractAddress = "<%= contractAddress %>";
+
+						const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+
+						try {
+							let mintResult = await contract.safeMint(userWalletAddress, data.sbtHash.toString());
+
+							let txReceipt = await provider.getTransactionReceipt(mintResult.hash);
+
+							while (!txReceipt && !txReceipt.blockNumber) {
+								txReceipt = await provider.getTransactionReceipt(mintResult.hash);
+							}
+
+							textStatus.innerHTML = "Published"
+							document.getElementById('container__statusLight').style.background = "green";
+
+							location.href = "/library/viewSBT?hash="+data.sbtHash;
+							window.location.assign(
+							  "/profile"
+							);
+
+
+						} catch(error) {
+
+							textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";
+							document.getElementById('container__statusLight').style.background = "red";
+						}
+
+
+					} else {
+						window.alert("Smart contract not deployed to detected network!");
+					}
+				} else {
+					window.alert("Error uploading data to IPFS");
+				}
+
+				
+		  	});
+		});
 	</script>
 </body>
