@@ -28,6 +28,8 @@ const initIpfs = async () => {
 
 const addFileToIPFS = async (file, ipfs) => {
   console.log("Adding file to IPFS....");
+  console.log("projectId: ", projectId);
+  console.log("projectSecret: ", projectSecret);
   const fileAdded = await ipfs.add({ content: file });
   return fileAdded;
 };
