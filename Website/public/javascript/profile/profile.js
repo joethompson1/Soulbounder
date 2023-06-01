@@ -5,12 +5,15 @@ async function loadAccountSBT(contractAbi, contractAddress, userWalletAddress) {
 	const signer = provider.getSigner(userWalletAddress);
 	const contract = new ethers.Contract(contractAddress, contractAbi, signer);
 
+	console.log(contract);
+
 	walletBalance = await contract.balanceOf(userWalletAddress);
+	console.log("walletBalance: ", walletBalance.toString());
 
 	// Runs through all the users tokens
 	for (var i=0; i < walletBalance.toString(); i++) {
 		const tokenId = await contract.tokenOfOwnerByIndex(userWalletAddress, i);
-
+		console.log("tokenId: ", tokenId);
 		let tokenURI = await contract.tokenURI(tokenId);
 		let request = new Request("https://soulbounder.infura-ipfs.io/ipfs/"+tokenURI);
 		// let request = new Request("/SBT-data/"+tokenURI);
@@ -23,6 +26,7 @@ async function loadAccountSBT(contractAbi, contractAddress, userWalletAddress) {
 		}
 		
 	}
+	console.log(accountSBT);
 	return accountSBT;
 };
 

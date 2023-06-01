@@ -41,6 +41,7 @@
 
 			if (userWalletAddress) {
 				setWalletToConnected();
+				console.log(userWalletAddress);
 
 				const accountSBT = await loadAccountSBT('<%- contractAbi %>','<%= contractAddress %>', userWalletAddress);
 				
@@ -53,12 +54,9 @@
 			const userWalletAddress = await setUserWallet();
 			setWalletToConnected(userWalletAddress);
 
-			await loadAccountSBT('<%- contractAbi %>','<%= contractAddress %>', userWalletAddress);
-			const accountMap = tabsMap.get("Account");
-			const numberOfValues = accountMap ? Array.from(accountMap.values()).length : 0;
-			if (numberOfValues) {
-				viewAccountSBT(tabsMap.get("Account").values().next().value);
-			}
+			const accountSBT = await loadAccountSBT('<%- contractAbi %>','<%= contractAddress %>', userWalletAddress);
+			
+			viewAccountSBT(accountSBT.SBTData);	
 		});
 
 

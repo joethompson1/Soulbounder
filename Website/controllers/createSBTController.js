@@ -5,6 +5,10 @@ import stream from 'stream';
 import streamifier from 'streamifier';
 import fs from 'fs';
 
+
+
+
+
 // controller actions
 export const createSBT_get = async (req, res) => {
 	let networkDataList = Soulbounder.networks;
@@ -18,10 +22,9 @@ export const createSBT_get = async (req, res) => {
 	const networkData = Soulbounder.networks[contractNetworkId];
 	const contractAddress = networkData.address;
 
-	res.status(200).render('createSBT/createAccount', { contractNetworkId, contractAddress, contractAbi : JSON.stringify(contractAbi) });
-};
-
-
+	res.status(200).render('createSBT/createAccount', 
+		{ contractNetworkId, contractAddress, contractAbi : JSON.stringify(contractAbi) });
+}
 
 
 
@@ -29,7 +32,8 @@ export const createSBT_get = async (req, res) => {
 export const blockchain_post = async (req, res) => {
 
 	try {
-			const imageBuffer = new Buffer.from(req.body.SBTData.image.replace(/^data:image\/\w+;base64,/, ""), 'base64');
+			const imageBuffer = new Buffer.from(
+				req.body.SBTData.image.replace(/^data:image\/\w+;base64,/, ""), 'base64');
 
 			const ipfs = await initIpfs();
 			const pictureAdded = await addFileToIPFS(imageBuffer, ipfs);

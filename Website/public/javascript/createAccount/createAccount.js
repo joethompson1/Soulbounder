@@ -1,10 +1,13 @@
 
 function readURL(input) {
 	var base64String = "";
+	const imageLabel = document.getElementById('imageLabel');
+
 	if (input.files && input.files[0]) {
 		const file = input.files[0];
 		var reader = new FileReader();
 
+		imageLabel.classList.remove('invalidImage');
 
 		reader.onload = function (e) {
 			$('#displayImage').attr('src', e.target.result);
@@ -41,6 +44,7 @@ function createCustomAttributes(numberOfCustomInputs) {
 	const descriptionTitle = document.createElement('input');
 	descriptionTitle.className = 'customTitle';
 	descriptionTitle.id = 'customTitle'+numberOfCustomInputs;
+	descriptionTitle.required = true;
 	container__title.appendChild(descriptionTitle);
 	
 	container__title.innerHTML += `<div class="closeInputButton" id="closeInputButton${numberOfCustomInputs}" onclick="closeInput('customAttribute${numberOfCustomInputs}')">X</div>`;
@@ -50,6 +54,7 @@ function createCustomAttributes(numberOfCustomInputs) {
 
 	const descriptionContents = document.createElement('input');
 	descriptionContents.className = 'descriptionContents';
+	descriptionContents.required = true;
 	container__description__contents.appendChild(descriptionContents);
 
 	container__attribute.appendChild(container__title);

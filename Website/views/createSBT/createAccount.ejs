@@ -14,33 +14,33 @@
 			</div>
 			<p class="text__status" id="text__status">Not Published</p>
 		</div>
-		<form class="formContainer">
+		<form class="formContainer" id="formContainer">
 			<div class="container__mainContents">
 				<div class="container__left">
 					<div class="container__image">
 						<img class="ethereumIcon" src="/images/ethereum.svg">
 						<div class="SBTPictureContainer">
-							<label class="imageLabel" for="fileInput">
+							<label id="imageLabel" class="imageLabel" for="fileInput">
 								<img class="SBTDisplayPicture" id="stockImage" src="/images/handWithPicture.png">
 								<img class="displayImage" src="#" id="displayImage">
 							</label>
 
-							<input id="fileInput" type="file" onchange="readURL(this);" name="image">
-							<input class="SBTPicture" type="text" name="SBTPicture" id=SBTPicture>
+							<input id="fileInput" type="file" onchange="readURL(this);" name="image" accept="image/png, image/jpeg, image/gif" >
+							<input class="SBTPicture" type="text" name="SBTPicture" id='SBTPicture'>
 						</div>
 					</div>
 					
 				</div>
 				<div class="container__right" id="container__right">
 					<div class="container__sbtContentsMain">
-						<input class="SBTName" type="text" name="SBTName" placeholder="Your Name" id="SBTName">
+						<input class="SBTName" type="text" name="SBTName" placeholder="Your Name" id="SBTName" required>
 						<div class="container__SBTType">
 							<h5 class="type">Type: </h5>
 							<h5 class="SBTType">Account</h5>
 						</div>
-						<div class="container__createButton" id="submitButton">
+						<button class="container__createButton" id="submitButton" type="submit">
 							<img class="sendIcon" src="/images/send.svg">
-						</div>
+						</button>
 						<div class="container__createButtonBubble">
 							<div class="pointer"></div>
 							<h5>Publish</h5>
@@ -54,7 +54,7 @@
 							<h2 class="descriptionTitle">Email</h2>
 						</div>
 						<div class="container__description-contents">
-							<input class="descriptionContents" id="emailContents">
+							<input class="descriptionContents" type="email" id="emailContents" required>
 						</div>
 					</div>
 
@@ -85,112 +85,129 @@
 		});
 
 
-		$(function() // execute once the DOM has loaded
-		{
+		$(function() { // execute once the DOM has loaded
+			
+			const form = document.getElementById('formContainer');
+			const imageInput = document.getElementById('fileInput');
+			const imageLabel = document.getElementById('imageLabel');
+
+			document.addEventListener('invalid', function (e) {
+				e.preventDefault();
+			  	var firstInvalidElement = e.target.form.querySelector(':invalid');
+			  	firstInvalidElement.focus();
+			}, true);
+
 			// wire up button click event
-			$("#submitButton").click(async function(event) {
+			form.addEventListener('submit', async (event) => {
 				event.preventDefault(); // cancel default behavior
 
-				attributes = [];
-				attributes.push({
-					trait_type: "Type",
-					value: "Account",
-				});
-				attributes.push({
-					trait_type: "Email",
-					value: document.getElementById('emailContents').value,
-				});
+				if (imageInput.files.length == 0) { // Checks if image file is uploaded
+					imageLabel.classList.add('invalidImage');
+				
+				} else { // If image file has been uploaded
 
-				var attributeTitles = document.getElementsByClassName("customTitle");
-				var attributeContents = document.getElementsByClassName("descriptionContents");
+					attributes = [{ // set form attributes for SBTData
+						trait_type: "Type",
+						value: "Account",
+					},
+					{
+						trait_type: "Email",
+						value: document.getElementById('emailContents').value,
+					}];
 
-				for (let i = 1; i <= attributeTitles.length; i++) {
-					const attributeTitle = attributeTitles[i-1].value;
-					const attributeContent = attributeContents[i].value;
-						attributes.push({
-							trait_type: attributeTitle,
-							value: attributeContent,
+
+					var attributeTitles = document.getElementsByClassName("customTitle");
+					var attributeContents = document.getElementsByClassName("descriptionContents");
+
+					// for each custom attribute add it to the attributes array
+					for (let i = 1; i <= attributeTitles.length; i++) {
+						const attributeTitle = attributeTitles[i-1].value;
+						const attributeContent = attributeContents[i].value;
+							attributes.push({
+								trait_type: attributeTitle,
+								value: attributeContent,
+							});
+						
+					}
+
+					// Set SBTData based on form content
+					var SBTData = {
+						"name" : document.getElementById('SBTName').value,
+						"image" : document.getElementById('displayImage').src,
+						attributes,
+					}
+
+					let data;
+
+					try {
+						const res = await fetch('/createSBT/blockchain', { 
+						  method: 'POST', 
+						  body: JSON.stringify({ SBTData }),
+						  headers: {'Content-Type': 'application/json'}
 						});
-					
-				}
 
-				var SBTData = {
-					"name" : document.getElementById('SBTName').value,
-					"image" : document.getElementById('displayImage').src,
-					attributes,
-				}
+						data = await res.json();
 
-				console.log(JSON.stringify(SBTData));
+					} catch(error) {
+						textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";
+						document.getElementById('container__statusLight').style.background = "red";
+					}
 
-				let data;
+					if (data.sbtHash) {
 
-				try {
-					const res = await fetch('/createSBT/blockchain', { 
-					  method: 'POST', 
-					  body: JSON.stringify({ SBTData }),
-					  headers: {'Content-Type': 'application/json'}
-					});
+						const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+						const userWalletAddress = accounts[0];
+						const provider = new ethers.providers.Web3Provider(window.ethereum);
+						const signer = provider.getSigner(userWalletAddress);
 
-					data = await res.json();
+						const networkId = await window.ethereum.request({ method: 'net_version' });
+						const contractNetworkId = "<%= contractNetworkId %>"
 
-				} catch(error) {
-					textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";
-					document.getElementById('container__statusLight').style.background = "red";
-				}
+						if (contractNetworkId == networkId) {
+							const textStatus = document.querySelector('.text__status');
+							textStatus.innerHTML = "Publishing..."
+							document.getElementById('container__statusLight').style.background = "orange";
 
-				if (data.sbtHash) {
+							let contractAbi = '<%- contractAbi %>';
+							const contractAddress = "<%= contractAddress %>";
 
-					const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-					const userWalletAddress = accounts[0];
-					const provider = new ethers.providers.Web3Provider(window.ethereum);
-					const signer = provider.getSigner(userWalletAddress);
+							const contract = new ethers.Contract(contractAddress, contractAbi, signer);
 
-					const networkId = await window.ethereum.request({ method: 'net_version' });
-					const contractNetworkId = "<%= contractNetworkId %>"
+							try {
+								console.log("Made it!");
+								console.log("data.sbtHash: ", data.sbtHash);
+								let mintResult = await contract.safeMint(userWalletAddress, data.sbtHash.toString());
+								console.log("Made it22!");
+								let txReceipt = await provider.getTransactionReceipt(mintResult.hash);
+
+								while (!txReceipt && !txReceipt.blockNumber) {
+									txReceipt = await provider.getTransactionReceipt(mintResult.hash);
+								}
+
+								textStatus.innerHTML = "Published"
+								document.getElementById('container__statusLight').style.background = "green";
+
+								location.href = "/library/viewSBT?hash="+data.sbtHash;
+								window.location.assign(
+								  "/profile"
+								);
 
 
-					if (contractNetworkId == networkId) {
-						const textStatus = document.querySelector('.text__status');
-						textStatus.innerHTML = "Publishing..."
-						document.getElementById('container__statusLight').style.background = "orange";
+							} catch(error) {
 
-						let contractAbi = '<%- contractAbi %>';
-						const contractAddress = "<%= contractAddress %>";
-
-						const contract = new ethers.Contract(contractAddress, contractAbi, signer);
-
-						try {
-							let mintResult = await contract.safeMint(userWalletAddress, data.sbtHash.toString());
-
-							let txReceipt = await provider.getTransactionReceipt(mintResult.hash);
-
-							while (!txReceipt && !txReceipt.blockNumber) {
-								txReceipt = await provider.getTransactionReceipt(mintResult.hash);
+								textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";
+								document.getElementById('container__statusLight').style.background = "red";
 							}
 
-							textStatus.innerHTML = "Published"
-							document.getElementById('container__statusLight').style.background = "green";
 
-							location.href = "/library/viewSBT?hash="+data.sbtHash;
-							window.location.assign(
-							  "/profile"
-							);
-
-
-						} catch(error) {
-
-							textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";
-							document.getElementById('container__statusLight').style.background = "red";
+						} else {
+							window.alert("Smart contract not deployed to detected network!");
 						}
-
-
 					} else {
-						window.alert("Smart contract not deployed to detected network!");
+						window.alert("Error uploading data to IPFS");
 					}
-				} else {
-					window.alert("Error uploading data to IPFS");
-				}
 
+				}
 				
 		  	});
 		});
