@@ -9,6 +9,30 @@
 
 
 
+
+/*input:invalid {
+  border-color: red;
+}
+
+input:invalid:focus {
+  outline-color: red;
+}
+
+input:invalid + .error-message {
+  display: block;
+  color: red;
+}*/
+
+
+.invalidImage {
+    border-radius: 1vw;
+    border: 2px solid red;
+}
+
+
+
+
+
 /* ---------------- Main ------------------ */
 
 
@@ -65,45 +89,86 @@
     border: 1px solid lightgray;
     border-radius: 1vw;
     padding: 8%;
-/*    width: 40vw;*/
     width: 100%;
 }
 
-
-.imageSBT {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
 
 
 .ethereumIcon {
     position: absolute;
-    top: 2.5%;
-    left: 1%;
+    top: 1.75vw;
+    left: 1.5vw;
     width: 5%;
+    transform: translate(-50%,-50%);
 }
 
 
 
-
-
-.container__sbtContentsMain {
-    
+.SBTPictureContainer {
+    background-color: transparent;
+    transition: all 0.3s;
 }
+
+.SBTPictureContainer:hover {
+    border-radius: 1.5vw;
+    transition: all 0.3s;
+    box-shadow: 0vw 2vw 4vw 0vw rgba(0,0,0,0.2);
+}
+
+.SBTPictureContainer>input {
+  display: none;
+}
+
+
+.SBTDisplayPicture {
+    width: 65%;
+    height: 100%;
+    transform: translate(4vw, 1vw);
+}
+
+
+.displayImage {
+    display: none;
+    width: 100%;
+}
+
+
+
+.imageLabel {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+
+
 
 
 .SBTName {
     font-family: Righteous;
     font-size: 2.42vw;
+    background-color: transparent;
+    border-radius: 0.9vw;
+    border-style: none;
+    width: 90%;
+    color: black;
+    padding-left: 1vw;
+    margin-left: -2%;
+    margin-bottom: 0.5vw;
 }
 
 
-.SBTOwner {
-    font-family: Raleway;
-    font-size: 1.24vw;
-    margin-bottom: 1.5vw;
+.SBTName:hover {
+    opacity: 0.8;
 }
+
+.SBTName:focus {
+
+}
+
+
 
 
 
@@ -160,18 +225,10 @@
 
 
 
-.container__createButtonText {
-    position: relative;
-    top: 10%;
-    right: 0%;
-    border-radius: 100%;
-    cursor: pointer;
-}
-
 .container__createButtonBubble {
     opacity: 0;
     position: absolute;
-    top: 12%;
+    top: 15%;
     right: -1%;
     padding: 0.5vw 1vw 0.5vw 1vw;
     background-color: var(--color-charcoal);
@@ -181,7 +238,6 @@
 
 .container__createButton:hover + .container__createButtonBubble {
     transition: all 0.3s;
-/*    display: block;*/
     opacity: 1;
 }
 
@@ -207,51 +263,7 @@
 
 
 
-.container__dates {
-    position: relative;
-    grid-template-columns: 1fr 1fr;
-    display: grid;
-    gap: 5%;
-    margin-top: 5%;
-    text-align: center;
-}
 
-
-.container__date {
-    position: relative;
-    border-radius: 1vw;
-    border: 1px solid lightgray;
-    padding: 5%;
-    background-color: #f8fcfd;
-}
-
-.container__date {
-    position: relative;
-    border-radius: 1vw;
-    border: 1px solid lightgray;
-    padding: 5%;
-    background-color: #f8fcfd;
-}
-
-
-
-.dateTitle {
-    position: relative;
-    font-family: Raleway;
-    font-size: 1.1vw;
-    font-weight: 800;
-    padding: 0;
-    margin: 0;
-}
-
-
-.dateContents {
-    position: relative;
-    font-size: 1.5vw;
-    padding: 0;
-    margin: 0;
-    font-family: Raleway;
-}
 
 
 
@@ -268,6 +280,14 @@
 }
 
 
+.repeatingInputContainers {
+    position: relative;
+    margin-top: 5%;
+    border: 1vw;
+    border: 0;
+}
+
+
 
 .container__description-title {
     position: relative;
@@ -275,21 +295,43 @@
     display: flex;
 }
 
-.dropDownCursor {
-    cursor: pointer;
-}
+
 
 .descriptionTitle {
     position: relative;
     margin: 0;
-    padding: 0.8% 0% 0% 2%;
+    padding: 0.4% 0% 0% 2%;
     font-family: Raleway;
     font-size: 1.25vw;
     font-weight: 800;
 }
 
 .descriptionIcon {
-    width: 5%;
+    width: 4%;
+}
+
+
+.customTitle {
+    position: relative;
+    width: 90%;
+    margin-left: 1%;
+    padding: 0.4% 0% 0% 1%;
+    font-family: Raleway;
+    font-size: 1.25vw;
+    font-weight: 800;
+/*    outline: none;*/
+    border: none;
+    border-radius: 0.3vw;
+}
+
+.customTitle:hover {
+    outline: 0.1vw solid lightgray;
+}
+
+
+.customTitle:focus {
+    /*outline: none;
+    border: none;*/
 }
 
 
@@ -300,9 +342,6 @@
     border-top: 1px solid lightgray;
 }
 
-.dropDown {
-    display: none;
-}
 
 .show {
     display: block;
@@ -318,29 +357,60 @@
 
 
 
-.container__location {
-    display: flex;
-    padding-top: 1%;
-}
 
-
-.arrowDropDown {
-    position: absolute;
-    right: 2%;
-    top: 23%;
-    width: 5%;
-}
-
-
-.locationTrait {
-    margin-right: 1.5%;
-}
 
 
 .descriptionContents {
-/*    font-family: Raleway;*/
-/*    font-size: 1.2%;*/
+    position: relative;
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    top: 0%;
+    border-radius: 0.4vw;
+    border: none;
+    font-size: 1.25vw;
+    padding: 0.5vw;
+    margin: 0;
+}
+
+.descriptionContents:hover {
+    border: 0.075vw solid lightgray;
+}
+
+.descriptionContents:focus {
+    /*border: none;
+    outline: none;*/
 }
 
 
+#createCustomAttribute:hover {
+    cursor: pointer;
+    background-color: #e8f4f8;
+}
+
+
+
+
+.closeInputButton {
+    position: relative;
+    margin-left: 2%;
+    width: 5%;
+    height: 100%;
+    border-radius: 0.5vw;
+    text-align: center;
+    background-color: #758CA3;
+    color: white;
+    cursor: pointer;
+    font-family: Righteous;
+    font-size: 1.2vw;
+    box-shadow: 0vw 0.25vw 0.5vw 0vw rgba(0,0,0,0.2);
+    transition: all 0.25s;
+}
+
+.closeInputButton:hover {
+    transform: scale(1.05);
+    transition: all 0.25s;
+    box-shadow: 0vw 0.5vw 1vw 0vw rgba(0,0,0,0.2);
+    background-color: #C04000;
+}
 
