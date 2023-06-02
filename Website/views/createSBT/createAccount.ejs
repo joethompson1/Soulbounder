@@ -191,8 +191,13 @@
 
 
 							} catch(error) {
+								console.log(error.data.data.reason);
+								if (error.data.data && error.data.data.reason) {
+									textStatus.innerHTML = "Unpublished (Error: "+error.data.data.reason;
 
-								textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";
+								} else {
+									textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";									
+								}
 								document.getElementById('container__statusLight').style.background = "red";
 							}
 
