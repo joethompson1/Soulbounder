@@ -142,7 +142,7 @@ Files are built to Website/builtContracts.
 
 4. Deploy the smart contract to the blockchain
    ```sh
-   truffle deploy
+   truffle migrate --reset
    ```
 * (If you wish to use interect with the smart contract through the truffle console) Command to bring up the truffle console
    ```sh

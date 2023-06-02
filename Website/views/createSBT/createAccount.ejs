@@ -174,10 +174,7 @@
 							const contract = new ethers.Contract(contractAddress, contractAbi, signer);
 
 							try {
-								console.log("Made it!");
-								console.log("data.sbtHash: ", data.sbtHash);
-								let mintResult = await contract.safeMint(userWalletAddress, data.sbtHash.toString());
-								console.log("Made it22!");
+								let mintResult = await contract.safeMint(userWalletAddress, data.sbtHash.toString(), 1);
 								let txReceipt = await provider.getTransactionReceipt(mintResult.hash);
 
 								while (!txReceipt && !txReceipt.blockNumber) {
