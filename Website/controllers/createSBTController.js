@@ -1,4 +1,5 @@
 import { initIpfs, addFileToIPFS } from '../models/ipfs.js';
+import { encryptData } from '../models/metamask/encryptData.js';
 import Soulbounder from '../builtContracts/Soulbounder.json' assert { type: "json"};
 import Web3 from 'web3';
 import stream from 'stream';
@@ -32,6 +33,9 @@ export const createSBT_get = async (req, res) => {
 export const blockchain_post = async (req, res) => {
 
 	try {
+			const publicKey = Buffer.from(req.body.keyB64, 'base64');
+			console.log("publicKey: ", publicKey);
+
 			const imageBuffer = new Buffer.from(
 				req.body.SBTData.image.replace(/^data:image\/\w+;base64,/, ""), 'base64');
 
@@ -49,9 +53,17 @@ export const blockchain_post = async (req, res) => {
 			  	attributes,
 			  };
 
-			console.log(JSON.stringify(sbtMetadata));
+			const sbtMetadataJSON = JSON.stringify(sbtMetadata);
+			console.log(sbtMetadataJSON);
+			const sbtMetadataBuffer = Buffer.from(sbtMetadataJSON);
+			// const sbtMetadataBuffer = Buffer.from("Hello!");
+			console.log(JSON.stringify(sbtMetadataBuffer));
 
-			const sbtHash = await addFileToIPFS(JSON.stringify(sbtMetadata), ipfs);
+			const encryptedMetadata = encryptData(publicKey, sbtMetadataBuffer);
+			console.log("encryptedMetadata: ", encryptedMetadata);
+
+			// const sbtHash = await addFileToIPFS(encryptedMetadata, ipfs);
+			const sbtHash = await addFileToIPFS(JSON.stringify(encryptedMetadata), ipfs);
 			console.log("Added file (CID):", sbtHash);
 			const path =  sbtHash.path.toString();
 			console.log("Path:", path);

@@ -1,4 +1,5 @@
 import * as IPFS from 'ipfs-core';
+import { decryptData } from '../models/metamask/decryptData.js';
 import Soulbounder from '../builtContracts/Soulbounder.json' assert { type: "json"};
 import Web3 from 'web3';
 
@@ -26,3 +27,25 @@ export const profile_get = async (req, res) => {
 
 
 
+export const decryptAuthToken = async (req, res) => {
+
+	try {
+
+		const account = req.body.userWalletAddress;
+		const data = Buffer.from(req.body.SBTData);
+		console.log("account: ", account);
+		console.log("data: ", data);
+
+
+		const ct = await decryptData(account, data);
+		console.log("ct: ", ct);
+		// const ct = "";
+
+		res.status(201).json({ ct });
+
+	} catch (err) {
+		console.error("Error in decrypting Auth token: ", err);
+		res.status(400).json({ errors: "Error in decrypting Auth token: ", err });
+	}
+
+}

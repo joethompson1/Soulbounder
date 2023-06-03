@@ -14,19 +14,23 @@ async function loadAccountSBT(contractAbi, contractAddress, userWalletAddress) {
 	for (var i=0; i < walletBalance.toString(); i++) {
 		const tokenId = await contract.tokenOfOwnerByIndex(userWalletAddress, i);
 		console.log("tokenId: ", tokenId);
-		let tokenURI = await contract.tokenURI(tokenId);
-		let request = new Request("https://soulbounder.infura-ipfs.io/ipfs/"+tokenURI);
-		// let request = new Request("/SBT-data/"+tokenURI);
-		let response = await fetch(request);
-		let SBTData = await response.json();
 
-		if (SBTData.attributes[0].value == "Account") {
+		const tokenType = await contract.getTokenType(tokenId);
+		console.log("tokenType: ", tokenType.toNumber());
+
+		if (tokenType.toNumber() == 1) {
+			let tokenURI = await contract.tokenURI(tokenId);
+			let request = new Request("https://soulbounder.infura-ipfs.io/ipfs/"+tokenURI);
+			let response = await fetch(request);
+			let SBTData = await response.json();
+			console.log("SBTData: ", SBTData.data);
+
 			accountSBT.tokenURI = tokenURI;
-			accountSBT.SBTData = SBTData;
+			accountSBT.SBTData = SBTData.data;
 		}
 		
 	}
-	console.log(accountSBT);
+	// console.log(accountSBT);
 	return accountSBT;
 };
 

@@ -40,7 +40,9 @@ contract Soulbounder is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         require(ownerOf(tokenId) == msg.sender, "Only token owner can burn it");
         _burn(tokenId);
 
+
         uint256 tokenType = _tokenTypes[tokenId];
+        delete _tokenTypes[tokenId];
         if (tokenType == 1) {
             _walletHasAuthToken[msg.sender] = false;
         }
@@ -51,6 +53,7 @@ contract Soulbounder is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         _burn(tokenId);
 
         uint256 tokenType = _tokenTypes[tokenId];
+        delete _tokenTypes[tokenId];
         if (tokenType == 1) {
             _walletHasAuthToken[msg.sender] = false;
         }
@@ -80,9 +83,8 @@ contract Soulbounder is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     }
 
-
-
     function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+
         super._burn(tokenId);
     }
 
@@ -95,6 +97,11 @@ contract Soulbounder is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     {
         return super.tokenURI(tokenId);
     }
+
+    function getTokenType(uint256 tokenId) public view returns (uint256) {
+        return _tokenTypes[tokenId];
+    }
+
 
     function supportsInterface(bytes4 interfaceId)
         public

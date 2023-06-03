@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/joethompson1/Soulbounder#readme",
   "dependencies": {
+    "ascii85": "^1.0.2",
     "buffer": "^6.0.3",
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
@@ -33,6 +34,7 @@
     "ipfs-core": "^0.18.0",
     "ipfs-http-client": "^60.0.0",
     "js-ipfs": "^0.0.301",
+    "metamask": "^0.0.1-security",
     "streamifier": "^0.1.1",
     "web3": "^1.8.1",
     "webpack": "^5.73.0"
@@ -40,6 +42,7 @@
   "devDependencies": {
     "@truffle/hdwallet-provider": "^2.1.2",
     "nodemon": "^2.0.16",
+    "typescript": "^5.1.3",
     "webpack-cli": "^4.9.2"
   }
 }

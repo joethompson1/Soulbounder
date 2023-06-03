@@ -106,14 +106,33 @@
 				
 				} else { // If image file has been uploaded
 
-					attributes = [{ // set form attributes for SBTData
-						trait_type: "Type",
-						value: "Account",
-					},
-					{
-						trait_type: "Email",
-						value: document.getElementById('emailContents').value,
-					}];
+					const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+					const userWalletAddress = accounts[0];
+					const provider = new ethers.providers.Web3Provider(window.ethereum);
+					const signer = provider.getSigner(userWalletAddress);
+
+					const networkId = await window.ethereum.request({ method: 'net_version' });
+					const contractNetworkId = "<%= contractNetworkId %>";
+
+					// Key is returned as base64
+					const keyB64 = await ethereum.request({
+					  method: 'eth_getEncryptionPublicKey',
+					  params: [userWalletAddress],
+					});
+
+					// const publicKey = Buffer.from(keyB64, 'base64');
+					console.log("publicKey: ", keyB64);
+
+					attributes = [ // set form attributes for SBTData 
+						{ 
+							trait_type: "Type",
+							value: "Account",
+						},
+						{
+							trait_type: "Email",
+							value: document.getElementById('emailContents').value,
+						}
+					];
 
 
 					var attributeTitles = document.getElementsByClassName("customTitle");
@@ -142,7 +161,7 @@
 					try {
 						const res = await fetch('/createSBT/blockchain', { 
 						  method: 'POST', 
-						  body: JSON.stringify({ SBTData }),
+						  body: JSON.stringify({ SBTData, keyB64 }),
 						  headers: {'Content-Type': 'application/json'}
 						});
 
@@ -154,14 +173,6 @@
 					}
 
 					if (data.sbtHash) {
-
-						const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-						const userWalletAddress = accounts[0];
-						const provider = new ethers.providers.Web3Provider(window.ethereum);
-						const signer = provider.getSigner(userWalletAddress);
-
-						const networkId = await window.ethereum.request({ method: 'net_version' });
-						const contractNetworkId = "<%= contractNetworkId %>"
 
 						if (contractNetworkId == networkId) {
 							const textStatus = document.querySelector('.text__status');
@@ -193,7 +204,7 @@
 							} catch(error) {
 								console.log(error.data.data.reason);
 								if (error.data.data && error.data.data.reason) {
-									textStatus.innerHTML = "Unpublished (Error: "+error.data.data.reason;
+									textStatus.innerHTML = "Unpublished (Error: "+error.data.data.reason+")";
 
 								} else {
 									textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";									

@@ -2,6 +2,8 @@ function viewAccountSBT(SBTData) {
 	console.log(SBTData);
 	const container__left = document.getElementById('container__left');
 	const container__right = document.getElementById('container__right');
+	container__left.innerHTML = "";
+	container__right.innerHTML = "";
 
 	// Container Left
 	const container__image = document.createElement('div');
