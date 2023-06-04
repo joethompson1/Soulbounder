@@ -17,6 +17,9 @@ const ipfsConfig = {
 
 
 const initIpfs = async () => {
+  if (!projectId || !projectSecret) {
+    throw new Error("Infura API keys missing.")
+  }
   const ipfs = await IPFS.create(ipfsConfig);
   console.log("IPFS node is ready");
 
@@ -30,7 +33,7 @@ const addFileToIPFS = async (file, ipfs) => {
   console.log("Adding file to IPFS....");
   console.log("projectId: ", projectId);
   console.log("projectSecret: ", projectSecret);
-  const fileAdded = await ipfs.add({ content: file.toString() });
+  const fileAdded = await ipfs.add({ content: file });
   return fileAdded;
 };
 

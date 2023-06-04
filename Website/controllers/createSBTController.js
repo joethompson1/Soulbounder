@@ -36,10 +36,26 @@ export const blockchain_post = async (req, res) => {
 			const publicKey = Buffer.from(req.body.keyB64, 'base64');
 			console.log("publicKey: ", publicKey);
 
+			console.log(req.body.SBTData.image);
+
 			const imageBuffer = new Buffer.from(
 				req.body.SBTData.image.replace(/^data:image\/\w+;base64,/, ""), 'base64');
 
-			const ipfs = await initIpfs();
+			console.log(imageBuffer);
+
+			let ipfs;
+
+			try {
+				ipfs = await initIpfs();			
+			} catch (error) {
+				console.log("Error initialising Infura IPFS: ", error.message);
+				console.error("Error initialising Infura IPFS: ", error.message);
+			}
+
+			if (!ipfs) {
+				throw new Error("Unable to establish connection with Infura IPFS");
+			}
+
 			const pictureAdded = await addFileToIPFS(imageBuffer, ipfs);
 			console.log("Added file CID:", pictureAdded);
 

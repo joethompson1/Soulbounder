@@ -38,7 +38,6 @@ export const decryptAuthToken = async (req, res) => {
 
 
 		const ct = await decryptData(account, data);
-		console.log("ct: ", ct);
 		// const ct = "";
 
 		res.status(201).json({ ct });
