@@ -80,6 +80,7 @@
 	<script type="text/javascript">
 		const createInputButton = document.querySelector('#createCustomAttribute');
 		var numberOfCustomInputs = 0;
+
 		createInputButton.addEventListener('click', (e) => {
 			createCustomAttributes(numberOfCustomInputs);
 		});
@@ -106,6 +107,10 @@
 				
 				} else { // If image file has been uploaded
 
+					const textStatus = document.querySelector('.text__status');
+					textStatus.innerHTML = "Publishing..."
+					document.getElementById('container__statusLight').style.background = "orange";
+					
 					const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 					const userWalletAddress = accounts[0];
 					const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -175,9 +180,6 @@
 					if (data.sbtHash) {
 
 						if (contractNetworkId == networkId) {
-							const textStatus = document.querySelector('.text__status');
-							textStatus.innerHTML = "Publishing..."
-							document.getElementById('container__statusLight').style.background = "orange";
 
 							let contractAbi = '<%- contractAbi %>';
 							const contractAddress = "<%= contractAddress %>";

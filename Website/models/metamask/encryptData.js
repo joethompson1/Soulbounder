@@ -7,7 +7,6 @@ function encryptData(publicKey, data) {
   // Each contains data encoded using base64, version is always the same string
   const enc = encrypt({
     publicKey: publicKey.toString('base64'),
-    // data: ascii85.encode(data).toString(),
     data: JSON.stringify(data),
     version: 'x25519-xsalsa20-poly1305',
   });

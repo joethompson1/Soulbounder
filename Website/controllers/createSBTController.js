@@ -34,14 +34,8 @@ export const blockchain_post = async (req, res) => {
 
 	try {
 			const publicKey = Buffer.from(req.body.keyB64, 'base64');
-			console.log("publicKey: ", publicKey);
 
-			console.log(req.body.SBTData.image);
-
-			const imageBuffer = new Buffer.from(
-				req.body.SBTData.image.replace(/^data:image\/\w+;base64,/, ""), 'base64');
-
-			console.log(imageBuffer);
+			const imageBuffer = new Buffer.from(req.body.SBTData.image.replace(/^data:image\/\w+;base64,/, ""), 'base64');
 
 			let ipfs;
 
@@ -70,19 +64,12 @@ export const blockchain_post = async (req, res) => {
 			  };
 
 			const sbtMetadataJSON = JSON.stringify(sbtMetadata);
-			console.log(sbtMetadataJSON);
 			const sbtMetadataBuffer = Buffer.from(sbtMetadataJSON);
-			// const sbtMetadataBuffer = Buffer.from("Hello!");
-			console.log(JSON.stringify(sbtMetadataBuffer));
-
 			const encryptedMetadata = encryptData(publicKey, sbtMetadataBuffer);
-			console.log("encryptedMetadata: ", encryptedMetadata);
 
-			// const sbtHash = await addFileToIPFS(encryptedMetadata, ipfs);
 			const sbtHash = await addFileToIPFS(JSON.stringify(encryptedMetadata), ipfs);
 			console.log("Added file (CID):", sbtHash);
 			const path =  sbtHash.path.toString();
-			console.log("Path:", path);
 
 			res.status(201).json({ sbtHash: sbtHash.path });
 
