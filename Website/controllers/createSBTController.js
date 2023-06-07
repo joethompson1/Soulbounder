@@ -34,16 +34,19 @@ export const blockchain_post = async (req, res) => {
 
 	try {
 			const publicKey = Buffer.from(req.body.keyB64, 'base64');
-
 			const imageBuffer = new Buffer.from(req.body.SBTData.image.replace(/^data:image\/\w+;base64,/, ""), 'base64');
 
 			let ipfs;
 
 			try {
-				ipfs = await initIpfs();			
+
+				ipfs = await initIpfs();
+
 			} catch (error) {
+
 				console.log("Error initialising Infura IPFS: ", error.message);
 				console.error("Error initialising Infura IPFS: ", error.message);
+
 			}
 
 			if (!ipfs) {
@@ -55,19 +58,32 @@ export const blockchain_post = async (req, res) => {
 
 			let attributes = req.body.SBTData.attributes;
 
+			for (let i = 1; i < attributes.length; i++ ) {
+				attributes[i].value = encryptData(publicKey, Buffer.from(JSON.stringify(attributes[i].value)));
+			}
+
+			// const sbtMetadata = { 
+			// 	"name" : req.body.SBTData.name,
+			//   	"image" : "https://soulbounder.infura-ipfs.io/ipfs/"+pictureAdded.path,
+			//   	"path" : pictureAdded.path,
+			//   	// "external_url": "https://soulbounder.org/SBT/hash",
+			//   	attributes,
+			//   };
+
+			// const sbtMetadataJSON = JSON.stringify(sbtMetadata);
+			// const sbtMetadataBuffer = Buffer.from(sbtMetadataJSON);
+			// const encryptedMetadata = encryptData(publicKey, sbtMetadataBuffer);
+
+
 			const sbtMetadata = { 
-				"name" : req.body.SBTData.name,
-			  	"image" : "https://soulbounder.infura-ipfs.io/ipfs/"+pictureAdded.path,
-			  	"path" : pictureAdded.path,
+				"name" : encryptData(publicKey, Buffer.from(JSON.stringify(req.body.SBTData.name))),
+			  	"image" : encryptData(publicKey, Buffer.from(JSON.stringify("https://soulbounder.infura-ipfs.io/ipfs/"+pictureAdded.path))),
+			  	"path" : encryptData(publicKey, Buffer.from(JSON.stringify(pictureAdded.path))),
 			  	// "external_url": "https://soulbounder.org/SBT/hash",
 			  	attributes,
 			  };
 
-			const sbtMetadataJSON = JSON.stringify(sbtMetadata);
-			const sbtMetadataBuffer = Buffer.from(sbtMetadataJSON);
-			const encryptedMetadata = encryptData(publicKey, sbtMetadataBuffer);
-
-			const sbtHash = await addFileToIPFS(JSON.stringify(encryptedMetadata), ipfs);
+			const sbtHash = await addFileToIPFS(JSON.stringify(sbtMetadata), ipfs);
 			console.log("Added file (CID):", sbtHash);
 			const path =  sbtHash.path.toString();
 

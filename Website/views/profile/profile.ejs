@@ -35,19 +35,35 @@
 	<script type="text/javascript">
 
 		let connectionText, statusLight;
+		let userWalletAddress = localStorage.getItem('userWalletAddress');
+		let encryptedAttributes = [];
+
+		async function revealAttribute(event) {
+			const attributeId = event.target.dataset.attributeId;		
+			const decryptedAttribute = await decryptAuthAttribute(userWalletAddress, encryptedAttributes[attributeId]);
+			console.log("decryptedAttribute: ", decryptedAttribute);
+
+			const revealAttribute = document.getElementById(attributeId);
+			revealAttribute.innerHTML = decryptedAttribute;
+		}
+
 
 		$(async function() { // execute once the DOM has loaded
 			clearAuthContainers();
-			const userWalletAddress = localStorage.getItem('userWalletAddress');
+			userWalletAddress = localStorage.getItem('userWalletAddress');
 
 			if (userWalletAddress) {
 				setWalletToConnected();
 
 				const accountSBT = await loadAccountSBT('<%- contractAbi %>','<%= contractAddress %>', userWalletAddress);
+				console.log("accountSBT: ", accountSBT);
 				
 				if (accountSBT.tokenURI && accountSBT.SBTData) {
-					const SBTData = await decryptAuthToken(userWalletAddress, accountSBT);
-					viewAccountSBT(SBTData);
+					for (let i = 1; i < accountSBT.SBTData.attributes.length; i++) {
+						encryptedAttributes.push(accountSBT.SBTData.attributes[i].value);
+					}
+					viewAccountSBT(accountSBT.SBTData);
+					// const SBTData = await decryptAuthToken(userWalletAddress, accountSBT);
 				} 
 
 				else {
@@ -58,15 +74,17 @@
 		});
 
 
+
 		$("#container__connectWallet").click(async function(event) {
 			clearAuthContainers();
-			const userWalletAddress = await setUserWallet();
+			userWalletAddress = await setUserWallet();
 			setWalletToConnected(userWalletAddress);
 
 			const accountSBT = await loadAccountSBT('<%- contractAbi %>','<%= contractAddress %>', userWalletAddress);
-			const SBTData = await decryptAuthToken(userWalletAddress, accountSBT);
+			// const SBTData = await decryptAuthToken(userWalletAddress, accountSBT);
+			console.log(accountSBT);
 
-			viewAccountSBT(SBTData);	
+			viewAccountSBT(accountSBT.SBTData);	
 		});
 
 

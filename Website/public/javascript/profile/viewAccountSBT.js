@@ -86,6 +86,7 @@ function viewAccountSBT(SBTData) {
 function loadSBTAttributes(SBTData) {
 	const container__right = document.getElementById('container__right');
 	
+	let index = 0;
 	for (const attribute of SBTData.attributes) {
 		if (attribute.trait_type == 'Type' || attribute.trait_type == null) {
 			continue;
@@ -104,6 +105,8 @@ function loadSBTAttributes(SBTData) {
 		const descriptionTitle = document.createElement('h2');
 		descriptionTitle.className = 'descriptionTitle';
 		descriptionTitle.textContent = attribute.trait_type;
+
+
 		container__title.appendChild(descriptionIcon);
 		container__title.appendChild(descriptionTitle);
 
@@ -112,12 +115,29 @@ function loadSBTAttributes(SBTData) {
 
 		const descriptionContents = document.createElement('p');
 		descriptionContents.className = 'descriptionContents';
-		descriptionContents.textContent = attribute.value;
+		// descriptionContents.textContent = attribute.value;
+		descriptionContents.textContent = "***********";
+		descriptionContents.id = index;
 		container__description.appendChild(descriptionContents);
 
 		container__attribute.appendChild(container__title);
 		container__attribute.appendChild(container__description);
 		container__right.appendChild(container__attribute);
 
+
+		const revealButton = document.createElement('div');
+		revealButton.className = 'revealButton';
+		// revealButton.textContent = "Reveal";
+		revealButton.setAttribute('data-attribute-id', descriptionContents.id);
+		revealButton.addEventListener('click', revealAttribute);
+
+		const lockIcon = document.createElement("img");
+		lockIcon.className = 'lockIcon';
+		lockIcon.src = "/images/lock.svg";
+
+		revealButton.appendChild(lockIcon);
+		container__title.appendChild(revealButton);
+		index++;
 	}
 }
+

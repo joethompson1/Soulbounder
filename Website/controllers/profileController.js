@@ -32,7 +32,7 @@ export const decryptAuthToken = async (req, res) => {
 	try {
 
 		const account = req.body.userWalletAddress;
-		const data = Buffer.from(req.body.SBTData);
+		const data = Buffer.from(req.body.encryptedAttribute);
 		console.log("account: ", account);
 		console.log("data: ", data);
 
