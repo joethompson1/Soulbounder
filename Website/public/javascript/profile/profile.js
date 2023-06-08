@@ -22,7 +22,6 @@ async function loadAccountSBT(contractAbi, contractAddress, userWalletAddress) {
 			console.log("SBTData: ", SBTData);
 
 			accountSBT.tokenURI = tokenURI;
-			// accountSBT.SBTData = SBTData.data;
 			accountSBT.SBTData = SBTData;
 		}
 		
@@ -46,7 +45,7 @@ async function decryptAuthAttribute(userWalletAddress, encryptedAttribute) {
 	let decrypt = await ethereum.request({
 	    method: 'eth_decrypt',
 	    params: [data.ct, userWalletAddress],
-	 });
+	});
 
 	const decryptJson = JSON.parse(decrypt);
 	const buffer = new Uint8Array(decryptJson.data);

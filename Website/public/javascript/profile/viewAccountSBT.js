@@ -113,10 +113,17 @@ function loadSBTAttributes(SBTData) {
 		const container__description = document.createElement('div');
 		container__description.className = 'container__description-contents';
 
+		let encryptedString = "";
+		const min = 10;
+		const max = 35;
+		const randomInt = Math.floor(Math.random() * (max - min + 1)) + min;
+		for (let i = 0; i < randomInt; i++) {
+			encryptedString += "*";
+		}
+
 		const descriptionContents = document.createElement('p');
 		descriptionContents.className = 'descriptionContents';
-		// descriptionContents.textContent = attribute.value;
-		descriptionContents.textContent = "***********";
+		descriptionContents.textContent = encryptedString;
 		descriptionContents.id = index;
 		container__description.appendChild(descriptionContents);
 

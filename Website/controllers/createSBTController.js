@@ -44,7 +44,6 @@ export const blockchain_post = async (req, res) => {
 
 			} catch (error) {
 
-				console.log("Error initialising Infura IPFS: ", error.message);
 				console.error("Error initialising Infura IPFS: ", error.message);
 
 			}
@@ -62,23 +61,10 @@ export const blockchain_post = async (req, res) => {
 				attributes[i].value = encryptData(publicKey, Buffer.from(JSON.stringify(attributes[i].value)));
 			}
 
-			// const sbtMetadata = { 
-			// 	"name" : req.body.SBTData.name,
-			//   	"image" : "https://soulbounder.infura-ipfs.io/ipfs/"+pictureAdded.path,
-			//   	"path" : pictureAdded.path,
-			//   	// "external_url": "https://soulbounder.org/SBT/hash",
-			//   	attributes,
-			//   };
-
-			// const sbtMetadataJSON = JSON.stringify(sbtMetadata);
-			// const sbtMetadataBuffer = Buffer.from(sbtMetadataJSON);
-			// const encryptedMetadata = encryptData(publicKey, sbtMetadataBuffer);
-
-
 			const sbtMetadata = { 
-				"name" : encryptData(publicKey, Buffer.from(JSON.stringify(req.body.SBTData.name))),
-			  	"image" : encryptData(publicKey, Buffer.from(JSON.stringify("https://soulbounder.infura-ipfs.io/ipfs/"+pictureAdded.path))),
-			  	"path" : encryptData(publicKey, Buffer.from(JSON.stringify(pictureAdded.path))),
+				"name" : req.body.SBTData.name,
+			  	"image" : "https://soulbounder.infura-ipfs.io/ipfs/"+pictureAdded.path,
+			  	"path" : pictureAdded.path,
 			  	// "external_url": "https://soulbounder.org/SBT/hash",
 			  	attributes,
 			  };
