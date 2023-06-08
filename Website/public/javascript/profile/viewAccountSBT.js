@@ -57,8 +57,8 @@ function viewAccountSBT(SBTData) {
 	container__createButton.id = 'submitButton';
 
 	var sendIcon = new Image();
-	sendIcon.className = 'sendIcon';
-	sendIcon.src = '/images/edit1.svg';
+	sendIcon.className = 'editIcon';
+	sendIcon.src = '/images/three-dots.svg';
 	container__createButton.appendChild(sendIcon);
 
 	const container__createButtonBubble = document.createElement('div');

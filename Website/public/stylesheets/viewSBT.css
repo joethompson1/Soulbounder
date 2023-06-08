@@ -120,30 +120,31 @@
     position: absolute;
     top: 0%;
     right: 0%;
-    width: 4vw;
-    height: 4vw;
-    border-radius: 100%;
+    width: 3vw;
+    height: 3vw;
+    border-radius: 35%;
     cursor: pointer;
     transition: all 0.3s;
     overflow: visible;
-    border: 0.2vw solid black;
+/*    border: 0.1vw solid grey;*/
 }
 
 
 .container__createButton:hover {
-    border: 0.1vw solid black;
-/*    box-shadow: 0vw 0.3vw 1.5vw 0vw rgba(0,100,0,0.5);*/
+/*    border: 0.1vw solid black;*/
+border: none;
+    box-shadow: 0vw 0.5vw 1.5vw 0vw rgba(108, 122, 137,0.5);
     transform: scale(1.05);
     transition: all 0.3s;
 }
 
 
-.sendIcon {
+.editIcon {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
+    width: 60%;
 }
 
 
