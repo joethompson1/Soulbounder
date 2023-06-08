@@ -126,12 +126,13 @@
     cursor: pointer;
     transition: all 0.3s;
     overflow: visible;
+    border: 0.2vw solid black;
 }
 
 
 .container__createButton:hover {
-    border: none;
-    box-shadow: 0vw 0.3vw 1.5vw 0vw rgba(0,100,0,0.5);
+    border: 0.1vw solid black;
+/*    box-shadow: 0vw 0.3vw 1.5vw 0vw rgba(0,100,0,0.5);*/
     transform: scale(1.05);
     transition: all 0.3s;
 }
@@ -139,10 +140,10 @@
 
 .sendIcon {
     position: absolute;
-    top: 55%;
-    left: 45%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    width: 70%;
+    width: 80%;
 }
 
 

@@ -58,7 +58,7 @@ function viewAccountSBT(SBTData) {
 
 	var sendIcon = new Image();
 	sendIcon.className = 'sendIcon';
-	sendIcon.src = '/images/share.svg';
+	sendIcon.src = '/images/edit1.svg';
 	container__createButton.appendChild(sendIcon);
 
 	const container__createButtonBubble = document.createElement('div');
@@ -69,7 +69,7 @@ function viewAccountSBT(SBTData) {
 	container__createButtonBubble.appendChild(pointer);
 
 	const shareH5 = document.createElement('h5');
-	shareH5.textContent = 'Share';
+	shareH5.textContent = 'Edit';
 	container__createButtonBubble.appendChild(shareH5);
 
 	container__createButton.appendChild(container__createButtonBubble);
