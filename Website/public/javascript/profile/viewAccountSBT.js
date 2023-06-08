@@ -41,7 +41,7 @@ function viewAccountSBT(SBTData) {
 
 	const type = document.createElement('h5');
 	type.className = 'type';
-	type.textContent = 'Type';
+	type.textContent = 'Type:';
 	container__SBTType.appendChild(type);
 
 	const sbtType = document.createElement('h5');
@@ -72,7 +72,7 @@ function viewAccountSBT(SBTData) {
 	shareH5.textContent = 'Share';
 	container__createButtonBubble.appendChild(shareH5);
 
-	container__createButton.appendChild(container__createButtonBubble)
+	container__createButton.appendChild(container__createButtonBubble);
 
 	container__sbtContentsMain.appendChild(container__createButton);
 	container__right.appendChild(container__sbtContentsMain); 
@@ -136,8 +136,24 @@ function loadSBTAttributes(SBTData) {
 		lockIcon.src = "/images/lock.svg";
 
 		revealButton.appendChild(lockIcon);
+
+
+		const container__createButtonBubble = document.createElement('div');
+		container__createButtonBubble.className = 'container__createButtonBubble';
+		
+		const pointer = document.createElement('div');
+		pointer.className = 'pointer';
+		container__createButtonBubble.appendChild(pointer);
+
+		const shareH5 = document.createElement('h5');
+		shareH5.textContent = 'Decrypt';
+		container__createButtonBubble.appendChild(shareH5);
+		revealButton.appendChild(container__createButtonBubble);
+
+
 		container__title.appendChild(revealButton);
 		index++;
+
 	}
 }
 

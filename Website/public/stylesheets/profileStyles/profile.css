@@ -114,6 +114,10 @@
 }
 
 
+.revealButton:hover .container__createButtonBubble {
+    transition: all 0.3s;
+    opacity: 1;
+}
 
 .container__sbt {
 	position: relative;

@@ -167,6 +167,7 @@
     border-radius: 0.5vw;
     transition: all 0.3s;
     text-align: center;
+    pointer-events: none;
 }
 
 .container__createButton:hover .container__createButtonBubble {
