@@ -101,7 +101,10 @@ function loadSBTAttributes(SBTData) {
 		
 		var descriptionIcon = new Image();
 		descriptionIcon.className = 'descriptionIcon';
-		descriptionIcon.src = "/images/description.svg";
+		if (attribute.trait_type == "Email") {
+			descriptionIcon.src = "/images/email.svg";
+		} else { descriptionIcon.src = "/images/description.svg"; }
+		
 		const descriptionTitle = document.createElement('h2');
 		descriptionTitle.className = 'descriptionTitle';
 		descriptionTitle.textContent = attribute.trait_type;
