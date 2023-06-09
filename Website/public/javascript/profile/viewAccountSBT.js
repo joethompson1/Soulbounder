@@ -104,7 +104,7 @@ function loadSBTAttributes(SBTData) {
 		if (attribute.trait_type == "Email") {
 			descriptionIcon.src = "/images/email.svg";
 		} else { descriptionIcon.src = "/images/description.svg"; }
-		
+
 		const descriptionTitle = document.createElement('h2');
 		descriptionTitle.className = 'descriptionTitle';
 		descriptionTitle.textContent = attribute.trait_type;
@@ -125,7 +125,6 @@ function loadSBTAttributes(SBTData) {
 		}
 
 		const descriptionContents = document.createElement('p');
-		descriptionContents.className = 'descriptionContents';
 		descriptionContents.textContent = encryptedString;
 		descriptionContents.id = index;
 		container__description.appendChild(descriptionContents);
@@ -161,7 +160,7 @@ function loadSBTAttributes(SBTData) {
 		revealButton.appendChild(container__createButtonBubble);
 
 
-		container__title.appendChild(revealButton);
+		container__description.appendChild(revealButton);
 		index++;
 
 	}

@@ -162,7 +162,7 @@
 .revealButton {
 	position: absolute;
 	right: 2%;
-	top: calc(50% - 1.5vw);
+	top: calc(58%);
 /*	transform: translateY(-50%);*/
 /*	width: max-content;*/
 	font-size: 1vw;

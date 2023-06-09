@@ -286,7 +286,7 @@ border: none;
 
 
 .container__description-contents {
-    padding: 2% 2% 2% 2.4%;
+    padding: 3% 2% 1.2% 2.4%;
     background-color: #f8fcfd;
     border-radius: 0 0vw 1vw 1vw;
     border-top: 1px solid lightgray;
@@ -302,6 +302,7 @@ border: none;
 
 .container__description-contents p {
     font-size: 1.15vw;
+/*    font-size: 100%;*/
 }
 
 .container__description-contents a {
@@ -329,10 +330,6 @@ border: none;
 }
 
 
-.descriptionContents {
-/*    font-family: Raleway;*/
-/*    font-size: 1.2%;*/
-}
 
 
 
