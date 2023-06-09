@@ -33,12 +33,7 @@ export const decryptAuthToken = async (req, res) => {
 
 		const account = req.body.userWalletAddress;
 		const data = Buffer.from(req.body.encryptedAttribute);
-		console.log("account: ", account);
-		console.log("data: ", data);
-
-
 		const ct = await decryptData(account, data);
-		// const ct = "";
 
 		res.status(201).json({ ct });
 
