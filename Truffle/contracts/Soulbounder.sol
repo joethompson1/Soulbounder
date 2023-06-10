@@ -36,6 +36,14 @@ contract Soulbounder is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         _tokenTypes[tokenId] = tokenType;
     }
 
+    function editTokenMetadata(uint256 tokenId, string memory newUri) public {
+        require(_tokenTypes[tokenId] == 1, "Token type does not support metadata editing");
+        require(ownerOf(tokenId) == msg.sender, "Only token owner can edit metadata");
+
+        _setTokenURI(tokenId, newUri);
+    }
+    
+
     function burn(uint256 tokenId) external {
         require(ownerOf(tokenId) == msg.sender, "Only token owner can burn it");
         _burn(tokenId);

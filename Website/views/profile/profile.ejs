@@ -61,6 +61,11 @@
 		}
 
 
+		function editAuthToken() {
+
+		}
+
+
 		$(async function() { // execute once the DOM has loaded
 			clearAuthContainers();
 			userWalletAddress = localStorage.getItem('userWalletAddress');
@@ -76,7 +81,6 @@
 						encryptedAttributes.push(accountSBT.SBTData.attributes[i].value);
 					}
 					viewAccountSBT(accountSBT.SBTData);
-					// const SBTData = await decryptAuthToken(userWalletAddress, accountSBT);
 				} 
 
 				else {

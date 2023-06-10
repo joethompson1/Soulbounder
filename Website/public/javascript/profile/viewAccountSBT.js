@@ -52,14 +52,15 @@ function viewAccountSBT(SBTData) {
 
 	container__sbtContentsMain.appendChild(container__SBTType);
 
-	const container__createButton = document.createElement('div');
-	container__createButton.className = 'container__createButton';
-	container__createButton.id = 'submitButton';
+	const container__editButton = document.createElement('div');
+	container__editButton.className = 'container__createButton';
+	// container__editButton.id = 'submitButton';
+	container__editButton.addEventListener('click', editAuthToken);
 
-	var sendIcon = new Image();
-	sendIcon.className = 'editIcon';
-	sendIcon.src = '/images/three-dots.svg';
-	container__createButton.appendChild(sendIcon);
+	var editIcon = new Image();
+	editIcon.className = 'editIcon';
+	editIcon.src = '/images/three-dots.svg';
+	container__editButton.appendChild(editIcon);
 
 	const container__createButtonBubble = document.createElement('div');
 	container__createButtonBubble.className = 'container__createButtonBubble';
@@ -72,9 +73,9 @@ function viewAccountSBT(SBTData) {
 	shareH5.textContent = 'Edit';
 	container__createButtonBubble.appendChild(shareH5);
 
-	container__createButton.appendChild(container__createButtonBubble);
+	container__editButton.appendChild(container__createButtonBubble);
 
-	container__sbtContentsMain.appendChild(container__createButton);
+	container__sbtContentsMain.appendChild(container__editButton);
 	container__right.appendChild(container__sbtContentsMain); 
 
 	// Container Right SBT Attributes
