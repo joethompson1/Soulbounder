@@ -73,6 +73,37 @@ async function clearAuthContainers() {
 
 
 
+async function burnToken(tokenId) {
+	try {
+		console.log('Burning token with ID:', tokenId);
+
+		const userWalletAddress = await setUserWallet();
+		const provider = new ethers.providers.Web3Provider(window.ethereum);
+		const signer = provider.getSigner(userWalletAddress);
+
+		const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+		let burnResult = await contract.burn(tokenId);
+
+		let txReceipt = await provider.getTransactionReceipt(burnResult.hash);
+
+		while (!txReceipt && !txReceipt.blockNumber) {
+			txReceipt = await provider.getTransactionReceipt(burnResult.hash);
+		}
+
+		window.location.href = `/home`;
+
+
+	} catch (error) {
+		// Handle any errors
+		console.error('Error burning token:', error);
+	}
+}
+
+
+
+
+
+
 
 
 

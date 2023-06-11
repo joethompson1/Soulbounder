@@ -26,11 +26,6 @@ function viewAccountSBT(accountSBT) {
 	const container__sbtContentsMain = document.createElement('div');
 	container__sbtContentsMain.className = 'container__sbtContentsMain';
 
-	const sbtOwner = document.createElement('h5');
-	sbtOwner.className = 'SBTOwner';
-	sbtOwner.id = 'SBTOwner';
-	container__sbtContentsMain.appendChild(sbtOwner);
-
 	const sbtName = document.createElement('h1');
 	sbtName.className = 'SBTName';
 	sbtName.id = 'SBTName';
@@ -79,7 +74,35 @@ function viewAccountSBT(accountSBT) {
 
 	container__editButton.appendChild(container__createButtonBubble);
 
+
+
+	const container__burnButton = document.createElement('div');
+	container__burnButton.className = 'container__burnButton';
+	container__burnButton.addEventListener('click', async () => {
+	  const tokenId = accountSBT.tokenId;
+	  await burnToken(tokenId);
+	});
+
+	var burnIcon = new Image();
+	burnIcon.className = 'editIcon';
+	burnIcon.src = '/images/openTrash.svg';
+	container__burnButton.appendChild(burnIcon);
+
+	const container__burnButtonBubble = document.createElement('div');
+	container__burnButtonBubble.className = 'container__createButtonBubble';
+	
+	const pointerBurn = document.createElement('div');
+	pointerBurn.className = 'pointer';
+	container__burnButtonBubble.appendChild(pointerBurn);
+
+	const burnH5 = document.createElement('h5');
+	burnH5.textContent = 'Burn';
+	container__burnButtonBubble.appendChild(burnH5);
+
+	container__burnButton.appendChild(container__burnButtonBubble);
+
 	container__sbtContentsMain.appendChild(container__editButton);
+	container__sbtContentsMain.appendChild(container__burnButton);
 	container__right.appendChild(container__sbtContentsMain); 
 
 	// Container Right SBT Attributes

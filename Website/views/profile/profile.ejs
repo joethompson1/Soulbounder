@@ -31,12 +31,13 @@
 	</div>
 
 
-
 	<script type="text/javascript">
 
 		let connectionText, statusLight;
 		let userWalletAddress = localStorage.getItem('userWalletAddress');
 		let encryptedAttributes = [];
+		let contractAbi = '<%- contractAbi %>';
+		const contractAddress = "<%= contractAddress %>";
 
 		async function revealAttribute(event) {
 			const attributeId = event.target.dataset.attributeId;		
