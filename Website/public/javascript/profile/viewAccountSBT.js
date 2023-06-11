@@ -50,9 +50,9 @@ function viewAccountSBT(accountSBT) {
 
 	const container__editButton = document.createElement('div');
 	container__editButton.className = 'container__createButton';
-	container__editButton.addEventListener('click', () => {
-	  const tokenId = accountSBT.tokenId;
+	container__editButton.addEventListener('click', (e) => {
 	  const encodedURI = encodeURIComponent(JSON.stringify(accountSBT.tokenURI));
+	  const tokenId = accountSBT.tokenId;
 	  window.location.href = `/profile/edit?tokenURI=${encodedURI}&tokenId=${tokenId}`;
 	});
 

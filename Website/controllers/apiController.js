@@ -40,18 +40,23 @@ export const getAuthToken = async (req, res) => {
 
 	    // Runs through all the user's tokens
 	    for (let i = 0; i < walletBalance.toString(); i++) {
-      		const tokenId = await contract.tokenOfOwnerByIndex(userWalletAddress, i);
+      		let tokenId = await contract.tokenOfOwnerByIndex(userWalletAddress, i);
       		const tokenType = await contract.getTokenType(tokenId);
 
       	if (tokenType.toNumber() === 1) {
+      		console.log("tokenId: ", tokenId);
 	        let tokenURI = await contract.tokenURI(tokenId);
-	        let request = new Request("https://soulbounder.infura-ipfs.io/ipfs/" + tokenURI);
+	        tokenURI = tokenURI.replace(/"/g, '');
+	        const url = `https://soulbounder.infura-ipfs.io/ipfs/${tokenURI}`;
+	        console.log(url);
+	        let request = new Request(url);
 	        let response = await fetch(request);
+	        console.log("response: ", response);
 	        let SBTData = await response.json();
 
 	        authToken.tokenURI = tokenURI;
 	        authToken.SBTData = SBTData;
-	        authToken.tokenId = tokenId;
+	        authToken.tokenId = tokenId.toNumber();
 	        break;
 	    }
     }

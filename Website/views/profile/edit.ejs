@@ -163,7 +163,6 @@
 			form.addEventListener('submit', async (event) => {
 				event.preventDefault(); // cancel default behavior
 
-				console.log("sbtEdited: ", sbtEdited);
 
 				const textStatus = document.querySelector('.text__status');
 				textStatus.innerHTML = "Publishing..."
@@ -183,6 +182,7 @@
 				  params: [userWalletAddress],
 				});
 
+				console.log("sbtEdited: ", sbtEdited);
 
 				let email;
 				if (sbtEdited.attributesBool[1]) {
@@ -249,8 +249,6 @@
 					attributes,
 				}
 
-				console.log("SBTData: ", SBTData);
-
 				let data;
 
 				try {
@@ -277,6 +275,7 @@
 						const contract = new ethers.Contract(contractAddress, contractAbi, signer);
 
 						try {
+							console.log("tokenId: ", accountSBT.tokenId);
 							let mintResult = await contract.editTokenMetadata(accountSBT.tokenId, data.sbtHash.toString());
 							let txReceipt = await provider.getTransactionReceipt(mintResult.hash);
 

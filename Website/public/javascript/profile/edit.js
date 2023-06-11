@@ -77,7 +77,9 @@ async function loadAuthToken() {
 	const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
 	const encodedTokenURI = urlParams.get('tokenURI');
+	console.log("encodedTokenURI", encodedTokenURI);
 	const tokenURI = encodedTokenURI.slice(1, -1);
+	console.log("tokenURI", tokenURI);
 	const tokenId = urlParams.get('tokenId');
 	console.log(tokenURI);
 

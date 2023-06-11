@@ -103,7 +103,8 @@ export const edit_post = async (req, res) => {
 					console.log("Encrypting Data: ", attributes[i].value);
 					attributes[i].value = encryptData(publicKey, Buffer.from(JSON.stringify(attributes[i].value)));
 				} else {
-					attributes[i].value = attributes[i].value.data;
+					console.log("attributes[i].value.data: ", attributes[i].value.data);
+					// attributes[i].value = attributes[i].value;
 				}
 			}
 
@@ -119,8 +120,9 @@ export const edit_post = async (req, res) => {
 
 			const sbtHash = await addFileToIPFS(JSON.stringify(sbtMetadata), ipfs);
 			console.log("Added file (CID):", sbtHash);
+			const sbtPath = JSON.stringify(sbtHash.path);
 
-			res.status(201).json({ sbtHash: sbtHash.path });
+			res.status(201).json({ sbtHash: sbtPath });
 
 	} catch (err) {
 			console.error("Error in uploading IPFS data: ", err);
