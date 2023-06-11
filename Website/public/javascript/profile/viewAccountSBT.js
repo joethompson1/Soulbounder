@@ -1,4 +1,5 @@
-function viewAccountSBT(SBTData) {
+function viewAccountSBT(accountSBT) {
+	const SBTData = accountSBT.SBTData;
 	const container__left = document.getElementById('container__left');
 	const container__right = document.getElementById('container__right');
 
@@ -54,8 +55,11 @@ function viewAccountSBT(SBTData) {
 
 	const container__editButton = document.createElement('div');
 	container__editButton.className = 'container__createButton';
-	// container__editButton.id = 'submitButton';
-	container__editButton.addEventListener('click', editAuthToken);
+	container__editButton.addEventListener('click', () => {
+	  const tokenId = accountSBT.tokenId;
+	  const encodedURI = encodeURIComponent(JSON.stringify(accountSBT.tokenURI));
+	  window.location.href = `/profile/edit?tokenURI=${encodedURI}&tokenId=${tokenId}`;
+	});
 
 	var editIcon = new Image();
 	editIcon.className = 'editIcon';
@@ -137,7 +141,6 @@ function loadSBTAttributes(SBTData) {
 
 		const revealButton = document.createElement('div');
 		revealButton.className = 'revealButton';
-		// revealButton.textContent = "Reveal";
 		revealButton.setAttribute('data-attribute-id', descriptionContents.id);
 		revealButton.addEventListener('click', revealAttribute);
 

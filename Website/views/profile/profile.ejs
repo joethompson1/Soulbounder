@@ -61,9 +61,6 @@
 		}
 
 
-		function editAuthToken() {
-
-		}
 
 
 		$(async function() { // execute once the DOM has loaded
@@ -80,7 +77,7 @@
 					for (let i = 1; i < accountSBT.SBTData.attributes.length; i++) {
 						encryptedAttributes.push(accountSBT.SBTData.attributes[i].value);
 					}
-					viewAccountSBT(accountSBT.SBTData);
+					viewAccountSBT(accountSBT);
 				} 
 
 				else {
@@ -98,10 +95,17 @@
 			setWalletToConnected(userWalletAddress);
 
 			const accountSBT = await loadAccountSBT('<%- contractAbi %>','<%= contractAddress %>', userWalletAddress);
-			// const SBTData = await decryptAuthToken(userWalletAddress, accountSBT);
-			console.log(accountSBT);
+			
+			if (accountSBT.tokenURI && accountSBT.SBTData) {
+				for (let i = 1; i < accountSBT.SBTData.attributes.length; i++) {
+					encryptedAttributes.push(accountSBT.SBTData.attributes[i].value);
+				}
+				viewAccountSBT(accountSBT);
+			} 
 
-			viewAccountSBT(accountSBT.SBTData);	
+			else {
+				console.error("No Auth token found in wallet.");
+			}
 		});
 
 

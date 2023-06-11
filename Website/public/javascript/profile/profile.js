@@ -1,5 +1,5 @@
 async function loadAccountSBT(contractAbi, contractAddress, userWalletAddress) {
-	const accountSBT = { tokenURI: null, SBTData: null};
+	const accountSBT = { tokenURI: null, SBTData: null, tokenId: null};
 
 	const provider = new ethers.providers.Web3Provider(window.ethereum);
 	const signer = provider.getSigner(userWalletAddress);
@@ -20,6 +20,7 @@ async function loadAccountSBT(contractAbi, contractAddress, userWalletAddress) {
 
 			accountSBT.tokenURI = tokenURI;
 			accountSBT.SBTData = SBTData;
+			accountSBT.tokenId = tokenId;
 		}
 		
 	}

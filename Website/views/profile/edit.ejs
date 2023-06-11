@@ -1,0 +1,320 @@
+	<head>
+	<!-- Stylesheets -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+	<link rel="stylesheet" href="/stylesheets/profileStyles/edit.css">
+
+	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+
+	<script src="/javascript/profile/edit.js"></script>
+	<script src="/javascript/profile/profile.js"></script>
+</head>
+
+<body>
+	<div class="container__body">
+		<div class="container__tokenStatus">
+			<div class="container__statusLight" id="container__statusLight">
+			</div>
+			<p class="text__status" id="text__status">Changes Not Published</p>
+		</div>
+		<form class="formContainer" id="formContainer">
+			<div class="container__mainContents">
+				<div class="container__left">
+					<div class="container__image">
+						<img class="ethereumIcon" src="/images/ethereum.svg">
+						<div class="SBTPictureContainer">
+							<label id="imageLabel" class="imageLabel" for="fileInput">
+								<img class="displayImage" src="#" id="displayImage">
+							</label>
+
+							<input id="fileInput" type="file" onchange="readURL(this);" name="image" accept="image/png, image/jpeg, image/gif" >
+							<input class="SBTPicture" type="text" name="SBTPicture" id='SBTPicture'>
+						</div>
+					</div>
+					
+				</div>
+				<div class="container__right" id="container__right">
+					<div class="container__sbtContentsMain">
+						<input class="SBTName" type="text" name="SBTName" placeholder="Your Name" id="SBTName" required>
+						<div class="container__SBTType">
+							<h5 class="type">Type: </h5>
+							<h5 class="SBTType">Account</h5>
+						</div>
+						<button class="container__createButton" id="submitButton" type="submit">
+							<img class="sendIcon" src="/images/send.svg">
+						</button>
+						<div class="container__createButtonBubble">
+							<div class="pointer"></div>
+							<h5>Publish</h5>
+						</div>
+					</div>
+
+
+					<div class="container__attribute" id="description">
+						<div class="container__description-title">
+							<img class="descriptionIcon" src="/images/email.svg">
+							<h2 class="descriptionTitle">Email</h2>
+						</div>
+						<div class="container__description-contents" id="containerDescription">
+							<input class="descriptionContents" type="" id="emailContents" required>
+						</div>
+					</div>
+
+					<div class="repeatingInputContainers" id="repeatingInputContainer">				
+					</div>
+
+					<div class="container__attribute" id="createCustomAttribute">
+						<div class="container__description-title">
+							<img class="descriptionIcon" src="/images/plus-square.svg">
+							<h2 class="descriptionTitle">Add Custom Attribute</h2>
+						</div>
+						<div class="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+
+
+	<script type="text/javascript">
+		let userWalletAddress = localStorage.getItem('userWalletAddress');
+		let encryptedAttributes = [];
+		let sbtEdited;
+
+		const createInputButton = document.querySelector('#createCustomAttribute');
+		var numberOfCustomInputs = 0;
+
+
+		createInputButton.addEventListener('click', (e) => {
+			createCustomAttributes(numberOfCustomInputs);
+		});
+
+
+
+
+		async function revealAttribute(event) {
+			let attributeId, revealButton;
+
+			if (event.target.dataset.attributeId) {
+				attributeId = event.target.dataset.attributeId;	
+				revealButton = event.target; 
+			}
+
+			else {
+				attributeId = event.target.id;
+				revealButton = document.getElementById('revealButton'+attributeId);
+			}
+
+			sbtEdited.attributesBool[parseInt(attributeId)+1] = true;
+
+			const decryptedAttribute = await decryptAuthAttribute(userWalletAddress, encryptedAttributes[attributeId]);
+			
+			if (decryptedAttribute) {
+
+				const revealAttribute = document.getElementById(attributeId);
+				revealAttribute.value = decryptedAttribute;
+
+			    revealButton.style.transition = 'opacity 0.5s'; // Set the transition property
+
+			    // Fade the button to opacity 0
+			    revealButton.style.opacity = '0';
+
+			    // Optional: Add a callback to remove the button from the DOM after the fade
+			    revealButton.addEventListener('transitionend', function() {
+			      revealButton.parentNode.removeChild(revealButton);
+			    });
+
+			}
+
+		}
+
+
+		$(async function() { // execute once the DOM has loaded
+
+			const form = document.getElementById('formContainer');
+			const imageInput = document.getElementById('fileInput');
+			const imageLabel = document.getElementById('imageLabel');
+
+
+			const accountSBT = await loadAuthToken();
+			populateAuthToken(accountSBT.SBTData);
+
+			let attributesBool = [];
+			attributesBool.push(false);
+
+	
+			if (accountSBT.tokenURI && accountSBT.SBTData) {
+				for (let i = 1; i < accountSBT.SBTData.attributes.length; i++) {
+					encryptedAttributes.push(accountSBT.SBTData.attributes[i].value);
+					attributesBool.push(false);
+				}
+			}
+
+			sbtEdited = {
+				"name" : false,
+				"image" : false,
+				attributesBool,
+			};
+
+
+			// wire up button click event
+			form.addEventListener('submit', async (event) => {
+				event.preventDefault(); // cancel default behavior
+
+				console.log("sbtEdited: ", sbtEdited);
+
+				const textStatus = document.querySelector('.text__status');
+				textStatus.innerHTML = "Publishing..."
+				document.getElementById('container__statusLight').style.background = "orange";
+				
+				const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+				const userWalletAddress = accounts[0];
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				const signer = provider.getSigner(userWalletAddress);
+
+				const networkId = await window.ethereum.request({ method: 'net_version' });
+				const contractNetworkId = "<%= contractNetworkId %>";
+
+				// Key is returned as base64
+				const keyB64 = await ethereum.request({
+				  method: 'eth_getEncryptionPublicKey',
+				  params: [userWalletAddress],
+				});
+
+
+				let email;
+				if (sbtEdited.attributesBool[1]) {
+					email = document.getElementById(0).value;
+				} else {
+					email = accountSBT.SBTData.attributes[1].value;
+				}
+
+				attributes = [ // set form attributes for SBTData 
+					{ 
+						trait_type: "Type",
+						value: "Account",
+					},
+					{
+						trait_type: "Email",
+						value: email,
+					}
+				];
+
+				for (let i = 2; i < accountSBT.SBTData.attributes.length; i++) {
+					if (sbtEdited.attributesBool[i]) {
+						attributes.push({
+							trait_type: accountSBT.SBTData.attributes[i].trait_type,
+							value: document.getElementById(i-1).value,
+						});
+					}
+
+					else {
+						attributes.push({
+							trait_type: accountSBT.SBTData.attributes[i].trait_type,
+							value: accountSBT.SBTData.attributes[i].value,
+						});
+					}
+				}
+
+
+				var attributeTitles = document.getElementsByClassName("customTitle");
+				var attributeContents = document.getElementsByClassName("descriptionContents");
+
+				// for each custom attribute add it to the attributes array
+				for (let i = 1; i <= attributeTitles.length; i++) {
+					const attributeTitle = attributeTitles[i-1].value;
+					const attributeContent = attributeContents[i].value;
+					attributes.push({
+						trait_type: attributeTitle,
+						value: attributeContent,
+					});
+					
+				}
+
+				let image;
+
+				if (sbtEdited.image) {
+					image = document.getElementById('displayImage').src;
+				} else {
+					image = accountSBT.SBTData.image;
+				}
+
+				// Set SBTData based on form content
+				var SBTData = {
+					"name" : document.getElementById('SBTName').value,
+					"image" : image,
+					"path" : accountSBT.SBTData.path,
+					attributes,
+				}
+
+				console.log("SBTData: ", SBTData);
+
+				let data;
+
+				try {
+					const res = await fetch('/profile/edit', { 
+					  method: 'POST', 
+					  body: JSON.stringify({ SBTData, keyB64, sbtEdited }),
+					  headers: {'Content-Type': 'application/json'}
+					});
+
+					data = await res.json();
+
+				} catch(error) {
+					textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";
+					document.getElementById('container__statusLight').style.background = "red";
+				}
+
+				if (data.sbtHash) {
+
+					if (contractNetworkId == networkId) {
+
+						let contractAbi = '<%- contractAbi %>';
+						const contractAddress = "<%= contractAddress %>";
+
+						const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+
+						try {
+							let mintResult = await contract.editTokenMetadata(accountSBT.tokenId, data.sbtHash.toString());
+							let txReceipt = await provider.getTransactionReceipt(mintResult.hash);
+
+							while (!txReceipt && !txReceipt.blockNumber) {
+								txReceipt = await provider.getTransactionReceipt(mintResult.hash);
+							}
+
+							textStatus.innerHTML = "Published"
+							document.getElementById('container__statusLight').style.background = "green";
+
+							window.location.assign(
+							  "/profile"
+							);
+
+
+						} catch(error) {
+							console.log(error.data.data.reason);
+							if (error.data.data && error.data.data.reason) {
+								textStatus.innerHTML = "Unpublished (Error: "+error.data.data.reason+")";
+
+							} else {
+								textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";									
+							}
+							document.getElementById('container__statusLight').style.background = "red";
+						}
+
+
+					} else {
+						window.alert("Smart contract not deployed to detected network!");
+					}
+				} else {
+					window.alert("Error uploading data to IPFS");
+				}
+
+				
+		  	});
+
+		});
+
+	</script>
+</body>
