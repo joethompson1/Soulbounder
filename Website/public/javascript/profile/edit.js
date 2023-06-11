@@ -26,8 +26,6 @@ function readURL(input) {
 
 
 function createCustomAttributes(numberOfCustomInputs) {
-	numberOfCustomInputs += 1;
-	sbtEdited.attributesBool.push(true);
 	var repeatingInputContainer = document.getElementById('repeatingInputContainer');
 
 	const container__attribute = document.createElement('div');
@@ -54,9 +52,10 @@ function createCustomAttributes(numberOfCustomInputs) {
 	container__description__contents.className = 'container__description-contents';
 
 	const descriptionContents = document.createElement('input');
-	descriptionContents.className = 'descriptionContents';
+	descriptionContents.className = 'descriptionContents customContent';
 	descriptionContents.required = true;
 	descriptionContents.type = "text";
+	descriptionContents.id = numberOfCustomInputs;
 	container__description__contents.appendChild(descriptionContents);
 
 	container__attribute.appendChild(container__title);
@@ -70,6 +69,7 @@ function createCustomAttributes(numberOfCustomInputs) {
 
 function closeInput(blankInputBoxX) {
 	document.getElementById(blankInputBoxX).remove();
+	numberOfCustomInputs--;
 }
 
 

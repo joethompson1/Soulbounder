@@ -39,30 +39,6 @@
 		let contractAbi = '<%- contractAbi %>';
 		const contractAddress = "<%= contractAddress %>";
 
-		async function revealAttribute(event) {
-			const attributeId = event.target.dataset.attributeId;		
-			const decryptedAttribute = await decryptAuthAttribute(userWalletAddress, encryptedAttributes[attributeId]);
-			
-			if (decryptedAttribute) {
-				const revealAttribute = document.getElementById(attributeId);
-				revealAttribute.innerHTML = decryptedAttribute;
-
-				const revealButton = event.target; // Get the button element
-			    revealButton.style.transition = 'opacity 0.5s'; // Set the transition property
-
-			    // Fade the button to opacity 0
-			    revealButton.style.opacity = '0';
-
-			    // Optional: Add a callback to remove the button from the DOM after the fade
-			    revealButton.addEventListener('transitionend', function() {
-			      revealButton.parentNode.removeChild(revealButton);
-			    });
-			}
-
-		}
-
-
-
 
 		$(async function() { // execute once the DOM has loaded
 			clearAuthContainers();

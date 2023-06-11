@@ -7,13 +7,11 @@ async function decryptAuthAttribute(userWalletAddress, encryptedAttribute) {
 	  headers: {'Content-Type': 'application/json'}
 	});
 
-	// const response = await fetch(`/api/decryptAttribute/${userWalletAddress}/${encryptedAttribute}`);
 
 	data = await response.json();
 	let decryptedAttribute;
 
 	try {
-
 		let decrypt = await ethereum.request({
 		    method: 'eth_decrypt',
 		    params: [data.ct, userWalletAddress],
@@ -29,6 +27,33 @@ async function decryptAuthAttribute(userWalletAddress, encryptedAttribute) {
 	}
 
 	return decryptedAttribute;
+}
+
+
+
+
+
+async function revealAttribute(event) {
+	const attributeId = event.target.dataset.attributeId;	
+	const decryptedAttribute = await decryptAuthAttribute(userWalletAddress, encryptedAttributes[attributeId]);
+	
+	if (decryptedAttribute) {
+		const revealAttribute = document.getElementById(attributeId);
+		revealAttribute.innerHTML = decryptedAttribute;
+		console.log("decryptedAttribute: ", decryptedAttribute);
+
+		const revealButton = event.target; // Get the button element
+	    revealButton.style.transition = 'opacity 0.5s'; // Set the transition property
+
+	    // Fade the button to opacity 0
+	    revealButton.style.opacity = '0';
+
+	    // Optional: Add a callback to remove the button from the DOM after the fade
+	    revealButton.addEventListener('transitionend', function() {
+	      revealButton.parentNode.removeChild(revealButton);
+	    });
+	}
+
 }
 
 

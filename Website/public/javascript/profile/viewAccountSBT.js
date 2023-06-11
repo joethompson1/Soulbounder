@@ -164,7 +164,7 @@ function loadSBTAttributes(SBTData) {
 
 		const revealButton = document.createElement('div');
 		revealButton.className = 'revealButton';
-		revealButton.setAttribute('data-attribute-id', descriptionContents.id);
+		revealButton.setAttribute('data-attribute-id', index);
 		revealButton.addEventListener('click', revealAttribute);
 
 		const lockIcon = document.createElement("img");

@@ -41,11 +41,11 @@
 						</div>
 						<button class="container__createButton" id="submitButton" type="submit">
 							<img class="sendIcon" src="/images/send.svg">
+							<div class="container__createButtonBubble">
+								<div class="pointer"></div>
+								<h5>Publish</h5>
+							</div>
 						</button>
-						<div class="container__createButtonBubble">
-							<div class="pointer"></div>
-							<h5>Publish</h5>
-						</div>
 					</div>
 
 
@@ -88,7 +88,10 @@
 
 
 		createInputButton.addEventListener('click', (e) => {
+			console.log("numberOfCustomInputs: ", numberOfCustomInputs);
 			createCustomAttributes(numberOfCustomInputs);
+			numberOfCustomInputs++;
+			sbtEdited.attributesBool.push(true);
 		});
 
 
@@ -106,6 +109,9 @@
 				attributeId = event.target.id;
 				revealButton = document.getElementById('revealButton'+attributeId);
 			}
+
+			console.log("attributeId: ", attributeId);
+			console.log("revealButton: ", revealButton);
 
 			sbtEdited.attributesBool[parseInt(attributeId)+1] = true;
 
@@ -144,11 +150,13 @@
 			let attributesBool = [];
 			attributesBool.push(false);
 
+			
 	
 			if (accountSBT.tokenURI && accountSBT.SBTData) {
 				for (let i = 1; i < accountSBT.SBTData.attributes.length; i++) {
 					encryptedAttributes.push(accountSBT.SBTData.attributes[i].value);
 					attributesBool.push(false);
+					numberOfCustomInputs++;
 				}
 			}
 
@@ -218,14 +226,18 @@
 					}
 				}
 
+				console.log("attributes: ", attributes);
 
-				var attributeTitles = document.getElementsByClassName("customTitle");
-				var attributeContents = document.getElementsByClassName("descriptionContents");
+
+				var customTitle = document.getElementsByClassName("customTitle");
+				var attributeContents = document.getElementsByClassName("customContent");
+				console.log("attributeContents: ", attributeContents);
 
 				// for each custom attribute add it to the attributes array
-				for (let i = 1; i <= attributeTitles.length; i++) {
-					const attributeTitle = attributeTitles[i-1].value;
+				for (let i = 0; i < customTitle.length; i++) {
+					const attributeTitle = customTitle[i].value;
 					const attributeContent = attributeContents[i].value;
+					console.log("attributeContent: ", attributeContent);
 					attributes.push({
 						trait_type: attributeTitle,
 						value: attributeContent,
