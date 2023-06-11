@@ -195,10 +195,10 @@ aside {
       }
 
         aside .side-inner .nav-menu ul li a:hover:before {
-          width: 0.75vw;
+          width: 5px;
           opacity: 1;
           visibility: visible;
-          border-radius: 0 0.65vw 0.65vw 0;  
+          border-radius: 0 15px 15px 0;  
         }
 
     aside .side-inner .nav-menu ul li.active a {
@@ -209,8 +209,8 @@ aside {
       aside .side-inner .nav-menu ul li.active a:before {
         opacity: 1;
         visibility: visible;
-        width: 1vw;
-        border-radius: 0 0.65vw 0.65vw 0; 
+        width: 7px;
+        border-radius: 0 15px 15px 0; 
       }
 
 

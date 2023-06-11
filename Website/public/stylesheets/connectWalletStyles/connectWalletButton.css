@@ -1,12 +1,13 @@
 .container__connectWallet {
     position: relative;
     cursor: pointer;
-    display: inline-block;
-    transform: translate(-3%, 0);
+    display: flex;
+/*    transform: translate(-3%, 0%);*/
     border-radius: 1vw;
     white-space: nowrap;
     padding: 0.25% 1.5% 0.25% 1%;
     transition: all 0.3s;
+    width: max-content;
 }
 
 
@@ -20,8 +21,9 @@
 
 .container__statusLight {
     position: absolute;
-    top: 50.5%;
-    left: 3.5%;
+    top: 50%;
+    left: 0;
+    margin-left: 0.4vw;
     transform: translateY(-50%);
     border-radius: 100%;
     width: 0.91vw;
@@ -36,3 +38,5 @@
     margin: 0 0 0 0;
     padding-left: 0.9vw;
 }
+
+

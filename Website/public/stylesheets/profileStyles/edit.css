@@ -9,21 +9,6 @@
 
 
 
-
-/*input:invalid {
-  border-color: red;
-}
-
-input:invalid:focus {
-  outline-color: red;
-}
-
-input:invalid + .error-message {
-  display: block;
-  color: red;
-}*/
-
-
 .invalidImage {
     border-radius: 1vw;
     border: 2px solid red;
@@ -47,9 +32,7 @@ input:invalid + .error-message {
 
 
 .container__tokenStatus {
-/*    border-top: 1px solid lightgray;*/
     display: flex;
-/*    padding-top: 0.25%;*/
 }
 
 

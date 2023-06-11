@@ -3,7 +3,7 @@
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 	<link rel="stylesheet" href="/stylesheets/profileStyles/profile.css">
 	<link rel="stylesheet" href="/stylesheets/connectWalletStyles/connectWalletButton.css">
-	<link rel="stylesheet" href="/stylesheets/viewSBT.css">
+	<!-- <link rel="stylesheet" href="/stylesheets/viewSBT.css"> -->
 
 	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
 	<script src="/javascript/walletButton.js"></script>
@@ -92,7 +92,7 @@
 		$("#container__connectWallet").click(async function(event) {
 			clearAuthContainers();
 			userWalletAddress = await setUserWallet();
-			setWalletToConnected(userWalletAddress);
+			setWalletToConnected();
 
 			const accountSBT = await loadAccountSBT('<%- contractAbi %>','<%= contractAddress %>', userWalletAddress);
 			

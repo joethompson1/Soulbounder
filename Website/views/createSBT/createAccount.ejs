@@ -5,6 +5,7 @@
 
 	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
 	<script src="/javascript/createAccount/createAccount.js"></script>
+	<script src="/javascript/walletButton.js"></script>
 </head>
 
 <body>
@@ -40,11 +41,11 @@
 						</div>
 						<button class="container__createButton" id="submitButton" type="submit">
 							<img class="sendIcon" src="/images/send.svg">
+							<div class="container__createButtonBubble">
+								<div class="pointer"></div>
+								<h5>Publish</h5>
+							</div>
 						</button>
-						<div class="container__createButtonBubble">
-							<div class="pointer"></div>
-							<h5>Publish</h5>
-						</div>
 					</div>
 
 
@@ -111,8 +112,7 @@
 					textStatus.innerHTML = "Publishing..."
 					document.getElementById('container__statusLight').style.background = "orange";
 					
-					const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-					const userWalletAddress = accounts[0];
+					const userWalletAddress = await setUserWallet();
 					const provider = new ethers.providers.Web3Provider(window.ethereum);
 					const signer = provider.getSigner(userWalletAddress);
 
