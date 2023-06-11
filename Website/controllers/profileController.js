@@ -29,23 +29,6 @@ export const profile_get = async (req, res) => {
 
 
 
-export const decryptAuthToken = async (req, res) => {
-
-	try {
-
-		const account = req.body.userWalletAddress;
-		const data = Buffer.from(req.body.encryptedAttribute);
-		const ct = await decryptData(account, data);
-
-		res.status(201).json({ ct });
-
-	} catch (err) {
-		console.error("Error in decrypting Auth token: ", err);
-		res.status(400).json({ errors: "Error in decrypting Auth token: ", err });
-	}
-
-}
-
 
 
 

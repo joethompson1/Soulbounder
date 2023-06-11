@@ -1,13 +1,15 @@
 
 
 async function decryptAuthAttribute(userWalletAddress, encryptedAttribute) {
-	const res = await fetch('/profile/decryptAuthToken', { 
+	const response = await fetch('/api/decryptAttribute', { 
 	  method: 'POST', 
 	  body: JSON.stringify({ userWalletAddress, encryptedAttribute}),
 	  headers: {'Content-Type': 'application/json'}
 	});
 
-	data = await res.json();
+	// const response = await fetch(`/api/decryptAttribute/${userWalletAddress}/${encryptedAttribute}`);
+
+	data = await response.json();
 	let decryptedAttribute;
 
 	try {

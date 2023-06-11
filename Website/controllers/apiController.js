@@ -6,6 +6,14 @@ import { ethers } from 'ethers';
 import Web3 from 'web3';
 
 
+
+function getProvider() {
+	const rpcUrl = 'http://127.0.0.1:7545';
+	const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+	return provider;
+}
+
+
 export const getAuthToken = async (req, res) => {
 	try {
     	const { userWalletAddress } = req.params;
@@ -24,8 +32,7 @@ export const getAuthToken = async (req, res) => {
     	const contractAddress = networkData.address;
 
 	    // Connect to Ethereum network using a JSON-RPC provider
-	    const rpcUrl = 'http://127.0.0.1:7545';
-	    const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+	    const provider = getProvider();
 	    const signer = provider.getSigner(userWalletAddress);
 	    const contract = new ethers.Contract(contractAddress, contractAbi, signer);
 
@@ -59,3 +66,33 @@ export const getAuthToken = async (req, res) => {
 
   	}
 };
+
+
+
+
+
+
+
+export const decryptAttribute = async (req, res) => {
+
+	try {
+
+		const userWalletAddress = req.body.userWalletAddress;
+		const encryptedData = Buffer.from(req.body.encryptedAttribute);
+		const ct = await decryptData(userWalletAddress, encryptedData);
+
+		res.status(201).json({ ct });
+
+
+	} catch (err) {
+		console.error("Error in decrypting attribute: ", err);
+		res.status(400).json({ errors: "Error in decrypting attribute: ", err });
+	}
+
+};
+
+
+
+
+
+

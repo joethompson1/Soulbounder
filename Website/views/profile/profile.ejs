@@ -79,10 +79,10 @@
 				    const data = await response.json();
 				    authToken = data.authToken;
 
-				  } catch (error) {
+				} catch (error) {
 				    // Handle any errors
 				    console.error('Error with getAuthToken API:', error);
-				  }
+				}
 				
 				if (authToken.tokenURI && authToken.SBTData) {
 					for (let i = 1; i < authToken.SBTData.attributes.length; i++) {
