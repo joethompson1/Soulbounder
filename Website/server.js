@@ -13,6 +13,8 @@ app.listen(process.env.PORT || 3000);
 import homeRouter from './routes/homeRoutes.js'
 import createSBTRouter from './routes/createSBTRoutes.js';
 import profileRouter from './routes/profileRoutes.js';
+import apiRouter from './routes/apiRoutes.js';
+
 
 
 // Set Templating Engine
@@ -33,6 +35,7 @@ app.use('/', homeRouter);
 app.use('/home', homeRouter);
 app.use('/createSBT', createSBTRouter);
 app.use('/profile', profileRouter);
+app.use('/api', apiRouter);
 
 
 

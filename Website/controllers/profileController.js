@@ -1,4 +1,4 @@
-// import * as IPFS from 'ipfs-core';
+
 import { initIpfs, addFileToIPFS } from '../models/ipfs.js';
 import { decryptData } from '../models/metamask/decryptData.js';
 import { encryptData } from '../models/metamask/encryptData.js';

@@ -71,14 +71,24 @@
 			if (userWalletAddress) {
 				setWalletToConnected();
 
-				const accountSBT = await loadAccountSBT('<%- contractAbi %>','<%= contractAddress %>', userWalletAddress);
-				console.log("accountSBT: ", accountSBT);
+				let authToken;
+
+				try {
+				    // Make a GET request to the getAuthToken API endpoint
+				    const response = await fetch(`/api/getAuthToken/${userWalletAddress}`);
+				    const data = await response.json();
+				    authToken = data.authToken;
+
+				  } catch (error) {
+				    // Handle any errors
+				    console.error('Error with getAuthToken API:', error);
+				  }
 				
-				if (accountSBT.tokenURI && accountSBT.SBTData) {
-					for (let i = 1; i < accountSBT.SBTData.attributes.length; i++) {
-						encryptedAttributes.push(accountSBT.SBTData.attributes[i].value);
+				if (authToken.tokenURI && authToken.SBTData) {
+					for (let i = 1; i < authToken.SBTData.attributes.length; i++) {
+						encryptedAttributes.push(authToken.SBTData.attributes[i].value);
 					}
-					viewAccountSBT(accountSBT);
+					viewAccountSBT(authToken);
 				} 
 
 				else {
