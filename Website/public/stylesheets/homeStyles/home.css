@@ -127,6 +127,7 @@ body {
 	display: inline-flex;
 	margin-top: 2vw;
 	margin-right: 5vw;
+	perspective: 1000px;
 }
 
 
@@ -135,6 +136,7 @@ body {
 	display: inline-flex;
 	margin-top: 2vw;
 	margin-right: 5vw;
+	perspective: 1000px;
 }
 
 
@@ -167,7 +169,7 @@ body {
 	width: max-conent;
 	height: max-content;
 	border-radius: 2vw 0 0 2vw;
-	padding: 2% 8% 1% 0%;
+	padding: 2% 10% 1% 0%;
 	width: 100%;
 }
 
@@ -183,29 +185,42 @@ body {
 
 
 .authToken__img {
-	width: 65%;
+	position: relative;
+	width: 100%;
+	border-radius: 1% 1% 5% 5%;
+	box-shadow: 0 0 2rem 0 rgba(0, 0, 0, .25);
+	padding: 2%;
+	background-color: white;
 }
 
 
 .authToken__decryptGif {
 	position: relative;
 	width: 100%;
-/*	border: 0.2vw solid lightgray;*/
-/*	border-style: ridge;*/
 	border-radius: 1% 1% 5% 5%;
 	box-shadow: 0 0 2rem 0 rgba(0, 0, 0, .25);
+	padding: 6%;
+	background-color: white;
 }
 
 .fakeScreenContainer {
 	position: relative;
 	width: max-content;
 	height: max-content;
-	width: 80%;
+	width: 100%;
 	padding: 1.5% 0 0 0;
 	border-radius: 3% 3% 5% 5%;
 	background-color: lightgray;
-/*	backdrop-filter: blur(150px);*/
+}
 
+
+.PersRight {
+	transform: rotate3d(0.2, 1, 0, -20deg);
+	left: -6%;
+}
+
+.PersLeft {
+	transform: rotate3d(0.2, 1, 0, 20deg);
 }
 
 
