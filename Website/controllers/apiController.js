@@ -17,7 +17,6 @@ function getProvider() {
 export const getAuthToken = async (req, res) => {
 	try {
     	const { userWalletAddress } = req.params;
-    	console.log(userWalletAddress);
     	const authToken = { tokenURI: null, tokenId: null, SBTData: null };
 
     	let networkDataList = Soulbounder.networks;
@@ -44,14 +43,11 @@ export const getAuthToken = async (req, res) => {
       		const tokenType = await contract.getTokenType(tokenId);
 
       	if (tokenType.toNumber() === 1) {
-      		console.log("tokenId: ", tokenId);
 	        let tokenURI = await contract.tokenURI(tokenId);
 	        tokenURI = tokenURI.replace(/"/g, '');
 	        const url = `https://soulbounder.infura-ipfs.io/ipfs/${tokenURI}`;
-	        console.log(url);
 	        let request = new Request(url);
 	        let response = await fetch(request);
-	        console.log("response: ", response);
 	        let SBTData = await response.json();
 
 	        authToken.tokenURI = tokenURI;
