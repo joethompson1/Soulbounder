@@ -177,7 +177,7 @@ body {
 	width: max-conent;
 	height: max-content;
 	border-radius: 2vw 0 0 2vw;
-	padding: 2% 0% 1% 8%;
+	padding: 2% 0% 1% 0%;
 	width: 100%;
 }
 
@@ -247,7 +247,24 @@ body {
 }
 
 
+.authToken__description__panel {
+	position: relative;
+	display: block;
+	padding-left: 5vw;
+}
 
+
+.createAuthTokenButton {
+	position: relative;
+	background-color: #2563EB;
+	color: white;
+	border-radius: 0.8vw;
+	padding: 2% 5% 2% 5%;
+	font-family: 'Quicksand', sans-serif;
+	font-size: 1.1vw;
+	border: none;
+	margin-top: 3vh;
+}
 
 
 

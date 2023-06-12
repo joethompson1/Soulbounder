@@ -51,9 +51,13 @@
 					<div class="greenDot"></div>
 					<img src="/images/decrypt.gif" class="authToken__decryptGif">
 				</div>
-				<p class="authToken__description2">
-					<span>2. </span>All of your data is encrypted and stored decentrally using the Ethereum network, meaning you have total ownership and privacy of what's yours. You can easily decrypt your data at the press of a button.
-				</p>
+				<div class="authToken__description__panel">
+					<p class="authToken__description2">
+						<span>2. </span>All of your data is encrypted and stored decentrally using the Ethereum network, meaning you have total ownership and privacy of what's yours. You can easily decrypt your data at the press of a button.
+					</p>
+
+					<button class="createAuthTokenButton" id="gettingStartedButton">Get Started</button>
+				</div>
 				
 			</div>
 		</div>
@@ -63,7 +67,9 @@
 
 
 	<script>
-
+		document.getElementById("gettingStartedButton").addEventListener("click", function() {
+   			window.location.href = "/createSBT";
+	  	});
 
 	</script>
 
