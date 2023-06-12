@@ -46,20 +46,37 @@ body {
 
 
 .text__panel {
+/*	border-radius: 5% !important;*/
+}
+
+/*.container {
+  width: 30rem;
+  height: 20rem;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, .15);
+  
+  backdrop-filter: blur(5px);
+}*/
+
+
+.text__panel {
 	position: absolute;
 	bottom: 0%;
 	transform: translateY(-50%);
 	left: 5%;
 	padding: 1%;
 	width: max-content;
-	border-radius: 5%;
-	background-color: rgba(0, 0, 0, 0.55); /* White color with 0.5 opacity */
-
+/*	border-radius: 15% !important;*/
+/*	height: 2;*/
+	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+	border-radius: 5px;
+	backdrop-filter: blur(5px);
 }
 
 .text__panel h1 {
 	font-size: 10vw;
-	color: rgba(255, 255, 255, 0.40); /* White color with 0.5 opacity */
+	color: rgba(255, 255, 255, 0.50); /* White color with 0.5 opacity */
 	margin: 0;
 	padding: 0;
 }
@@ -70,13 +87,6 @@ body {
 	color: rgba(255, 255, 255, 0.95); /* White color with 0.5 opacity */
 	font-family: 'Montserrat Alternates', sans-serif;
 }
-
-
-/*--font-marker: 'Permanent Marker', cursive;
-	--font-gajraj: 'Gajraj One', cursive ;
-	--font-josefin: 'Josefin Sans', sans-serif;
-	--font-montserrat: 'Montserrat Alternates', sans-serif;*/
-
 
 
 
