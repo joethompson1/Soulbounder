@@ -74,13 +74,10 @@
 
 
 .createAuthTokenButton:hover {
-/*    border-color: turquoise;*/
-/*    border: .25vw solid #1FD6D0;*/
     transition: all 0.3s;
     color: #1FD6D0;
     transform: scale(1.05);
     box-shadow: 0vw .5vw 1vw 0vw rgba(0,0,0,0.4);
-
 }
 
 
