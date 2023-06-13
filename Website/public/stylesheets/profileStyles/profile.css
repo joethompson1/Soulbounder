@@ -19,18 +19,19 @@
 }
 
 
-.noAuthFoundOuter {
-/*    position: relative;
+.noAuthFoundOuter {/*
+    position: relative;
     width: 100%;
-    height: 90vh;
-    perspective: 1000px;*/
+    height: 90vh;*/
+    perspective: 1000px;
 }
 
 
 
 .noAuthFound__container {
     position: relative;
-/*    transform: rotate3d(0, 1, 0, 15deg);*/
+/*    left: 5%;*/
+    transform: rotate3d(2, 0, 0, 5deg);
     display: none;
     padding: 5%;
     margin-top: 2vw;
