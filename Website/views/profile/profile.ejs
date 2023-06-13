@@ -19,6 +19,13 @@
 			<p class="text__status" id="text__status">Wallet not connected</p>
 		</div>
 
+		<div class="noAuthFoundOuter">
+			<div class="noAuthFound__container" id="noAuthFound">
+				<h1>Oops.</h1>
+				<h3>It doesn't look like you have an auth token.</h3>
+				<button class="createAuthTokenButton" id="gettingStartedButton">Create!</button>
+			</div>
+		</div>
 
 		<div class="container__mainContents">
 			<div class="container__left" id='container__left'>
@@ -32,12 +39,12 @@
 
 
 	<script type="text/javascript">
-
 		let connectionText, statusLight;
 		let userWalletAddress = localStorage.getItem('userWalletAddress');
 		let encryptedAttributes = [];
 		let contractAbi = '<%- contractAbi %>';
 		const contractAddress = "<%= contractAddress %>";
+		const noAuthFound = document.getElementById('noAuthFound');
 
 
 		$(async function() { // execute once the DOM has loaded
@@ -61,6 +68,7 @@
 				}
 				
 				if (authToken.tokenURI && authToken.SBTData) {
+					hasAuthToken = true;
 					for (let i = 1; i < authToken.SBTData.attributes.length; i++) {
 						encryptedAttributes.push(authToken.SBTData.attributes[i].value);
 					}
@@ -68,6 +76,7 @@
 				} 
 
 				else {
+					noAuthFound.style.display = "block";
 					console.error("No Auth token found in wallet.");
 				}
 			
@@ -75,8 +84,14 @@
 		});
 
 
+		document.getElementById("gettingStartedButton").addEventListener("click", function() {
+   			window.location.href = "/createSBT";
+	  	});
+
+
 
 		$("#container__connectWallet").click(async function(event) {
+			noAuthFound.style.display = "none";
 			clearAuthContainers();
 			userWalletAddress = await setUserWallet();
 			setWalletToConnected();
@@ -102,6 +117,7 @@
 			} 
 
 			else {
+				noAuthFound.style.display = "block";
 				console.error("No Auth token found in wallet.");
 			}
 		});

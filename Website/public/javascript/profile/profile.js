@@ -1,4 +1,4 @@
-
+let hasAuthToken = false;
 
 async function decryptAuthAttribute(userWalletAddress, encryptedAttribute) {
 	const response = await fetch('/api/decryptAttribute', { 

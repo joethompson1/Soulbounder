@@ -19,10 +19,68 @@
 }
 
 
+.noAuthFoundOuter {
+/*    position: relative;
+    width: 100%;
+    height: 90vh;
+    perspective: 1000px;*/
+}
+
+
+
+.noAuthFound__container {
+    position: relative;
+/*    transform: rotate3d(0, 1, 0, 15deg);*/
+    display: none;
+    padding: 5%;
+    margin-top: 2vw;
+    border-radius: 2vw;
+    width: max-content;
+    height: max-content;
+    background-color: ghostwhite;
+    font-family: Raleway;
+    box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.3);
+}
+
+
+
+.noAuthFound__container h1 {
+    font-size: 5vw;
+    font-family: Righteous;
+}
+
+
+.noAuthFound__container h3 {
+    font-family: Raleway;
+}
 
 
 
 
+.createAuthTokenButton {
+    position: relative;
+    background-color: #2563EB;
+    color: white;
+    border-radius: 0.8vw;
+    padding: 3% 10% 3% 10%;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.1vw;
+    border: none;
+    margin-top: 1.5vw;
+/*    border: .25vw solid transparent;*/
+    transition: all 0.3s;
+}
+
+
+.createAuthTokenButton:hover {
+/*    border-color: turquoise;*/
+/*    border: .25vw solid #1FD6D0;*/
+    transition: all 0.3s;
+    color: #1FD6D0;
+    transform: scale(1.05);
+    box-shadow: 0vw .5vw 1vw 0vw rgba(0,0,0,0.4);
+
+}
 
 
 
