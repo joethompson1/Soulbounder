@@ -43,6 +43,7 @@ body {
 	color: white;
 	background-image: url("/images/landingPageGif.gif");
 	background-size: cover;
+	box-shadow: 0 .2rem 2rem 0 rgba(0, 0, 0, .5); 
 }
 
 
