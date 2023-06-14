@@ -40,7 +40,8 @@
     height: max-content;
     background-color: ghostwhite;
     font-family: Raleway;
-    box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.3);
+/*    box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.3);*/
+    box-shadow: 0vw 1.7vw 4vw 1.5vw rgba(0,0,0,0.2);
 }
 
 
@@ -74,10 +75,21 @@
 
 
 .createAuthTokenButton:hover {
+    border-bottom: 0.1vw solid white;
+    border-right: 0.1vw solid white;
     transition: all 0.3s;
-    color: #1FD6D0;
+/*    color: #1FD6D0;*/
     transform: scale(1.05);
-    box-shadow: 0vw .5vw 1vw 0vw rgba(0,0,0,0.4);
+    box-shadow: 0.33vw .4vw 0.1vw 0vw rgba(0,0,0,0.3);
+}
+
+
+.createAuthTokenButton:active {
+    box-shadow: none;
+/*    margin-top: 5.9%;
+    margin-left: 2.5%;*/
+    transition: all 0.3s; 
+    transform: scale(1);
 }
 
 
