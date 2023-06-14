@@ -30,8 +30,6 @@
 
 .noAuthFound__container {
     position: relative;
-/*    left: 5%;*/
-    transform: rotate3d(2, 0, 0, 5deg);
     display: none;
     padding: 5%;
     margin-top: 2vw;
@@ -40,9 +38,17 @@
     height: max-content;
     background-color: ghostwhite;
     font-family: Raleway;
-/*    box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.3);*/
-    box-shadow: 0vw 1.7vw 4vw 1.5vw rgba(0,0,0,0.2);
+    box-shadow: 0vw 1vw 2vw 0vw rgba(0,0,0,0.3);
+    transition: all 0.3s;
 }
+
+
+.noAuthFound__container:hover {
+    transform: rotate3d(2, 0, 0, 5deg);
+    box-shadow: 0vw 1.7vw 4vw 1.5vw rgba(0,0,0,0.2);
+    transition: all 0.3s;
+}
+
 
 
 
