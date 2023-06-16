@@ -1,5 +1,59 @@
 let hasAuthToken = false;
 
+
+
+async function connectAuthToken(userWalletAddress) {
+	if (!userWalletAddress) {
+		noAuthFound.style.display = "block";
+		console.error("Wallet not connected.");
+	}
+	
+	setWalletToConnected();
+
+	const networkVersion = ethereum.networkVersion;
+	if (networkVersion != 5777) { // Checks user has Ganache selected as their network
+		correctNetwork = false;
+		console.error("Wrong blockchain network selected.");
+		const error = new Error();
+		error.reason = "Wrong blockchain network selected";
+		handleError(error);
+	}
+
+	else {
+
+		let authToken;
+		let data;
+
+	    // Make a GET request to the getAuthToken API endpoint
+	    const response = await fetch(`/api/getAuthToken/${userWalletAddress}`);
+	    data = await response.json();
+	    authToken = data.authToken;
+
+		if (data.errors) {
+			console.log(data.errors);
+			handleError(data.errors);
+		}
+		
+		if (authToken && authToken.tokenURI && authToken.SBTData) {
+			hasAuthToken = true;
+			for (let i = 1; i < authToken.SBTData.attributes.length; i++) {
+				encryptedAttributes.push(authToken.SBTData.attributes[i].value);
+			}
+			viewAccountSBT(authToken);
+		} 
+
+		else {
+			noAuthFound.style.display = "block";
+			console.error("No Auth token found in wallet.");
+		}
+	}
+	
+}
+
+
+
+
+
 async function decryptAuthAttribute(userWalletAddress, encryptedAttribute) {
 	const response = await fetch('/api/decryptAttribute', { 
 	  method: 'POST', 
@@ -94,6 +148,7 @@ async function burnToken(tokenId) {
 		console.error('Error burning token:', error);
 	}
 }
+
 
 
 

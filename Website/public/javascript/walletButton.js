@@ -8,7 +8,7 @@ function entersWalletConnect(connectionText) { // First function called when mou
   		document.getElementById('container__statusLight').style.background="lightgreen";
 	}
 	// If the wallet is connected, show "Refresh wallet" text
-	else if (connectionText === 'Wallet connected') {
+	else {
   		$('.text__status').text('Refresh wallet');
 	}
 }
@@ -31,8 +31,26 @@ function setWalletToConnected() {
 
 
 async function setUserWallet() {
+	// Wallet is installed
 	const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 	const userWalletAddress = accounts[0];
 	localStorage.setItem('userWalletAddress', userWalletAddress);
+
 	return userWalletAddress;
+}
+
+
+
+function handleError(error) {
+	const reason = capitalizeFirstLetter(error.reason);
+	document.querySelector('.text__status').innerHTML = reason;
+	document.getElementById('container__statusLight').style.background = "red";
+	connectionText = document.getElementById("text__status").innerHTML;
+	statusLight = document.getElementById('container__statusLight').style.background;
+}
+
+
+
+function capitalizeFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }

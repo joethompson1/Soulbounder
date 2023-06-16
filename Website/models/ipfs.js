@@ -1,8 +1,9 @@
 import * as IPFS from 'ipfs-http-client';
+import { Soulbounder_API_KEY, Soulbounder_API_SECRET_KEY } from '../env.js';
 
 
-const projectId = process.env.Soulbounder_API_KEY;
-const projectSecret = process.env.Soulbounder_API_SECRET_KEY;
+const projectId = Soulbounder_API_KEY;
+const projectSecret = Soulbounder_API_SECRET_KEY;
 const auth = "Basic " + btoa(projectId + ":" + projectSecret);
 
 

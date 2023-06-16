@@ -14,9 +14,11 @@
 <body>
 	<div class="container__body">
 		<div class="container__connectWallet" id="container__connectWallet">
-			<div class="container__statusLight" id="container__statusLight">
+			<div class="text__background">
+				<div class="container__statusLight" id="container__statusLight">
+				</div>
+				<p class="text__status" id="text__status">Wallet not connected</p>
 			</div>
-			<p class="text__status" id="text__status">Wallet not connected</p>
 		</div>
 
 		<div class="noAuthFoundOuter">
@@ -39,49 +41,15 @@
 
 
 	<script type="text/javascript">
-		let connectionText, statusLight;
+		let connectionText = document.getElementById("text__status").innerHTML;
+		let statusLight = document.getElementById('container__statusLight').style.background;
+		// let connectionText, statusLight;
+		let correctNetwork = false;
 		let userWalletAddress = localStorage.getItem('userWalletAddress');
 		let encryptedAttributes = [];
 		let contractAbi = '<%- contractAbi %>';
 		const contractAddress = "<%= contractAddress %>";
 		const noAuthFound = document.getElementById('noAuthFound');
-
-
-		$(async function() { // execute once the DOM has loaded
-			clearAuthContainers();
-			userWalletAddress = localStorage.getItem('userWalletAddress');
-
-			if (userWalletAddress) {
-				setWalletToConnected();
-
-				let authToken;
-
-				try {
-				    // Make a GET request to the getAuthToken API endpoint
-				    const response = await fetch(`/api/getAuthToken/${userWalletAddress}`);
-				    const data = await response.json();
-				    authToken = data.authToken;
-
-				} catch (error) {
-				    // Handle any errors
-				    console.error('Error with getAuthToken API:', error);
-				}
-				
-				if (authToken.tokenURI && authToken.SBTData) {
-					hasAuthToken = true;
-					for (let i = 1; i < authToken.SBTData.attributes.length; i++) {
-						encryptedAttributes.push(authToken.SBTData.attributes[i].value);
-					}
-					viewAccountSBT(authToken);
-				} 
-
-				else {
-					noAuthFound.style.display = "block";
-					console.error("No Auth token found in wallet.");
-				}
-			
-			} 
-		});
 
 
 		document.getElementById("gettingStartedButton").addEventListener("click", function() {
@@ -90,35 +58,33 @@
 
 
 
+		$(async function() { // execute once the DOM has loaded
+			clearAuthContainers();
+			if (window.ethereum) {
+				userWalletAddress = await setUserWallet();
+				userWalletAddress = localStorage.getItem('userWalletAddress');
+				connectAuthToken(userWalletAddress);
+			} else {
+				console.error("Metamask not installed");
+				const error = new Error();
+				error.reason = "Metamask not installed";
+				handleError(error);
+			}
+		});
+
+
+
 		$("#container__connectWallet").click(async function(event) {
 			noAuthFound.style.display = "none";
 			clearAuthContainers();
-			userWalletAddress = await setUserWallet();
-			setWalletToConnected();
-
-			let authToken;
-
-			try {
-			    // Make a GET request to the getAuthToken API endpoint
-			    const response = await fetch(`/api/getAuthToken/${userWalletAddress}`);
-			    const data = await response.json();
-			    authToken = data.authToken;
-
-			} catch (error) {
-			    // Handle any errors
-			    console.error('Error with getAuthToken API:', error);
-			}
-			
-			if (authToken.tokenURI && authToken.SBTData) {
-				for (let i = 1; i < authToken.SBTData.attributes.length; i++) {
-					encryptedAttributes.push(authToken.SBTData.attributes[i].value);
-				}
-				viewAccountSBT(authToken);
-			} 
-
-			else {
-				noAuthFound.style.display = "block";
-				console.error("No Auth token found in wallet.");
+			if (window.ethereum) {
+				userWalletAddress = await setUserWallet();
+				connectAuthToken(userWalletAddress);
+			} else {
+				console.error("Metamask not installed");
+				const error = new Error();
+				error.reason = "Metamask not installed";
+				handleError(error);
 			}
 		});
 

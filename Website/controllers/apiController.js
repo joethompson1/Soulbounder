@@ -22,6 +22,7 @@ export const getAuthToken = async (req, res) => {
     	let networkDataList = Soulbounder.networks;
     	let contractNetworkId;
 
+
     	for (let key in networkDataList) {
       		contractNetworkId = key;
     	}	
@@ -34,36 +35,47 @@ export const getAuthToken = async (req, res) => {
 	    const provider = getProvider();
 	    const signer = provider.getSigner(userWalletAddress);
 	    const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+	    let walletBalance
 
-	    const walletBalance = await contract.balanceOf(userWalletAddress);
+	    try {
+		    
+		    walletBalance = await contract.balanceOf(userWalletAddress);
+
+	    } catch (error) {
+
+	    	console.error("Error in reading smart contract");
+	    	error.reason = "Error: Soulbounder smart contract not deployed to selected network";
+	    	return res.status(400).json({ errors: error });
+	    }
 
 	    // Runs through all the user's tokens
 	    for (let i = 0; i < walletBalance.toString(); i++) {
       		let tokenId = await contract.tokenOfOwnerByIndex(userWalletAddress, i);
       		const tokenType = await contract.getTokenType(tokenId);
 
-      	if (tokenType.toNumber() === 1) {
-	        let tokenURI = await contract.tokenURI(tokenId);
-	        tokenURI = tokenURI.replace(/"/g, '');
-	        const url = `https://soulbounder.infura-ipfs.io/ipfs/${tokenURI}`;
-	        let request = new Request(url);
-	        let response = await fetch(request);
-	        let SBTData = await response.json();
+	      	if (tokenType.toNumber() === 1) {
+		        let tokenURI = await contract.tokenURI(tokenId);
+		        tokenURI = tokenURI.replace(/"/g, '');
+		        const url = `https://soulbounder.infura-ipfs.io/ipfs/${tokenURI}`;
+		        let request = new Request(url);
+		        let response = await fetch(request);
+		        let SBTData = await response.json();
 
-	        authToken.tokenURI = tokenURI;
-	        authToken.SBTData = SBTData;
-	        authToken.tokenId = tokenId.toNumber();
-	        break;
+		        authToken.tokenURI = tokenURI;
+		        authToken.SBTData = SBTData;
+		        authToken.tokenId = tokenId.toNumber();
+		        break;
+		    }
 	    }
-    }
 
-    res.status(201).json({ authToken });
+	    res.status(201).json({ authToken });
 
 
-  	} catch (err) {
 
-    	console.error("Error in getting Auth token: ", err);
-    	res.status(400).json({ errors: "Error in getting Auth token: ", err });
+  	} catch (error) {
+
+    	console.error("Error in getting Auth token: ", error );
+    	res.status(400).json({ errors: error });
 
   	}
 };

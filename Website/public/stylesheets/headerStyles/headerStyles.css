@@ -71,7 +71,9 @@ aside {
   }
 
   aside .toggle {
-    padding-left: 30px;
+    padding-left: 2.2vw;
+/*    padding-top: 2.2vw;*/
+/*    padding-left: 30px;*/
     padding-top: 30px;
     position: absolute;
     right: 0;
