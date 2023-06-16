@@ -121,6 +121,13 @@ If you don't have them installed then copy and paste the necessary lines below i
   ```
 
 
+#### Metamask
+* Download and Install the Metamask wallet extension from the following
+  ```url
+  https://metamask.io/download/
+  ```
+
+
 
 <br></br>
 ### Compile and Deploy the Smart Contract
