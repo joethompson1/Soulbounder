@@ -158,3 +158,134 @@ async function setUserWallet() {
 
 
 
+
+async function getUsersPublicKey(userWalletAddress) {
+	try {
+
+		// Key is returned as base64
+		keyB64 = await ethereum.request({
+			method: 'eth_getEncryptionPublicKey',
+		  	params: [userWalletAddress],
+		});
+
+		return keyB64;
+
+	} catch (err) {
+
+		const error = new Error("Public key not shared");
+		handleError(error);
+		revertLoadingAnimation();
+		return;
+
+	}
+}
+
+
+
+
+function compileSBTData() {
+
+	try {
+
+		attributes = [ // set form attributes for SBTData 
+			{ 
+				trait_type: "Type",
+				value: "Account",
+			},
+			{
+				trait_type: "Email",
+				value: document.getElementById('emailContents').value,
+			}
+		];
+
+
+		var attributeTitles = document.getElementsByClassName("customTitle");
+		var attributeContents = document.getElementsByClassName("descriptionContents");
+
+		// for each custom attribute add it to the attributes array
+		for (let i = 1; i <= attributeTitles.length; i++) {
+			const attributeTitle = attributeTitles[i-1].value;
+			const attributeContent = attributeContents[i].value;
+				attributes.push({
+					trait_type: attributeTitle,
+					value: attributeContent,
+				});
+			
+		}
+
+		// Set SBTData based on form content
+		var SBTData = {
+			"name" : document.getElementById('SBTName').value,
+			"image" : document.getElementById('displayImage').src,
+			attributes,
+		}
+
+		return SBTData;
+
+	} catch(error) {
+
+		revertLoadingAnimation();
+		handleError(error);
+		return;
+
+	}
+}
+
+
+
+
+async function uploadToIPFS(SBTData, keyB64) {
+	try {
+		const res = await fetch('/createSBT/blockchain', { 
+		  method: 'POST', 
+		  body: JSON.stringify({ SBTData, keyB64 }),
+		  headers: {'Content-Type': 'application/json'}
+		});
+
+		data = await res.json();
+		return data;
+
+	} catch(error) {
+
+		revertLoadingAnimation();
+		handleError(error);
+		return;
+	}
+}
+
+
+
+
+
+async function mintToken(userWalletAddress, contractAbi, contractAddress, data) {
+	try {
+		
+		const provider = new ethers.providers.Web3Provider(window.ethereum);
+		const signer = provider.getSigner(userWalletAddress);
+		const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+
+		let mintResult = await contract.safeMint(userWalletAddress, data.sbtHash.toString(), 1);
+		let txReceipt = await provider.getTransactionReceipt(mintResult.hash);
+
+		while (!txReceipt && !txReceipt.blockNumber) {
+			txReceipt = await provider.getTransactionReceipt(mintResult.hash);
+		}
+
+		const textStatus = document.querySelector('.text__status');
+		textStatus.innerHTML = "Published"
+		document.getElementById('container__statusLight').style.background = "green";
+
+
+	} catch(error) {
+
+		console.error(error);
+
+		if (error.data && error.data.data && error.data.data.reason) {
+			console.log(error.data.data.reason);
+			error = new Error(error.data.data.reason);
+		}
+		revertLoadingAnimation();
+		handleError(error);
+	}
+}
+

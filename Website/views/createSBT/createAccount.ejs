@@ -104,6 +104,7 @@
 			const imageInput = document.getElementById('fileInput');
 			const imageLabel = document.getElementById('imageLabel');
 
+			// Checks if input elements have been filled
 			document.addEventListener('invalid', function (e) {
 				e.preventDefault();
 			  	var firstInvalidElement = e.target.form.querySelector(':invalid');
@@ -144,117 +145,31 @@
 
 					// Connect to users wallet
 					const userWalletAddress = await setUserWallet();
-					const provider = new ethers.providers.Web3Provider(window.ethereum);
-					const signer = provider.getSigner(userWalletAddress);
 
-					const networkId = await window.ethereum.request({ method: 'net_version' });
-					const contractNetworkId = "<%= contractNetworkId %>";
-
-					let keyB64;
-
-					// Get users public key
-					try {
-
-						// Key is returned as base64
-						keyB64 = await ethereum.request({
-							method: 'eth_getEncryptionPublicKey',
-						  	params: [userWalletAddress],
-						});
-
-					} catch (err) {
-
-						const error = new Error("Public key not shared");
-						handleError(error);
-						revertLoadingAnimation();
-						return;
-
-					}
+					// Request access to users public key
+					let keyB64 = await getUsersPublicKey(userWalletAddress);
 
 					setLoadingText("Uploading data to Interplanetary File System...");
 
-					attributes = [ // set form attributes for SBTData 
-						{ 
-							trait_type: "Type",
-							value: "Account",
-						},
-						{
-							trait_type: "Email",
-							value: document.getElementById('emailContents').value,
-						}
-					];
+					const SBTData = compileSBTData();
 
-
-					var attributeTitles = document.getElementsByClassName("customTitle");
-					var attributeContents = document.getElementsByClassName("descriptionContents");
-
-					// for each custom attribute add it to the attributes array
-					for (let i = 1; i <= attributeTitles.length; i++) {
-						const attributeTitle = attributeTitles[i-1].value;
-						const attributeContent = attributeContents[i].value;
-							attributes.push({
-								trait_type: attributeTitle,
-								value: attributeContent,
-							});
-						
+					if (!SBTData) { // Error compiling SBT data from form
+						return 
 					}
 
-					// Set SBTData based on form content
-					var SBTData = {
-						"name" : document.getElementById('SBTName').value,
-						"image" : document.getElementById('displayImage').src,
-						attributes,
-					}
+					// Upload SBT metadata to IPFS
+					let data = await uploadToIPFS(SBTData, keyB64);
 
-					let data;
-
-					try {
-						const res = await fetch('/createSBT/blockchain', { 
-						  method: 'POST', 
-						  body: JSON.stringify({ SBTData, keyB64 }),
-						  headers: {'Content-Type': 'application/json'}
-						});
-
-						data = await res.json();
-
-					} catch(error) {
-
-						// const error = new Error("Public key not shared.");
-						revertLoadingAnimation();
-						handleError(error);
+					if (!data) { // Error in uploading data to IPFS
 						return;
 					}
 
 					setLoadingText("Minting token...");
 					let contractAbi = '<%- contractAbi %>';
 					const contractAddress = "<%= contractAddress %>";
+					await mintToken(userWalletAddress, contractAbi, contractAddress, data);
 
-					const contract = new ethers.Contract(contractAddress, contractAbi, signer);
-
-					try {
-						let mintResult = await contract.safeMint(userWalletAddress, data.sbtHash.toString(), 1);
-						let txReceipt = await provider.getTransactionReceipt(mintResult.hash);
-
-						while (!txReceipt && !txReceipt.blockNumber) {
-							txReceipt = await provider.getTransactionReceipt(mintResult.hash);
-						}
-
-						textStatus.innerHTML = "Published"
-						document.getElementById('container__statusLight').style.background = "green";
-
-						window.location.assign(
-						  "/profile"
-						);
-
-
-					} catch(error) {
-
-						if (error.data && error.data.data && error.data.data.reason) {
-							console.log(error.data.data.reason);
-							error = new Error(error.data.data.reason);
-						}
-						revertLoadingAnimation();
-						handleError(error);
-					}
+					window.location.assign("/profile");
 
 				}
 				
