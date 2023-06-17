@@ -1,4 +1,4 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+
 <a name="readme-top"></a>
 
 
@@ -7,7 +7,7 @@
 <br />
 <div align="center">
   <a href="">
-    <img src="https://github.com/joethompson1/Soulbounder/blob/main/website/public/images/logo/LogoDesigns/SB%20purple%2Bblue%2Bgradient.svg" alt="Logo" width="180" height="180">
+    <img src="https://github.com/joethompson1/Soulbounder/blob/main/Website/public/images/logo/LogoDesigns/SB%20purple%2Bblue%2Bgradient.svg" alt="Logo" width="180" height="180">
   </a>
 
   <h3 align="center">Soulbounder</h3>
