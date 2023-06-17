@@ -7,7 +7,7 @@
 <br />
 <div align="center">
   <a href="">
-    <img src="https://github.com/joethompson1/Soulbounder/blob/main/Website/public/images/logo/LogoDesigns/SB%20purple%2Bblue%2Bgradient.svg" alt="Logo" width="180" height="180">
+    <img src="https://github.com/joethompson1/Soulbounder/blob/main/Website/public/images/logos/SB%20purple%2Bblue%2Bgradient.svg" alt="Logo" width="180" height="180">
   </a>
 
   <h3 align="center">Soulbounder</h3>
@@ -51,7 +51,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![product-screenshot][product-screenshot]](https://joethompson.co.uk/projects)
+[![product-screenshot][product-screenshot]](https://joethompson.co.uk/soulbounder)
 
 
 ### Description:
