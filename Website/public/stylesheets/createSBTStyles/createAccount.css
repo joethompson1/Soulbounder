@@ -8,12 +8,63 @@
 
 
 
+body {
+    min-height: 100vh;
+}
+
 
 .invalidImage {
     border-radius: 1vw;
     border: 2px solid red;
 }
 
+.container__loading {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0;
+}
+
+
+.loadingContainer {
+    width: 25%;
+    display: flex;
+    padding: 2% 5%;
+}
+
+
+.loadingContainer .logoContainer {
+    margin: auto;
+}
+
+.loadingTextContainer {
+/*    transform: translateY(-25vh);*/
+}
+
+.loadingTextContainer h1 {
+    font-family: 'Raleway';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 2;
+    font-size: 1.5vw;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+#loadingText {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
 
 
 
@@ -32,24 +83,48 @@
 }
 
 
-.container__tokenStatus {
+
+
+.container__connectWallet {
+    position: relative;
+    cursor: none;
     display: flex;
+    border-radius: 1vw;
+    white-space: nowrap;
+    margin-bottom: 0.75vw;
 }
 
 
+
+.text__background {
+    padding: 0.25% .5% 0.25% 1%;
+    transition: all 0.3s;
+/*    background: none;*/
+    border-radius: 1vw;
+    background-color: transparent;
+    width: 100%;
+}
+
+
+
 .container__statusLight {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-left: 0.4vw;
+    transform: translateY(-50%);
     border-radius: 100%;
     width: 0.91vw;
     height: 1vw;
     background-color: red;
-    margin-right: 0.5%;
-    margin-top: 0.3%;
 }
 
 
 .text__status {
     font-family: Raleway;
     font-size: 1vw;
+    margin: 0 0 0 0;
+    padding-left: 0.9vw;
 }
 
 

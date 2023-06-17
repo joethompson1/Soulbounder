@@ -31,7 +31,6 @@ function setWalletToConnected() {
 
 
 async function setUserWallet() {
-	// Wallet is installed
 	const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 	const userWalletAddress = accounts[0];
 	localStorage.setItem('userWalletAddress', userWalletAddress);

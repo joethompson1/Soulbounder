@@ -69,3 +69,92 @@ function createCustomAttributes(numberOfCustomInputs) {
 function closeInput(blankInputBoxX) {
 	document.getElementById(blankInputBoxX).remove();
 }
+
+
+
+function startLoadingAnimation() {
+	const headerImg = $(".burgerImg");
+	headerImg.css({
+	  opacity: "0",
+	  pointerEvents: "none"
+	});
+
+	const bodyContainer = document.getElementById("container__body");
+	bodyContainer.style.opacity = "0";
+	bodyContainer.style.pointerEvents = "none";
+
+	// Show the container
+	const loadingContainer = document.getElementById("loadingContainer");
+	loadingContainer.style.opacity = "1";
+}
+
+
+
+
+
+function revertLoadingAnimation() {
+	const headerImg = $(".burgerImg");
+	headerImg.css({
+	  opacity: "1",
+	  pointerEvents: "auto"
+	});
+
+	const bodyContainer = document.getElementById("container__body");
+	bodyContainer.style.opacity = "1";
+	bodyContainer.style.pointerEvents = "auto";
+
+	// Show the container
+	const loadingContainer = document.getElementById("loadingContainer");
+	loadingContainer.style.opacity = "0";
+}
+
+
+
+
+function setLoadingText(currentText) {
+  const loadingText = document.getElementById('loadingText');
+
+  // Fade out the current text
+  loadingText.style.opacity = 0;
+
+  // Wait for the fade out transition to complete
+  setTimeout(() => {
+    // Update the text
+    loadingText.innerHTML = currentText;
+
+    // Fade in the new text
+    loadingText.style.opacity = 1;
+  }, 1000); // Wait for 0.5 seconds (the duration of the fade out transition)
+}
+
+
+
+function handleError(error) {
+	document.querySelector('.text__status').innerHTML = error.message;
+	document.getElementById('container__statusLight').style.background = "red";
+	const element = document.getElementById('text__background');
+	const originalColor = element.style.backgroundColor;
+	element.style.backgroundColor = 'lightcoral';
+
+	// Set a timeout to revert the background color back to the original after 1 second
+	setTimeout(() => {
+	  element.style.backgroundColor = originalColor;
+	}, 750);
+
+	connectionText = document.getElementById("text__status").innerHTML;
+	statusLight = document.getElementById('container__statusLight').style.background;
+}
+
+
+
+
+async function setUserWallet() {
+	const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+	const userWalletAddress = accounts[0];
+	localStorage.setItem('userWalletAddress', userWalletAddress);
+
+	return userWalletAddress;
+}
+
+
+

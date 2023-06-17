@@ -2,18 +2,31 @@
 	<!-- Stylesheets -->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 	<link rel="stylesheet" href="/stylesheets/createSBTStyles/createAccount.css">
+	<link rel="stylesheet" href="/stylesheets/logoStyles/logoLoadingAnimation.css">
 
 	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
 	<script src="/javascript/createAccount/createAccount.js"></script>
-	<script src="/javascript/walletButton.js"></script>
+	<!-- <script src="/javascript/walletButton.js"></script> -->
 </head>
 
 <body>
-	<div class="container__body">
-		<div class="container__tokenStatus">
-			<div class="container__statusLight" id="container__statusLight">
+	<div class="container__loading text-center hide" id="loadingContainer">
+		<div class="container loadingContainer">
+			<%- include('../components/logoLoadingAnimation.ejs') %>
+		</div>
+		<div class="container loadingTextContainer" style="width: max-content;">
+			<h1 id="loadingText">Requesting public key...</h1>	
+		</div>
+	</div>
+
+	<div class="container__body" id="container__body">
+
+		<div class="container__connectWallet" id="container__connectWallet">
+			<div class="text__background" id="text__background">
+				<div class="container__statusLight" id="container__statusLight">
+				</div>
+				<p class="text__status" id="text__status">Not Published</p>
 			</div>
-			<p class="text__status" id="text__status">Not Published</p>
 		</div>
 		<form class="formContainer" id="formContainer">
 			<div class="container__mainContents">
@@ -34,7 +47,7 @@
 				</div>
 				<div class="container__right" id="container__right">
 					<div class="container__sbtContentsMain">
-						<input class="SBTName" type="text" name="SBTName" placeholder="Account Name" id="SBTName" required>
+						<input class="SBTName" type="text" name="SBTName" placeholder="Username" id="SBTName" required>
 						<div class="container__SBTType">
 							<h5 class="type">Type: </h5>
 							<h5 class="SBTType">Account</h5>
@@ -66,8 +79,6 @@
 						<div class="container__description-title">
 							<img class="descriptionIcon" src="/images/plus-square.svg">
 							<h2 class="descriptionTitle">Add Custom Attribute</h2>
-						</div>
-						<div class="">
 						</div>
 					</div>
 				</div>
@@ -111,7 +122,27 @@
 					const textStatus = document.querySelector('.text__status');
 					textStatus.innerHTML = "Publishing..."
 					document.getElementById('container__statusLight').style.background = "orange";
-					
+
+					startLoadingAnimation();
+
+					if (!window.ethereum) {
+						console.error("Metamask wallet not detected.");
+						const error = new Error("Metamask wallet not detected.");
+						revertLoadingAnimation();
+						handleError(error);
+						return;
+					}
+
+					const networkVersion = ethereum.networkVersion;
+					if (networkVersion != 5777) { // Checks user has Ganache selected as their network
+						console.error("Wrong blockchain network selected.");
+						const error = new Error("Wrong blockchain network selected.");
+						revertLoadingAnimation();
+						handleError(error);
+						return;
+					}
+
+					// Connect to users wallet
 					const userWalletAddress = await setUserWallet();
 					const provider = new ethers.providers.Web3Provider(window.ethereum);
 					const signer = provider.getSigner(userWalletAddress);
@@ -119,14 +150,27 @@
 					const networkId = await window.ethereum.request({ method: 'net_version' });
 					const contractNetworkId = "<%= contractNetworkId %>";
 
-					// Key is returned as base64
-					const keyB64 = await ethereum.request({
-					  method: 'eth_getEncryptionPublicKey',
-					  params: [userWalletAddress],
-					});
+					let keyB64;
 
-					// const publicKey = Buffer.from(keyB64, 'base64');
-					console.log("publicKey: ", keyB64);
+					// Get users public key
+					try {
+
+						// Key is returned as base64
+						keyB64 = await ethereum.request({
+							method: 'eth_getEncryptionPublicKey',
+						  	params: [userWalletAddress],
+						});
+
+					} catch (err) {
+
+						const error = new Error("Public key not shared");
+						handleError(error);
+						revertLoadingAnimation();
+						return;
+
+					}
+
+					setLoadingText("Uploading data to Interplanetary File System...");
 
 					attributes = [ // set form attributes for SBTData 
 						{ 
@@ -173,52 +217,43 @@
 						data = await res.json();
 
 					} catch(error) {
-						textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";
-						document.getElementById('container__statusLight').style.background = "red";
+
+						// const error = new Error("Public key not shared.");
+						revertLoadingAnimation();
+						handleError(error);
+						return;
 					}
 
-					if (data.sbtHash) {
+					setLoadingText("Minting token...");
+					let contractAbi = '<%- contractAbi %>';
+					const contractAddress = "<%= contractAddress %>";
 
-						if (contractNetworkId == networkId) {
+					const contract = new ethers.Contract(contractAddress, contractAbi, signer);
 
-							let contractAbi = '<%- contractAbi %>';
-							const contractAddress = "<%= contractAddress %>";
+					try {
+						let mintResult = await contract.safeMint(userWalletAddress, data.sbtHash.toString(), 1);
+						let txReceipt = await provider.getTransactionReceipt(mintResult.hash);
 
-							const contract = new ethers.Contract(contractAddress, contractAbi, signer);
-
-							try {
-								let mintResult = await contract.safeMint(userWalletAddress, data.sbtHash.toString(), 1);
-								let txReceipt = await provider.getTransactionReceipt(mintResult.hash);
-
-								while (!txReceipt && !txReceipt.blockNumber) {
-									txReceipt = await provider.getTransactionReceipt(mintResult.hash);
-								}
-
-								textStatus.innerHTML = "Published"
-								document.getElementById('container__statusLight').style.background = "green";
-
-								window.location.assign(
-								  "/profile"
-								);
-
-
-							} catch(error) {
-								console.log(error.data.data.reason);
-								if (error.data.data && error.data.data.reason) {
-									textStatus.innerHTML = "Unpublished (Error: "+error.data.data.reason+")";
-
-								} else {
-									textStatus.innerHTML = "Unpublished (Error: "+error.message+"("+error.code+")";									
-								}
-								document.getElementById('container__statusLight').style.background = "red";
-							}
-
-
-						} else {
-							window.alert("Smart contract not deployed to detected network!");
+						while (!txReceipt && !txReceipt.blockNumber) {
+							txReceipt = await provider.getTransactionReceipt(mintResult.hash);
 						}
-					} else {
-						window.alert("Error uploading data to IPFS");
+
+						textStatus.innerHTML = "Published"
+						document.getElementById('container__statusLight').style.background = "green";
+
+						window.location.assign(
+						  "/profile"
+						);
+
+
+					} catch(error) {
+
+						if (error.data && error.data.data && error.data.data.reason) {
+							console.log(error.data.data.reason);
+							error = new Error(error.data.data.reason);
+						}
+						revertLoadingAnimation();
+						handleError(error);
 					}
 
 				}
