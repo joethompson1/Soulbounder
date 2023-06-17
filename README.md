@@ -7,7 +7,7 @@
 <br />
 <div align="center">
   <a href="">
-    <img src="https://github.com/joethompson1/Soulbounder/blob/main/LogoDesigns/SB%20purple%2Bblue%2Bgradient.svg" alt="Logo" width="180" height="180">
+    <img src="https://github.com/joethompson1/Soulbounder/blob/main/website/public/images/logo/LogoDesigns/SB%20purple%2Bblue%2Bgradient.svg" alt="Logo" width="180" height="180">
   </a>
 
   <h3 align="center">Soulbounder</h3>
@@ -243,7 +243,7 @@ Github Link: [https://github.com/joethompson1/Datachain](https://github.com/joet
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[product-screenshot]: LogoDesigns/soulbounderCreateSBT.png
+[product-screenshot]: Website/public/images/logo/LogoDesigns/soulbounderCreateSBT.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [Hyperledger]: https://img.shields.io/badge/Hyperledger_Fabric-FF0000?style=for-the-badge&logo=Hyperledger&logoColor=black
