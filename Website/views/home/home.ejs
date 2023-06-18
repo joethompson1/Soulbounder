@@ -14,6 +14,12 @@
 	<div class="container__body">
 		<div class="landing__container">
 			<div class="landing__panel">
+				<div class="gradient gradient-purple"></div>
+			 	<div class="gradient gradient-yellow"></div>
+			 	<div class="gradient-yellowMiddle"></div>
+			  	<div class="gradient gradient-orange"></div>
+			 	<div class="gradient gradient-turquoise"></div>
+			 	<div class="blur-layer"></div>
 				<div class="text__panel">
 					<h1>Soulbounder</h1>
 					<h3>Your decentralised digital identity.</h3>
@@ -82,6 +88,14 @@
 		document.getElementById("gettingStartedButton").addEventListener("click", function() {
    			window.location.href = "/createSBT";
 	  	});
+
+	  	$(window).on('scroll', function() {
+		  var scrollTop = $(window).scrollTop();
+		  var transformValue = scrollTop > 0 ? 'perspective(800px) rotateY(0)' : 'perspective(800px) rotateY(-20deg)';
+		  $('.landing__panel').css('transform', transformValue);
+		});
+
+
 
 	</script>
 

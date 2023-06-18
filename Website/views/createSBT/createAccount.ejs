@@ -151,6 +151,7 @@
 
 					setLoadingText("Uploading data to Interplanetary File System...");
 
+					// Compiles form data in into an object that can be saved as JSON
 					const SBTData = compileSBTData();
 
 					if (!SBTData) { // Error compiling SBT data from form
@@ -167,9 +168,11 @@
 					setLoadingText("Minting token...");
 					let contractAbi = '<%- contractAbi %>';
 					const contractAddress = "<%= contractAddress %>";
-					await mintToken(userWalletAddress, contractAbi, contractAddress, data);
+					const success = await mintToken(userWalletAddress, contractAbi, contractAddress, data);
 
-					window.location.assign("/profile");
+					if (success) {
+						window.location.assign("/profile");
+					}
 
 				}
 				

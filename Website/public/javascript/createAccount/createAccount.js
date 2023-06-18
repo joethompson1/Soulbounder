@@ -275,6 +275,8 @@ async function mintToken(userWalletAddress, contractAbi, contractAddress, data) 
 		textStatus.innerHTML = "Published"
 		document.getElementById('container__statusLight').style.background = "green";
 
+		return true;
+
 
 	} catch(error) {
 
@@ -286,6 +288,8 @@ async function mintToken(userWalletAddress, contractAbi, contractAddress, data) 
 		}
 		revertLoadingAnimation();
 		handleError(error);
+
+		return false;
 	}
 }
 
