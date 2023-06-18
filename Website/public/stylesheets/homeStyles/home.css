@@ -83,64 +83,54 @@ footer {
 
 
 .gradient {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  animation-duration: 8s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+	position: absolute;
+  	width: 100%;
+  	height: 100%;
+  	animation-duration: 3s;
+  	animation-timing-function: linear;
+  	animation-iteration-count: infinite;
 }
 
 .gradient-purple {
-  animation-fill-mode: forwards;
-  background: radial-gradient(circle at bottom left, purple, transparent);
+	animation-fill-mode: forwards;
+  	background: radial-gradient(circle at bottom left, purple, transparent);
 }
 
 .gradient-orange {
   	background: radial-gradient(circle at top right, orangered, transparent);
-/*	animation-name: moveOrange;*/
-	transition: all 5s ease; /* Smoothly transition background position */
-  	animation-fill-mode: forwards;
- /* 	width: 350%;
-  	height: 00%;*/
 }
 
 .gradient-yellow {
   	background: radial-gradient(circle at center right, yellow, transparent);
  	animation-name: moveYellow;
-	transition: all 5s ease; /* Smoothly transition background position */
+	transition: all 1s ease; /* Smoothly transition background position */
   	animation-fill-mode: forwards;
   	width: 125%;
 }
 
 .gradient-yellowMiddle {
-  background: radial-gradient(circle at center, yellow, transparent);
-  animation-name: moveYellowMiddle;
-  transition: all 5s ease; /* Smoothly transition background position */
-  animation-fill-mode: forwards;
+	background: radial-gradient(circle at center, yellow, transparent);
+  	animation-name: moveYellowMiddle;
+  	transition: all 1s ease; /* Smoothly transition background position */
+  	animation-fill-mode: forwards;
 }
 
 .gradient-turquoise {
-  background: radial-gradient(circle at center bottom, turquoise, transparent);
-  animation-name: moveTurquoise;
-  transition: all 5s ease; /* Smoothly transition background position */
-  animation-fill-mode: forwards;
-  height: 150%;
+	background: radial-gradient(circle at center bottom, turquoise, transparent);
+  	animation-name: moveTurquoise;
+  	transition: all 1s ease; /* Smoothly transition background position */
+  	animation-fill-mode: forwards;
+  	height: 150%;
 }
 
 .blur-layer {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(20px);
+ 	position: absolute;
+  	width: 100%;
+  	height: 100%;
+  	backdrop-filter: blur(20px);
 }
 
 
-@keyframes moveOrange {
-  0% { transform: translate(0, 0); }
-  50% { transform: translate(-5%, 5%); }
-  100% { transform: translate(0, 0); }
-}
 
 @keyframes moveYellow {
   0% { transform: translate(0, 0); }
@@ -224,20 +214,273 @@ footer {
 }
 
 
-.about__container p {
+.about-description__container p {
 	padding-top: 2vh;
 	position: relative;
 	font-size: 1.2vw;
 	font-family: 'Quicksand', sans-serif;
-
+	max-width: 55%;
 }
+
+
+
+.about-description__container {
+	position: relative;
+	display: inline-flex;
+	margin-top: 2.5vw;
+}
+
+
+.about-image {
+	position: relative;
+	width: 100%;
+	transform: translate(-15%, -25%);
+}
+
+
+
+
+.tokenAuth {
+	position: absolute;
+  	top: calc(50% - 3vw);
+	left: calc(50%);
+  	width: 10vw;
+  	height: 10vw;
+  	border: 0.5vw solid lightgray; 
+  	border-radius: 100%;
+  	background-color: #f0f0ff; 
+  	box-shadow: 0 0.2vw 0.5vw rgba(0, 0, 0, 0.2); 
+  	overflow: hidden; 
+}
+
+.tokenAuth::before {
+	content: "";
+  	position: absolute;
+  	top: -0.5vw; 
+  	right: -0.5vw;
+  	bottom: -0.5vw;
+  	left: -0.5vw;
+  	border: 0.5vw solid rgba(0, 0, 0, 0.3); 
+  	border-radius: 100%;
+}
+
+.tokenAuth::after {
+	content: "";
+  	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -42%);
+  	width: 95%; 
+  	height: 95%;
+  	background-image: url("/images/avatar-lady.svg");
+  	background-size: cover;
+  	background-position: center;
+  	border: none;
+}
+
+
+
+
+.badges {
+	position: absolute;
+	overflow: hidden;
+	width: 5vw;
+	height: 5vw;
+	border-radius: 100%;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #f0f0ff; 
+	box-shadow: 0 0.2vw 0.5vw rgba(0, 0, 0, 0.2);
+}
+
+
+.badges::before {
+	content: "";
+  	position: absolute;
+  	top: -0.5vw;
+  	right: -0.5vw;
+  	bottom: -0.5vw;
+  	left: -0.5vw;
+  	border: 0.5vw solid rgba(0, 0, 0, 0.3);
+  	border-radius: 100%;
+}
+
+.badges::after {
+	content: "";
+  	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	width: 100%;
+  	height: 100%;
+  	background-size: cover;
+  	background-position: center;
+  	border: 0.5vw solid rgba(0, 0, 0, 0.3);
+  	border-radius: 100%;
+}
+
+
+
+.about-image .badges:nth-child(2) {
+  	top: calc(62% + 9vw);
+  	left: calc(64.5%);
+  	background-size: cover;
+	background-position: center;
+  	background-image: url("/images/gift.svg");
+}
+
+.about-image .badges:nth-child(3) {
+  	left: 44%;
+  	top: calc(62% + 6.2vw);
+  	background-image: url("/images/badge.svg");
+  	background-size: cover;
+	background-position: center;
+}
+
+
+.about-image .badges:nth-child(4) {
+	top: calc(62% + 6.2vw);
+  	left: 85%;
+  	background-image: url("/images/labelPrice.svg");
+  	background-size: cover;
+	background-position: center;
+}
+
+
+
+
+
+
+.about-description__container2 {
+	position: relative;
+	margin-top: 6.5vw;
+	display: inline-flex;
+}
+
+
+.about-description__container2 p {
+	padding-top: 2vh;
+	position: relative;
+	font-size: 1.2vw;
+	font-family: 'Quicksand', sans-serif;
+	max-width: 55%;
+}
+
+.about-image2 {
+	position: relative;
+/*	left: 10%;*/
+	margin-top: 5vw;
+/*	width: max-content;*/
+	width: 40%;
+}
+
+
+.about-imageInner {
+	position: absolute;
+	left: 35%;
+	top: 0%;
+	transform: translate(-50%, -80%);
+}
+
+
+.tokenAuth2 {
+	position: relative;
+  	width: 10vw;
+  	height: 10vw;
+  	border: 0.5vw solid lightgray; 
+  	border-radius: 100%;
+  	background-color: #f2ffc8; 
+  	box-shadow: 0 0.2vw 0.5vw rgba(0, 0, 0, 0.2); 
+  	overflow: hidden;
+}
+
+
+.tokenAuth2::before {
+	content: "";
+  	position: absolute;
+  	top: -0.5vw; 
+  	right: -0.5vw;
+  	bottom: -0.5vw;
+  	left: -0.5vw;
+  	border: 0.5vw solid rgba(0, 0, 0, 0.3); 
+  	border-radius: 100%;
+}
+
+.tokenAuth2::after {
+	content: "";
+  	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -42%);
+  	width: 95%; 
+  	height: 95%;
+  	background-image: url("/images/avatar-man.svg");
+  	background-size: cover;
+  	background-position: center;
+  	border: none;
+}
+
+
+.about-image2 .badges:nth-child(2) {
+  	top: calc(50% + 9vw);
+  	left: calc(50%);
+	background-position: center;
+  	background-image: url("/images/ethereum.svg");
+  	background-origin: content-box;
+	background-clip: padding-box;
+  	background-size: cover;
+	padding: 10%; /* Adjust the padding value as desired */
+	background-repeat: no-repeat;
+}
+
+.about-image2 .badges:nth-child(3) {
+  	top: calc(50% + 6.2vw);
+  	left: -20%;
+  	background-color: mediumpurple;
+  	background-position: center;
+  	background-image: url("/images/ticket.svg");
+  	background-origin: content-box;
+	background-clip: padding-box;
+  	background-size: cover;
+	padding: 10%; /* Adjust the padding value as desired */
+	background-repeat: no-repeat;
+}
+
+
+.about-image2 .badges:nth-child(4) {
+	top: calc(50% + 6.2vw);
+  	left: 120%;
+  	background-color: #C1E1C1;
+  	background-position: center;
+  	background-image: url("/images/metamask-icon.svg");
+  	background-origin: content-box;
+	background-clip: padding-box;
+  	background-size: cover;
+	padding: 15%; /* Adjust the padding value as desired */
+	background-repeat: no-repeat;
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .authToken__container {
 	position: relative;
 	width: 100%;
-/*	height: 100vh;*/
-	padding-right: 10%;
+/*	padding-right: 20% !important;*/
 }
 
 
@@ -245,7 +488,7 @@ footer {
 	position: relative;
 	display: inline-flex;
 	margin-top: 2vw;
-/*	margin-right: 5vw;*/
+	margin-right: 5vw;
 	perspective: 1000px;
 }
 
@@ -253,8 +496,8 @@ footer {
 .authToken__container__panel2 {
 	position: relative;
 	display: inline-flex;
-	margin-top: 2vw;
-/*	margin-right: 5vw;*/
+	margin-top: 5vw;
+	margin-right: 7vw;
 	perspective: 1000px;
 }
 
@@ -328,6 +571,7 @@ footer {
 	position: relative;
 	width: max-content;
 	height: max-content;
+	margin-left: 2vw;
 	width: 100%;
 	padding: 1.5% 0 0 0;
 	border-radius: 3% 3% 5% 5%;
