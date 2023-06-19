@@ -134,7 +134,10 @@ function resetAuthContainers() {
 	const imageSBT = document.getElementById('imageSBT');
 	if (imageSBT) { imageSBT.src = "/images/loading2.svg"; }
 	const sbtName = document.getElementById('SBTName');
-	if (sbtName) { sbtName.textContent = ""; }
+	if (sbtName) { 
+		sbtName.textContent = "";
+		sbtName.classList.add('loading');
+	}
 	const attributeContainer = document.getElementById('container__attributes');
 	attributeContainer.innerHTML = "";
 }
