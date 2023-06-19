@@ -319,6 +319,18 @@
     position: relative;
     width: 100%;
     height: 100%;
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.imageSBT.fade-in {
+  animation: fade-in 2s;
 }
 
 
@@ -328,6 +340,11 @@
     left: 1%;
     width: 5%;
 }
+
+
+
+
+
 
 
 
@@ -344,6 +361,39 @@
     font-family: Righteous;
     font-size: 2.42vw;
 }
+
+
+/*.loading-heading {
+  display: inline-block;
+  padding: 10px;
+  border: 2px solid #ccc;
+  opacity: 0;
+  animation: fadeAnimation 1s infinite;
+}*/
+
+@keyframes fadeAnimation {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+
+.loading {
+    position: relative;
+    animation: fadeAnimation 2s infinite;
+    opacity: 1;
+    width: 50%;
+    height: 2vw;
+    background-color: lightgray;
+    border-radius: 0.75vw;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.loaded {
+/*  opacity: 0;*/
+}
+
+
 
 
 .SBTOwner {

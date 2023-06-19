@@ -130,7 +130,6 @@ function setLoadingText(currentText) {
 
 
 function handleError(error) {
-	document.querySelector('.text__status').innerHTML = error.message;
 	document.getElementById('container__statusLight').style.background = "red";
 	const element = document.getElementById('text__background');
 	const originalColor = element.style.backgroundColor;

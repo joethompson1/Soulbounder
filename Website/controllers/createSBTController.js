@@ -1,4 +1,4 @@
-import { initIpfs, addFileToIPFS } from '../models/ipfs.js';
+import { initIpfs, addFileToIPFS, unpinFileFromIPFS } from '../models/ipfs.js';
 import { encryptData } from '../models/metamask/encryptData.js';
 import Soulbounder from '../builtContracts/Soulbounder.json' assert { type: "json"};
 import Web3 from 'web3';
@@ -32,11 +32,13 @@ export const createSBT_get = async (req, res) => {
 
 export const blockchain_post = async (req, res) => {
 
+	let pictureAdded;
+
 	try {
 			const publicKey = Buffer.from(req.body.keyB64, 'base64');
 			const imageBuffer = new Buffer.from(req.body.SBTData.image.replace(/^data:image\/\w+;base64,/, ""), 'base64');
 
-			let ipfs;
+			let ipfs, sbtHash;
 
 			try {
 
@@ -52,7 +54,7 @@ export const blockchain_post = async (req, res) => {
 				throw new Error("Unable to establish connection with Infura IPFS");
 			}
 
-			const pictureAdded = await addFileToIPFS(imageBuffer, ipfs);
+			pictureAdded = await addFileToIPFS(imageBuffer, ipfs);
 			console.log("Added file CID:", pictureAdded);
 
 			let attributes = req.body.SBTData.attributes;
@@ -69,15 +71,27 @@ export const blockchain_post = async (req, res) => {
 			  	attributes,
 			  };
 
-			const sbtHash = await addFileToIPFS(JSON.stringify(sbtMetadata), ipfs);
+			sbtHash = await addFileToIPFS(JSON.stringify(sbtMetadata), ipfs);
 			console.log("Added file (CID):", sbtHash);
 			const path =  sbtHash.path.toString();
 
-			res.status(201).json({ sbtHash: sbtHash.path });
+			res.status(201).json({ sbtHash: sbtHash.path, pictureHash: pictureAdded.path });
 
 	} catch (err) {
-			console.error("Error in uploading IPFS data: ", err);
-			res.status(400).json({ errors: "Error in uploading IPFS data: ", err });
+
+		if (pictureAdded) {
+			console.log("Unpinning picture from Infura IPFS");
+			unpinFileFromIPFS(pictureAdded.path);
+		}
+
+		if (sbtHash) {
+			console.log("Unpinning SBT metadata from Infura IPFS");
+			unpinFileFromIPFS(sbtHash.path);
+		}
+
+		console.error("Error in uploading IPFS data: ", err);
+		res.status(400).json({ errors: "Error in uploading IPFS data: ", err });
+
 	}
 
 }

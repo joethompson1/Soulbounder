@@ -1,5 +1,3 @@
-let hasAuthToken = false;
-
 
 
 async function connectAuthToken(userWalletAddress) {
@@ -17,32 +15,44 @@ async function connectAuthToken(userWalletAddress) {
 		const error = new Error();
 		error.reason = "Wrong blockchain network selected";
 		handleError(error);
+		// clearAuthContainers();
+		const mainContents = document.getElementById('container__mainContents');
+		mainContents.style.display = "none";
 	}
 
 	else {
 
-		let authToken;
 		let data;
+
 
 	    // Make a GET request to the getAuthToken API endpoint
 	    const response = await fetch(`/api/getAuthToken/${userWalletAddress}`);
 	    data = await response.json();
 	    authToken = data.authToken;
 
-		if (data.errors) {
-			console.log(data.errors);
-			handleError(data.errors);
-		}
-		
-		if (authToken && authToken.tokenURI && authToken.SBTData) {
-			hasAuthToken = true;
-			for (let i = 1; i < authToken.SBTData.attributes.length; i++) {
-				encryptedAttributes.push(authToken.SBTData.attributes[i].value);
+		if (authToken.tokenURI) {
+
+			if (authToken.SBTData) {
+				for (let i = 1; i < authToken.SBTData.attributes.length; i++) {
+					encryptedAttributes.push(authToken.SBTData.attributes[i].value);
+				}
+				viewAccountSBT(authToken);
 			}
-			viewAccountSBT(authToken);
+
+			else {
+				if (data.errors) {
+					handleError(data.errors);
+				}
+			}
 		} 
 
 		else {
+			clearAuthContainers();
+			if (data.errors) {
+				const error = new Error(data.errors);
+				handleError(error);
+			}
+
 			noAuthFound.style.display = "block";
 			console.error("No Auth token found in wallet.");
 		}
@@ -77,7 +87,7 @@ async function decryptAuthAttribute(userWalletAddress, encryptedAttribute) {
 		decryptedAttribute = JSON.parse(decoder.decode(buffer));
 
 	} catch (error) {
-		console.log("Error decrypting Auth token: ", error);
+		console.error("Error decrypting Auth token: ", error);
 	}
 
 	return decryptedAttribute;
@@ -94,7 +104,6 @@ async function revealAttribute(event) {
 	if (decryptedAttribute) {
 		const revealAttribute = document.getElementById(attributeId);
 		revealAttribute.innerHTML = decryptedAttribute;
-		console.log("decryptedAttribute: ", decryptedAttribute);
 
 		const revealButton = event.target; // Get the button element
 	    revealButton.style.transition = 'opacity 0.5s'; // Set the transition property
@@ -113,11 +122,21 @@ async function revealAttribute(event) {
 
 
 
-async function clearAuthContainers() {
+function clearAuthContainers() {
 	const container__left = document.getElementById('container__left');
 	const container__right = document.getElementById('container__right');
 	container__left.innerHTML = "";
 	container__right.innerHTML = "";
+}
+
+
+function resetAuthContainers() {
+	const imageSBT = document.getElementById('imageSBT');
+	if (imageSBT) { imageSBT.src = "/images/loading2.svg"; }
+	const sbtName = document.getElementById('SBTName');
+	if (sbtName) { sbtName.textContent = ""; }
+	const attributeContainer = document.getElementById('container__attributes');
+	attributeContainer.innerHTML = "";
 }
 
 

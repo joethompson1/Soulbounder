@@ -41,9 +41,21 @@ async function setUserWallet() {
 
 
 function handleError(error) {
-	const reason = capitalizeFirstLetter(error.reason);
-	document.querySelector('.text__status').innerHTML = reason;
-	document.getElementById('container__statusLight').style.background = "red";
+	
+	if (error.reason) {
+			const reason = capitalizeFirstLetter(error.reason);
+			document.querySelector('.text__status').innerHTML = reason;
+			document.getElementById('container__statusLight').style.background = "red";
+			connectionText = document.getElementById("text__status").innerHTML;
+			statusLight = document.getElementById('container__statusLight').style.background;
+	} 
+
+	else {
+	    document.querySelector('.text__status').innerHTML = error.message;
+			document.getElementById('container__statusLight').style.background = "red";
+
+	}
+
 	connectionText = document.getElementById("text__status").innerHTML;
 	statusLight = document.getElementById('container__statusLight').style.background;
 }

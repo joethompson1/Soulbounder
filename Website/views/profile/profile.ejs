@@ -29,12 +29,41 @@
 			</div>
 		</div>
 
-		<div class="container__mainContents">
+		<div class="container__mainContents" id="container__mainContents">
 			<div class="container__left" id='container__left'>
-
+				<div class="container__image">
+					<img src="/images/ethereum.svg" class="ethereumIcon">
+					<img src="/images/loading2.svg" id="imageSBT" class="imageSBT">
+				</div>
 			</div>
 			<div class="container__right" id='container__right'>
+				<div class="container__createButton">
+				    <img class="editIcon" src="/images/three-dots.svg">
+				  	<div class="container__createButtonBubble">
+				    	<div class="pointer"></div>
+				    	<h5>Edit</h5>
+				  	</div>
+				</div>
 
+				<div class="container__burnButton" id="container__burnButton">
+				    <img class="editIcon" src="/images/openTrash.svg">
+				  	<div class="container__createButtonBubble">
+				    	<div class="pointer"></div>
+				    	<h5>Burn</h5>
+				  	</div>
+				</div>
+
+				<div class="container__sbtContentsMain">
+					<h1 class="SBTName loading" id="SBTName">Loading</h1>
+					<div class="container__SBTType">
+						<h5 class="type">Type</h5>
+						<h5 class="SBTType" id="SBTType">Account</h5>
+					</div>
+				</div>
+
+				<div class="container__attributes" id="container__attributes">
+					
+				</div>
 			</div>
 		</div>
 	</div>
@@ -43,13 +72,13 @@
 	<script type="text/javascript">
 		let connectionText = document.getElementById("text__status").innerHTML;
 		let statusLight = document.getElementById('container__statusLight').style.background;
-		// let connectionText, statusLight;
 		let correctNetwork = false;
 		let userWalletAddress = localStorage.getItem('userWalletAddress');
 		let encryptedAttributes = [];
 		let contractAbi = '<%- contractAbi %>';
 		const contractAddress = "<%= contractAddress %>";
 		const noAuthFound = document.getElementById('noAuthFound');
+		let authToken = { tokenURI: null, tokenId: null, SBTData: null };
 
 
 		document.getElementById("gettingStartedButton").addEventListener("click", function() {
@@ -59,7 +88,7 @@
 
 
 		$(async function() { // execute once the DOM has loaded
-			clearAuthContainers();
+			resetAuthContainers();
 			if (window.ethereum) {
 				userWalletAddress = await setUserWallet();
 				userWalletAddress = localStorage.getItem('userWalletAddress');
@@ -76,7 +105,9 @@
 
 		$("#container__connectWallet").click(async function(event) {
 			noAuthFound.style.display = "none";
-			clearAuthContainers();
+			const mainContents = document.getElementById('container__mainContents');
+			mainContents.style.display = "grid";
+			resetAuthContainers();
 			if (window.ethereum) {
 				userWalletAddress = await setUserWallet();
 				connectAuthToken(userWalletAddress);
@@ -101,6 +132,12 @@
 		        leavesWalletConnect(connectionText, statusLight);
 		    }
 		);
+
+
+		const container__burnButton = document.getElementById('container__burnButton')
+		container__burnButton.addEventListener('click', async () => {
+		  	await burnToken(authToken.tokenId);
+		});
 
 
 	</script>

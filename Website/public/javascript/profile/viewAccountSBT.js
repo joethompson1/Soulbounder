@@ -4,106 +4,17 @@ function viewAccountSBT(accountSBT) {
 	const container__right = document.getElementById('container__right');
 
 	// Container Left
-	const container__image = document.createElement('div');
-	container__image.className = 'container__image';
-
-	var ethereumIcon = new Image();
-	ethereumIcon.src = '/images/ethereum.svg';
-	ethereumIcon.className = 'ethereumIcon';
-	container__image.appendChild(ethereumIcon);
-
-	var imageSBT = new Image();
+	const imageSBT = document.getElementById('imageSBT');
 	imageSBT.src = SBTData.image;
-	imageSBT.className = 'imageSBT';
-	container__image.appendChild(imageSBT);
-
-	container__left.appendChild(container__image);
-
-
+	imageSBT.classList.add('fade-in');
 
 
 	// Container Right
-	const container__sbtContentsMain = document.createElement('div');
-	container__sbtContentsMain.className = 'container__sbtContentsMain';
-
-	const sbtName = document.createElement('h1');
-	sbtName.className = 'SBTName';
-	sbtName.id = 'SBTName';
+	const sbtName = document.getElementById('SBTName');
+	sbtName.classList.remove('loading');
 	sbtName.textContent = SBTData.name;
-	container__sbtContentsMain.appendChild(sbtName);
+	sbtName.classList.add('loaded');
 
-	const container__SBTType = document.createElement('div');
-	container__SBTType.className = 'container__SBTType';
-
-	const type = document.createElement('h5');
-	type.className = 'type';
-	type.textContent = 'Type:';
-	container__SBTType.appendChild(type);
-
-	const sbtType = document.createElement('h5');
-	sbtType.className = 'SBTType';
-	sbtType.id = 'SBTType';
-	sbtType.textContent = SBTData.attributes[0].value;
-	container__SBTType.appendChild(sbtType);
-
-	container__sbtContentsMain.appendChild(container__SBTType);
-
-	const container__editButton = document.createElement('div');
-	container__editButton.className = 'container__createButton';
-	container__editButton.addEventListener('click', (e) => {
-	  const encodedURI = encodeURIComponent(JSON.stringify(accountSBT.tokenURI));
-	  const tokenId = accountSBT.tokenId;
-	  window.location.href = `/profile/edit?tokenURI=${encodedURI}&tokenId=${tokenId}`;
-	});
-
-	var editIcon = new Image();
-	editIcon.className = 'editIcon';
-	editIcon.src = '/images/three-dots.svg';
-	container__editButton.appendChild(editIcon);
-
-	const container__createButtonBubble = document.createElement('div');
-	container__createButtonBubble.className = 'container__createButtonBubble';
-	
-	const pointer = document.createElement('div');
-	pointer.className = 'pointer';
-	container__createButtonBubble.appendChild(pointer);
-
-	const shareH5 = document.createElement('h5');
-	shareH5.textContent = 'Edit';
-	container__createButtonBubble.appendChild(shareH5);
-
-	container__editButton.appendChild(container__createButtonBubble);
-
-
-
-	const container__burnButton = document.createElement('div');
-	container__burnButton.className = 'container__burnButton';
-	container__burnButton.addEventListener('click', async () => {
-	  const tokenId = accountSBT.tokenId;
-	  await burnToken(tokenId);
-	});
-
-	var burnIcon = new Image();
-	burnIcon.className = 'editIcon';
-	burnIcon.src = '/images/openTrash.svg';
-	container__burnButton.appendChild(burnIcon);
-
-	const container__burnButtonBubble = document.createElement('div');
-	container__burnButtonBubble.className = 'container__createButtonBubble';
-	
-	const pointerBurn = document.createElement('div');
-	pointerBurn.className = 'pointer';
-	container__burnButtonBubble.appendChild(pointerBurn);
-
-	const burnH5 = document.createElement('h5');
-	burnH5.textContent = 'Burn';
-	container__burnButtonBubble.appendChild(burnH5);
-
-	container__burnButton.appendChild(container__burnButtonBubble);
-
-	container__sbtContentsMain.appendChild(container__editButton);
-	container__sbtContentsMain.appendChild(container__burnButton);
-	container__right.appendChild(container__sbtContentsMain); 
 
 	// Container Right SBT Attributes
 	loadSBTAttributes(SBTData);
@@ -112,7 +23,7 @@ function viewAccountSBT(accountSBT) {
 
 
 function loadSBTAttributes(SBTData) {
-	const container__right = document.getElementById('container__right');
+	const container__right = document.getElementById('container__attributes');
 	
 	let index = 0;
 	for (const attribute of SBTData.attributes) {

@@ -20,6 +20,7 @@
   "homepage": "https://github.com/joethompson1/Soulbounder#readme",
   "dependencies": {
     "ascii85": "^1.0.2",
+    "axios": "^1.4.0",
     "buffer": "^6.0.3",
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",

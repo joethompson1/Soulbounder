@@ -15,9 +15,10 @@ function getProvider() {
 
 
 export const getAuthToken = async (req, res) => {
+	let authToken = { tokenURI: null, tokenId: null, SBTData: null };
+
 	try {
     	const { userWalletAddress } = req.params;
-    	const authToken = { tokenURI: null, tokenId: null, SBTData: null };
 
     	let networkDataList = Soulbounder.networks;
     	let contractNetworkId;
@@ -48,6 +49,7 @@ export const getAuthToken = async (req, res) => {
 	    	return res.status(400).json({ errors: error });
 	    }
 
+
 	    // Runs through all the user's tokens
 	    for (let i = 0; i < walletBalance.toString(); i++) {
       		let tokenId = await contract.tokenOfOwnerByIndex(userWalletAddress, i);
@@ -56,14 +58,22 @@ export const getAuthToken = async (req, res) => {
 	      	if (tokenType.toNumber() === 1) {
 		        let tokenURI = await contract.tokenURI(tokenId);
 		        tokenURI = tokenURI.replace(/"/g, '');
+		        authToken.tokenURI = tokenURI;
+		        authToken.tokenId = tokenId.toNumber();
+
 		        const url = `https://soulbounder.infura-ipfs.io/ipfs/${tokenURI}`;
 		        let request = new Request(url);
 		        let response = await fetch(request);
-		        let SBTData = await response.json();
 
-		        authToken.tokenURI = tokenURI;
+
+		        if (response.status != 200) {
+		        	const error = new Error("token metadata does not exist on IPFS");
+		        	error.reason = "token metadata does not exist on IPFS";
+		        	return res.status(400).json({ errors: error, authToken })
+		        }
+
+		        let SBTData = await response.json();
 		        authToken.SBTData = SBTData;
-		        authToken.tokenId = tokenId.toNumber();
 		        break;
 		    }
 	    }
@@ -74,8 +84,8 @@ export const getAuthToken = async (req, res) => {
 
   	} catch (error) {
 
-    	console.error("Error in getting Auth token: ", error );
-    	res.status(400).json({ errors: error });
+    	console.error("Error in getting Auth token: ", error.message );
+    	res.status(400).json({ errors: error.message, authToken });
 
   	}
 };
