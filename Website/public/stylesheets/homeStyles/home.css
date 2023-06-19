@@ -86,7 +86,7 @@ footer {
 	position: absolute;
   	width: 100%;
   	height: 100%;
-  	animation-duration: 3s;
+  	animation-duration: 5s;
   	animation-timing-function: linear;
   	animation-iteration-count: infinite;
 }
@@ -118,7 +118,7 @@ footer {
 .gradient-turquoise {
 	background: radial-gradient(circle at center bottom, turquoise, transparent);
   	animation-name: moveTurquoise;
-  	transition: all 1s ease; /* Smoothly transition background position */
+  	transition: all 5s ease; /* Smoothly transition background position */
   	animation-fill-mode: forwards;
   	height: 150%;
 }
@@ -146,7 +146,7 @@ footer {
 
 @keyframes moveTurquoise {
   0% { transform: translate(0, 0); }
-  50% { transform: translate(0, -10%); }
+  50% { transform: translate(0, -20%); }
   100% { transform: translate(0, 0); }
 }
 
@@ -380,7 +380,7 @@ footer {
 	position: absolute;
 	left: 35%;
 	top: 0%;
-	transform: translate(-50%, -80%);
+	transform: translate(-50%, -60%);
 }
 
 

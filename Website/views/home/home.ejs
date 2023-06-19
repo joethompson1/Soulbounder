@@ -61,14 +61,14 @@
 				</div>
 
 				<p>
-					Every Soulbound token tells a story. Preserve them forever with words and pictures. Whether it's a cherished memory, an important milestone,
+					Every Soulbound token tells a story. Whether it's a cherished memory, an important milestone,
     				or a meaningful connection, Soulbounder allows you to capture and immortalize those precious moments.<br><br>
     				Share your stories, unlock new experiences, and create a timeless legacy with Soulbounder.
 	 				It's as easy as filling out a form.
 				</p>
 			</div>
 		</div>
-		
+
 		<div class="authToken__container">
 			<h1>Auth Tokens.</h1>
 			<h3>Authenticates you whilst navigating Web3.</h3>
@@ -121,11 +121,33 @@
    			window.location.href = "/createSBT";
 	  	});
 
-	  	$(window).on('scroll', function() {
-		  var scrollTop = $(window).scrollTop();
-		  var transformValue = scrollTop > 0 ? 'perspective(800px) rotateY(0)' : 'perspective(800px) rotateY(-20deg)';
+	  	// $(window).on('scroll', function() {
+		//   var scrollTop = $(window).scrollTop();
+		//   var transformValue = scrollTop > 0 ? 'perspective(800px) rotateY(0)' : 'perspective(800px) rotateY(-20deg)';
+		//   $('.landing__panel').css('transform', transformValue);
+		// });
+
+		// Function to debounce scroll events
+		function debounce(func, delay) {
+		  let timeoutId;
+		  return function () {
+		    clearTimeout(timeoutId);
+		    timeoutId = setTimeout(func, delay);
+		  };
+		}
+
+		// Function to handle scroll events
+		function handleScroll() {
+		  const scrollTop = $(window).scrollTop();
+		  const transformValue = scrollTop > 0 ? 'perspective(800px) rotateY(0)' : 'perspective(800px) rotateY(-20deg)';
 		  $('.landing__panel').css('transform', transformValue);
-		});
+		}
+
+		// Debounced scroll event handler
+		const debouncedHandleScroll = debounce(handleScroll, 100); // Adjust the delay as needed
+
+		// Attach scroll event listener
+		$(window).on('scroll', debouncedHandleScroll);
 
 
 
