@@ -131,6 +131,8 @@ function clearAuthContainers() {
 
 
 function resetAuthContainers() {
+	const editButton = document.getElementById('container__editButton');
+	if (editButton) { editButton.innerHTML = ""; }
 	const imageSBT = document.getElementById('imageSBT');
 	if (imageSBT) { imageSBT.src = "/images/loading2.svg"; }
 	const sbtName = document.getElementById('SBTName');

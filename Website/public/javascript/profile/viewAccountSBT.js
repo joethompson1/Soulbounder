@@ -10,6 +10,36 @@ function viewAccountSBT(accountSBT) {
 
 
 	// Container Right
+	const container__editButton = document.createElement('div');
+	container__editButton.className = 'container__createButton';
+	container__editButton.id = "container__editButton"
+	container__editButton.addEventListener('click', (e) => {
+	  const encodedURI = encodeURIComponent(JSON.stringify(accountSBT.tokenURI));
+	  const tokenId = accountSBT.tokenId;
+	  window.location.href = `/profile/edit?tokenURI=${encodedURI}&tokenId=${tokenId}`;
+	});
+
+	var editIcon = new Image();
+	editIcon.className = 'editIcon';
+	editIcon.src = '/images/three-dots.svg';
+	container__editButton.appendChild(editIcon);
+
+	const container__createButtonBubble = document.createElement('div');
+	container__createButtonBubble.className = 'container__createButtonBubble';
+	
+	const pointer = document.createElement('div');
+	pointer.className = 'pointer';
+	container__createButtonBubble.appendChild(pointer);
+
+	const shareH5 = document.createElement('h5');
+	shareH5.textContent = 'Edit';
+	container__createButtonBubble.appendChild(shareH5);
+
+	container__editButton.appendChild(container__createButtonBubble);
+
+	const container__sbtContentsMain = document.getElementById('container__mainContents');
+	container__sbtContentsMain.appendChild(container__editButton);
+
 	const sbtName = document.getElementById('SBTName');
 	sbtName.classList.remove('loading');
 	sbtName.textContent = SBTData.name;

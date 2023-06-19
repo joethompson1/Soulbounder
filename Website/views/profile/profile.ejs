@@ -37,13 +37,13 @@
 				</div>
 			</div>
 			<div class="container__right" id='container__right'>
-				<div class="container__createButton">
+<!-- 				<div class="container__createButton" id="container__editButton">
 				    <img class="editIcon" src="/images/three-dots.svg">
 				  	<div class="container__createButtonBubble">
 				    	<div class="pointer"></div>
 				    	<h5>Edit</h5>
 				  	</div>
-				</div>
+				</div> -->
 
 				<div class="container__burnButton" id="container__burnButton">
 				    <img class="editIcon" src="/images/openTrash.svg">
@@ -138,6 +138,13 @@
 		container__burnButton.addEventListener('click', async () => {
 		  	await burnToken(authToken.tokenId);
 		});
+
+		// const container__editButton = document.getElementById('container__editButton')
+		// container__editButton.addEventListener('click', async () => {
+		//   	const encodedURI = encodeURIComponent(JSON.stringify(authToken.tokenURI));
+		// 	const tokenId = authToken.tokenId;
+		// 	window.location.href = `/profile/edit?tokenURI=${encodedURI}&tokenId=${tokenId}`;
+		// });
 
 
 	</script>
