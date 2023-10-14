@@ -376,9 +376,9 @@
     animation: fadeAnimation 2s infinite;
     opacity: 1;
     width: 50%;
-    height: 2vw;
+    height: 3vw;
     background-color: lightgray;
-    border-radius: 0.75vw;
+    border-radius: 0.8vw;
     transition: opacity 0.5s ease-in-out;
 }
 
